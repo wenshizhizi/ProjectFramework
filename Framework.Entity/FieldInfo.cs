@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Framework.Entity
+namespace Framework.DTO
 {
     /// <summary>
     /// 数据字段信息
@@ -25,6 +25,11 @@ namespace Framework.Entity
         /// <summary>
         /// 数据字段是否是必填(不能为空)
         /// </summary>
-        public Boolean IsDataFieldNecessary { get; set; }
+        public Boolean Required { get; set; }
+
+        /// <summary>
+        /// 数据字段在数据库的名称
+        /// </summary>
+        public String FiledName { get; set; }
     }
 }

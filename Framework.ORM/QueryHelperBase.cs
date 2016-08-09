@@ -6,6 +6,7 @@ using Framework.Log;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Framework.ORM
 {
@@ -25,7 +26,7 @@ namespace Framework.ORM
             }
             catch (Exception ex)
             {
-                Logs.GetLog().WriteErrorLog(new ApplicationException("获取数据库链接时失败。", ex));
+                Logs.GetLog().WriteErrorLog(ex);
                 return null;
             }
         }
@@ -45,7 +46,7 @@ namespace Framework.ORM
             }
             catch (Exception ex)
             {
-                Logs.GetLog().WriteErrorLog(new ApplicationException("关闭数据库链接时失败。", ex));
+                Logs.GetLog().WriteErrorLog(ex);
             }
         }
 

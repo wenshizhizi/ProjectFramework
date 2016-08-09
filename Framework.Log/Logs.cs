@@ -39,14 +39,24 @@ namespace Framework.Log
         }
 
         /// <summary>
-        /// 构造方法，将初始化异常信息
+        /// 构造方法，将初始化异常日志信息
         /// </summary>
         private Logs()
-        {            
-            SetLevel("log", "ERROR");
-            AddAppender("log", CreateFileAppender("rfa", web.config.WebConfig.LoadElement("logPath")));
-            log = log4net.LogManager.GetLogger("log");
-            log4net.Config.BasicConfigurator.Configure();
+        {
+            try
+            {
+                SetLevel("log", "ERROR");
+                AddAppender("log", CreateFileAppender("rfa", web.config.WebConfig.LoadElement("logPath")));
+                log = log4net.LogManager.GetLogger("log");
+                log4net.Config.BasicConfigurator.Configure();
+            }
+            catch (Exception)
+            {
+                SetLevel("log", "ERROR");
+                AddAppender("log", CreateFileAppender("rfa", "../SystemLogs/Log\\"));
+                log = log4net.LogManager.GetLogger("log");
+                log4net.Config.BasicConfigurator.Configure();
+            }
         }
 
         //设置log名称和记录等级

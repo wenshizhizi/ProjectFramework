@@ -7,8 +7,8 @@
     <ProjectGuid>{C7C3D0E2-C9B8-43FD-99E6-F8A3C12A8814}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Framework.ORM</RootNamespace>
-    <AssemblyName>Framework.ORM</AssemblyName>
+    <RootNamespace>Framework.Dapper</RootNamespace>
+    <AssemblyName>Framework.Dapper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -54,9 +54,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Entity\Framework.Entity.csproj">
+    <ProjectReference Include="..\Framework.Entity\Framework.DTO.csproj">
       <Project>{17fd7ad8-a20d-4f3b-b441-a9f2d2732a93}</Project>
-      <Name>Framework.Entity</Name>
+      <Name>Framework.DTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.Log\Framework.Log.csproj">
       <Project>{2d79182e-02cb-4b38-b639-f728412473f0}</Project>
