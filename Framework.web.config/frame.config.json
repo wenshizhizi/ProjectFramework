@@ -1,3 +1,4 @@
-﻿{
-  "log": ""
+﻿{ 
+  "logPath": "../SystemLogs/Log\\",
+  "connectionString": "server=localhost;database=Test;User = sa; Password = Okmijnuhb1;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;"
 }
