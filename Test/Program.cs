@@ -35,10 +35,28 @@ namespace Test
                 sOrderNo = "001",
                 sSizeName = "85"
             };
-           
-           // Order o = new Order { orderGoods=new List<OrderGood>(new List<Order>)}
+
+            // Order o = new Order { orderGoods=new List<OrderGood>(new List<Order>)}
+
+            OrderDTO order = new OrderDTO
+            {
+                bIsClientDelete = false,
+                bIsDeleted = false,
+                dBookTime = DateTime.Now,
+                dFinishTime = DateTime.Now,
+                dPayTime = DateTime.Now,
+                dRoyaltyOutput = 80,
+                dSendTime = DateTime.Now,
+                iBaggingPrice = 15,
+                iClientType = 1
+            };
+
+            Order or = MapperHelpper.Map<Order>(order);
 
             OrderGood o = MapperHelpper.Map<OrderGood>(ogd);
+
+            or.orderGoods = new List<OrderGood>();
+            or.orderGoods.Add(o);
 
             //QueryHelper qb = new DapperDBHelper();
             //var list = qb.QueryList<Object>("select * from CICUser where [Username] = @name", new { name = "yangyukun" });
