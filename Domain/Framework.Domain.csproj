@@ -40,16 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderGood.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecevierAddress.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework.Entity\Framework.DTO.csproj">
       <Project>{17fd7ad8-a20d-4f3b-b441-a9f2d2732a93}</Project>
       <Name>Framework.DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

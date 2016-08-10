@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace Framework.ORM
+namespace Framework.Dapper
 {
     public abstract class QueryHelperBase : QueryHelper
     {
@@ -112,13 +112,13 @@ namespace Framework.ORM
         /// <param name="sqlCommand"></param>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        public override sealed IList<T> PaginationQuery<T>(string sqlCommand, Object parameter)
+        public override sealed IList<T> PaginationQuery<T>(string sqlCommand, PageInfo pageInfo, Object parameter)
         {
             SqlConnection conn = null;
             try
             {
-                conn = GetSqlConnection();
-                return DoPaginationQuery<T>(conn, sqlCommand, parameter);
+                conn = GetSqlConnection();                
+                return DoPaginationQuery<T>(conn, sqlCommand, pageInfo, parameter);
             }
             catch (Exception ex)
             {
@@ -131,7 +131,7 @@ namespace Framework.ORM
                 CloseConnect(conn);
             }
         }
-
+        
         /// <summary>
         /// 子类真正应该实现的查询单条数据的方法
         /// </summary>
@@ -160,6 +160,6 @@ namespace Framework.ORM
         /// <param name="sqlCommand">sql</param>
         /// <param name="parameter">参数</param>
         /// <returns>查询结果</returns>
-        protected abstract IList<T> DoPaginationQuery<T>(SqlConnection conn, string sqlCommand, Object parameter);
+        protected abstract IList<T> DoPaginationQuery<T>(SqlConnection conn, string sqlCommand, PageInfo pageInfo, Object parameter);
     }
 }

@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Framework.ORM
+namespace Framework.Dapper
 {
     public abstract class QueryHelper
     {
+
         
+
         /// <summary>
         /// 查询一条数据
         /// </summary>
@@ -40,7 +42,7 @@ namespace Framework.ORM
         /// <param name="sqlCommand">sql</param>
         /// <param name="parameter">参数</param>
         /// <returns>查询结果</returns>
-        public virtual IList<T> PaginationQuery<T>(string sqlCommand, Object parameter) where T : new()
+        public virtual IList<T> PaginationQuery<T>(string sqlCommand, PageInfo pageInfo, Object parameter) where T : new()
         {
             return new List<T>();
         }

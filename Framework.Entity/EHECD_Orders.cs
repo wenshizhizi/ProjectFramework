@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Framework.DTO
 {
-    public class OrderDTO
+    public class EHECD_Orders
     {
+        //public int MaxCount;
+
         /// <summary>
         /// ID
         /// </summary>		

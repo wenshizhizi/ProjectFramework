@@ -41,13 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FieldInfo.cs" />
-    <Compile Include="OrderDTO.cs" />
+    <Compile Include="EHECD_Orders.cs" />
     <Compile Include="OrderGoodDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecevierAddressDTO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="说明.txt" />
+    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

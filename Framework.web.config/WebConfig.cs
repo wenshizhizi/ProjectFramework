@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using Framework.Helper;
 
 namespace Framework.web.config
 {
@@ -16,7 +16,7 @@ namespace Framework.web.config
             using (TextReader tr = new StreamReader("frame.config.json"))
             {
                 string configStr = tr.ReadToEnd();
-                configJson = JsonConvert.DeserializeObject<IDictionary<string, string>>(configStr);
+                configJson = JSONHelper.GetModel<IDictionary<string, string>>(configStr);
             }
         }
 

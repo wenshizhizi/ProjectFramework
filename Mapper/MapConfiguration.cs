@@ -5,19 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Framework.DTO;
-using Framework.Domain;
 
 namespace Framework.MapperConfig
 {
-    public class Configuration
+    public class MapConfiguration
     {
+        /// <summary>
+        /// 初始化automapper配置
+        /// </summary>
         public static void Configure()
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<OrderDTO, Order>();
-                cfg.CreateMap<OrderGoodDTO, OrderGood>();
-                cfg.CreateMap<RecevierAddressDTO, RecevierAddress>();
+                //TODO:配置对象的映射，如下
+                //cfg.CreateMap<OrderDTO, Order>();
             });
         }
     }
