@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Framework.DTO;
 using Framework.Domain;
 using Framework.MapperConfig;
+using Framework.Helper;
 
 namespace Test
 {
@@ -57,6 +58,8 @@ namespace Test
 
             or.orderGoods = new List<OrderGood>();
             or.orderGoods.Add(o);
+
+            GuidHelper.CreateRpcrt4Guid();
 
             //QueryHelper qb = new DapperDBHelper();
             //var list = qb.QueryList<Object>("select * from CICUser where [Username] = @name", new { name = "yangyukun" });
