@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Framework.DTO
 {
-    public class EHECD_Orders
-    {       
+    public class OrderPagingDTO
+    {
         /// <summary>
         /// ID
         /// </summary>		
@@ -374,5 +374,7 @@ namespace Framework.DTO
             get;
             set;
         }
+
+        public int MaxCount { get; set; }
     }
 }

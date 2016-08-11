@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Framework.Dapper
 {
-    public class PagingRet<T> 
+    public class PagingRet<T> where T : new()
     {
         public int MaxCount { get; set; } = 0;
 
-        public T Result { get; set; }
+        public T Result { get; set; } = new T();
     }
 }

@@ -160,6 +160,6 @@ namespace Framework.Dapper
         /// <param name="sqlCommand">sql</param>
         /// <param name="parameter">参数</param>
         /// <returns>查询结果</returns>
-        protected abstract IList<T> DoPaginationQuery<T>(SqlConnection conn, string sqlCommand, PageInfo pageInfo, Object parameter);
+        protected abstract IList<T> DoPaginationQuery<T>(SqlConnection conn, string sqlCommand, PageInfo pageInfo, Object parameter) where T : new();
     }
 }

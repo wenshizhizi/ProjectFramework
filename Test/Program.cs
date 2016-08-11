@@ -64,7 +64,7 @@ namespace Test
             //var list = qb.QueryList<Object>("select * from CICUser where [Username] = @name", new { name = "yangyukun" });
 
             QueryHelper helper = new DapperDBHelper();
-            var ret = helper.PaginationQuery<EHECD_Orders>("select * from EHECD_Orders", new PageInfo
+            var ret = helper.PaginationQuery<OrderPagingDTO>("select * from EHECD_Orders", new PageInfo
             {
                 OrderBy = "dBookTime",
                 orderType = OrderType.DESC,
