@@ -7,6 +7,7 @@ using Framework.DTO;
 using Framework.MapperConfig;
 using Framework.Helper;
 using Framework.Dapper;
+using Framework.DI;
 
 namespace Test
 {
@@ -63,14 +64,25 @@ namespace Test
             //QueryHelper qb = new DapperDBHelper();
             //var list = qb.QueryList<Object>("select * from CICUser where [Username] = @name", new { name = "yangyukun" });
 
-            QueryHelper helper = new DapperDBHelper();
-            var ret = helper.PaginationQuery<OrderPagingDTO>("select * from EHECD_Orders", new PageInfo
-            {
-                OrderBy = "dBookTime",
-                orderType = OrderType.DESC,
-                PageIndex = 1,
-                PageSize = 3
-            }, null);
+            var list = Framework.web.config.WebConfig.ParseDictionary("unity");
+
+
+            QueryHelper helper = DIEntity.GetInstance().GetImpl<QueryHelper>();
+
+            ////Dictionary<string,object>
+
+            //var ret = helper.PaginationQuery<EHECD_Orders>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new PageInfo
+            //{
+            //    OrderBy = "iTotalPrice",
+            //    orderType = OrderType.DESC,
+            //    PageIndex = 1,
+            //    PageSize = 10
+            //}, new { condi = 100 });
+
+
+            var ret2 = helper.QueryList<Dictionary<string, object>>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new { condi = 100 });
+
+            var ret3 = helper.SingleQuery<Dictionary<string, object>>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new { condi = 100 });
         }
     }
 }

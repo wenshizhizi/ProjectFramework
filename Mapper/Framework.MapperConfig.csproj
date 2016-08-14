@@ -49,10 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Framework.Domain.csproj">
-      <Project>{32ec1887-56f8-4f47-b2d1-1bef33e6249c}</Project>
-      <Name>Framework.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Framework.Entity\Framework.DTO.csproj">
       <Project>{17fd7ad8-a20d-4f3b-b441-a9f2d2732a93}</Project>
       <Name>Framework.DTO</Name>

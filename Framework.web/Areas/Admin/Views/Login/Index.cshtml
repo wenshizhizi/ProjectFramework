@@ -1,0 +1,101 @@
+﻿@model Framework.DTO.EHECD_AccountDTO
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <!--主题样式：可选-->
+    @*<link href="~/Content/themes/black/easyui.css" rel="stylesheet" />*@
+    @*<link href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />*@
+    @*<link href="~/Content/themes/ui-pepper-grinder/easyui.css" rel="stylesheet" />*@
+    @*<link href="~/Content/themes/ui-cupertino/easyui.css" rel="stylesheet" />*@
+
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <link href="~/Content/themes/color.css" rel="stylesheet" />
+    <link href="~/Content/themes/mobile.css" rel="stylesheet" />
+    <link href="~/Content/themes/ui-sunny/easyui.css" rel="stylesheet" />
+   
+    <script src="~/scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/scripts/jquery.easyui-1.4.5.min.js"></script>
+    <script src="~/scripts/lib/modules.manager.js"></script>
+    <script src="~/scripts/lib/version.module.js"></script>
+    <script src="~/scripts/lib/object.module.js"></script>
+    <script src="~/scripts/lib/tool.module.js"></script>
+    <script src="~/scripts/lib/array.module.js"></script>
+    <script src="~/scripts/lib/func.module.js"></script>
+    <script src="~/scripts/lib/easyui.module.js"></script>
+    <script src="~/Areas/Admin/Scripts/Login/Index.js"></script>
+
+    <style type="text/css">
+        .title {
+            width: 100px;
+            text-align: right;
+        }
+
+        .content {
+            padding-left: 5px;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+
+        .vcode {
+            top: 5px;
+        }
+
+        html {
+            background: url(../../../../Content/themes/14-15111615263S59.jpg) no-repeat center center fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+        }
+    </style>
+
+    <title>登录</title>
+</head>
+<body>
+    <div id="lg_panel" class="easyui-panel" title="亿合科技欢迎您"
+         style="width:450px;height:250px;padding:10px;background:#fafafa;"
+         data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,style:{position:'absolute'}">
+        <form id="lg_form" action="/Admin/Login/Login" method="post">
+            <table style="width:100%;">
+                <tbody>
+                    <tr>
+                        <td class="title">登录名：</td>
+                        <td class="content">
+                            <input id="uname" class="easyui-textbox" 
+                                   data-options="height:25,width:180,required:true,missingMessage:'请输入登录名',iconCls:'icon-man',iconAlign:'left',type:'text',value:'请输入登录名',validType:['chartLengthBetween[3,12,\'账号\']','isHtmlValidate']" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">密  码：</td>
+                        <td class="content">
+                            <input id="upwd" class="easyui-textbox" data-options="height:25,width:180,required:true,missingMessage:'请输入登录密码',iconCls:'icon-man',iconAlign:'left',type:'password',value:'123',validType:['chartLengthBetween[3,15,\'密码\']','isHtmlValidate']" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title">验证码：</td>
+                        <td class="content">
+                            <img id="vcodepic" />
+                            <input id="vcode" class="easyui-textbox" data-options="height:25,width:90,required:true,missingMessage:'请输入4位验证码',type:'text',value:'请输入验证码',validType:['chartLengthEquire[4,\'验证码\']','isHtmlValidate']" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center;vertical-align:bottom">
+                            <a id="btn_reset" href="javascript:;" class="easyui-linkbutton" data-options="width:100">重置</a>
+                            <a id="btn_lgon" href="javascript:;" class="easyui-linkbutton" data-options="width:100">登录</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

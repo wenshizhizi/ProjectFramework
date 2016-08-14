@@ -1,22 +1,23 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using Framework.Helper;
+using Newtonsoft.Json.Linq;
+using System.Web;
 
 namespace Framework.web.config
 {
     public class WebConfig
     {
 
-        private static IDictionary<string, string> configJson = new Dictionary<string, string>();
+        private static JObject configJson = new JObject();
 
         //初始化配置
         static WebConfig()
         {
-            using (TextReader tr = new StreamReader("frame.config.json"))
+            using (TextReader tr = new StreamReader(Path.Combine(HttpRuntime.BinDirectory, "frame.config.json")))
             {
                 string configStr = tr.ReadToEnd();
-                configJson = JSONHelper.GetModel<IDictionary<string, string>>(configStr);
+                configJson = JSONHelper.GetModel<JObject>(configStr);
             }
         }
 
@@ -27,9 +28,70 @@ namespace Framework.web.config
         /// <returns>value</returns>
         public static String LoadElement(string key)
         {
-            string ret = string.Empty;
+            var temp = ParseDictionary(key);
+            if (temp.Count > 0)
+            {
+                string ret = null;
+                if (temp.TryGetValue(key, out ret))
+                {
+                    return ret;
+                }
+                else
+                {
+                    throw new ApplicationException(string.Format("给定的关键字{0}未在配置中找到", key));
+                }
+            }
+            else
+            {
+                throw new ApplicationException(string.Format("给定的关键字{0}未在配置中找到", key));
+            }
+        }
+
+        /// <summary>
+        /// 根据键载入token
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private static JToken LoadJToken(string key)
+        {
+            JToken ret = null;
             configJson.TryGetValue(key, out ret);
             return ret;
-        }        
+        }
+
+        public static IDictionary<string, string> ParseDictionary(string key)
+        {
+            var obj = LoadJToken(key);
+            IDictionary<string, string> ret = new Dictionary<string, string>();
+            if (obj == null) { return ret; }
+
+            string nodeType = obj.GetType().Name;
+
+            //节点是对象
+            if (nodeType == "JObject")
+            {
+                var ele = (JObject)obj;
+                ret.Add(ele.Path, ele.ToString());
+                return ret;
+            }
+
+            //节点直接是键值方式
+            if (nodeType == "JValue")
+            {
+                var val = (JValue)obj;
+                ret.Add(val.Path, val.Value.ToString());
+                return ret;
+            }
+
+            //节点是数组
+            if (nodeType == "JArray")
+            {
+                var arr = (JArray)obj;
+                ret.Add(arr.Path, arr.ToString());
+                return ret;
+            }
+
+            return ret;
+        }
     }
 }

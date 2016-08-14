@@ -1,0 +1,721 @@
+﻿
+===================================================================================================
+异常时间：2016-08-13 13:06:39,251 
+异常级别：ERROR 
+引发类型：Microsoft.Practices.Unity.UnityContainer
+所在方法：DoBuildUp
+异常简述：Resolution of the dependency failed, type = "Framework.Dapper.DapperDBHelper", name = "(none)".
+Exception occurred while: Calling constructor Framework.Dapper.DapperDBHelper().
+Exception is: TypeInitializationException - “Framework.Dapper.QueryHelperBase”的类型初始值设定项引发异常。
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving Framework.Dapper.DapperDBHelper,(none)
+  Calling constructor Framework.Dapper.DapperDBHelper()
+
+详细信息：
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.Resolve(Type t, String name, ResolverOverride[] resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainerExtensions.Resolve[T](IUnityContainer container, ResolverOverride[] overrides)
+   在 Framework.DI.DIEntity.GetImpl[T]() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.DI\DIEntity.cs:行号 37
+   在 Framework.web.Areas.Admin.Controllers.MainController.Index() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\MainController.cs:行号 16
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 13:08:53,575 
+异常级别：ERROR 
+引发类型：Framework.DI.DIEntity
+所在方法：GetImpl
+异常简述：Resolution of the dependency failed, type = "Framework.Dapper.DapperDBHelper", name = "(none)".
+Exception occurred while: Calling constructor Framework.Dapper.DapperDBHelper().
+Exception is: TypeInitializationException - “Framework.Dapper.QueryHelperBase”的类型初始值设定项引发异常。
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving Framework.Dapper.DapperDBHelper,(none)
+  Calling constructor Framework.Dapper.DapperDBHelper()
+
+详细信息：
+   在 Framework.DI.DIEntity.GetImpl[T]() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.DI\DIEntity.cs:行号 43
+   在 Framework.web.Areas.Admin.Controllers.MainController.Index() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\MainController.cs:行号 16
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 13:17:25,784 
+异常级别：ERROR 
+引发类型：Framework.web.config.WebConfig
+所在方法：LoadElement
+异常简述：给定的关键字connectionString1未在配置中找到
+详细信息：
+   在 Framework.web.config.WebConfig.LoadElement(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 45
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 23
+
+===================================================================================================
+异常时间：2016-08-13 13:17:38,356 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperDBHelper
+所在方法：DoQueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.DapperDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\DapperDBHelper.cs:行号 131
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 95
+
+===================================================================================================
+异常时间：2016-08-13 13:21:42,852 
+异常级别：ERROR 
+引发类型：Framework.web.config.WebConfig
+所在方法：LoadElement
+异常简述：给定的关键字connectionString1未在配置中找到
+详细信息：
+   在 Framework.web.config.WebConfig.LoadElement(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 45
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 23
+
+===================================================================================================
+异常时间：2016-08-13 13:28:31,809 
+异常级别：ERROR 
+引发类型：Framework.web.config.WebConfig
+所在方法：ParseDictionary
+异常简述：未将对象引用设置到对象的实例。
+详细信息：
+   在 Framework.web.config.WebConfig.ParseDictionary(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 75
+   在 Framework.web.config.WebConfig.LoadElement(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 30
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 24
+
+===================================================================================================
+异常时间：2016-08-13 13:28:31,833 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperDBHelper
+所在方法：DoQueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.DapperDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\DapperDBHelper.cs:行号 131
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 96
+
+===================================================================================================
+异常时间：2016-08-13 13:29:27,269 
+异常级别：ERROR 
+引发类型：Framework.web.config.WebConfig
+所在方法：ParseDictionary
+异常简述：未将对象引用设置到对象的实例。
+详细信息：
+   在 Framework.web.config.WebConfig.ParseDictionary(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 75
+   在 Framework.web.config.WebConfig.LoadElement(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 30
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 24
+
+===================================================================================================
+异常时间：2016-08-13 13:29:29,251 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperDBHelper
+所在方法：DoQueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.DapperDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\DapperDBHelper.cs:行号 131
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 96
+
+===================================================================================================
+异常时间：2016-08-13 15:24:56,765 
+异常级别：ERROR 
+引发类型：Framework.web.config.WebConfig
+所在方法：ParseDictionary
+异常简述：未将对象引用设置到对象的实例。
+详细信息：
+   在 Framework.web.config.WebConfig.ParseDictionary(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 76
+   在 Framework.web.config.WebConfig.LoadElement(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 31
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 24
+
+===================================================================================================
+异常时间：2016-08-13 15:24:56,787 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperDBHelper
+所在方法：DoQueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.DapperDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\DapperDBHelper.cs:行号 131
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 96
+
+===================================================================================================
+异常时间：2016-08-13 15:35:12,420 
+异常级别：ERROR 
+引发类型：System.Data.SqlClient.SqlCommand
+所在方法：ValidateCommand
+异常简述：ExecuteReader: CommandText 属性尚未初始化
+详细信息：
+   在 System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior)
+   在 Dapper.SqlMapper.<QueryImpl>d__125`1.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 Dapper.SqlMapper.Query[T](IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Boolean buffered, Nullable`1 commandTimeout, Nullable`1 commandType)
+   在 Dapper.SqlMapper.Query(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Boolean buffered, Nullable`1 commandTimeout, Nullable`1 commandType)
+   在 Framework.Dapper.DapperDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\DapperDBHelper.cs:行号 91
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 98
+
+===================================================================================================
+异常时间：2016-08-13 15:45:25,028 
+异常级别：ERROR 
+引发类型：System.Data.Common.DbConnectionOptions
+所在方法：GetKeyValuePair
+异常简述：从索引 0 处开始，初始化字符串的格式不符合规范。
+详细信息：
+   在 System.Data.Common.DbConnectionOptions.GetKeyValuePair(String connectionString, Int32 currentPosition, StringBuilder buffer, Boolean useOdbcRules, String& keyname, String& keyvalue)
+   在 System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   在 System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   在 System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   在 System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   在 System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   在 System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 25
+
+===================================================================================================
+异常时间：2016-08-13 15:45:25,028 
+异常级别：ERROR 
+引发类型：System.Data.Common.DbConnectionOptions
+所在方法：GetKeyValuePair
+异常简述：从索引 0 处开始，初始化字符串的格式不符合规范。
+详细信息：
+   在 System.Data.Common.DbConnectionOptions.GetKeyValuePair(String connectionString, Int32 currentPosition, StringBuilder buffer, Boolean useOdbcRules, String& keyname, String& keyvalue)
+   在 System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   在 System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   在 System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   在 System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   在 System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   在 System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 25
+
+===================================================================================================
+异常时间：2016-08-13 15:45:25,057 
+异常级别：ERROR 
+引发类型：Framework.Dapper.QueryHelperBase
+所在方法：QueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-08-13 15:45:25,057 
+异常级别：ERROR 
+引发类型：Framework.Dapper.QueryHelperBase
+所在方法：QueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-08-13 15:45:32,993 
+异常级别：ERROR 
+引发类型：System.Data.Common.DbConnectionOptions
+所在方法：GetKeyValuePair
+异常简述：从索引 0 处开始，初始化字符串的格式不符合规范。
+详细信息：
+   在 System.Data.Common.DbConnectionOptions.GetKeyValuePair(String connectionString, Int32 currentPosition, StringBuilder buffer, Boolean useOdbcRules, String& keyname, String& keyvalue)
+   在 System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   在 System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   在 System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   在 System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   在 System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   在 System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 25
+
+===================================================================================================
+异常时间：2016-08-13 15:45:33,002 
+异常级别：ERROR 
+引发类型：Framework.Dapper.QueryHelperBase
+所在方法：QueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-08-13 15:49:43,612 
+异常级别：ERROR 
+引发类型：System.Data.Common.DbConnectionOptions
+所在方法：GetKeyValuePair
+异常简述：从索引 0 处开始，初始化字符串的格式不符合规范。
+详细信息：
+   在 System.Data.Common.DbConnectionOptions.GetKeyValuePair(String connectionString, Int32 currentPosition, StringBuilder buffer, Boolean useOdbcRules, String& keyname, String& keyvalue)
+   在 System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   在 System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   在 System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   在 System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   在 System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   在 System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString, SqlCredential credential)
+   在 System.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 25
+
+===================================================================================================
+异常时间：2016-08-13 15:49:43,633 
+异常级别：ERROR 
+引发类型：Framework.Dapper.QueryHelperBase
+所在方法：QueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-08-13 15:50:43,245 
+异常级别：ERROR 
+引发类型：Framework.web.config.WebConfig
+所在方法：LoadElement
+异常简述：给定的关键字connectionString1未在配置中找到
+详细信息：
+   在 Framework.web.config.WebConfig.LoadElement(String key) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web.config\WebConfig.cs:行号 46
+   在 Framework.Dapper.QueryHelperBase.GetSqlConnection() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 24
+
+===================================================================================================
+异常时间：2016-08-13 15:50:43,264 
+异常级别：ERROR 
+引发类型：Framework.Dapper.QueryHelperBase
+所在方法：QueryList
+异常简述：未获取到连接对象。
+详细信息：
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.ORM\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-08-13 21:15:32,250 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 49
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:15:44,926 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 49
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:34:09,932 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:34:13,644 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:34:56,885 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:36:33,440 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:37:09,936 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:37:45,999 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:38:41,463 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:39:07,336 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:40:44,623 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:48:34,983 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 21:53:53,396 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 22:02:47,604 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 22:05:50,104 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-08-13 22:10:54,780 
+异常级别：ERROR 
+引发类型：Framework.web.Controllers.ValidateCodeController
+所在方法：<VCode>b__0_0
+异常简述：请勿频繁重复请求图片验证码，请稍后再试
+详细信息：
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>b__0_0() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 51
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 Framework.web.Controllers.ValidateCodeController.<VCode>d__0.MoveNext() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Controllers\ValidateCodeController.cs:行号 19
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()

@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Security.cs" />
+    <Compile Include="ConvertHelper.cs" />
     <Compile Include="GuidHelper.cs" />
     <Compile Include="JSONHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

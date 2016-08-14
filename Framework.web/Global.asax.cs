@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.SessionState;
 
 namespace Framework.web
 {
@@ -13,6 +14,21 @@ namespace Framework.web
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            MapperConfig.MapConfiguration.Configure();
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+        
+        }
+
+        /// <summary>
+        /// WebApiSession启动
+        /// </summary>
+        public override void Init()
+        {
+            this.PostAuthenticateRequest += (sender, e) => HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
+            base.Init();
         }
     }
 }
