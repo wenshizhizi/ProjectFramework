@@ -13,7 +13,7 @@ namespace Framework.web.Areas.Admin.Controllers
     {        
         public ActionResult Index()
         {            
-            return View();
+            return PartialView();
         }
     }
 }

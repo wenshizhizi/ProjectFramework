@@ -27,7 +27,7 @@ var modules = (function Manager() {
     function get(name) {
         return modules[name];
     }
-    
+
     return {
         define: define,
         get: get

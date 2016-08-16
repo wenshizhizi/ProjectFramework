@@ -117,6 +117,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Scripts\AccountManager\Index.js" />
+    <Content Include="Areas\Admin\Scripts\InfoManager\Index.js" />
     <Content Include="Areas\Admin\Scripts\Login\Index.js" />
     <Content Include="Areas\Admin\Scripts\Main\Index.js" />
     <Content Include="Content\themes\14-15111615263S59.jpg" />
@@ -685,6 +687,8 @@
     <Content Include="scripts\locale\easyui-lang-zh_CN.js" />
     <Content Include="scripts\locale\easyui-lang-zh_TW.js" />
     <None Include="scripts\_references.js" />
+    <Content Include="SystemLogs\Log\异常日志_20160813.txt" />
+    <Content Include="SystemLogs\Log\异常日志_20160814.txt" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">

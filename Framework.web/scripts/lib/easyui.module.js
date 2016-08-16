@@ -127,20 +127,39 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
     }));
 
     function alertMsg(msg) {
-        $.messager.alert("提示",msg,"warning");
+        $.messager.alert("提示", msg, "warning");
     }
 
     function alertErr(err) {
-        $.messager.alert("错误", msg, "error");
+        $.messager.alert("错误", err, "error");
     }
 
-    function alertInfo(info){
-        $.messager.alert("信息", msg, "info");
+    function alertInfo(info) {
+        $.messager.alert("信息", info, "info");
+    }
+
+    function bindPaginationEvent(datagrd, options, callback) {
+        try {
+            if (func.definededAndNotNull(datagrd) && options && callback) {
+               return datagrd.datagrid(options).datagrid('getPager').pagination({
+                    pageList: [10, 20, 30, 40, 50, 100],
+                    pageNumber: 1,
+                    pageSize: 10,
+                    beforePageText: '第',//页数文本框前显示的汉字 
+                    afterPageText: '页    共 {pages} 页',
+                    displayMsg: '当前显示 {from} - {to} 条记录  共{total}条记录',
+                    onSelectPage: callback
+                });
+            }
+        } catch (e) {
+            throw e;
+        }
     }
 
     return {
         alertMsg: alertMsg,
         alertErr: alertErr,
-        alertInfo: alertInfo
+        alertInfo: alertInfo,
+        bindPaginationEvent: bindPaginationEvent
     };
 });

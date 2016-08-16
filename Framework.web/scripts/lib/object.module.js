@@ -1,6 +1,6 @@
 ﻿/*!
  * Yangyukun Script Library
- * version: 1.0.1
+ * version: 1.0.2
  * build: Sun Aug 07 2016 09:00:36 GMT+0800 (中国标准时间)
  * Released under MIT license
  * 
@@ -40,7 +40,7 @@ modules.define("object", [], function ObjectDomain() {
      * @param { Object } subClass 子类对象
      * @param { Object } superClass 父类对象
      * @returns { Object } 继承superClass后的子类对象
-     */        
+     */
     function inherits(subClass, superClass) {
         var oldP = subClass.prototype,
             newP = makeInstance(superClass.prototype);
@@ -168,14 +168,18 @@ modules.define("object", [], function ObjectDomain() {
             if (source.hasOwnProperty(i)) {
                 tmp = source[i];
                 if (typeof tmp == 'object') {
-                    target[i] = utils.isArray(tmp) ? [] : {};
-                    utils.clone(source[i], target[i])
+                    target[i] = isArray(tmp) ? [] : {};
+                    clone(source[i], target[i])
                 } else {
                     target[i] = tmp;
                 }
             }
         }
         return target;
+    }
+
+    function isArray(obj) {
+        return Object.prototype.toString.apply(obj) == '[object Array]';
     }
 
     /**

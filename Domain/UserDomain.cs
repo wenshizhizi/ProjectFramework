@@ -7,6 +7,7 @@ using Framework.DI;
 using Framework.DTO;
 using Framework.MapperConfig;
 using Framework.Helper;
+using Framework.Dapper;
 
 namespace Framework.Domain
 {
@@ -50,6 +51,14 @@ namespace Framework.Domain
         public bool ChangeAccountInfo()
         {
             return false;
+        }
+
+        public PagingRet<Dictionary<string,object>> LoadUsers(PageInfo page)
+        {
+            //获取查询实体
+            var helper = DIEntity.GetInstance().GetImpl<Dapper.QueryHelper>();
+
+            return helper.PaginationQuery<Dictionary<string, object>>("select sRealName,sLoginName,case when iType = 0 then '公司员工' else '管理员' end iType from EHECD_Account", page, null);
         }
     }
 }

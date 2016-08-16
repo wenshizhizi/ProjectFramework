@@ -16,8 +16,8 @@
     <link href="~/Content/themes/mobile.css" rel="stylesheet" />
     <link href="~/Content/themes/ui-sunny/easyui.css" rel="stylesheet" />
 
-    <script src="~/scripts/jquery-1.11.3.min.js"></script>
-    <script src="~/scripts/jquery.easyui-1.4.5.min.js"></script>
+    <script src="~/scripts/jquery-1.11.3.js"></script>
+    <script src="~/scripts/jquery.easyui-1.4.5.js"></script>
     <script src="~/scripts/lib/modules.manager.js"></script>
     <script src="~/scripts/lib/version.module.js"></script>
     <script src="~/scripts/lib/object.module.js"></script>
@@ -30,25 +30,24 @@
     <title>亿合科技内部应用后台</title>
 
     <style>
-        table{
-            width:100%
+        .menu_table {
+            width: 100%;
         }
 
-        tr:hover{
-            background-color:cornsilk;
-            cursor:pointer;
+        .menu_tr:hover {
+            background-color: cornsilk;
+            cursor: pointer;
         }
 
-        tr{
-            background-color:burlywood;            
+        .menu_tr {
+            background-color: burlywood;
         }
 
-        td{
-            text-align:right;    
-            height:25px;    
-            padding-right:25px;    
+        .menu_td {
+            text-align: right;
+            height: 25px;
+            padding-right: 25px;
         }
-
     </style>
 
 </head>
@@ -68,15 +67,15 @@
 
             <div id="aa" class="easyui-accordion" data-options="border:false,multiple:true">
                 <div title="服务页面部署" data-options="selected:true" style="overflow:auto;padding:1px;">
-                    <table>
+                    <table class="menu_table">
                         <tbody>
-                            <tr>
-                                <td data-index="indexpage">
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="indexpage">
                                     首页
                                 </td>
-                            </tr>                            
-                            <tr>
-                                <td data-index="serpagedeploy">
+                            </tr>
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="serpagedeploy">
                                     服务页面部署
                                 </td>
                             </tr>
@@ -84,36 +83,36 @@
                     </table>
                 </div>
                 <div title="案例展示区部署" data-options="" style="padding:0px;">
-                    <table>
+                    <table class="menu_table">
                         <tbody>
-                            <tr>
-                                <td data-index="weixinstore">
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="weixinstore">
                                     微信商城
                                 </td>
                             </tr>
-                            <tr>
-                                <td data-index="app">
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="app">
                                     APP
                                 </td>
                             </tr>
-                            <tr>
-                                <td data-index="pcmall">
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="pcmall">
                                     PC商城
                                 </td>
                             </tr>
-                            <tr>
-                                <td data-index="weixinaccount">
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="weixinaccount">
                                     微信公众号
                                 </td>
-                            </tr>                            
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div title="体验区部署" data-options="" style="padding:0px;">
-                    <table>
-                        <tbody>                           
-                            <tr>
-                                <td data-index="dpexperiencepro">
+                    <table class="menu_table">
+                        <tbody>
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="dpexperiencepro">
                                     部署体验项目
                                 </td>
                             </tr>
@@ -122,10 +121,10 @@
                 </div>
 
                 <div title="亿合咨询管理" data-options="" style="padding:0px;">
-                    <table>
+                    <table class="menu_table">
                         <tbody>
-                            <tr>
-                                <td data-index="infomanage">
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="infomanage">
                                     资讯管理
                                 </td>
                             </tr>
@@ -134,10 +133,10 @@
                 </div>
 
                 <div title="账号管理" data-options="" style="padding:0px;">
-                    <table>
+                    <table class="menu_table">
                         <tbody>
-                            <tr>
-                                <td data-index="accountmanage">
+                            <tr class="menu_tr">
+                                <td class="menu_td" data-index="accountmanage">
                                     账号管理
                                 </td>
                             </tr>
@@ -151,7 +150,7 @@
         <!--中间面板-->
         <div data-options="region:'center',title:''" style="padding:1px;background:#eee;">
             <div id="tabs" class="easyui-tabs" data-options="fit:true">
-               
+
             </div>
         </div>
     </div>

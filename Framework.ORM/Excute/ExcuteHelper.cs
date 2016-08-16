@@ -12,6 +12,7 @@ namespace Framework.Dapper
         /// 插入单条数据
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
         /// <returns></returns>
         public virtual int InsertSingle<T>(T t)
         {
@@ -30,7 +31,7 @@ namespace Framework.Dapper
         }
 
         /// <summary>
-        /// 插入（sql）
+        /// 插入数据（sql）
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="param"></param>
@@ -43,7 +44,6 @@ namespace Framework.Dapper
         /// <summary>
         /// 执行事务
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <returns></returns>
         public virtual int ExcuteTransaction(string sql)
@@ -63,7 +63,7 @@ namespace Framework.Dapper
         }
 
         /// <summary>
-        /// 
+        /// 更新数据（sql）
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="param"></param>
@@ -74,9 +74,9 @@ namespace Framework.Dapper
         }
 
         /// <summary>
-        /// 更新多条数据
+        ///  更新多条数据
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">更新类型</typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
         public virtual int UpdateMultiple<T>(IList<T> t)
