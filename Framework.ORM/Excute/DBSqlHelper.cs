@@ -21,11 +21,10 @@ namespace Framework.Dapper
             StringBuilder mySQL = new StringBuilder();
             List<string> fs = new List<string>();
             List<string> vs = new List<string>();
-            mySQL.Append("INSERT INTO ");
             PropertyInfo[] pros = t.GetType().GetProperties();
             var tbName = t.GetType().GetCustomAttribute<Framework.DTO.TableInfo>();
-                        
-            mySQL.Append(string.Format("[{0}]", tbName.TableName));
+              
+            mySQL.Append(string.Format("INSERT INTO [{0}]", tbName.TableName));
 
             foreach (var pro in pros)
             {
