@@ -1,6 +1,7 @@
 ﻿using Framework.Log;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -56,7 +57,7 @@ namespace Framework.Dapper
             {
                 conn = GetSqlConnection();
                 if (conn == null) throw new ApplicationException("未获取到连接对象。");
-                return DoInsertSingle<T>(conn,t);
+                return DoInsertSingle<T>(conn, t);
             }
             catch (Exception ex)
             {
@@ -72,15 +73,21 @@ namespace Framework.Dapper
         public override sealed int InsertMultiple<T>(IList<T> t)
         {
             SqlConnection conn = null;
+            IDbTransaction tran = null;
             try
             {
                 conn = GetSqlConnection();
                 if (conn == null) throw new ApplicationException("未获取到连接对象。");
-                return DoInsertMultiple<T>(conn, t);
+                tran = conn.BeginTransaction();
+                return DoInsertMultiple<T>(conn, tran, t);
             }
             catch (Exception ex)
             {
                 Logs.GetLog().WriteErrorLog(ex);
+                if (tran != null)
+                {
+                    tran.Rollback();
+                }
                 return 0;
             }
             finally
@@ -109,9 +116,9 @@ namespace Framework.Dapper
             }
         }
 
-        
-        protected abstract int DoInsertSingle<T>(SqlConnection conn,T t);
-        protected abstract int DoInsertMultiple<T>(SqlConnection conn, IList<T> t);
+
+        protected abstract int DoInsertSingle<T>(SqlConnection conn, T t);
+        protected abstract int DoInsertMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t);
         protected abstract int DoInsert(SqlConnection conn, string sql, object param);
 
     }

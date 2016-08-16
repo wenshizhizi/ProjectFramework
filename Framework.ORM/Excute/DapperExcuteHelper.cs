@@ -4,24 +4,29 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using System.Data;
 
-namespace Framework.Dapper.Excute
+namespace Framework.Dapper
 {
     public class DapperExcuteHelper : ExcuteHelperBase
     {
         protected override int DoInsert(SqlConnection conn, string sql, object param)
         {
-            throw new NotImplementedException();
+            return conn.ExecuteScalar<int>(sql, param, null, null, System.Data.CommandType.Text);
         }
 
-        protected override int DoInsertMultiple<T>(SqlConnection conn, IList<T> t)
+        protected override int DoInsertMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t)
         {
-            throw new NotImplementedException();
+            return 0;
+            //return conn.ExecuteScalar<int>()
         }
 
         protected override int DoInsertSingle<T>(SqlConnection conn, T t)
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

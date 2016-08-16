@@ -11,12 +11,7 @@ namespace Framework.DTO
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class FieldInfo:Attribute
-    {
-        /// <summary>
-        /// 数据字段类型
-        /// </summary>
-        public Type DataFieldType { get; set; }
-
+    {       
         /// <summary>
         /// 数据字段长度
         /// </summary>
@@ -31,5 +26,17 @@ namespace Framework.DTO
         /// 数据字段在数据库的名称
         /// </summary>
         public String FiledName { get; set; }
+    }
+    /// <summary>
+    /// 数据表信息
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class TableInfo : Attribute
+    {
+        /// <summary>
+        /// 表名
+        /// </summary>
+        public string TableName { get; set; }
+
     }
 }

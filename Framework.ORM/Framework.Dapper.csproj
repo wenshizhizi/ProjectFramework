@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Excute\DapperExcuteHelper.cs" />
+    <Compile Include="Excute\DBSqlHelper.cs" />
     <Compile Include="Excute\ExcuteHelper.cs" />
     <Compile Include="Excute\ExcuteHelperBase.cs" />
     <Compile Include="PagingAbout\PageInfo.cs" />
