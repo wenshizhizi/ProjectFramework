@@ -24,7 +24,8 @@ namespace Framework.Dapper
 
         protected override int DoInsertSingle<T>(SqlConnection conn, T t)
         {
-            throw new NotImplementedException();
+            string sql = DBSqlHelper.GetInsertSQL<T>(t);
+            return conn.ExecuteScalar<int>(sql);
         }
 
 

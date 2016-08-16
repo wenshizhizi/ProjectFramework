@@ -16,36 +16,41 @@ namespace Framework.Dapper
         /// <param name="obj"></param>
         /// <param name="viewName"></param>
         /// <returns></returns>
-        public static string GetInsertSQL(object obj, string viewName)
+        public static string GetInsertSQL<T>(T t)
         {
-            //复数
-            bool isList = false;
-            List<Dictionary<string, object>> newList = null;
-            Dictionary<string, object> newObj = null;
             StringBuilder mySQL = new StringBuilder();
-            PropertyInfo[] pros = obj.GetType().GetProperties();
-            //foreach (PropertyInfo pro in pros)
-            //{
-            //    if (pro.Name.ToLower() == "count" && obj.GetType().Name != "Dictionary`2")
-            //    {
-            //        isList = true;
-            //        break;
-            //    }
-            //}
+            List<string> fs = new List<string>();
+            List<string> vs = new List<string>();
+            mySQL.Append("INSERT INTO ");
+            PropertyInfo[] pros = t.GetType().GetProperties();
+            var tbName = t.GetType().GetCustomAttribute<Framework.DTO.TableInfo>();
+                        
+            mySQL.Append(string.Format("[{0}]", tbName.TableName));
 
-            //if (isList)
-            //{
-            //    newList = obj.ToObject<List<Dictionary<string, object>>>();
-            //    foreach (var item in newList)
-            //    {
-            //        mySQL.Append(GetInsertByDictToSQL(item, viewName)).Append(";");
-            //    }
-            //}
-            //else
-            //{
-            //    newObj = obj.ToObject<Dictionary<string, object>>();
-            //    mySQL.Append(GetInsertByDictToSQL(newObj, viewName));
-            //}
+            foreach (var pro in pros)
+            {
+                var field = pro.GetCustomAttribute<Framework.DTO.FieldInfo>();
+                var value = pro.GetValue(t).ToString();
+                if (!string.IsNullOrEmpty(value) && !string.IsNullOrWhiteSpace(value))
+                {
+                    fs.Add(string.Format("[{0}]", field.FiledName));
+                    var pName = pro.PropertyType.FullName.ToLower();
+
+                    if (pName.IndexOf("guid") >= 0 || pName.IndexOf("datetime") >= 0 || pName.IndexOf("string") >= 0)
+                    {
+                        vs.Add(string.Format("'{0}'", value));
+                    }
+                    else if (pName.IndexOf("int32") >= 0)
+                    {
+                        vs.Add(string.Format("{0}", value));
+                    }
+                    else if (pName.IndexOf("boolean") >= 0)
+                    {
+                        vs.Add(string.Format("{0}", value.ToLower() == "false" ? "0" : "1"));
+                    }
+                }
+            }
+            mySQL.Append(string.Format("({0}) VALUES({1});", string.Join(",", fs), string.Join(",", vs)));
             return mySQL.ToString();
         }
     }

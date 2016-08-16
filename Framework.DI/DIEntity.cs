@@ -62,7 +62,7 @@ namespace Framework.DI
             container = new UnityContainer();
                         
             container.RegisterType<QueryHelper, DapperQueryDBHelper>();
-
+            container.RegisterType<ExcuteHelper, DapperExcuteHelper>();
             //初始化容器
             //这里是用web.config的方式配置的初始化方法。如果你要用
             //配置文件来映射实体和接口，那就把上面那句注释了，用

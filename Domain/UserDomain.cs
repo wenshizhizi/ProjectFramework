@@ -60,5 +60,7 @@ namespace Framework.Domain
 
             return helper.PaginationQuery<Dictionary<string, object>>("select sRealName,sLoginName,case when iType = 0 then '公司员工' else '管理员' end iType from EHECD_Account", page, null);
         }
+
+        
     }
 }

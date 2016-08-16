@@ -64,25 +64,36 @@ namespace Test
             //QueryHelper qb = new DapperDBHelper();
             //var list = qb.QueryList<Object>("select * from CICUser where [Username] = @name", new { name = "yangyukun" });
 
-            var list = Framework.web.config.WebConfig.ParseDictionary("unity");
+            //var list = Framework.web.config.WebConfig.ParseDictionary("unity");
 
 
-            QueryHelper helper = DIEntity.GetInstance().GetImpl<QueryHelper>();
+            //QueryHelper helper = DIEntity.GetInstance().GetImpl<QueryHelper>();
 
-            ////Dictionary<string,object>
+            //////Dictionary<string,object>
 
-            //var ret = helper.PaginationQuery<EHECD_Orders>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new PageInfo
-            //{
-            //    OrderBy = "iTotalPrice",
-            //    orderType = OrderType.DESC,
-            //    PageIndex = 1,
-            //    PageSize = 10
-            //}, new { condi = 100 });
+            ////var ret = helper.PaginationQuery<EHECD_Orders>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new PageInfo
+            ////{
+            ////    OrderBy = "iTotalPrice",
+            ////    orderType = OrderType.DESC,
+            ////    PageIndex = 1,
+            ////    PageSize = 10
+            ////}, new { condi = 100 });
 
 
-            var ret2 = helper.QueryList<Dictionary<string, object>>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new { condi = 100 });
+            //var ret2 = helper.QueryList<Dictionary<string, object>>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new { condi = 100 });
 
-            var ret3 = helper.SingleQuery<Dictionary<string, object>>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new { condi = 100 });
+            //var ret3 = helper.SingleQuery<Dictionary<string, object>>("select ID,iTotalPrice from EHECD_Orders where iTotalPrice > @condi", new { condi = 100 });
+
+            Framework.DI.DIEntity.GetInstance().GetImpl<Framework.Dapper.ExcuteHelper>().InsertSingle<EHECD_AccountDTO>(new EHECD_AccountDTO {
+                 ID = Framework.Helper.GuidHelper.GetSecuentialGuid(),
+                 bIsDeleted = false,
+                 dCreateTime = DateTime.Now,
+                 iOrder = 0,
+                 iType = 0,
+                 sLoginName = "yangyukun",
+                 sLoginPwd = "123",
+                 sRealName = "yangyukun"
+            });
         }
     }
 }
