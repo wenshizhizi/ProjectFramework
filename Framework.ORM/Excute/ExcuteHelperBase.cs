@@ -16,7 +16,7 @@ namespace Framework.Dapper
 
         // 获取数据库连接        
         private SqlConnection GetSqlConnection()
-        {
+        { 
             try
             {
                 if (connectionStr == null) connectionStr = web.config.WebConfig.LoadElement("connectionString");
@@ -92,6 +92,7 @@ namespace Framework.Dapper
             }
             finally
             {
+                if (tran != null) tran.Dispose();
                 CloseConnect(conn);
             }
         }
@@ -116,10 +117,79 @@ namespace Framework.Dapper
             }
         }
 
+        public override int Update(string sql, object param)
+        {
+            SqlConnection conn = null;
+            try
+            {
+                conn = GetSqlConnection();
+                if (conn == null) throw new ApplicationException("未获取到连接对象。");
+                return DoUpdate(conn, sql, param);
+            }
+            catch (Exception ex)
+            {
+                Logs.GetLog().WriteErrorLog(ex);
+                return 0;
+            }
+            finally
+            {
+                CloseConnect(conn);
+            }
+        }
+
+        public override int UpdateMultiple<T>(IList<T> t, string where)
+        {
+            SqlConnection conn = null;
+            IDbTransaction tran = null;
+            try
+            {
+                conn = GetSqlConnection();
+                if (conn == null) throw new ApplicationException("未获取到连接对象。");
+                tran = conn.BeginTransaction();
+                return DoUpdateMultiple<T>(conn, tran, t, where);
+            }
+            catch (Exception ex)
+            {
+                Logs.GetLog().WriteErrorLog(ex);
+                if (tran != null)
+                {
+                    tran.Rollback();
+                }
+                return 0;
+            }
+            finally
+            {
+                if (tran != null) tran.Dispose();
+                CloseConnect(conn);
+            }
+        }
+
+        public override int UpdateSingle<T>(T t, string where)
+        {
+            SqlConnection conn = null;
+            try
+            {
+                conn = GetSqlConnection();
+                if (conn == null) throw new ApplicationException("未获取到连接对象。");
+                return DoUpdateSingle<T>(conn, t, where);
+            }
+            catch (Exception ex)
+            {
+                Logs.GetLog().WriteErrorLog(ex);
+                return 0;
+            }
+            finally
+            {
+                CloseConnect(conn);
+            }
+        }
 
         protected abstract int DoInsertSingle<T>(SqlConnection conn, T t);
         protected abstract int DoInsertMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t);
         protected abstract int DoInsert(SqlConnection conn, string sql, object param);
 
+        protected abstract int DoUpdateSingle<T>(SqlConnection conn, T t, string where);
+        protected abstract int DoUpdateMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t, string where);
+        protected abstract int DoUpdate(SqlConnection conn, string sql, object param);
     }
 }

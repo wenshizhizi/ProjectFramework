@@ -16,7 +16,7 @@ namespace Framework.Dapper
         /// <returns></returns>
         public virtual int InsertSingle<T>(T t)
         {
-            return 0;
+            return 0; 
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Framework.Dapper
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public virtual int UpdateSingle<T>(T t)
+        public virtual int UpdateSingle<T>(T t,string where)
         {
             return 0;
         }
@@ -79,7 +79,7 @@ namespace Framework.Dapper
         /// <typeparam name="T">更新类型</typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public virtual int UpdateMultiple<T>(IList<T> t)
+        public virtual int UpdateMultiple<T>(IList<T> t, string where)
         {
             return 0;
         }
