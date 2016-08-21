@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateHelpr.cs" />
     <Compile Include="HTMLTranscoding.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="ConvertHelper.cs" />

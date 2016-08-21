@@ -56,6 +56,7 @@ namespace Framework.Dapper
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
+        /// <param name="where">where条件 如："where id = ...."</param>
         /// <returns></returns>
         public virtual int UpdateSingle<T>(T t,string where)
         {
@@ -65,8 +66,8 @@ namespace Framework.Dapper
         /// <summary>
         /// 更新数据（sql）
         /// </summary>
-        /// <param name="sql"></param>
-        /// <param name="param"></param>
+        /// <param name="sql">sql</param>
+        /// <param name="param">sql中需要的参数</param>
         /// <returns></returns>
         public virtual int Update(String sql, object param)
         {
@@ -74,10 +75,11 @@ namespace Framework.Dapper
         }
 
         /// <summary>
-        ///  更新多条数据
+        /// 更新多条数据,发方法暂时没有实现，定义有点问题，一个where无法满足多条的条件，暂缓调用
         /// </summary>
-        /// <typeparam name="T">更新类型</typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
+        /// <param name="where"></param>
         /// <returns></returns>
         public virtual int UpdateMultiple<T>(IList<T> t, string where)
         {
