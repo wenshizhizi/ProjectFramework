@@ -16,7 +16,7 @@ namespace Framework.Dapper
         /// <returns></returns>
         public virtual int InsertSingle<T>(T t)
         {
-            return 0; 
+            return 0;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Framework.Dapper
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public virtual int Insert(String sql,object param)
+        public virtual int Insert(String sql, object param)
         {
             return 0;
         }
@@ -58,7 +58,7 @@ namespace Framework.Dapper
         /// <param name="t"></param>
         /// <param name="where">where条件 如："where id = ...."</param>
         /// <returns></returns>
-        public virtual int UpdateSingle<T>(T t,string where)
+        public virtual int UpdateSingle<T>(T t, string where)
         {
             return 0;
         }

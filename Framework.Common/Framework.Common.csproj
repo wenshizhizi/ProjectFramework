@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32EC1887-56F8-4F47-B2D1-1BEF33E6249C}</ProjectGuid>
+    <ProjectGuid>{C6DBD71C-DF48-47B7-8545-0806A328CE71}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Framework.Domain</RootNamespace>
-    <AssemblyName>Framework.Domain</AssemblyName>
+    <RootNamespace>Framework.Common</RootNamespace>
+    <AssemblyName>Framework.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,10 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainInfoException.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\Framework.BLL.csproj">
+      <Project>{128012ba-aa90-4e30-aca8-36c6e36fd204}</Project>
+      <Name>Framework.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Framework.Domain.csproj">
+      <Project>{32ec1887-56f8-4f47-b2d1-1bef33e6249c}</Project>
+      <Name>Framework.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Cache\Framework.Cache.csproj">
+      <Project>{e9c326c7-db54-47dd-ac57-a55a75c6024e}</Project>
+      <Name>Framework.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework.DI\Framework.DI.csproj">
       <Project>{21e20c6e-7ff5-4e35-b4ab-b7ce4b8e65a2}</Project>
       <Name>Framework.DI</Name>
@@ -56,17 +68,26 @@
       <Project>{4bb5f221-3226-4ba9-9eb0-27377c2cb196}</Project>
       <Name>Framework.Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework.Log\Framework.Log.csproj">
+      <Project>{2d79182e-02cb-4b38-b639-f728412473f0}</Project>
+      <Name>Framework.Log</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework.ORM\Framework.Dapper.csproj">
       <Project>{c7c3d0e2-c9b8-43fd-99e6-f8a3c12a8814}</Project>
       <Name>Framework.Dapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Validate\Framework.Validate.csproj">
+      <Project>{760b93c4-51f9-4755-8d48-a56a3c16bdd9}</Project>
+      <Name>Framework.Validate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.web.config\Framework.web.config.csproj">
+      <Project>{7f29fbc4-3e7d-46b4-99b3-a02fd3eef2b3}</Project>
+      <Name>Framework.web.config</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapper\Framework.MapperConfig.csproj">
       <Project>{b925ea38-965d-4899-8886-1ebc86a648e6}</Project>
       <Name>Framework.MapperConfig</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

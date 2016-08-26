@@ -12,8 +12,20 @@ namespace Framework.web.Areas.Admin.Controllers
     public class MainController : SuperController
     {        
         public ActionResult Index()
-        {            
+        {           
+            
             return View();
+        }
+
+        /// <summary>
+        /// 获取上传图片服务器地址
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public void GetServerUrl()
+        {
+            result.Succeeded = true;
+            result.Data = web.config.WebConfig.LoadElement("url");
         }
     }
 }

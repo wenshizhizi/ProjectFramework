@@ -16,7 +16,7 @@ namespace Framework.Dapper
 
         // 获取数据库连接        
         private SqlConnection GetSqlConnection()
-        { 
+        {
             try
             {
                 if (connectionStr == null) connectionStr = web.config.WebConfig.LoadElement("connectionString");

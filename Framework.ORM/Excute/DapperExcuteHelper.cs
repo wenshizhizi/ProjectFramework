@@ -19,11 +19,29 @@ namespace Framework.Dapper
         protected override int DoInsertMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t)
         {
             StringBuilder sb = new StringBuilder();
-            Parallel.ForEach(t, item =>
+
+            foreach (var item in t)
             {
                 sb.Append(DBSqlHelper.GetInsertSQL(item));
-            }); 
-            return conn.Execute(sb.ToString(), null, tran, null, CommandType.Text);
+            }
+            
+            //Parallel.ForEach(t, item =>
+            //{
+            //    sb.Append(DBSqlHelper.GetInsertSQL(item));
+            //});
+
+            int row = conn.Execute(sb.ToString(), null, tran, null, CommandType.Text);
+
+            if (row > 0)
+            {
+                tran.Commit();
+            }
+            else
+            {
+                tran.Rollback();
+            }
+
+            return row;
         }
 
         protected override int DoInsertSingle<T>(SqlConnection conn, T t)
@@ -39,12 +57,12 @@ namespace Framework.Dapper
 
         protected override int DoUpdateMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t, string where)
         {
-            //StringBuilder sb = new StringBuilder();
+            
+//StringBuilder sb = new StringBuilder();
             //Parallel.ForEach(t, item => {
             //    sb.Append(DBSqlHelper.GetUpdateSQL<T>(item));
             //});
             //return conn.Execute(sb.ToString(), null, tran, null, CommandType.Text);
-
             return 0;
         }
 

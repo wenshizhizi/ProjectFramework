@@ -30,7 +30,7 @@ namespace Framework.Validate
             {
                 //登陆验证Session
                 AdminLoginValidate(context);
-            }            
+            }
         }
 
 
@@ -46,6 +46,7 @@ namespace Framework.Validate
                 return;
             }
 
+            //获取用户会话
             SessionInfo session = (SessionInfo)context.Session[SessionInfo.SESSION_NAME];
 
             if (session == null || session.SessionUser == null || session.SessionUser.User == null)

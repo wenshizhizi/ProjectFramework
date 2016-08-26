@@ -7,6 +7,8 @@ using Framework.DTO;
 using Framework.Validate;
 using Framework.web.Controllers;
 using Framework.Domain;
+using Framework.BLL;
+using Framework.DI;
 
 namespace Framework.web.Areas.Admin.Controllers
 {
@@ -19,21 +21,23 @@ namespace Framework.web.Areas.Admin.Controllers
         }
 
         public void Login()
-        {
-            var user = JSONHelper.GetModel<Account>(RequestParameters.data.ToString());
+        {            
+            //获取上传的账户信息
+            var user = JSONHelper.GetModel<EHECD_AccountDTO>(RequestParameters.data.ToString());
 
+            //获取session信息
             SessionInfo session = (SessionInfo)Session[SessionInfo.SESSION_NAME];
-
+            
+            //校验验证码
             if (user.sRealName.ToLower() != session.ImgCode.VCodeContent.ToLower())
-            {
+            {                
                 result.Succeeded = false;
                 result.Msg = "验证码验证失败，请输入正确的验证码";
             }
 
-            UserDomain udo = new UserDomain();
-            udo.user = user;
-
-            var dto = udo.Login();
+            ILogin login = DIEntity.GetInstance().GetImpl<ILogin>();
+            
+            var dto = login.Login(user);
 
             if (dto!=null)
             {

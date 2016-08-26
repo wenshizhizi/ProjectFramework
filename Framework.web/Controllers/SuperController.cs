@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Text;
-
+using Framework.Domain;
 
 namespace Framework.web.Controllers
 {
@@ -45,9 +45,30 @@ namespace Framework.web.Controllers
         {
             if (filterContext.Exception != default(Exception))
             {
-                //处理controller的异常
-                Log.Logs.GetLog().WriteErrorLog(filterContext.Exception);
-                filterContext.ExceptionHandled = true;               
+                if(filterContext.Exception.GetType() == typeof(DomainInfoException))
+                {
+                    var ex = filterContext.Exception as DomainInfoException;
+                    filterContext.ExceptionHandled = true;
+                    if (ex.IsLog)
+                    {
+                        Log.Logs.GetLog().WriteErrorLog(ex);                        
+                        result.Succeeded = false;
+                        result.Msg = ex.Message;
+                        filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
+                    }
+                    else
+                    {
+                        result.Succeeded = false;
+                        result.Msg = ex.Message;
+                        filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
+                    }
+                }
+                else
+                {
+                    //处理controller的异常
+                    Log.Logs.GetLog().WriteErrorLog(filterContext.Exception);
+                    filterContext.ExceptionHandled = true;                   
+                }               
             }
             else if (filterContext.HttpContext.Request.IsAjaxRequest() && filterContext.HttpContext.Request.RequestType.ToLower() == "post")
             {

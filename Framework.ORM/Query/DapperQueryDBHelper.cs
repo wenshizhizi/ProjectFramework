@@ -32,7 +32,7 @@ namespace Framework.Dapper
         protected override PagingRet<T> DoPaginationQuery<T>(SqlConnection conn, string sqlCommand, PageInfo pageInfo, Object parameter)
         {
             //计算分页参数
-            int startPage = pageInfo.PageSize * (pageInfo.PageIndex - 1) + 1;
+            int startPage = pageInfo.PageIndex == 0 ? 1 : pageInfo.PageSize * (pageInfo.PageIndex - 1) + 1;
             int endPage = startPage + pageInfo.PageSize - 1;
             var result = new PagingRet<T>();
             
@@ -119,8 +119,9 @@ namespace Framework.Dapper
         }
 
         protected override T DoSingleQuery<T>(SqlConnection conn, string sqlCommand, Object parameter)
-        {
-            var ret = conn.Query(sqlCommand, parameter, null, true, null, CommandType.Text).Select(m => ((IDictionary<string, object>)m).ToDictionary(pi => pi.Key, pi => pi.Value)).FirstOrDefault<IDictionary<string, object>>();
+        {           
+            var ret = conn.Query(sqlCommand, parameter, null, true, null, CommandType.Text).Select(
+                m => ((IDictionary<string, object>)m).ToDictionary(pi => pi.Key, pi => pi.Value)).FirstOrDefault<IDictionary<string, object>>();
 
             if (ret == default(IDictionary<string, object>)) return default(T);
 

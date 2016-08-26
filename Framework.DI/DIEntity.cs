@@ -1,5 +1,4 @@
-﻿using Framework.Dapper;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using System;
 using System.Linq;
@@ -19,8 +18,8 @@ namespace Framework.DI
         /// 直接用的是代码做映射，如果你要用，
         /// 配置文件在这个项目的Web.config里面
         /// </summary>
-        //private UnityConfigurationSection configuration =
-        //   ConfigurationManager.GetSection(UnityConfigurationSection.SectionName) as UnityConfigurationSection;
+        private UnityConfigurationSection configuration =
+           ConfigurationManager.GetSection(UnityConfigurationSection.SectionName) as UnityConfigurationSection;
 
         //注入容器
         private UnityContainer container = null;
@@ -60,14 +59,12 @@ namespace Framework.DI
         private DIEntity()
         {
             container = new UnityContainer();
-                        
-            container.RegisterType<QueryHelper, DapperQueryDBHelper>();
-            container.RegisterType<ExcuteHelper, DapperExcuteHelper>();
+                                    
             //初始化容器
             //这里是用web.config的方式配置的初始化方法。如果你要用
             //配置文件来映射实体和接口，那就把上面那句注释了，用
             //这个就是了
-            //configuration.Configure(container, "defaultContainer");
+            configuration.Configure(container, "defaultContainer");
         }
 
         /// <summary>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32EC1887-56F8-4F47-B2D1-1BEF33E6249C}</ProjectGuid>
+    <ProjectGuid>{128012BA-AA90-4E30-ACA8-36C6E36FD204}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Framework.Domain</RootNamespace>
-    <AssemblyName>Framework.Domain</AssemblyName>
+    <RootNamespace>Framework.BLL</RootNamespace>
+    <AssemblyName>Framework.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,33 +40,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainInfoException.cs" />
+    <Compile Include="Implement\UserLogin.cs" />
+    <Compile Include="Interface\ILogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Framework.DI\Framework.DI.csproj">
       <Project>{21e20c6e-7ff5-4e35-b4ab-b7ce4b8e65a2}</Project>
       <Name>Framework.DI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.Entity\Framework.DTO.csproj">
-      <Project>{17fd7ad8-a20d-4f3b-b441-a9f2d2732a93}</Project>
+      <Project>{17FD7AD8-A20D-4F3B-B441-A9F2D2732A93}</Project>
       <Name>Framework.DTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.Helper\Framework.Helper.csproj">
-      <Project>{4bb5f221-3226-4ba9-9eb0-27377c2cb196}</Project>
+      <Project>{4BB5F221-3226-4BA9-9EB0-27377C2CB196}</Project>
       <Name>Framework.Helper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.ORM\Framework.Dapper.csproj">
-      <Project>{c7c3d0e2-c9b8-43fd-99e6-f8a3c12a8814}</Project>
+      <Project>{C7C3D0E2-C9B8-43FD-99E6-F8A3C12A8814}</Project>
       <Name>Framework.Dapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapper\Framework.MapperConfig.csproj">
-      <Project>{b925ea38-965d-4899-8886-1ebc86a648e6}</Project>
+      <Project>{B925EA38-965D-4899-8886-1EBC86A648E6}</Project>
       <Name>Framework.MapperConfig</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -67,6 +67,67 @@ namespace Framework.Helper
             return Security.GetMD5Hash(sign.ToUpper() + signKey).ToUpper();
         }
 
+        /// <summary>
+        /// json数据加密
+        /// </summary>
+        /// <param name="responseJsonString">要加密的json数据</param>
+        /// <returns></returns>
+        public static byte[] EncryptionResponse(string responseJsonString)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(responseJsonString);
+
+            Parallel.For(0, bytes.Length, index =>
+            {
+                var temp = bytes[index];
+                var b = (Convert.ToString(temp, 2).PadLeft(8, '0')).ToArray();
+
+                char[] tb = new char[7];
+                Array.Copy(b, 1, tb, 0, tb.Length);
+
+                Parallel.For(0, tb.Length, tempIndex =>
+                {
+
+                    tb[tempIndex] = tb[tempIndex] == '0' ? '1' : '0';
+                });
+
+                Array.Copy(tb, 0, b, 1, tb.Length);
+                string sb = new string(b);
+                bytes[index] = Convert.ToByte(sb, 2);
+            });
+
+            return bytes;
+        }
+
+        /// <summary>
+        /// 请求数据解密
+        /// </summary>
+        /// <param name="requestData"></param>
+        /// <returns></returns>
+        public static string DecryptRequest(byte[] requestData)
+        {
+            string encode = Encoding.UTF8.GetString(requestData);
+
+            Parallel.For(0, requestData.Length, index =>
+            {
+                var temp = requestData[index];
+                var b = (Convert.ToString(temp, 2).PadLeft(8, '0')).ToArray();
+
+                char[] tb = new char[7];
+                Array.Copy(b, 1, tb, 0, tb.Length);
+
+                Parallel.For(0, tb.Length, tempIndex =>
+                {
+                    tb[tempIndex] = tb[tempIndex] == '1' ? '0' : '1';
+                });
+
+                Array.Copy(tb, 0, b, 1, tb.Length);
+                string sb = new string(b);
+                requestData[index] = Convert.ToByte(sb, 2);
+            });
+
+            return Encoding.UTF8.GetString(requestData);
+        }
+
         #region base64算法
 
         /// <summary> 

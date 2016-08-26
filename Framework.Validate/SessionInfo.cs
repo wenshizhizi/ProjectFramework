@@ -48,7 +48,7 @@ namespace Framework.Validate
     public class SessionInfo
     {
         public static readonly string SESSION_NAME = "$-@k-76^";
-
+        public static readonly string APISESSION_NAME = "$-@k-71^";
         /// <summary>
         /// 获取或设置会话用户信息
         /// </summary>
