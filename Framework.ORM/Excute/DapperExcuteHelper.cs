@@ -25,6 +25,7 @@ namespace Framework.Dapper
                 sb.Append(DBSqlHelper.GetInsertSQL(item));
             }
             
+            //考虑到有的时候批量插入需要按照顺序来插入，所以这个地方暂时不用并行运算了
             //Parallel.ForEach(t, item =>
             //{
             //    sb.Append(DBSqlHelper.GetInsertSQL(item));

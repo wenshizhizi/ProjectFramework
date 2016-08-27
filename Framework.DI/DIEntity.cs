@@ -22,7 +22,7 @@ namespace Framework.DI
            ConfigurationManager.GetSection(UnityConfigurationSection.SectionName) as UnityConfigurationSection;
 
         //注入容器
-        private UnityContainer container = null;
+        private UnityContainer container = new UnityContainer();
 
         /// <summary>
         /// 获取注入容器
@@ -36,6 +36,11 @@ namespace Framework.DI
             }
         }
 
+        /// <summary>
+        /// 获取接口的实现对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T GetImpl<T>()
         {
             try
@@ -58,8 +63,10 @@ namespace Framework.DI
         /// </summary>
         private DIEntity()
         {
-            container = new UnityContainer();
-                                    
+            //使用代码方式注释，这样有一个坏处，你必须依赖配置的库，这样容易造成循环引用
+            //container.RegisterType<QueryHelper, DapperQueryDBHelper>();
+            //container.RegisterType<ExcuteHelper, DapperExcuteHelper>();
+
             //初始化容器
             //这里是用web.config的方式配置的初始化方法。如果你要用
             //配置文件来映射实体和接口，那就把上面那句注释了，用

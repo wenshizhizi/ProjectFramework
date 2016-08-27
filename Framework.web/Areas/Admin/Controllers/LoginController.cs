@@ -23,16 +23,17 @@ namespace Framework.web.Areas.Admin.Controllers
         public void Login()
         {            
             //获取上传的账户信息
-            var user = JSONHelper.GetModel<EHECD_AccountDTO>(RequestParameters.data.ToString());
+            var user = JSONHelper.GetModel<EHECD_SystemUserDTO>(RequestParameters.data.ToString());
 
             //获取session信息
             SessionInfo session = (SessionInfo)Session[SessionInfo.SESSION_NAME];
-            
-            //校验验证码
-            if (user.sRealName.ToLower() != session.ImgCode.VCodeContent.ToLower())
+
+            //校验验证码:这里偷了个懒，用的EHECD_SystemUserDTO的sUserName临时装了一下
+            if (user.sUserName.ToLower() != session.ImgCode.VCodeContent.ToLower())
             {                
                 result.Succeeded = false;
                 result.Msg = "验证码验证失败，请输入正确的验证码";
+                return;
             }
 
             ILogin login = DIEntity.GetInstance().GetImpl<ILogin>();
@@ -41,6 +42,9 @@ namespace Framework.web.Areas.Admin.Controllers
 
             if (dto!=null)
             {
+                //获取该用户的权限
+
+
                 session.SessionUser.User = dto;
                 Session[SessionInfo.SESSION_NAME] = session;                
                 result.Succeeded = true;

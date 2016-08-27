@@ -9,15 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Dapper", "Framewo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DTO", "Framework.Entity\Framework.DTO.csproj", "{17FD7AD8-A20D-4F3B-B441-A9F2D2732A93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{4A833114-1FAD-43F5-8EF3-0BEDB531CC5B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.web", "Framework.web\Framework.web.csproj", "{D321AD43-43CB-4E6C-97D3-CEFB1A05B8B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Log", "Framework.Log\Framework.Log.csproj", "{2D79182E-02CB-4B38-B639-F728412473F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Domain", "Domain\Framework.Domain.csproj", "{32EC1887-56F8-4F47-B2D1-1BEF33E6249C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Domain", "Framework.Domain\Framework.Domain.csproj", "{32EC1887-56F8-4F47-B2D1-1BEF33E6249C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.MapperConfig", "Mapper\Framework.MapperConfig.csproj", "{B925EA38-965D-4899-8886-1EBC86A648E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.MapperConfig", "Framework.MapperConfig\Framework.MapperConfig.csproj", "{B925EA38-965D-4899-8886-1EBC86A648E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Helper", "Framework.Helper\Framework.Helper.csproj", "{4BB5F221-3226-4BA9-9EB0-27377C2CB196}"
 EndProject
@@ -27,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Validate", "Frame
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Cache", "Framework.Cache\Framework.Cache.csproj", "{E9C326C7-DB54-47DD-AC57-A55A75C6024E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.BLL", "BLL\Framework.BLL.csproj", "{128012BA-AA90-4E30-ACA8-36C6E36FD204}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.BLL", "Framework.BLL\Framework.BLL.csproj", "{128012BA-AA90-4E30-ACA8-36C6E36FD204}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{17FD7AD8-A20D-4F3B-B441-A9F2D2732A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17FD7AD8-A20D-4F3B-B441-A9F2D2732A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17FD7AD8-A20D-4F3B-B441-A9F2D2732A93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A833114-1FAD-43F5-8EF3-0BEDB531CC5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A833114-1FAD-43F5-8EF3-0BEDB531CC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A833114-1FAD-43F5-8EF3-0BEDB531CC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A833114-1FAD-43F5-8EF3-0BEDB531CC5B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D321AD43-43CB-4E6C-97D3-CEFB1A05B8B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D321AD43-43CB-4E6C-97D3-CEFB1A05B8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D321AD43-43CB-4E6C-97D3-CEFB1A05B8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU

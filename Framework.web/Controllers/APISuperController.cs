@@ -33,7 +33,7 @@ namespace Framework.web.Controllers
         /// <summary>
         /// 会话记录的用户
         /// </summary>
-        protected EHECD_AccountDTO SessionUser;
+        protected EHECD_SystemUserDTO SessionUser;
 
         /// <summary>
         /// 处理前
@@ -52,21 +52,29 @@ namespace Framework.web.Controllers
                 {
                     //直接post的加密接口
                     //RequestParameters = ParameterLoader.LoadSecurityParameters(requestContext.HttpContext.Request.InputStream);
+
+                    /**
+                     * 载入客户端post上来的请求
+                     * */
                     RequestParameters = ParameterLoader.LoadAjaxPostParameters(requestContext.HttpContext.Request.InputStream);
+
+                    //如果没有上传identity参数，表示客户端还没有登录或者客户端觉得不需要登录，则不初始化session user
                     if (!string.IsNullOrEmpty(RequestParameters.identity) && !string.IsNullOrWhiteSpace(RequestParameters.identity))
                     {
                         //保存在Session中
                         SessionInfo session = (SessionInfo)Session[SessionInfo.APISESSION_NAME];
 
-                        //session里面没有
+                        //session里面有用户信息
                         if (session != null && session.SessionUser != null && session.SessionUser.User != null)
                         {
-                            //如果传入token不一致，以客户端为准
+                            //如果传入identity不一致，以客户端为准
                             if (session.SessionUser.User.ID.ToString() != RequestParameters.identity)
                             {
+                                //获取用户并保存到session
                                 ILogin login = DIEntity.GetInstance().GetImpl<ILogin>();
                                 session.SessionUser.User = login.GetAppLoginInfo(RequestParameters.identity);
                                 Session[SessionInfo.APISESSION_NAME] = session;
+                                SessionUser = session.SessionUser.User;
                             }
                             else
                             {

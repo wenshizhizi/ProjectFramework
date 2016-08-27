@@ -13,15 +13,15 @@ namespace Framework.BLL
     {
 
 
-        public override EHECD_AccountDTO Login(EHECD_AccountDTO t)
+        public override EHECD_SystemUserDTO Login(EHECD_SystemUserDTO t)
         {
             //获取查询实体
             var helper = DIEntity.GetInstance().GetImpl<Dapper.QueryHelper>();
 
             //查询数据
-            t = helper.SingleQuery<EHECD_AccountDTO>("select * from EHECD_Account where sLoginName = @name and sLoginPwd = @pwd and bIsDeleted = 0", new { name = t.sLoginName, pwd = Security.GetMD5Hash(t.sLoginPwd) });
+            t = helper.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE sLoginName = @name and sPassWord = @pwd AND bIsDeleted = 0;", new { name = t.sLoginName, pwd = Security.GetMD5Hash(t.sPassWord) });
 
-            if (t != default(EHECD_AccountDTO))
+            if (t != default(EHECD_SystemUserDTO))
             {
                 //登录成功                
                 return t;

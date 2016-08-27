@@ -40,16 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainData\Account.cs" />
-    <Compile Include="EHECD_AccountDTO.cs" />
-    <Compile Include="EHECD_ImagesDTO.cs" />
-    <Compile Include="EHECD_ProjectCaseDTO.cs" />
-    <Compile Include="EHECD_ProjectExperienceDTO.cs" />
+    <Compile Include="EHECD_FunctionMenuDTO.cs" />
+    <Compile Include="EHECD_MenuButtonDTO.cs" />
+    <Compile Include="EHECD_PrivilegeDTO.cs" />
+    <Compile Include="EHECD_RoleDTO.cs" />
+    <Compile Include="EHECD_SystemUserDTO.cs" />
+    <Compile Include="EHECD_SystemUser_R_RoleDTO.cs" />
     <Compile Include="FieldInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApplicationData\DataBaseInfo\CreateSQL\crebas.sql" />
+    <Content Include="ApplicationData\DataBaseInfo\PDM\quanxian.pdb" />
     <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="ApplicationData\DataBaseInfo\PDM\quanxian.pdm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

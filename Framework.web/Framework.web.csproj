@@ -124,6 +124,7 @@
     <Content Include="Areas\Admin\Scripts\Login\Index.js" />
     <Content Include="Areas\Admin\Scripts\Main\Index.js" />
     <Content Include="Content\themes\14-15111615263S59.jpg" />
+    <Content Include="Content\themes\14-15111615263S591.jpg" />
     <Content Include="Content\themes\login.jpg" />
     <Content Include="Content\themes\black\accordion.css" />
     <Content Include="Content\themes\black\calendar.css" />
@@ -686,11 +687,11 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\Framework.BLL.csproj">
+    <ProjectReference Include="..\Framework.BLL\Framework.BLL.csproj">
       <Project>{128012BA-AA90-4E30-ACA8-36C6E36FD204}</Project>
       <Name>Framework.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\Framework.Domain.csproj">
+    <ProjectReference Include="..\Framework.Domain\Framework.Domain.csproj">
       <Project>{32ec1887-56f8-4f47-b2d1-1bef33e6249c}</Project>
       <Name>Framework.Domain</Name>
     </ProjectReference>
@@ -710,6 +711,10 @@
       <Project>{2d79182e-02cb-4b38-b639-f728412473f0}</Project>
       <Name>Framework.Log</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework.MapperConfig\Framework.MapperConfig.csproj">
+      <Project>{b925ea38-965d-4899-8886-1ebc86a648e6}</Project>
+      <Name>Framework.MapperConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework.ORM\Framework.Dapper.csproj">
       <Project>{c7c3d0e2-c9b8-43fd-99e6-f8a3c12a8814}</Project>
       <Name>Framework.Dapper</Name>
@@ -722,10 +727,6 @@
       <Project>{7f29fbc4-3e7d-46b4-99b3-a02fd3eef2b3}</Project>
       <Name>Framework.web.config</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapper\Framework.MapperConfig.csproj">
-      <Project>{b925ea38-965d-4899-8886-1ebc86a648e6}</Project>
-      <Name>Framework.MapperConfig</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
@@ -733,12 +734,16 @@
     <Content Include="Areas\Admin\Views\Main\Index.cshtml" />
     <None Include="Properties\PublishProfiles\companyweb.pubxml" />
     <Content Include="scripts\jquery-1.11.3.min.map" />
+    <Content Include="unity.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

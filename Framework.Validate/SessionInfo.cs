@@ -38,7 +38,7 @@ namespace Framework.Validate
     [Serializable]
     public class UserInfo
     {
-        public Framework.DTO.EHECD_AccountDTO User { get; set; }
+        public Framework.DTO.EHECD_SystemUserDTO User { get; set; }
     }
 
     /// <summary>

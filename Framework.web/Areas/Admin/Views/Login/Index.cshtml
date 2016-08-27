@@ -1,5 +1,4 @@
-﻿@model Framework.DTO.EHECD_AccountDTO
-@{
+﻿@{
     Layout = null;
 }
 
@@ -22,10 +21,7 @@
     <script src="~/scripts/jquery-1.11.3.min.js"></script>
     <script src="~/scripts/jquery.easyui-1.4.5.min.js"></script>
     <script src="~/scripts/lib/modules.manager.js"></script>
-    <script src="~/scripts/lib/version.module.js"></script>
-    <script src="~/scripts/lib/object.module.js"></script>
-    <script src="~/scripts/lib/tool.module.js"></script>
-    <script src="~/scripts/lib/array.module.js"></script>
+    <script src="~/scripts/lib/tool.module.js"></script>   
     <script src="~/scripts/lib/func.module.js"></script>
     <script src="~/scripts/lib/easyui.module.js"></script>
     <script src="~/Areas/Admin/Scripts/Login/Index.js"></script>
@@ -50,7 +46,7 @@
         }
 
         html {
-            background: url(../../../../Content/themes/14-15111615263S59.jpg) no-repeat center center fixed;
+            background: url(../../../../Content/themes/14-15111615263S591.jpg) no-repeat center fixed;
             background-size: cover;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -61,7 +57,7 @@
     <title>登录</title>
 </head>
 <body>
-    <div id="lg_panel" class="easyui-panel" title="亿合科技欢迎您"
+    <div id="lg_panel" class="easyui-panel" title="这里是登录框的标题"
          style="width:450px;height:250px;padding:10px;background:#fafafa;"
          data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,style:{position:'absolute'}">
         <form id="lg_form" action="/Admin/Login/Login" method="post">

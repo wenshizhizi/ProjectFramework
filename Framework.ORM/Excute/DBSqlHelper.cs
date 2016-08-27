@@ -41,7 +41,7 @@ namespace Framework.Dapper
                     {
                         vs.Add(string.Format("'{0}'", value));
                     }
-                    else if (pName.IndexOf("int32") >= 0)
+                    else if (pName.IndexOf("int") >= 0 || pName.IndexOf("byte") >= 0)
                     {
                         vs.Add(string.Format("{0}", value));
                     }
@@ -68,9 +68,9 @@ namespace Framework.Dapper
 
             PropertyInfo[] pros = t.GetType().GetProperties();
             var tbName = t.GetType().GetCustomAttribute<Framework.DTO.TableInfo>();
-            
+
             mySQL.Append(string.Format("UPDATE [{0}] SET ", tbName.TableName));
-            
+
             foreach (var pro in pros)
             {
                 var field = pro.GetCustomAttribute<Framework.DTO.FieldInfo>();
@@ -84,7 +84,8 @@ namespace Framework.Dapper
                     {
                         setStrArray.Add(string.Format("[{0}] = '{1}'", field.FiledName, value));
                     }
-                    else if (pName.IndexOf("int32") >= 0)
+                    else if (pName.IndexOf("int") >= 0 ||
+                                pName.IndexOf("byte") >= 0)
                     {
                         setStrArray.Add(string.Format("[{0}] = {1}", field.FiledName, value));
                     }
