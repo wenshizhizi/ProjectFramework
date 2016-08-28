@@ -5,11 +5,20 @@ namespace Framework.BLL
 {
     public abstract class ILogin
     {
+        protected Dapper.QueryHelper helper = DIEntity.GetInstance().GetImpl<Dapper.QueryHelper>();
+
         /// <summary>
         /// 后台用户登录
         /// </summary>
         /// <returns></returns>
         public abstract EHECD_SystemUserDTO Login(EHECD_SystemUserDTO t);
+
+        /// <summary>
+        /// 载入用户权限信息
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public abstract UserRoleMenuInfo LoadUserRoleMenuInfo(EHECD_SystemUserDTO t);
 
         /// <summary>
         /// 修改用户信息

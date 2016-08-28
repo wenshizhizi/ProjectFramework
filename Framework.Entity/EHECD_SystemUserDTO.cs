@@ -31,7 +31,7 @@ namespace Framework.DTO
         /// <summary>
         /// 登录密码
         /// </summary>
-        [FieldInfo(DataFieldLength = 20,FiledName = "sPassWord",Required = true)]
+        [FieldInfo(DataFieldLength = 50,FiledName = "sPassWord",Required = true)]
         public String sPassWord
         {
             get; set;

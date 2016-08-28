@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationData\RoleMenus\UserMenuButton.cs" />
+    <Compile Include="ApplicationData\RoleMenus\UserMenu.cs" />
+    <Compile Include="ApplicationData\RoleMenus\UserRole.cs" />
+    <Compile Include="ApplicationData\RoleMenus\UserRoleMenuInfo.cs" />
     <Compile Include="EHECD_FunctionMenuDTO.cs" />
     <Compile Include="EHECD_MenuButtonDTO.cs" />
     <Compile Include="EHECD_PrivilegeDTO.cs" />
@@ -51,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationData\DataBaseInfo\CreateSQL\crebas.sql" />
-    <Content Include="ApplicationData\DataBaseInfo\PDM\quanxian.pdb" />
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup />

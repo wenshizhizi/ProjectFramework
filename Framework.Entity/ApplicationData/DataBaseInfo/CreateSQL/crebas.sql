@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     2016/8/27 11:34:08                           */
+/* Created on:     2016/8/28 8:29:19                            */
 /*==============================================================*/
 
 
@@ -52,7 +52,7 @@ go
 create table EHECD_FunctionMenu (
    ID                   uniqueidentifier     not null default newid(),
    sMenuName            nvarchar(20)         not null default '',
-   sPID                 uniqueidentifier     null default newid(),
+   sPID                 uniqueidentifier     null,
    sUrl                 nvarchar(50)         not null default '',
    bIsDeleted           bit                  not null default 0
       constraint CKC_BISDELETED_EHECD_FU check (bIsDeleted between 0 and 1),
@@ -270,10 +270,12 @@ go
 create table EHECD_Privilege (
    ID                   uniqueidentifier     not null default newid(),
    sPrivilegeMaster     varchar(15)          not null default '',
-   sPrivilegeMasterValue uniqueidentifier     not null default '',
+   sPrivilegeMasterValue uniqueidentifier     not null default newid(),
    sPrivilegeAccess     varchar(15)          not null default '',
-   sPrivilegeAccessValue uniqueidentifier     not null default '',
-   sPrivilegeOperation  bit                  not null default 0,
+   sPrivilegeAccessValue uniqueidentifier     not null default newid(),
+   sBelong              varchar(15)          not null default '',
+   sBelongValue         uniqueidentifier     not null default newid(),
+   bPrivilegeOperation  bit                  not null default 0,
    bIsDeleted           bit                  not null default 0
       constraint CKC_BISDELETED_EHECD_PR check (bIsDeleted between 0 and 1),
    constraint PK_EHECD_PRIVILEGE primary key (ID)
@@ -335,10 +337,12 @@ end
 
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '特权所有人标识
-   可根据此标识进行分组
-   如，这个特权是给角色的，那么这个字段可以表示为Role
-   这个特权是分配个用户的，那么这个字段可以表示为User',
+   '配置该特权所属的对象
+   
+   如，
+   
+   这个特权是属于角色的，那么这个字段表示为role
+   这个特权是属于用户的，那么这个字段表示为user',
    'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sPrivilegeMaster'
 go
 
@@ -357,7 +361,9 @@ end
 
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '对应的特权所有人的唯一标识',
+   '对应的特权所有者的唯一标识
+   如特权所有者是role
+   则该字段就是记录的对应的特权所有者的ID',
    'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sPrivilegeMasterValue'
 go
 
@@ -376,10 +382,11 @@ end
 
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '访问权限的标识，用来对访问者所拥有的权限进行标识区分
+   '特权类型标识
+   该字段标识了这个特权的类型
    比如：
-   这是一个菜单权限，则这里可以用Menu来标识
-   这是一个按钮权限，则这里可以用Button来标识',
+   这是一个菜单特权，则这里用menu来标识
+   这是一个按钮特权，则这里用button来标识',
    'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sPrivilegeAccess'
 go
 
@@ -398,7 +405,7 @@ end
 
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '对应的权限
+   '对应的特权
    如
    对应的菜单ID
    对应的按钮ID',
@@ -407,21 +414,62 @@ go
 
 if exists(select 1 from sys.extended_properties p where
       p.major_id = object_id('EHECD_Privilege')
-  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'sPrivilegeOperation')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'sBelong')
 )
 begin
    declare @CurrentUser sysname
 select @CurrentUser = user_name()
 execute sp_dropextendedproperty 'MS_Description', 
-   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sPrivilegeOperation'
+   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sBelong'
 
 end
 
 
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '是否要禁用该特权',
-   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sPrivilegeOperation'
+   '标识这个特权所有者的类型
+   与特权所属对象对应，以指定这个特权所属的类型
+   如，该特权是赋予用户的，则用user来标识
+   如，该特权是赋予角色的，则用role来标识',
+   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sBelong'
+go
+
+if exists(select 1 from sys.extended_properties p where
+      p.major_id = object_id('EHECD_Privilege')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'sBelongValue')
+)
+begin
+   declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_dropextendedproperty 'MS_Description', 
+   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sBelongValue'
+
+end
+
+
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
+   '标识这个特权是属于哪个的',
+   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'sBelongValue'
+go
+
+if exists(select 1 from sys.extended_properties p where
+      p.major_id = object_id('EHECD_Privilege')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'bPrivilegeOperation')
+)
+begin
+   declare @CurrentUser sysname
+select @CurrentUser = user_name()
+execute sp_dropextendedproperty 'MS_Description', 
+   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'bPrivilegeOperation'
+
+end
+
+
+select @CurrentUser = user_name()
+execute sp_addextendedproperty 'MS_Description', 
+   '是否要禁用该特权 0为不禁用 1为禁用',
+   'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'bPrivilegeOperation'
 go
 
 if exists(select 1 from sys.extended_properties p where
@@ -439,7 +487,7 @@ end
 
 select @CurrentUser = user_name()
 execute sp_addextendedproperty 'MS_Description', 
-   '是否删除',
+   '是否删除 0 未删除 1删除',
    'user', @CurrentUser, 'table', 'EHECD_Privilege', 'column', 'bIsDeleted'
 go
 

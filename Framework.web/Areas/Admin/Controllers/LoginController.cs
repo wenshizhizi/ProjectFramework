@@ -43,10 +43,11 @@ namespace Framework.web.Areas.Admin.Controllers
             if (dto!=null)
             {
                 //获取该用户的权限
-
+                var userRoleMenu = login.LoadUserRoleMenuInfo(dto);
 
                 session.SessionUser.User = dto;
-                Session[SessionInfo.SESSION_NAME] = session;                
+                Session[SessionInfo.SESSION_NAME/*用户的信息*/] = session;
+                Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;       
                 result.Succeeded = true;
                 result.Data = "/Admin/Main";
             }

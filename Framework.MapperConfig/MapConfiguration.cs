@@ -18,8 +18,13 @@ namespace Framework.MapperConfig
             Mapper.Initialize(cfg =>
             {
                 //TODO:配置对象的映射，如下
-                //cfg.CreateMap<Account, EHECD_SystemUserDTO>();
-                //cfg.CreateMap<EHECD_SystemUserDTO, Account>();
+                cfg.CreateMap<EHECD_RoleDTO, UserRole>();
+                cfg.CreateMap<EHECD_FunctionMenuDTO, UserMenu>();
+                cfg.CreateMap<EHECD_MenuButtonDTO, UserMenuButton>();
+
+                cfg.CreateMap<UserRole, EHECD_RoleDTO>();
+                cfg.CreateMap<UserMenu, EHECD_FunctionMenuDTO>();
+                cfg.CreateMap<UserMenuButton, EHECD_MenuButtonDTO>();
             });
         }
     }

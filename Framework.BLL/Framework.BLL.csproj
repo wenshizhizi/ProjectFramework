@@ -62,6 +62,10 @@
       <Project>{C7C3D0E2-C9B8-43FD-99E6-F8A3C12A8814}</Project>
       <Name>Framework.Dapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework.web.config\Framework.web.config.csproj">
+      <Project>{7f29fbc4-3e7d-46b4-99b3-a02fd3eef2b3}</Project>
+      <Name>Framework.web.config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapper\Framework.MapperConfig.csproj">
       <Project>{B925EA38-965D-4899-8886-1EBC86A648E6}</Project>
       <Name>Framework.MapperConfig</Name>
