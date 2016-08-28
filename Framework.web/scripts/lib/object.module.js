@@ -1,6 +1,6 @@
 ﻿/*!
  * Yangyukun Script Library
- * version: 1.0.2
+ * version: 1.0.1
  * build: Sun Aug 07 2016 09:00:36 GMT+0800 (中国标准时间)
  * Released under MIT license
  * 
@@ -9,6 +9,30 @@
 
 //定义object模块
 modules.define("object", [], function ObjectDomain() {
+
+    /**
+     * 序列化容器内的带name属性的输入框的值为json object
+     * @method serializeObject
+     * @for ObjectDomain
+     * @author [王其]
+     * @version 1.0.1
+     * @returns {Object}  
+     */
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 
     /**
      * 
@@ -168,18 +192,14 @@ modules.define("object", [], function ObjectDomain() {
             if (source.hasOwnProperty(i)) {
                 tmp = source[i];
                 if (typeof tmp == 'object') {
-                    target[i] = isArray(tmp) ? [] : {};
-                    clone(source[i], target[i])
+                    target[i] = utils.isArray(tmp) ? [] : {};
+                    utils.clone(source[i], target[i])
                 } else {
                     target[i] = tmp;
                 }
             }
         }
         return target;
-    }
-
-    function isArray(obj) {
-        return Object.prototype.toString.apply(obj) == '[object Array]';
     }
 
     /**

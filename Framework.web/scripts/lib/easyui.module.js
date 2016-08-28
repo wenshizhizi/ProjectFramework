@@ -79,6 +79,14 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
             },
             message: "该字段只能是11位手机号"
         },
+        //密码是否相同
+        equals: {
+            validator: function (value, param) {
+                var flag = value == $(param[0]).val();
+                return flag;
+            },
+            message: '两次输入不一致.'
+        },
         //是否是html
         isHtmlValidate: {
             validator: function (value, param) {
@@ -126,29 +134,48 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
         }
     }));
 
+    /**
+     * 弹出消息
+     * @param {String} msg 消息
+     */
     function alertMsg(msg) {
         $.messager.alert("提示", msg, "warning");
     }
 
+    /**
+     * 弹出错误
+     * @param {type} err 错误
+     */
     function alertErr(err) {
         $.messager.alert("错误", err, "error");
     }
 
+    /**
+     * 弹出信息
+     * @param {type} info 信息
+     */
     function alertInfo(info) {
         $.messager.alert("信息", info, "info");
     }
 
-    function bindPaginationEvent(datagrd, options, callback) {
+    /**
+     * 绑定datagrid分页事件
+     * @param {objec} datagrid 数据表格
+     * @param {object} options 表格配置
+     * @param {function} callback 翻页回调事件
+     * @returns {pager} pager对象
+     */
+    function bindPaginationEvent(datagrid, options, callback) {
         try {
-            if (func.definededAndNotNull(datagrd) && options && callback) {
-               return datagrd.datagrid(options).datagrid('getPager').pagination({
+            if (func.definededAndNotNull(datagrid) && options && callback) {
+                return datagrid.datagrid(options).datagrid('getPager').pagination({
                     pageList: [10, 20, 30, 40, 50, 100],
                     pageNumber: 1,
                     pageSize: 10,
                     beforePageText: '第',//页数文本框前显示的汉字 
                     afterPageText: '页    共 {pages} 页',
                     displayMsg: '当前显示 {from} - {to} 条记录  共{total}条记录',
-                    onSelectPage: callback
+                    onSelectPage: callback                    
                 });
             }
         } catch (e) {
@@ -156,10 +183,139 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
         }
     }
 
+    /**
+     * 校验数据表格是否选中行
+     * @param {type} datagrid 数据表格
+     * @param {type} callBackFuc 回调事件
+     * @param {type} unSelectRowMessage 未选中的消息
+     */
+    function checkSelectedRow(datagrid, callBackFuc, unSelectRowMessage) {
+        try {
+            selectedRow = datagrid.datagrid("getSelected");
+            if (selectedRow !== null) {
+                callBackFuc(selectedRow);
+            } else {
+                alertMsg(unSelectRowMessage);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    /**
+     * 开启一个确认框
+     * @param {Datagrid} datagrid datagrid对象
+     * @param {Function} callBackFuc 点了确定后回调的函数
+     * @param {String} confirmMessage 要提示的信息
+     * @param {String} unSelectRowMessage 未选中行提示的信息    
+     * @param {Function} formatConfirmMSGCallBack 表示格式化提示信息的函数（需要返回格式化好的字符串）
+     */
+    function confirmDomain(datagrid, callBackFuc, confirmMessage, unSelectRowMessage, formatConfirmMSGCallBack) {
+        try {
+            var selectedRow = null;
+            selectedRow = datagrid.datagrid("getSelected");
+            if (selectedRow !== null) {
+                if (formatConfirmMSGCallBack) {
+                    confirmMessage = formatConfirmMSGCallBack(selectedRow);
+                }
+                $.messager.confirm('确认', confirmMessage, function (result) {
+                    if (result) {
+                        callBackFuc(selectedRow);
+                    }
+                });
+            } else {
+                alertInfo(unSelectRowMessage);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    /**
+     * 带多行验证的确认提示框
+     * @param {Datagrid} datagrid datagrid对象
+     * @param {Function} callBackFuc 点了确定后回调的函数
+     * @param {String} confirmMessage 要提示的信息
+     * @param {String} unSelectRowMessage 未选中行提示的信息    
+     * @param {Function} formatConfirmMSGCallBack 表示格式化提示信息的函数（需要返回格式化好的字符串）
+     */
+    function confirmDomainByMultiRows(datagrid, callBackFuc, confirmMessage, unSelectRowMessage, formatConfirmMSGCallBack) {
+        try {
+            var selectedRow = datagrid.datagrid("getSelections");
+            if (selectedRow.length > 0) {
+                if (formatConfirmMSGCallBack) {
+                    confirmMessage = formatConfirmMSGCallBack(selectedRow);
+                }
+                $.messager.confirm('确认', confirmMessage, function (result) {
+                    if (result) {
+                        callBackFuc(selectedRow);
+                    }
+                });
+            } else {
+                alertInfo(unSelectRowMessage);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    /**
+     * 校验是否选中树节点
+     * @param {tree} tree 树对象
+     * @param {function} callBackFuc 回调函数
+     * @param {string} unSelectNodeMessage 未选中的消息
+     */
+    function checkTreeSelected(tree, callBackFuc, unSelectNodeMessage) {
+        try {
+            selectedNode = tree.tree("getSelected");
+            if (selectedNode !== null) {
+                callBackFuc(selectedNode);
+            } else {
+                alertMsg(unSelectNodeMessage);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+    
+    /**
+     * 带确认框的树点击事件
+     * @param {tree} tree 树
+     * @param {function} callBackFuc 回调函数
+     * @param {string} confirmMessage 确认消息
+     * @param {string} unSelectRowMessage 未选中的消息
+     * @param {function} formatConfirmMSGCallBack 需要格式化选中节点的回调函数
+     */
+    function confirmTreeNode(tree, callBackFuc, confirmMessage, unSelectRowMessage, formatConfirmMSGCallBack) {
+        try {
+            var selectedNode = null;
+            selectedNode = tree.tree("getSelected");
+            if (selectedNode !== null) {
+                if (formatConfirmMSGCallBack) {
+                    confirmMessage = formatConfirmMSGCallBack(selectedNode);
+                }
+                $.messager.confirm('操作确认', confirmMessage, function (result) {
+                    if (result) {
+                        callBackFuc(selectedNode);
+                    }
+                });
+            } else {
+                alertInfo(unSelectRowMessage);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+    
     return {
         alertMsg: alertMsg,
         alertErr: alertErr,
         alertInfo: alertInfo,
-        bindPaginationEvent: bindPaginationEvent
+        bindPaginationEvent: bindPaginationEvent,
+        checkSelectedRow: checkSelectedRow,
+        confirmDomain: confirmDomain,
+        confirmDomainByMultiRows: confirmDomainByMultiRows,
+        checkTreeSelected: checkTreeSelected,
+        confirmTreeNode: confirmTreeNode
     };
 });

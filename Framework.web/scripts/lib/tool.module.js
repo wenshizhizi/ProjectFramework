@@ -59,7 +59,6 @@ modules.define("tool", [], function ToolDomain() {
      * @for String
      * @author [杨瑜堃]
      * @version 1.0.1
-     * @param {String} str 要格式化的字符串
      * @param {Stringp[]} args 要格式化的替换值数组
      * @returns {String} 格式化结果 
      * 
@@ -67,7 +66,7 @@ modules.define("tool", [], function ToolDomain() {
      * 
      * "这个就是格式化字符串的列子:{0}".format("列子")
      */
-    String.prototype.format = function (str, args) {
+    String.prototype.format = function (args) {
         var result = this;
         if (arguments.length > 0) {
             if (arguments.length == 1 && typeof (args) == "object") {

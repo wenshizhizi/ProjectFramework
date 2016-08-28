@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implement\MenuManager.cs" />
     <Compile Include="Implement\UserLogin.cs" />
+    <Compile Include="Interface\BaseBll.cs" />
     <Compile Include="Interface\ILogin.cs" />
+    <Compile Include="Interface\IMenuManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -61,6 +64,10 @@
     <ProjectReference Include="..\Framework.ORM\Framework.Dapper.csproj">
       <Project>{C7C3D0E2-C9B8-43FD-99E6-F8A3C12A8814}</Project>
       <Name>Framework.Dapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Validate\Framework.Validate.csproj">
+      <Project>{760b93c4-51f9-4755-8d48-a56a3c16bdd9}</Project>
+      <Name>Framework.Validate</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.web.config\Framework.web.config.csproj">
       <Project>{7f29fbc4-3e7d-46b4-99b3-a02fd3eef2b3}</Project>

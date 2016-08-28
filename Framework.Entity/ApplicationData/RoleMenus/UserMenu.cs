@@ -54,11 +54,17 @@ namespace Framework.DTO
             get; set;
         }
 
+        /// <summary>
+        /// 该菜单的子菜单
+        /// </summary>
         public IList<UserMenu> ChildMenu
         {
             get; set;
         } = new List<UserMenu>();
 
+        /// <summary>
+        /// 该菜单的按钮（根据是否启用菜单按钮绑定来初始化）
+        /// </summary>
         public IList<UserMenuButton> Buttons
         {
             get; set;

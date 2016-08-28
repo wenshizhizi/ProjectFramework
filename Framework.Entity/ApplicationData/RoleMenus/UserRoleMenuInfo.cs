@@ -23,6 +23,11 @@ namespace Framework.DTO
         public IList<UserMenu> UserMenu { get; set; } = new List<UserMenu>();
 
         /// <summary>
+        /// 用户所有的菜单（没有层级关系）
+        /// </summary>
+        public IList<UserMenu> AllMenu { get; set; } = new List<UserMenu>();
+
+        /// <summary>
         /// 载入结果
         /// </summary>
         public bool LoadSuccess { get; set; } = false;

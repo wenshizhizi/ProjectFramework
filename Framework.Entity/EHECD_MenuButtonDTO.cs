@@ -45,5 +45,23 @@ namespace Framework.DTO
         {
             get; set;
         }
+
+        /// <summary>
+        /// 按钮ICON
+        /// </summary>
+        [FieldInfo(DataFieldLength = 15, FiledName = "sIcon", Required = true)]
+        public string sIcon
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// 按钮标识
+        /// </summary>
+        [FieldInfo(DataFieldLength = 25, FiledName = "sDataID", Required = true)]
+        public string sDataID
+        {
+            get; set;
+        }
     }
 }

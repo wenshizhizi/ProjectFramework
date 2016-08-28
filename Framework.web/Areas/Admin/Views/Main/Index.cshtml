@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width" />
     <!--主题样式：可选-->
     @*<link href="~/Content/themes/black/easyui.css" rel="stylesheet" />*@
-    @*<link href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />*@
+    <link href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />
     @*<link href="~/Content/themes/ui-pepper-grinder/easyui.css" rel="stylesheet" />*@
     @*<link href="~/Content/themes/ui-cupertino/easyui.css" rel="stylesheet" />*@
 
     <link href="~/Content/themes/icon.css" rel="stylesheet" />
     <link href="~/Content/themes/color.css" rel="stylesheet" />
     <link href="~/Content/themes/mobile.css" rel="stylesheet" />
-    <link href="~/Content/themes/ui-sunny/easyui.css" rel="stylesheet" />
+    @*<link href="~/Content/themes/ui-sunny/easyui.css" rel="stylesheet" />*@
 
     <script src="~/scripts/jquery-1.11.3.js"></script>
     <script src="~/scripts/jquery.easyui-1.4.5.js"></script>
@@ -25,7 +25,6 @@
     <script src="~/scripts/lib/array.module.js"></script>
     <script src="~/scripts/lib/func.module.js"></script>
     <script src="~/scripts/lib/easyui.module.js"></script>
-    <script src="~/Areas/Admin/Scripts/Main/Index.js"></script>
 
     <title>亿合科技内部应用后台</title>
 
@@ -44,9 +43,9 @@
         }
 
         .menu_td {
-            text-align: right;
+            text-align: left;
             height: 25px;
-            padding-right: 25px;
+            padding-left: 15px;
         }
     </style>
 
@@ -63,89 +62,7 @@
         @*<div data-options="region:'east',title:'',split:false" style="width:0px;"></div>*@
 
         <!--左布局 菜单-->
-        <div data-options="region:'west',title:'菜单',split:false" style="width:280px;padding:1px">
-
-            <div id="aa" class="easyui-accordion" data-options="border:false,multiple:true">
-                <div title="服务页面部署" data-options="selected:true" style="overflow:auto;padding:1px;">
-                    <table class="menu_table">
-                        <tbody>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="indexpage">
-                                    首页
-                                </td>
-                            </tr>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="serpagedeploy">
-                                    服务页面部署
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div title="案例展示区部署" data-options="" style="padding:0px;">
-                    <table class="menu_table">
-                        <tbody>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="weixinstore">
-                                    微信商城
-                                </td>
-                            </tr>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="app">
-                                    APP
-                                </td>
-                            </tr>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="pcmall">
-                                    PC商城
-                                </td>
-                            </tr>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="weixinaccount">
-                                    微信公众号
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div title="体验区部署" data-options="" style="padding:0px;">
-                    <table class="menu_table">
-                        <tbody>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="dpexperiencepro">
-                                    部署体验项目
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div title="亿合咨询管理" data-options="" style="padding:0px;">
-                    <table class="menu_table">
-                        <tbody>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="infomanage">
-                                    资讯管理
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div title="账号管理" data-options="" style="padding:0px;">
-                    <table class="menu_table">
-                        <tbody>
-                            <tr class="menu_tr">
-                                <td class="menu_td" data-index="accountmanage">
-                                    账号管理
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
+        <div data-options="region:'west',title:'菜单',split:false,href:'/Admin/Menu'" style="width:280px;padding:1px"></div>
 
         <!--中间面板-->
         <div data-options="region:'center',title:''" style="padding:1px;background:#eee;">

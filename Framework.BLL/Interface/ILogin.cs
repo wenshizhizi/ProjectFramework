@@ -3,10 +3,8 @@ using Framework.DTO;
 
 namespace Framework.BLL
 {
-    public abstract class ILogin
+    public abstract class ILogin : BaseBll
     {
-        protected Dapper.QueryHelper helper = DIEntity.GetInstance().GetImpl<Dapper.QueryHelper>();
-
         /// <summary>
         /// 后台用户登录
         /// </summary>
@@ -26,7 +24,8 @@ namespace Framework.BLL
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public virtual EHECD_SystemUserDTO ChangeUserInfo(EHECD_SystemUserDTO t) {
+        public virtual EHECD_SystemUserDTO ChangeUserInfo(EHECD_SystemUserDTO t)
+        {
             return default(EHECD_SystemUserDTO);
         }
 
@@ -36,7 +35,8 @@ namespace Framework.BLL
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public virtual EHECD_SystemUserDTO ChangePassword(EHECD_SystemUserDTO t) {
+        public virtual EHECD_SystemUserDTO ChangePassword(EHECD_SystemUserDTO t)
+        {
             return default(EHECD_SystemUserDTO);
         }
 
@@ -47,8 +47,7 @@ namespace Framework.BLL
         /// <returns></returns>
         public EHECD_SystemUserDTO GetAppLoginInfo(string ID)
         {
-            var query = DIEntity.GetInstance().GetImpl<Dapper.QueryHelper>();
-            return query.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE ID=@ID AND bIsDeleted = 0", new { ID = ID });
+            return helper.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE ID=@ID AND bIsDeleted = 0", new { ID = ID });
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Framework.web
 
                 object rdata = "";
 
-                if (requstDic.TryGetValue("data", out rdata))
+                if (requstDic!=null && requstDic.TryGetValue("data", out rdata))
                 {
                     if (rdata != null)
                     {

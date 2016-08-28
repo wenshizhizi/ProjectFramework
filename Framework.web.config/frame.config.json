@@ -6,7 +6,7 @@
   "VImgCodeMaxCount": 3,
   "VImgCodeTimeOut": 10,
   "imgCodeLength": 4,
-  "url": "http://115.28.48.78:8092/api/upload/controller?module=CompanyAppp&field=CompanyAppp&appKey=7GHMK4VF6PQE9T30L5O8W2UCA1SYIRXNJDBK", //图片服务器地址
-  "UseUserRole": 0, //是否启用角色
-  "UseMenuBottn": 0 //是否启用菜单按钮
+  "url": "http://115.28.48.78:8092/api/upload/controller?module=CompanyAppp&field=CompanyAppp&appKey=695MK4VF6PQE9T30L5O8W2UCA1SYIRXNJDBK", //图片服务器地址
+  "UseUserRole": 0, //是否启用角色绑定
+  "UseMenuBottn": 0 //是否启用菜单按钮绑定
 }

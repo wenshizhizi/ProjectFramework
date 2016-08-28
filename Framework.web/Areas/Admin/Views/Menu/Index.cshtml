@@ -1,0 +1,8 @@
+﻿@using Framework.web.Models
+@model Framework.DTO.UserRoleMenuInfo
+
+<script src="~/Areas/Admin/Scripts/Menu/Index.js"></script>
+
+<div id="menu_accordion" class="easyui-accordion" data-options="border:false,multiple:true">    
+    @(MenuTagCreator.CreateMenu(Model))
+</div>
