@@ -9,14 +9,14 @@ namespace Framework.BLL
 {
     public class MenuManager : IMenuManager
     {
-        public override Guid? AddMenu(EHECD_FunctionMenuDTO dto)
+        public override EHECD_FunctionMenuDTO AddMenu(EHECD_FunctionMenuDTO dto)
         {
             dto.bIsDeleted = false;
-            dto.ID = Helper.GuidHelper.GetSecuentialGuid();
+            dto.ID = Helper.GuidHelper.GetSecuentialGuid();            
             var ret = excute.InsertSingle<EHECD_FunctionMenuDTO>(dto);
             if(ret > 0)
             {
-                return dto.ID;
+                return dto;
             }
             else
             {

@@ -251,7 +251,7 @@ namespace Framework.BLL
                     LoadLevelUserMenu(t, temp);
                 }
             });
-            m.ChildMenu = m.ChildMenu.OrderBy(x => x.iOrder).ToList();
+            m.ChildMenu = m.ChildMenu != null && m.ChildMenu.Count > 0 ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
         }
 
         public override EHECD_SystemUserDTO Login(EHECD_SystemUserDTO t)

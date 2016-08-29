@@ -9,6 +9,6 @@ namespace Framework.BLL
 {
     public abstract class IMenuManager : BaseBll
     {
-        public abstract Guid? AddMenu(EHECD_FunctionMenuDTO dto);        
+        public abstract EHECD_FunctionMenuDTO AddMenu(EHECD_FunctionMenuDTO dto);        
     }
 }

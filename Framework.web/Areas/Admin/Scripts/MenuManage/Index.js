@@ -9,26 +9,24 @@
      */
     function init() {
         allMenu.tree({
-            url: "/Admin/MenuManage/LoadAllMenu",
             onlyLeafCheck: true,
             checkbox: false,
             lines: true,
-            loadFilter: function (data) {
-                if (data.Succeeded) {
-                    return [data.Data];
-                } else {
-                    return [];
-                }
-            },
             onContextMenu: function (e, node) {
                 //不要执行与事件关联的默认动作
                 e.preventDefault();
-                // 查找节点
-                allMenu.tree('select', node.target);
                 //创建菜单
                 createMenu(e, node);
             }
         });
+
+        f.post("/Admin/MenuManage/LoadAllMenu", null, function (ret) {
+            debugger
+            allMenu.tree("loadData", [ret.Data]);
+        }, function (ret) {
+            eui.alertErr(ret.Msg);
+        });
+
     }
 
     /**
@@ -104,8 +102,12 @@
                             var json = $("#add_menu_form").serializeObject();
                             json.sPID = node.id;
                             f.post("/Admin/MenuManage/AddMenu", json,
-                                function (ret) {
-
+                                function (ret) {                                    
+                                    allMenu.tree("append", {
+                                        parent: node.target,
+                                        data: [ret.Data]
+                                    }); 
+                                    $(div).dialog("close");
                                 }, function (ret) {
                                     eui.alertErr(ret.Msg);
                                 });

@@ -51,9 +51,46 @@ namespace Framework.web.Areas.Admin.Controllers
             IMenuManager menubll = DI.DIEntity.GetInstance().GetImpl<IMenuManager>();
 
             //添加菜单
-            result.Data = menubll.AddMenu(menu);
-            if (result.Data != null)
+            var ret = menubll.AddMenu(menu);
+            if (ret != null)
             {
+                //返回给页面添加好的菜单对象（tree使用的节点）
+                result.Data = new
+                {
+                    id = ret.ID,
+                    text = ret.sMenuName,
+                    state = "open",
+                    @checked = false,
+                    attributes = new { type = "menu" },
+                    children = new object[0]
+                };
+
+                var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+
+                if (userRoleMenu != null)
+                {
+                    userRoleMenu.AllMenu.Add(new UserMenu
+                    {
+                        Buttons = new List<UserMenuButton>(),
+                        ChildMenu = new List<UserMenu>(),
+                        ID = ret.ID,
+                        iOrder = ret.iOrder,
+                        sMenuName = ret.sMenuName,
+                        sPID = ret.sPID,
+                        sUrl = ret.sUrl
+                    });
+                }
+                else
+                {
+                    result.Succeeded = false;
+                    result.Msg = "会话菜单缓存获取错误";
+                }
+
+                //重新获取菜单结构
+                userRoleMenu.UserMenu = InitMenu(userRoleMenu.AllMenu);
+
+                Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
+
                 result.Succeeded = true;
             }
             else
@@ -89,7 +126,7 @@ namespace Framework.web.Areas.Admin.Controllers
             }
             return new
             {
-                id = "0",
+
                 text = "根目录",
                 attributes = new { type = "root" },
                 @checked = true,
@@ -148,6 +185,45 @@ namespace Framework.web.Areas.Admin.Controllers
             {
                 return new List<object>();
             }
+        }
+
+        //重新构建菜单层级结构
+        private IList<UserMenu> InitMenu(IList<UserMenu> t)
+        {
+            Parallel.For(0, t.Count, index =>
+            {
+                t[index].ChildMenu.Clear();
+            });
+
+            var userMs = new List<UserMenu>();
+
+            //初始化菜单层级关系
+            foreach (var item in t)
+            {
+                //顶层菜单
+                if (item.sPID == null)
+                {
+                    RecursionLoadLevelUserMenu(t, item);
+                    userMs.Add(item);
+                }
+            }
+            return userMs.OrderBy(m => m.iOrder).ToList();
+        }
+
+
+        // 递归从集合中载入指定菜单的下级菜单，直到没有下级菜单        
+        private void RecursionLoadLevelUserMenu(IList<UserMenu> t, UserMenu m)
+        {
+            Parallel.For(0, t.Count, index =>
+            {
+                var temp = t[index];
+                if (m.ID == temp.sPID)
+                {
+                    m.ChildMenu.Add(temp);
+                    RecursionLoadLevelUserMenu(t, temp);
+                }
+            });
+            m.ChildMenu = m.ChildMenu != null && m.ChildMenu.Count > 0 ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
         }
     }
 }

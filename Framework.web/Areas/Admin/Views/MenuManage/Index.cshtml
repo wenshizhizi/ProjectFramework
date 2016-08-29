@@ -1,20 +1,4 @@
-﻿@using Framework.DTO;
-@{
-    var btns = ViewData["btns"] as List<UserMenuButton>;
-}
-<script src="~/Areas/Admin/Scripts/MenuManage/Index.js"></script>
+﻿@{ Layout = "~/Areas/Admin/Views/Shared/ButtonsMasterView.cshtml";}
 
-<div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,fit:true" style="padding:1px">
-    <div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,border:false,fit:false,height:60" style="padding:10px">       
-        @{
-            if (btns != null && btns.Count > 0)
-            {
-                foreach (var item in btns)
-                {
-                    <a id="@item.ID" data-id="@item.sDataID" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'@item.sIcon'">@item.sButtonName</a>
-                }
-            }
-        }
-    </div>
-    <ul id="all_menu"></ul>
-</div>
+<script src="~/Areas/Admin/Scripts/MenuManage/Index.js"></script>
+<ul id="all_menu"></ul>

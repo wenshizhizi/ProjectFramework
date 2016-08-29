@@ -36,7 +36,7 @@ namespace Framework.web.Models
                         sb.AppendLine("<tr class=\"menu_tr\">");
                         if (child.ChildMenu != null && child.ChildMenu.Count > 0)
                         {
-                            sb.AppendLine("<td class=\"menu_td\">");
+                            sb.AppendLine("<td class=\"menu_td\" data-title=\"" + child.sMenuName + "\" data-link=\"" + child.sUrl + "\">");
                             sb.Append(GetMenuString(child.ChildMenu));
                             sb.AppendLine("</td>");
                         }
@@ -48,6 +48,18 @@ namespace Framework.web.Models
                         }
                         sb.AppendLine("</tr>");
                     }
+                    sb.AppendLine("</tbody>");
+                    sb.AppendLine("</table>");
+                }
+                else
+                {
+                    sb.AppendLine("<table class=\"menu_table\">");
+                    sb.AppendLine("<tbody>");
+                    sb.AppendLine("<tr class=\"menu_tr\">");
+                    sb.AppendLine("<td class=\"menu_td\" data-title=\"" + item.sMenuName + "\" data-link=\"" + item.sUrl + "\">");
+                    sb.AppendLine(item.sMenuName);
+                    sb.AppendLine("</td>");
+                    sb.AppendLine("</tr>");
                     sb.AppendLine("</tbody>");
                     sb.AppendLine("</table>");
                 }
