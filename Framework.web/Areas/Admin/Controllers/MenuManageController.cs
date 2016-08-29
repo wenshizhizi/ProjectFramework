@@ -28,21 +28,26 @@ namespace Framework.web.Areas.Admin.Controllers
             result.Succeeded = userRoleMenu != null ? true : false;
 
             //开始组装菜单的数据
-            result.Data = CreateMenuData(userRoleMenu.AllMenu);
+            result.Data = userRoleMenu != null ? CreateMenuData(userRoleMenu.AllMenu) : new object();
         }
 
+        #region 跳转的Action，用于获取部分视图
         /// <summary>
         /// 获取添加菜单的页面
         /// </summary>
-        public ActionResult ToAddMenu()
+        public PartialViewResult ToAddMenu()
         {
-            return View("AddMenu");
+            return PartialView("AddMenu");
         }
 
+        /// <summary>
+        /// 获取添加按钮的页面
+        /// </summary>        
         public PartialViewResult ToAddButton()
         {
             return PartialView("AddButton");
         }
+        #endregion
 
         /// <summary>
         /// 添加菜单
@@ -57,6 +62,7 @@ namespace Framework.web.Areas.Admin.Controllers
 
             //添加菜单
             var ret = menubll.AddMenu(menu);
+
             if (ret != null)
             {
                 //返回给页面添加好的菜单对象（tree使用的节点）
@@ -66,14 +72,16 @@ namespace Framework.web.Areas.Admin.Controllers
                     text = ret.sMenuName,
                     state = "open",
                     @checked = false,
-                    attributes = new { type = "menu" },
+                    attributes = new { type = "menu", url = ret.sUrl },
                     children = new object[0]
                 };
 
+                //从session获取用户的权限和菜单等信息
                 var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
 
                 if (userRoleMenu != null)
                 {
+                    //更新添加的菜单到session缓存
                     userRoleMenu.AllMenu.Add(new UserMenu
                     {
                         Buttons = new List<UserMenuButton>(),
@@ -88,7 +96,8 @@ namespace Framework.web.Areas.Admin.Controllers
                 else
                 {
                     result.Succeeded = false;
-                    result.Msg = "会话菜单缓存获取错误";
+                    result.Msg = "会话菜单缓存获取失败";
+                    return;
                 }
 
                 //重新获取菜单结构
@@ -105,7 +114,73 @@ namespace Framework.web.Areas.Admin.Controllers
             }
         }
 
-        //创建菜单数据
+        /// <summary>
+        /// 添加按钮
+        /// </summary>
+        public void AddButton()
+        {
+            var requestData = JSONHelper.GetModel<Dictionary<string, object>>(RequestParameters.data.ToString());
+            EHECD_MenuButtonDTO addbutton = JSONHelper.GetModel<EHECD_MenuButtonDTO>(requestData["btn"].ToString());
+            string menuID = requestData["menuID"].ToString();
+            //菜单业务对象
+            IMenuManager menubll = DI.DIEntity.GetInstance().GetImpl<IMenuManager>();
+            addbutton = menubll.AddButton(addbutton, menuID);
+
+            if (addbutton != null)
+            {
+                //从session获取用户的权限和菜单等信息
+                var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+
+                if (userRoleMenu != null)
+                {
+                    result.Data = new {
+                        id = addbutton.ID,
+                        @checked = false,
+                        attributes = new { type = "btn" },
+                        text = addbutton.sButtonName,
+                        iconCls = addbutton.sIcon,
+                        state = "open"
+                    };
+
+                    Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                    {
+                        if (userRoleMenu.AllMenu[index].ID.ToString() == menuID)
+                        {
+                            userRoleMenu.AllMenu[index].Buttons.Add(new UserMenuButton
+                            {
+                                ID = addbutton.ID,
+                                iOrder = addbutton.iOrder,
+                                sButtonName = addbutton.sButtonName,
+                                sDataID = addbutton.sDataID,
+                                sIcon = addbutton.sIcon
+                            });
+                            state.Stop();
+                            return;
+                        }
+                    });
+
+                    //重新获取菜单结构
+                    userRoleMenu.UserMenu = InitMenu(userRoleMenu.AllMenu);
+
+                    Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
+
+                    result.Succeeded = true;
+                }
+                else
+                {
+                    result.Succeeded = false;
+                    result.Msg = "会话菜单缓存获取失败";
+                    return;
+                }
+            }
+            else
+            {
+                result.Succeeded = false;
+                result.Msg = "添加菜单按钮失败，请联系管理员";
+            }
+        }
+
+        //创建菜单节点数据
         private dynamic CreateMenuData(IList<UserMenu> t)
         {
             var userMs = new List<object>();
@@ -113,7 +188,9 @@ namespace Framework.web.Areas.Admin.Controllers
             //初始化菜单层级关系
             foreach (var item in t)
             {
+                //载入当前菜单的层级关系节点
                 var child = LoadLevelUserMenu(t, item);
+                //载入当前菜单的按钮
                 child.AddRange(CreateButtons(item.Buttons));
                 //顶层菜单
                 if (item.sPID == null)
@@ -122,25 +199,26 @@ namespace Framework.web.Areas.Admin.Controllers
                     {
                         id = item.ID,
                         text = item.sMenuName,
-                        attributes = new { type = "menu" },
+                        attributes = new { type = "menu", url = "" },
                         @checked = true,
                         state = "open",
                         children = child
                     });
                 }
             }
+
+            //给整个菜单创建一个根目录
             return new
             {
-
                 text = "根目录",
-                attributes = new { type = "root" },
+                attributes = new { type = "root", url = "" },
                 @checked = true,
                 state = "open",
                 children = userMs
             };
         }
 
-        //载入带层级的菜单
+        //载入带层级的菜单节点
         private List<object> LoadLevelUserMenu(IList<UserMenu> t, UserMenu m)
         {
             var userMs = new List<object>();
@@ -156,7 +234,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         id = temp.ID,
                         text = temp.sMenuName,
                         state = "open",
-                        attributes = new { type = "menu" },
+                        attributes = new { type = "menu", url = temp.sUrl },
                         @checked = true,
                         children = child
                     };
@@ -166,7 +244,7 @@ namespace Framework.web.Areas.Admin.Controllers
             return userMs;
         }
 
-        //创建按钮
+        //创建按钮节点
         private List<object> CreateButtons(IList<UserMenuButton> t)
         {
             if (t.Count > 0)

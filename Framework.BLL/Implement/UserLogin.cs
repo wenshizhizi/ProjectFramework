@@ -219,7 +219,7 @@ namespace Framework.BLL
         /// <param name="t"></param>
         /// <returns></returns>
         private IList<UserMenu> InitMenu(IList<UserMenu> t)
-        {
+        {            
             var userMs = new List<UserMenu>();
 
             //初始化菜单层级关系
@@ -251,7 +251,7 @@ namespace Framework.BLL
                     LoadLevelUserMenu(t, temp);
                 }
             });
-            m.ChildMenu = m.ChildMenu != null && m.ChildMenu.Count > 0 ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
+            m.ChildMenu = m.ChildMenu != null ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
         }
 
         public override EHECD_SystemUserDTO Login(EHECD_SystemUserDTO t)

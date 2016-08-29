@@ -21,7 +21,6 @@
         });
 
         f.post("/Admin/MenuManage/LoadAllMenu", null, function (ret) {
-            debugger
             allMenu.tree("loadData", [ret.Data]);
         }, function (ret) {
             eui.alertErr(ret.Msg);
@@ -33,27 +32,60 @@
      * 动态创建右键菜单
      */
     function createMenu(e, node) {
+
+        var menu = $("<div/>");
+        //创建右键菜单
+        menu.menu({
+            align: "left",
+            minWidth: 120,
+            noline: false,
+            hideOnUnhover: false,
+            onClick: function () {
+                $(this).menu("hide");
+                $(this).menu("destroy");
+            }
+        });
+
         if (node.attributes.type === "root" || node.attributes.type === "menu") {
-            var menu = $("<div/>");
-            menu.menu({
-                align: "left",
-                minWidth: 120,
-                noline: false,
-                hideOnUnhover: false,
-                onClick: function () {
-                    $(this).menu("hide");
-                    $(this).menu("destroy");
-                }
-            });
-            menu.menu("appendItem", {
-                text: '添加菜单',
-                iconCls: 'icon-add',
-                onclick: function () {
-                    //添加菜单
-                    createAddMenuDialog(node);
-                }
-            });
-            if (node.attributes.type === "menu") {
+
+            //如果当前菜单是一个节点菜单，没有对应的url，则右键菜单可以添加菜单和编辑菜单
+            if (node.attributes.type === "menu" && node.attributes.url.length === 0) {
+
+                //添加菜单节点
+                menu.menu("appendItem", {
+                    text: '添加菜单',
+                    iconCls: 'icon-add',
+                    onclick: function () {
+                        //添加菜单
+                        createAddMenuDialog(node);
+                    }
+                });
+
+                //编辑菜单节点
+                menu.menu("appendItem", {
+                    text: '编辑菜单',
+                    iconCls: 'icon-edit',
+                    onclick: function () {
+                        //编辑菜单
+                    }
+                });
+
+            }
+            else if (node.attributes.type === "root") {
+                //添加菜单节点
+                menu.menu("appendItem", {
+                    text: '添加菜单',
+                    iconCls: 'icon-add',
+                    onclick: function () {
+                        //添加菜单
+                        createAddMenuDialog(node);
+                    }
+                });
+            }
+            else {
+
+                //如果当前节点是有对应url的菜单，则右键菜单可以添加按钮和编辑菜单
+                //添加按钮节点
                 menu.menu("appendItem", {
                     text: '添加按钮',
                     iconCls: 'icon-add',
@@ -62,6 +94,8 @@
                         createAddButtonDialog(node);
                     }
                 });
+
+                //编辑菜单节点
                 menu.menu("appendItem", {
                     text: '编辑菜单',
                     iconCls: 'icon-edit',
@@ -70,11 +104,23 @@
                     }
                 });
             }
-            menu.menu("show", {
-                left: e.pageX,
-                top: e.pageY
+        } else if (node.attributes.type === "btn") {
+
+            //编辑按钮节点
+            menu.menu("appendItem", {
+                text: '编辑按钮',
+                iconCls: 'icon-edit',
+                onclick: function () {
+                    //编辑按钮
+                }
             });
         }
+
+        //显示菜单
+        menu.menu("show", {
+            left: e.pageX,
+            top: e.pageY
+        });
     }
 
     /**
@@ -103,11 +149,11 @@
                             var json = $("#add_menu_form").serializeObject();
                             json.sPID = node.id;
                             f.post("/Admin/MenuManage/AddMenu", json,
-                                function (ret) {                                    
+                                function (ret) {
                                     allMenu.tree("append", {
                                         parent: node.target,
                                         data: [ret.Data]
-                                    }); 
+                                    });
                                     $(div).dialog("close");
                                 }, function (ret) {
                                     eui.alertErr(ret.Msg);
@@ -152,20 +198,21 @@
                     text: '保存',
                     iconCls: 'icon-save',
                     handler: function () {
-                        //if ($("#add_menu_form").form("validate")) {
-                        //    var json = $("#add_menu_form").serializeObject();
-                        //    json.sPID = node.id;
-                        //    f.post("/Admin/MenuManage/AddMenu", json,
-                        //        function (ret) {
-                        //            allMenu.tree("append", {
-                        //                parent: node.target,
-                        //                data: [ret.Data]
-                        //            });
-                        //            $(div).dialog("close");
-                        //        }, function (ret) {
-                        //            eui.alertErr(ret.Msg);
-                        //        });
-                        //}
+                        if ($("#add_button_form").form("validate")) {
+                            debugger
+                            var json = { btn: $("#add_button_form").serializeObject() };
+                            json.menuID = node.id;
+                            f.post("/Admin/MenuManage/AddButton", json,
+                                function (ret) {
+                                    allMenu.tree("append", {
+                                        parent: node.target,
+                                        data: [ret.Data]
+                                    });
+                                    $(div).dialog("close");
+                                }, function (ret) {
+                                    eui.alertErr(ret.Msg);
+                                });
+                        }
                     }
                 }, {
                     text: '关闭',
