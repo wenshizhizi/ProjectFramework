@@ -73,7 +73,7 @@
       <Project>{7f29fbc4-3e7d-46b4-99b3-a02fd3eef2b3}</Project>
       <Name>Framework.web.config</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapper\Framework.MapperConfig.csproj">
+    <ProjectReference Include="..\Framework.MapperConfig\Framework.MapperConfig.csproj">
       <Project>{B925EA38-965D-4899-8886-1EBC86A648E6}</Project>
       <Name>Framework.MapperConfig</Name>
     </ProjectReference>

@@ -94,7 +94,7 @@ namespace Framework.web.Controllers
             }
             catch (Exception e)
             {
-                Log.Logs.GetLog().WriteErrorLog(e);
+                SystemLog.Logs.GetLog().WriteErrorLog(e);
             }
             base.Initialize(requestContext);
         }
@@ -113,7 +113,7 @@ namespace Framework.web.Controllers
                     filterContext.ExceptionHandled = true;
                     if (ex.IsLog)
                     {
-                        Log.Logs.GetLog().WriteErrorLog(ex);
+                        SystemLog.Logs.GetLog().WriteErrorLog(ex);
                         result.Succeeded = false;
                         result.Msg = ex.Message;
                         filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
@@ -128,7 +128,7 @@ namespace Framework.web.Controllers
                 else
                 {
                     //处理controller的异常
-                    Log.Logs.GetLog().WriteErrorLog(filterContext.Exception);
+                    SystemLog.Logs.GetLog().WriteErrorLog(filterContext.Exception);
                     filterContext.ExceptionHandled = true;
                 }
             }

@@ -1,4 +1,4 @@
-﻿using Framework.Log;
+﻿using Framework.SystemLog;
 using System;
 using System.Collections.Generic;
 using System.Data;

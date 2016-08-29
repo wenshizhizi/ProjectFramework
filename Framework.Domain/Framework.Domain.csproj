@@ -60,7 +60,7 @@
       <Project>{c7c3d0e2-c9b8-43fd-99e6-f8a3c12a8814}</Project>
       <Name>Framework.Dapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapper\Framework.MapperConfig.csproj">
+    <ProjectReference Include="..\Framework.MapperConfig\Framework.MapperConfig.csproj">
       <Project>{b925ea38-965d-4899-8886-1ebc86a648e6}</Project>
       <Name>Framework.MapperConfig</Name>
     </ProjectReference>

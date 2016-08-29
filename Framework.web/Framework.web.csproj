@@ -715,9 +715,9 @@
       <Project>{4bb5f221-3226-4ba9-9eb0-27377c2cb196}</Project>
       <Name>Framework.Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework.Log\Framework.Log.csproj">
+    <ProjectReference Include="..\Framework.Log\Framework.SystemLog.csproj">
       <Project>{2d79182e-02cb-4b38-b639-f728412473f0}</Project>
-      <Name>Framework.Log</Name>
+      <Name>Framework.SystemLog</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.MapperConfig\Framework.MapperConfig.csproj">
       <Project>{b925ea38-965d-4899-8886-1ebc86a648e6}</Project>
