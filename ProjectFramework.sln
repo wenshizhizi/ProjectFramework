@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DTO", "Framework.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.web", "Framework.web\Framework.web.csproj", "{D321AD43-43CB-4E6C-97D3-CEFB1A05B8B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.SystemLog", "Framework.Log\Framework.SystemLog.csproj", "{2D79182E-02CB-4B38-B639-F728412473F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.SystemLog", "Framework.SystemLog\Framework.SystemLog.csproj", "{2D79182E-02CB-4B38-B639-F728412473F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Domain", "Framework.Domain\Framework.Domain.csproj", "{32EC1887-56F8-4F47-B2D1-1BEF33E6249C}"
 EndProject
@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DI", "Framework.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Validate", "Framework.Validate\Framework.Validate.csproj", "{760B93C4-51F9-4755-8D48-A56A3C16BDD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.AppCache", "Framework.Cache\Framework.AppCache.csproj", "{E9C326C7-DB54-47DD-AC57-A55A75C6024E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.AppCache", "Framework.AppCache\Framework.AppCache.csproj", "{E9C326C7-DB54-47DD-AC57-A55A75C6024E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.BLL", "Framework.BLL\Framework.BLL.csproj", "{128012BA-AA90-4E30-ACA8-36C6E36FD204}"
 EndProject
