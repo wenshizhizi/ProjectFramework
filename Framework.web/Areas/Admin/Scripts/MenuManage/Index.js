@@ -59,6 +59,7 @@
                     iconCls: 'icon-add',
                     onclick: function () {
                         //添加按钮
+                        createAddButtonDialog(node);
                     }
                 });
                 menu.menu("appendItem", {
@@ -112,6 +113,59 @@
                                     eui.alertErr(ret.Msg);
                                 });
                         }
+                    }
+                }, {
+                    text: '关闭',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        $(div).dialog("close");
+                    }
+                }],
+                onClose: function () {
+                    $(div).dialog("destroy");
+                }
+            });
+        } catch (e) {
+            eui.alertErr(e.message);
+        }
+    }
+
+    /**
+     * 创建添加按钮的窗口
+     * @param {objec} node 菜单节点
+     */
+    function createAddButtonDialog(node) {
+        try {
+            var div = $("<div/>");
+            div.dialog({
+                title: "添加按钮",
+                width: 400,
+                height: 230,
+                cache: false,
+                href: '/Admin/MenuManage/ToAddButton',
+                modal: true,
+                collapsible: false,
+                minimizable: false,
+                maximizable: false,
+                resizable: false,
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-save',
+                    handler: function () {
+                        //if ($("#add_menu_form").form("validate")) {
+                        //    var json = $("#add_menu_form").serializeObject();
+                        //    json.sPID = node.id;
+                        //    f.post("/Admin/MenuManage/AddMenu", json,
+                        //        function (ret) {
+                        //            allMenu.tree("append", {
+                        //                parent: node.target,
+                        //                data: [ret.Data]
+                        //            });
+                        //            $(div).dialog("close");
+                        //        }, function (ret) {
+                        //            eui.alertErr(ret.Msg);
+                        //        });
+                        //}
                     }
                 }, {
                     text: '关闭',

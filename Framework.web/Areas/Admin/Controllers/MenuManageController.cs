@@ -39,6 +39,11 @@ namespace Framework.web.Areas.Admin.Controllers
             return View("AddMenu");
         }
 
+        public PartialViewResult ToAddButton()
+        {
+            return PartialView("AddButton");
+        }
+
         /// <summary>
         /// 添加菜单
         /// </summary>
@@ -210,7 +215,6 @@ namespace Framework.web.Areas.Admin.Controllers
             return userMs.OrderBy(m => m.iOrder).ToList();
         }
 
-
         // 递归从集合中载入指定菜单的下级菜单，直到没有下级菜单        
         private void RecursionLoadLevelUserMenu(IList<UserMenu> t, UserMenu m)
         {
@@ -223,7 +227,7 @@ namespace Framework.web.Areas.Admin.Controllers
                     RecursionLoadLevelUserMenu(t, temp);
                 }
             });
-            m.ChildMenu = m.ChildMenu != null && m.ChildMenu.Count > 0 ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
+            m.ChildMenu = m.ChildMenu != null ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
         }
     }
 }

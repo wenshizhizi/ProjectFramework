@@ -1,0 +1,114 @@
+﻿<form id="add_button_form">
+    <style>
+        .tablestype {
+            width: 90%;
+            height: 90%;
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+            .tablestype td {
+                text-align: right;
+                height: 30px;
+            }
+    </style>
+    <div>
+        <table class="gridtable tablestype">
+            <tr>
+                <td>按钮名称：</td>
+                <td style="text-align:left;padding-left:15px">
+                    <input type="text" name="sButtonName" class="easyui-textbox" data-options="required:true,validType:['maxLength[20]']" missingmessage="请输入按钮名称" />
+                </td>
+            </tr>
+            <tr>
+                <td>唯一标识：</td>
+                <td style="text-align:left;padding-left:15px">
+                    <input type="text" name="sDataID" class="easyui-textbox" data-options="required:true,validType:['maxLength[25]']" missingmessage="请输入唯一标识" />
+                </td>
+            </tr>
+            <tr>
+                <td>唯一标识：</td>
+                <td style="text-align:left;padding-left:15px">
+                    <input name="sIcon" class="easyui-combobox" data-options="valueField:'id',textField:'text',data:[{
+                                                                                                                        'id':'icon-blank',
+                                                                                                                        'text':'icon-blank'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-add',
+                                                                                                                        'text':'icon-add'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-edit',
+                                                                                                                        'text':'icon-edit',
+                                                                                                                        'selected':true
+                                                                                                                    },{
+                                                                                                                        'id':'icon-clear',
+                                                                                                                        'text':'icon-clear'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-remove',
+                                                                                                                        'text':'icon-remove'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-save',
+                                                                                                                        'text':'icon-save'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-cut',
+                                                                                                                        'text':'icon-cut'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-ok',
+                                                                                                                        'text':'icon-ok'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-no',
+                                                                                                                        'text':'icon-no'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-cancel',
+                                                                                                                        'text':'icon-cancel'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-reload',
+                                                                                                                        'text':'icon-reload'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-search',
+                                                                                                                        'text':'icon-search'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-print',
+                                                                                                                        'text':'icon-print'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-help',
+                                                                                                                        'text':'icon-help'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-undo',
+                                                                                                                        'text':'icon-undo'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-redo',
+                                                                                                                        'text':'icon-redo'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-back',
+                                                                                                                        'text':'icon-back'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-sum',
+                                                                                                                        'text':'icon-sum'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-tip',
+                                                                                                                        'text':'icon-tip'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-filter',
+                                                                                                                        'text':'icon-filter'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-man',
+                                                                                                                        'text':'icon-man'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-lock',
+                                                                                                                        'text':'icon-lock'
+                                                                                                                    },{
+                                                                                                                        'id':'icon-more',
+                                                                                                                        'text':'icon-more'
+                                                                                                                    }]" />
+                </td>
+            </tr>
+            <tr>
+                <td>排序号：</td>
+                <td style="text-align:left;padding-left:15px">
+                    <input type="text" name="iOrder" class="easyui-numberbox" data-options="required:true,min:0,validType:['isNumber']" missingmessage="请输入按钮排序号" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
