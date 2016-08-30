@@ -54,5 +54,19 @@ namespace Framework.BLL
                 return null;
             }
         }
+
+        public override EHECD_MenuButtonDTO EditButton(EHECD_MenuButtonDTO dto)
+        {
+            dto.bIsDeleted = false;
+            var ret = excute.UpdateSingle<EHECD_MenuButtonDTO>(dto,string.Format("WHERE [ID] = '{0}'", dto.ID));
+            if (ret > 0)
+            {
+                return dto;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

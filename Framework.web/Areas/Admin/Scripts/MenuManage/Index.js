@@ -49,7 +49,7 @@
         if (node.attributes.type === "root" || node.attributes.type === "menu") {
 
             //如果当前菜单是一个节点菜单，没有对应的url，则右键菜单可以添加菜单和编辑菜单
-            if (node.attributes.type === "menu" && node.attributes.url.length === 0) {
+            if (node.attributes.type === "menu" && node.attributes.url.trim().length === 0) {
 
                 //添加菜单节点
                 menu.menu("appendItem", {
@@ -112,6 +112,7 @@
                 iconCls: 'icon-edit',
                 onclick: function () {
                     //编辑按钮
+                    createEditButtonDialog(node);
                 }
             });
         }
@@ -207,6 +208,59 @@
                                     allMenu.tree("append", {
                                         parent: node.target,
                                         data: [ret.Data]
+                                    });
+                                    $(div).dialog("close");
+                                }, function (ret) {
+                                    eui.alertErr(ret.Msg);
+                                });
+                        }
+                    }
+                }, {
+                    text: '关闭',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        $(div).dialog("close");
+                    }
+                }],
+                onClose: function () {
+                    $(div).dialog("destroy");
+                }
+            });
+        } catch (e) {
+            eui.alertErr(e.message);
+        }
+    }
+
+    /**
+     * 创建编辑按钮的窗口
+     * @param {objec} node 菜单节点
+     */
+    function createEditButtonDialog(node) {
+        try {            
+            var div = $("<div/>");
+            div.dialog({
+                title: "编辑按钮",
+                width: 400,
+                height: 230,
+                cache: false,
+                href: '/Admin/MenuManage/ToEditButton?id=' + node.id,
+                modal: true,
+                collapsible: false,
+                minimizable: false,
+                maximizable: false,
+                resizable: false,
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-save',
+                    handler: function () {
+                        if ($("#edit_button_form").form("validate")) {                            
+                            var json = $("#edit_button_form").serializeObject();                            
+                            f.post("/Admin/MenuManage/EditButton", json,
+                                function (ret) {                                    
+                                    allMenu.tree("update", {
+                                        target: node.target,
+                                        text: ret.Data.text,
+                                        iconCls: ret.Data.iconCls
                                     });
                                     $(div).dialog("close");
                                 }, function (ret) {

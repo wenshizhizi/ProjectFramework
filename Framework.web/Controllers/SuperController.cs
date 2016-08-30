@@ -30,6 +30,11 @@ namespace Framework.web.Controllers
         protected UserInfo SessionUser = null;
 
         /// <summary>
+        /// 这个地方是标识继承自该controller的菜单是否需要从session中筛选对应button
+        /// </summary>
+        protected Boolean NeedMenuButton = false;
+
+        /// <summary>
         /// 处理前
         /// </summary>
         /// <param name="requestContext"></param>
@@ -97,9 +102,11 @@ namespace Framework.web.Controllers
             else if (isAjaxRequest && requestType == "get")
             {
                 var controller = filterContext.RequestContext.RouteData.Values["controller"].ToString().ToLower();
+                var action = filterContext.RequestContext.RouteData.Values["action"].ToString().ToLower();
 
-                //排除登录和菜单首页
-                if (controller != "login" && controller != "menu" && controller != "main")
+                //排除登录和菜单、首页还有不需要按钮的标识，如果非登录和菜单、首页，
+                //你需要载入按钮的话，那么把NeedMenuButton置为true就可以了
+                if (controller != "login" && controller != "menu" && controller != "main" && action == "index" || NeedMenuButton)
                 {
                     //请求是get请求，一般都是打开某个菜单，获取会话中的用户权限菜单信息
                     var menuinfo = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
@@ -114,8 +121,8 @@ namespace Framework.web.Controllers
 
                         if (userMenu != default(UserMenu))
                         {
-                            //添加这个菜单有的btn
-                            filterContext.Controller.ViewData.Add("btns", userMenu.Buttons);
+                            //添加这个菜单有的btn,这里是会排序的，如果编辑了菜单按钮的排序，刷新就可以了
+                            filterContext.Controller.ViewData.Add("btns", userMenu.Buttons.OrderBy(m=>m.iOrder).ToList());
                         }
                     }
                 }

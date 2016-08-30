@@ -647,6 +647,7 @@
     <Content Include="Areas\Admin\Views\MenuManage\AddMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\ButtonsMasterView.cshtml" />
     <Content Include="Areas\Admin\Views\MenuManage\AddButton.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuManage\EditButton.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="scripts\easyloader.js" />
     <Content Include="scripts\jquery-1.11.3.js" />

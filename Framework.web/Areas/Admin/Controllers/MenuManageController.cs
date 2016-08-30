@@ -47,6 +47,15 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             return PartialView("AddButton");
         }
+
+        /// <summary>
+        /// 获取编辑按钮的页面
+        /// </summary> 
+        public PartialViewResult ToEditButton(string id)
+        {
+            UserMenuButton btn = LoadMenuButtonById(id);
+            return PartialView("EditButton", btn);
+        }
         #endregion
 
         /// <summary>
@@ -133,7 +142,8 @@ namespace Framework.web.Areas.Admin.Controllers
 
                 if (userRoleMenu != null)
                 {
-                    result.Data = new {
+                    result.Data = new
+                    {
                         id = addbutton.ID,
                         @checked = false,
                         attributes = new { type = "btn" },
@@ -177,6 +187,47 @@ namespace Framework.web.Areas.Admin.Controllers
             {
                 result.Succeeded = false;
                 result.Msg = "添加菜单按钮失败，请联系管理员";
+            }
+        }
+
+        /// <summary>
+        /// 编辑按钮
+        /// </summary>
+        public void EditButton()
+        {
+            EHECD_MenuButtonDTO editbutton = JSONHelper.GetModel<EHECD_MenuButtonDTO>(RequestParameters.dataStr);
+
+            editbutton = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditButton(editbutton);
+
+            if (editbutton != null)
+            {
+                var ret = new UserMenuButton
+                {
+                    ID = editbutton.ID,
+                    iOrder = editbutton.iOrder,
+                    sButtonName = editbutton.sButtonName,
+                    sDataID = editbutton.sDataID,
+                    sIcon = editbutton.sIcon
+                };
+
+                UpdateSessionMenuButton(ret);
+
+                result.Data = new
+                {
+                    id = ret.ID,
+                    @checked = true,
+                    attributes = new { type = "btn" },
+                    text = ret.sButtonName,
+                    iconCls = ret.sIcon,
+                    state = "open"
+                };
+
+                result.Succeeded = true;
+            }
+            else
+            {
+                result.Succeeded = false;
+                result.Msg = "编辑菜单按钮失败，请联系管理员";
             }
         }
 
@@ -227,8 +278,10 @@ namespace Framework.web.Areas.Admin.Controllers
                 var temp = t[i];
                 if (m.ID == temp.sPID)
                 {
+                    //载入他的下级节点
                     var child = LoadLevelUserMenu(t, temp);
-                    child.AddRange(CreateButtons(temp.Buttons));
+                    //载入他的菜单按钮
+                    child.AddRange(CreateButtons(temp.Buttons.OrderBy(mx=>mx.iOrder).ToList()));
                     var menu = new
                     {
                         id = temp.ID,
@@ -306,6 +359,78 @@ namespace Framework.web.Areas.Admin.Controllers
                 }
             });
             m.ChildMenu = m.ChildMenu != null ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
+        }
+
+        //找到指定的按钮信息
+        private UserMenuButton LoadMenuButtonById(string id)
+        {
+            UserMenuButton ret = null;
+            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+
+            if (userRoleMenu != null)
+            {
+                var isfind = false;
+                Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                {
+                    if (isfind)
+                    {
+                        state.Stop();
+                        return;
+                    }
+                    else
+                    {
+                        Parallel.ForEach<UserMenuButton>(userRoleMenu.AllMenu[index].Buttons, (button, innerstate) =>
+                        {
+                            if (button.ID.ToString() == id)
+                            {
+                                ret = button;
+                                isfind = true;
+                                innerstate.Stop();
+                                return;
+                            }
+                        });
+                    }
+                });
+            }
+
+            return ret;
+        }
+
+        //更新会话中的按钮
+        private void UpdateSessionMenuButton(UserMenuButton m)
+        {
+            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+
+            if (userRoleMenu != null)
+            {
+                var isfind = false;
+                Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                {
+                    if (isfind)
+                    {
+                        state.Stop();
+                        return;
+                    }
+                    else
+                    {
+                        Parallel.For(0, userRoleMenu.AllMenu[index].Buttons.Count, (innerindex, innerstate) =>
+                        {
+                            if (userRoleMenu.AllMenu[index].Buttons[innerindex].ID == m.ID)
+                            {
+                                userRoleMenu.AllMenu[index].Buttons[innerindex] = m;
+                                userRoleMenu.AllMenu = userRoleMenu.AllMenu.OrderBy(mx => mx.iOrder).ToList();
+                                isfind = true;
+                                innerstate.Stop();
+                                return;
+                            }
+                        });
+                    }
+                });
+            }
+            else
+            {
+                throw new Domain.DomainInfoException("没有从会话中找到对应的按钮，请联系管理员");
+            }
         }
     }
 }
