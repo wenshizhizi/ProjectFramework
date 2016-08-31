@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseCache.cs" />
-    <Compile Include="ValidateCache.cs" />
+    <Compile Include="ApplicationCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -129,6 +129,7 @@
     <Content Include="Areas\Admin\Scripts\Main\Index.js" />
     <Content Include="Areas\Admin\Scripts\MenuManage\Index.js" />
     <Content Include="Areas\Admin\Scripts\Menu\Index.js" />
+    <Content Include="Content\home.css" />
     <Content Include="Content\themes\14-15111615263S59.jpg" />
     <Content Include="Content\themes\14-15111615263S591.jpg" />
     <Content Include="Content\themes\login.jpg" />
@@ -657,6 +658,7 @@
     <Content Include="scripts\jquery.easyui.mobile-1.4.5.js" />
     <Content Include="scripts\jquery.easyui.mobile-1.4.5.min.js" />
     <Content Include="scripts\lib\array.module.js" />
+    <Content Include="scripts\lib\client.common.js" />
     <Content Include="scripts\lib\easyui.module.js" />
     <Content Include="scripts\lib\func.module.js" />
     <Content Include="scripts\lib\modules.manager.js" />
