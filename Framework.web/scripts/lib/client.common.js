@@ -9,8 +9,12 @@
     window.config = {
         //ajax post 超时时间
         postTimeOut: 10000,
-        //ajax post 的遮罩层
-        maskmsg: null
+        //ajax post 的遮罩层对象
+        maskmsg: null,
+        //ajax提交的上下文对象
+        ajaxPostContext: null,
+        //alert的弹出框divHTML
+        alertDivHTMLString: "<div class='alert_box' style='position:fixed;z-index:1500;width:100%;opacity:1;height:100%;left:0;top:0px;background-color:rgba(68,68,68,0.4);transition:all 0.3s linear'><div class='content' style='width:260px;text-align:center;position:absolute;font-size:14px;left:50%;top:50%; transform:translateY(-50%) translateX(-50%);-webkit-transform:translateY(-50%) translateX(-50%);background-color:#fff;border-radius:10px'><P style='padding:20px 15px; line-height:25px; color:#333;font-size:16px'>{0}<P><div><div>"
     };
 
     window.$_c4 = {
@@ -65,8 +69,7 @@
          * 
          * 隐藏遮罩层
          * 
-         * @method hide
-         * @for Maskin
+         * @method hide        
          * @author [杨瑜堃]
          * @version 1.0.1
          */
@@ -103,12 +106,37 @@
     };
 
     /**
+     * 弹出消息框
+     * @param {String} msg 消息
+     * @param {Function} fn 可选：显示后回调的函数
+     * @param {Number} duration 显示的时间
+     */
+    window.alert = function AlertWindow(msg, fn, duration) {
+        duration = isNaN(duration) ? 2000 : duration;
+       
+        if ($(".alert_box").length) {
+            $(".alert_box .content p:first").text(msg).parents(".alert_box").css({ "opacity": "1", "width": "100%", "height": "100%" });
+        }
+        else {
+            var win = $(window.config.alertDivHTMLString.format(msg));
+            $("body").append(win);
+        }
+        setTimeout(function () {
+            var d = 0.7;
+            $(".alert_box")[0].style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+            $(".alert_box")[0].style.opacity = '0';
+            if (fn) fn();
+            setTimeout(function () { $(".alert_box").remove(); }, d * 1000);
+        }, 2000);
+    };
+
+    /**
      * ajax post 
      * @param {String} url 提交的地址
      * @param {Json} data 提交的数据
      * @param {Function} onSuccess 成功时的回调函数，有个参数是回调的data
      * @param {Function} unSucess 失败时的回调函数，有个参数是回调的data
-     * @param {Boolean} modal 是否启用遮罩层
+     * @param {Boolean} modal 是否启用遮罩层 默认开启
      * @param {Boolean} async 是否是异步
      * @param {Function} onError 错误时的回调函数
      * @param {Function} onComplete 完成时的回调函数
@@ -116,36 +144,49 @@
      */
     window.common.post = function post(url, data, onSuccess, unSucess, modal, async, onError, onComplete, dataType) {
 
+        //判断是否提交期间开启遮罩层
         modal = (modal == false ? false : true);
+
+        //如果要开启遮罩层就显示遮罩层（遮罩层的样式在项目根目录下的Conten/home.css中）
         if (modal) window.$_c4.show();
 
-        var jsonData = { data: data };
+        //封装jsondata，对参数进行url编码
+        var jsonData = window.$_c4.encodeParam({ data: data });
 
-        var ajaxHandler = $.ajax({
+        var ajaxHandler = $.ajax.call(window.config.ajaxPostContext, {
             type: "post",
             url: url,
             cache: false,
             contentType: "application/x-www-form-urlencoded",
             dataType: (dataType ? dataType : "text"),
-            data: window.$_c4.encodeParam(jsonData),
+            data: jsonData,
             async: (async == false ? async : true),
             success: function (json) {
-                if (modal) {
-                    window.$_c4.hide();
-                }
-
-                var result = JSON.parse(json || null);
                 try {
+                    //调用成功，服务端返回结果
+
+                    //如果显示了遮罩层就去掉
+                    if (modal) {
+                        window.$_c4.hide();
+                    }
+
+                    //由于返回的是text，这里解析成对象
+                    var result = JSON.parse(json || null);
+                    
+                    //将Data解析为对象
                     result.Data = JSON.parse(result.Data || null);
+
+                    //返回结果成功就调用成功的回调函数
+                    if (result.Succeeded) {
+                        onSuccess(result);
+                    }
+
+                    //返回失败且要自己处理错误就调用服务端通知失败的回调函数
+                    if (!result.Succeeded && unSucess) {
+                        unSucess(result);
+                    }
                 } catch (e) {
-                }
-
-                if (result.Succeeded) {
-                    onSuccess(result);
-                }
-
-                if (!result.Succeeded && unSucess) {
-                    unSucess(result);
+                    alert(e.message);
                 }
             },
             error: onError ? onError : function () {
@@ -167,4 +208,158 @@
             }
         });
     };
+
+    /**
+     * 
+     * 对Date的扩展，将 Date 转化为指定格式的String
+     * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+     * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
+     * 
+     * @for Date
+     * @author [杨瑜堃]
+     * @version 1.0.1
+     * @param {String} fmt 格式化字符串
+     * @returns {String} 结果 
+     * 
+     * @example
+     *  
+     * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+     * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
+     */
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        for (var time in o) {
+            if (isNaN(o[time])) {
+                return "";
+            }
+        }
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+    /**
+     * 带确认取消按钮的确认框
+     * @param {String} msg 提示的信息
+     * @param {Object} okOptopn 确认按钮配置，格式如下：{"text":"确定按钮",fn:function(){ //这里是按了确定后触发的事件 }}
+     * @param {Object} canclOption 取消按钮配置，格式如下：{"text":"取消按钮",fn:function(){ //这里是按了取消后触发的事件 }}
+     * @param {Function} callback 可选：按了确定后，调了确定方法后的回调事件
+     */
+    $.confirm = function (msg, okOptopn, canclOption, callback) {
+        //创建背景DIV
+        var divBackground = document.createElement("div");
+
+        //设置背景DIV样式
+        divBackground.style.cssText = "position:fixed;top: 0;left:0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);z-index:9999999999";
+
+        //创建内容DIV
+        var divContent = document.createElement("div");
+
+        //设置DIV样式
+        divContent.style.cssText = "width: 72%;background: #ffffff;border-radius: 8px;margin:70% auto;position: relative;text-align: center;overflow:hidden;font-size:14px;";
+
+        //创建消息SPAN
+        var span = document.createElement("span");
+
+        //设置消息提示内容
+        span.innerHTML = msg;
+
+        //设置消息span样式
+        span.style.cssText = "margin: 20px;display:block;";
+
+        //创建下方两个按钮的ul容器
+        var ul = document.createElement("ul");
+
+        //设置ulstyle
+        ul.style.cssText = "margin-top:10px;border-top: 1px solid #dcdcdc;";
+
+        //#region 取消按钮（默认）
+        var li1 = document.createElement("li");
+        //设置按钮样式（默认）
+        li1.style.cssText = "text-align: center;line-height: 40px;float:left;width:50%;border-right: 1px solid gainsboro;margin-left:-1px;font-size:12px;color:red;";
+        li1.innerHTML = "取消";
+        //检查是否自定义取消按钮文本
+        if (canclOption && canclOption.text) {
+            li1.innerHTML = canclOption.text;
+        }
+        //绑定取消按钮事件
+        li1.onclick = function () {
+            if (canclOption.fn) canclOption.fn();
+            document.body.removeChild(divBackground);
+        };
+        //#endregion
+
+        //#region 确认按钮（默认）
+        var li2 = document.createElement("li");
+        //设置按钮样式（默认）
+        li2.style.cssText = "text-align: center;line-height: 40px;float:left;width:50%;font-size:12px;color:red;";
+        li2.innerHTML = "确定";
+        //检查是否自定义确认按钮文本
+        if (okOptopn && okOptopn.text) {
+            li2.innerHTML = okOptopn.text;
+        }
+        //绑定确认按钮事件
+        li2.onclick = function () {
+            if (okOptopn.fn) okOptopn.fn();
+            if (callback) callback();
+            document.body.removeChild(divBackground);
+        };
+        //#endregion
+
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        divContent.appendChild(span);
+        divContent.appendChild(ul);
+        divBackground.appendChild(divContent);
+        document.body.appendChild(divBackground);
+    };
+
+    /**
+     * 
+     * 格式化字符串
+     * 
+     * @method format     
+     * @author [杨瑜堃]
+     * @version 1.0.1
+     * @param {Stringp[]} args 要格式化的替换值数组
+     * @returns {String} 格式化结果 
+     * 
+     * @example
+     * 
+     * "这个就是格式化字符串的列子:{0}".format("列子")
+     */
+    String.prototype.format = function (args) {
+        var result = this;
+        if (arguments.length > 0) {
+            if (arguments.length == 1 && typeof (args) == "object") {
+                for (var key in args) {
+                    if (args[key] != undefined) {
+                        var reg = new RegExp("({)" + key + "(})", "g");
+                        result = result.replace(reg, args[key]);
+                    }
+                }
+            }
+            else {
+                for (var i = 0; i < arguments.length; i++) {
+                    if (arguments[i] != undefined) {
+                        var reg = new RegExp("({)" + i + "(})", "g");
+                        result = result.replace(reg, arguments[i]);
+                    }
+                }
+            }
+        }
+        return result;
+    };
 }());
+

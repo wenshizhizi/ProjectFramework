@@ -659,6 +659,7 @@
     <Content Include="scripts\jquery.easyui.mobile-1.4.5.min.js" />
     <Content Include="scripts\lib\array.module.js" />
     <Content Include="scripts\lib\client.common.js" />
+    <Content Include="scripts\lib\client.common.min.js" />
     <Content Include="scripts\lib\easyui.module.js" />
     <Content Include="scripts\lib\func.module.js" />
     <Content Include="scripts\lib\modules.manager.js" />
