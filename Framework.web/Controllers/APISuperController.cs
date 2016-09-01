@@ -78,7 +78,7 @@ namespace Framework.web.Controllers
                         {
                             var login = DIEntity.GetInstance().GetImpl<ILogin>();
                             SessionInfo info = new SessionInfo();
-                            info.SessionUser.User = domain.GetAppLoginInfo(RequestParameters.identity);
+                            info.SessionUser.User = login.GetAppLoginInfo(RequestParameters.identity);
                             requestContext.HttpContext.Session[SessionInfo.APISESSION_NAME] = info;
                             SessionUser = info.SessionUser.User;
                         }
