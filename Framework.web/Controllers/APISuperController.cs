@@ -8,6 +8,8 @@ using Framework.Helper;
 using System.IO;
 using Framework.Validate;
 using Framework.DTO;
+using Framework.DI;
+using Framework.BLL;
 
 namespace Framework.web.Controllers
 {
@@ -54,32 +56,32 @@ namespace Framework.web.Controllers
                     RequestParameters = ParameterLoader.LoadAjaxPostParameters(requestContext.HttpContext.Request.InputStream);
                     if (!string.IsNullOrEmpty(RequestParameters.identity) && !string.IsNullOrWhiteSpace(RequestParameters.identity))
                     {
-                        ////保存在Session中
-                        //SessionInfo session = (SessionInfo)requestContext.HttpContext.Session[SessionInfo.APISESSION_NAME];
+                        //保存在Session中
+                        SessionInfo session = (SessionInfo)requestContext.HttpContext.Session[SessionInfo.APISESSION_NAME];
 
-                        ////session里面没有
-                        //if (session != null && session.SessionUser != null && session.SessionUser.User != null)
-                        //{
-                        //    //如果传入token不一致，以客户端为准
-                        //    if (session.SessionUser.User.ID.ToString() != RequestParameters.identity)
-                        //    {
-                        //        UserDomain domain = new UserDomain();
-                        //        session.SessionUser.User = domain.GetAppLoginInfo(RequestParameters.identity);
-                        //        requestContext.HttpContext.Session[SessionInfo.APISESSION_NAME] = session;
-                        //    }
-                        //    else
-                        //    {
-                        //        SessionUser = session.SessionUser.User;
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    UserDomain domain = new UserDomain();
-                        //    SessionInfo info = new SessionInfo();
-                        //    info.SessionUser.User = domain.GetAppLoginInfo(RequestParameters.identity);
-                        //    requestContext.HttpContext.Session[SessionInfo.APISESSION_NAME] = info;
-                        //    SessionUser = info.SessionUser.User;
-                        //}
+                        //session里面没有
+                        if (session != null && session.SessionUser != null && session.SessionUser.User != null)
+                        {
+                            //如果传入token不一致，以客户端为准
+                            if (session.SessionUser.User.ID.ToString() != RequestParameters.identity)
+                            {
+                                var login = DIEntity.GetInstance().GetImpl<ILogin>();
+                                session.SessionUser.User = login.GetAppLoginInfo(RequestParameters.identity);
+                                requestContext.HttpContext.Session[SessionInfo.APISESSION_NAME] = session;
+                            }
+                            else
+                            {
+                                SessionUser = session.SessionUser.User;
+                            }
+                        }
+                        else
+                        {
+                            var login = DIEntity.GetInstance().GetImpl<ILogin>();
+                            SessionInfo info = new SessionInfo();
+                            info.SessionUser.User = domain.GetAppLoginInfo(RequestParameters.identity);
+                            requestContext.HttpContext.Session[SessionInfo.APISESSION_NAME] = info;
+                            SessionUser = info.SessionUser.User;
+                        }
                     }
                 }
             }

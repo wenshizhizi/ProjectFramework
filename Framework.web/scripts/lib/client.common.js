@@ -1,10 +1,106 @@
 ﻿/**
  * 创建全局公用对象
  */
-$(function () {
-
+(function () {
     //全局对象
     window.common = {};
+
+    //全局配置对象
+    window.config = {
+        //ajax post 超时时间
+        postTimeOut: 10000,
+        //ajax post 的遮罩层
+        maskmsg: null
+    };
+
+    window.$_c4 = {
+        /**
+        * 
+        * 对参数进行URL编码
+        * 
+        * @method encodeParam    
+        * @author [杨瑜堃]
+        * @version 1.0.1
+        * @param {json} jsonObj 要编码的对象
+        * @returns {string} 编码结果
+        */
+        encodeParam: function (jsonObj) {
+            if (!jsonObj) return jsonObj;
+            if (jsonObj instanceof String) {
+                return encodeURIComponent(jsonObj);
+            } else {
+                return encodeURIComponent(JSON.stringify(jsonObj));
+            }
+        },
+
+        /**
+         * 
+         * 显示遮罩层
+         * 
+         * @method show    
+         * @author [杨瑜堃]
+         * @version 1.0.1
+         * @param [String] msg 可选：要显示的遮罩层文本
+         */
+        show: function (msg) {
+            var h = $(document).height();
+            window.config.maskmsg = $('<div style="height:100%;width:100%;position:fixed;z-index:99999;background: rgba(255,255,255,0.8);left:0px;top:0px;">' +
+                            '<div style="position:absolute;overflow:hidden;left:50%;top:50%;margin-left:-34px;margin-top:-34px;height:68px;width:68px;text-align:center;">' +
+                                '<span class="circles-loader"></span>' +
+                            '</div>' +
+                        '</div>');
+            if (msg) {
+                window.config.maskmsg.find("div").text(msg);
+            }
+            window.config.maskmsg.appendTo("body");
+            setTimeout(
+            (function (maskmsg) {
+                return function () {
+                    maskmsg.remove();
+                };
+            })(window.config.maskmsg), window.config.postTimeOut);
+        },
+
+        /**
+         * 
+         * 隐藏遮罩层
+         * 
+         * @method hide
+         * @for Maskin
+         * @author [杨瑜堃]
+         * @version 1.0.1
+         */
+        hide: function () {
+            if (window.config.maskmsg !== null) {
+                window.config.maskmsg.remove();
+                window.config.maskmsg = null;
+            }
+        }
+    };
+
+    /**
+     * 序列化容器内的带name属性的输入框的值为json object
+     * @method serializeObject
+     * @for ObjectDomain
+     * @author [王其]
+     * @version 1.0.1
+     * @returns {Object}  
+     */
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 
     /**
      * ajax post 
@@ -21,15 +117,9 @@ $(function () {
     window.common.post = function post(url, data, onSuccess, unSucess, modal, async, onError, onComplete, dataType) {
 
         modal = (modal == false ? false : true);
-        if (modal) {
-            if (tool) {
-                tool.show();
-            }
-        }
+        if (modal) window.$_c4.show();
 
-        var jsonData = {
-            data: data
-        };
+        var jsonData = { data: data };
 
         var ajaxHandler = $.ajax({
             type: "post",
@@ -37,13 +127,11 @@ $(function () {
             cache: false,
             contentType: "application/x-www-form-urlencoded",
             dataType: (dataType ? dataType : "text"),
-            data: zip(jsonData),
+            data: window.$_c4.encodeParam(jsonData),
             async: (async == false ? async : true),
             success: function (json) {
                 if (modal) {
-                    if (tool) {
-                        tool.hide();
-                    }
+                    window.$_c4.hide();
                 }
 
                 var result = JSON.parse(json || null);
@@ -62,8 +150,8 @@ $(function () {
             },
             error: onError ? onError : function () {
                 ajaxHandler.abort();
-                if (tool) {
-                    tool.hide();
+                if (modal) {
+                    window.$_c4.hide();
                 }
             },
             //请求完成后最终执行参数
@@ -72,76 +160,11 @@ $(function () {
                     //超时,status还有success,error等值的情况
                     alert("访问超时");
                     ajaxHandler.abort();
-                    if (tool) {
-                        tool.hide();
+                    if (modal) {
+                        window.$_c4.hide();
                     }
                 }
             }
         });
-    }
-
-    /**
-     * 
-     * 对参数进行URL编码
-     * 
-     * @method zip    
-     * @author [杨瑜堃]
-     * @version 1.0.1
-     * @param {json} jsonObj 要编码的对象
-     * @returns {string} 编码结果
-     */
-    function zip(jsonObj) {
-        if (!jsonObj) return jsonObj;
-        if (jsonObj instanceof String) {
-            return encodeURIComponent(jsonObj);
-        } else {
-            return encodeURIComponent(JSON.stringify(jsonObj));
-        }
-    }
-
-    var maskmsg = null;
-
-    /**
-     * 
-     * 显示遮罩层
-     * 
-     * @method show    
-     * @author [杨瑜堃]
-     * @version 1.0.1
-     * @param [String] msg 可选：要显示的遮罩层文本
-     */
-    function show(msg) {
-        var h = $(document).height();
-        maskmsg = $('<div style="height:100%;width:100%;position:fixed;z-index:99999;background: rgba(255,255,255,0.8);left:0px;top:0px;">' +
-                        '<div style="position:absolute;overflow:hidden;left:50%;top:50%;margin-left:-34px;margin-top:-34px;height:68px;width:68px;text-align:center;">' +
-                            '<span class="circles-loader"></span>' +
-                        '</div>' +
-                    '</div>');
-        if (msg) {
-            maskmsg.find("div").text(msg);
-        }
-        maskmsg.appendTo("body");
-        setTimeout(
-        (function (maskmsg) {
-            return function () {
-                maskmsg.remove();
-            };
-        })(maskmsg), 10000);
-    }
-
-    /**
-     * 
-     * 隐藏遮罩层
-     * 
-     * @method hide
-     * @for Maskin
-     * @author [杨瑜堃]
-     * @version 1.0.1
-     */
-    function hide() {
-        if (maskmsg !== null) {
-            maskmsg.remove();
-            maskmsg = null;
-        }
-    }
-});
+    };
+}());
