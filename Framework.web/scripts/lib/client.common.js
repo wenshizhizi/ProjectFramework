@@ -1,12 +1,14 @@
-﻿/**
+﻿/// <reference path="jquery.cookie.js" />
+
+/**
  * 创建全局公用对象
  */
 (function () {
-    //全局对象
-    window.common = {};
 
     //全局配置对象
     window.config = {
+        //localstore记录的history的键名字
+        historyLocalStoreName: "_HISTORY_C4_M16",
         //ajax post 超时时间
         postTimeOut: 10000,
         //ajax post 的遮罩层对象
@@ -16,6 +18,151 @@
         //alert的弹出框divHTML
         alertDivHTMLString: "<div class='alert_box' style='position:fixed;z-index:1500;width:100%;opacity:1;height:100%;left:0;top:0px;background-color:rgba(68,68,68,0.4);transition:all 0.3s linear'><div class='content' style='width:260px;text-align:center;position:absolute;font-size:14px;left:50%;top:50%; transform:translateY(-50%) translateX(-50%);-webkit-transform:translateY(-50%) translateX(-50%);background-color:#fff;border-radius:10px'><P style='padding:20px 15px; line-height:25px; color:#333;font-size:16px'>{0}<P><div><div>"
     };
+
+    $(function () {
+        window.common.history.pushHistory(window.location.pathname);
+    });
+
+    //全局对象
+    window.common = {};
+    //通过url请求的参数
+    window.common.requestParam = null;
+    //提供浏览历史的相关方法
+    window.common.history = new function () {
+        //是否支持LocalStorage
+        var isSupportLocalStorage = window.localStorage != undefined && window.localStorage != null;
+
+        /**
+         * 获取上一个浏览记录
+         * @returns {String} 浏览记录 
+         */
+        function getPrev() {
+            if (isSupportLocalStorage) {
+                var _history = getLocalStorage();
+                if (_history.length > 1) {
+                    return _history[_history.length - 2];
+                } else {
+                    return null;
+                }
+            }
+        }
+
+        /**
+         * 获取第一个浏览记录
+         * @returns {String} 浏览记录 
+         */
+        function getFirst() {
+            if (isSupportLocalStorage) {
+                var _history = getLocalStorage();
+                if (_history.length > 0) {
+                    return _history[0];
+                } else {
+                    return null;
+                }
+            }
+        }
+
+        /**
+         * 获取最后一次访问记录
+         * @returns {type} 
+         */
+        function getLast() {
+            if (isSupportLocalStorage) {
+                var _history = getLocalStorage();
+                if (_history.length > 0) {
+                    return _history[_history.length - 1];
+                } else {
+                    return null;
+                }
+            }
+        }
+
+        /**
+         * 移除最后一次浏览记录
+         */
+        function removeLast() {
+            if (isSupportLocalStorage) {
+                var _history = getLocalStorage();
+                if (_history.length > 0) {
+                    _history.pop();
+                    resetLocalStorage(_history);
+                }
+            }
+        }
+
+        /**
+         * 更新历史记录的值
+         * @param {Array<String>} obj
+         */
+        function resetLocalStorage(obj) {
+            if (isSupportLocalStorage) {
+                window.localStorage[window.config.historyLocalStoreName] = JSON.stringify(obj);
+            }
+        }
+
+        /**
+         * 获取历史记录的值
+         * @returns {Array<String>} 
+         */
+        function getLocalStorage() {
+            if (isSupportLocalStorage) {
+                if (window.localStorage[window.config.historyLocalStoreName]) {
+                    return JSON.parse(window.localStorage[window.config.historyLocalStoreName]);
+                } else {
+                    return new Array();
+                }
+            }
+        }
+
+        /**
+         * 返回上一次浏览记录
+         */
+        function back() {
+            if (isSupportLocalStorage) {
+                var url/*上次浏览*/ = getPrev();
+                if (url != null) {
+                    removeLast();//移除最后浏览（当前页）                    
+                    window.location = url;
+                }
+            }
+        }
+
+        /**
+         * 记录一条浏览信息
+         * @param {String} url 网址
+         */
+        function pushHistory(url) {
+            if (isSupportLocalStorage) {
+                var _history = getLocalStorage();
+                if (_history.length > 0) {
+                    if (_history[_history.length - 1] !== url) {
+                        _history.push(url);
+                    } else {
+                        return;
+                    }
+                } else {
+                    _history.push(url);
+                }
+                resetLocalStorage(_history);
+            }
+        }
+
+        function doState(e) {
+            debugger
+        }
+
+        if (history && history.pushState) {
+            window.onpopstate = doState.bind(getLocalStorage);
+        }
+
+
+
+        return {
+            back: back,
+            pushHistory: pushHistory
+        };
+    };
+
 
     window.$_c4 = {
         /**
@@ -113,7 +260,7 @@
      */
     window.alert = function AlertWindow(msg, fn, duration) {
         duration = isNaN(duration) ? 2000 : duration;
-       
+
         if ($(".alert_box").length) {
             $(".alert_box .content p:first").text(msg).parents(".alert_box").css({ "opacity": "1", "width": "100%", "height": "100%" });
         }
@@ -172,7 +319,7 @@
 
                     //由于返回的是text，这里解析成对象
                     var result = JSON.parse(json || null);
-                    
+
                     //将Data解析为对象
                     result.Data = JSON.parse(result.Data || null);
 

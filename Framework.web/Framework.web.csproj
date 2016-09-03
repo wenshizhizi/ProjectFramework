@@ -662,6 +662,7 @@
     <Content Include="scripts\lib\client.common.min.js" />
     <Content Include="scripts\lib\easyui.module.js" />
     <Content Include="scripts\lib\func.module.js" />
+    <Content Include="scripts\lib\jquery.cookie.js" />
     <Content Include="scripts\lib\modules.manager.js" />
     <Content Include="scripts\lib\object.module.js" />
     <Content Include="scripts\lib\tool.module.js" />
