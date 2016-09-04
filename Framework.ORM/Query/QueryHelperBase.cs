@@ -126,7 +126,6 @@ namespace Framework.Dapper
             }
             catch (Exception ex)
             {
-
                 Logs.GetLog().WriteErrorLog(ex);
                 return null;
             }

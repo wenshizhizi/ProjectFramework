@@ -12,9 +12,9 @@ namespace Framework.web.Areas.Admin.Controllers
     public class MainController : SuperController
     {        
         public ActionResult Index()
-        {           
-            
-            return View();
+        {
+            var user = SessionUser;
+            return View("Index", user.User);
         }
 
         /// <summary>

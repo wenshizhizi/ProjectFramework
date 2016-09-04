@@ -129,6 +129,7 @@
     <Content Include="Areas\Admin\Scripts\Main\Index.js" />
     <Content Include="Areas\Admin\Scripts\MenuManage\Index.js" />
     <Content Include="Areas\Admin\Scripts\Menu\Index.js" />
+    <Content Include="Areas\Admin\Scripts\RoleManage\Index.js" />
     <Content Include="Content\home.css" />
     <Content Include="Content\themes\14-15111615263S59.jpg" />
     <Content Include="Content\themes\14-15111615263S591.jpg" />
@@ -628,6 +629,7 @@
     <Compile Include="Areas\Admin\Controllers\MainController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleManageController.cs" />
     <Compile Include="Controllers\APISuperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
@@ -649,6 +651,8 @@
     <Content Include="Areas\Admin\Views\MenuManage\AddButton.cshtml" />
     <Content Include="Areas\Admin\Views\MenuManage\EditButton.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Button.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuManage\EditMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\RoleManage\Index.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="scripts\easyloader.js" />
     <Content Include="scripts\jquery-1.11.3.js" />

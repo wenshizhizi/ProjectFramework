@@ -135,6 +135,25 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
     }));
 
     /**
+     * 查询datagrid数据
+     * @param {type} grid grid对象
+     * @param {type} isSelected 是否选中grid行
+     */
+    function search(grid, isSelected) {
+        var getPager;
+        try {
+            getPager = grid.datagrid('getPager').pagination("select");
+            if (!isSelected) {
+                grid.datagrid("unselectAll");
+            }
+        } catch (e) {
+            throw e;
+        } finally {
+            getPager = null;
+        }
+    }
+
+    /**
      * 弹出消息
      * @param {String} msg 消息
      */
@@ -175,7 +194,7 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
                     beforePageText: '第',//页数文本框前显示的汉字 
                     afterPageText: '页    共 {pages} 页',
                     displayMsg: '当前显示 {from} - {to} 条记录  共{total}条记录',
-                    onSelectPage: callback                    
+                    onSelectPage: callback
                 });
             }
         } catch (e) {
@@ -277,7 +296,7 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
             throw e;
         }
     }
-    
+
     /**
      * 带确认框的树点击事件
      * @param {tree} tree 树
@@ -306,7 +325,7 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
             throw e;
         }
     }
-    
+
     return {
         alertMsg: alertMsg,
         alertErr: alertErr,
@@ -316,6 +335,7 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
         confirmDomain: confirmDomain,
         confirmDomainByMultiRows: confirmDomainByMultiRows,
         checkTreeSelected: checkTreeSelected,
-        confirmTreeNode: confirmTreeNode
+        confirmTreeNode: confirmTreeNode,
+        search: search
     };
 });

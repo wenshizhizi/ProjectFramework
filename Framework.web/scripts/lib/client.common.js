@@ -5,6 +5,10 @@
  */
 (function () {
 
+    //全局对象
+    window.common = {};
+    //通过url请求的参数
+    window.common.requestParam = null;
     //全局配置对象
     window.config = {
         //localstore记录的history的键名字
@@ -19,18 +23,133 @@
         alertDivHTMLString: "<div class='alert_box' style='position:fixed;z-index:1500;width:100%;opacity:1;height:100%;left:0;top:0px;background-color:rgba(68,68,68,0.4);transition:all 0.3s linear'><div class='content' style='width:260px;text-align:center;position:absolute;font-size:14px;left:50%;top:50%; transform:translateY(-50%) translateX(-50%);-webkit-transform:translateY(-50%) translateX(-50%);background-color:#fff;border-radius:10px'><P style='padding:20px 15px; line-height:25px; color:#333;font-size:16px'>{0}<P><div><div>"
     };
 
-    $(function () {
-        window.common.history.pushHistory(window.location.pathname);
-    });
+    (function initExtend() {
 
-    //全局对象
-    window.common = {};
-    //通过url请求的参数
-    window.common.requestParam = null;
+        /**
+        * 
+        * 格式化字符串
+        * 
+        * @method format     
+        * @author [杨瑜堃]
+        * @version 1.0.1
+        * @param {Stringp[]} args 要格式化的替换值数组
+        * @returns {String} 格式化结果 
+        * 
+        * @example
+        * 
+        * "这个就是格式化字符串的列子:{0}".format("列子")
+        */
+        String.prototype.format = function (args) {
+            var result = this;
+            if (arguments.length > 0) {
+                if (arguments.length == 1 && typeof (args) == "object") {
+                    for (var key in args) {
+                        if (args[key] != undefined) {
+                            var reg = new RegExp("({)" + key + "(})", "g");
+                            result = result.replace(reg, args[key]);
+                        }
+                    }
+                }
+                else {
+                    for (var i = 0; i < arguments.length; i++) {
+                        if (arguments[i] != undefined) {
+                            var reg = new RegExp("({)" + i + "(})", "g");
+                            result = result.replace(reg, arguments[i]);
+                        }
+                    }
+                }
+            }
+            return result;
+        };
+
+        /**
+        * 
+        * 对Date的扩展，将 Date 转化为指定格式的String
+        * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+        * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
+        * 
+        * @for Date
+        * @author [杨瑜堃]
+        * @version 1.0.1
+        * @param {String} fmt 格式化字符串
+        * @returns {String} 结果 
+        * 
+        * @example
+        *  
+        * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+        * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
+        */
+        Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "h+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            for (var time in o) {
+                if (isNaN(o[time])) {
+                    return "";
+                }
+            }
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+
+        /* 
+        *  删除数组元素:Array.removeArr(index) 
+        */
+        Array.prototype.removeAt = function (index) {
+            if (isNaN(index) || index >= this.length) { return false; }
+            this.splice(index, 1);
+        }
+
+        /* 
+        *  插入数组元素:Array.insertArr(dx) 
+        */
+        Array.prototype.insertAt = function (index, item) {
+            this.splice(index, 0, item);
+        };
+
+        /**
+        * 弹出消息框
+        * @param {String} msg 消息
+        * @param {Function} fn 可选：显示后回调的函数
+        * @param {Number} duration 显示的时间
+        */
+        window.alert = function AlertWindow(msg, fn, duration) {
+            duration = isNaN(duration) ? 2000 : duration;
+
+            if ($(".alert_box").length) {
+                $(".alert_box .content p:first").text(msg).parents(".alert_box").css({ "opacity": "1", "width": "100%", "height": "100%" });
+            }
+            else {
+                var win = $(window.config.alertDivHTMLString.format(msg));
+                $("body").append(win);
+            }
+            setTimeout(function () {
+                var d = 0.7;
+                $(".alert_box")[0].style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+                $(".alert_box")[0].style.opacity = '0';
+                if (fn) fn();
+                setTimeout(function () { $(".alert_box").remove(); }, d * 1000);
+            }, 2000);
+        };
+    })();
+
     //提供浏览历史的相关方法
     window.common.history = new function () {
         //是否支持LocalStorage
         var isSupportLocalStorage = window.localStorage != undefined && window.localStorage != null;
+
+        //指定系统键的返回地址（主要针对的是安卓的返回键）
+        var backUrl = null;
 
         /**
          * 获取上一个浏览记录
@@ -96,7 +215,7 @@
          */
         function resetLocalStorage(obj) {
             if (isSupportLocalStorage) {
-                window.localStorage[window.config.historyLocalStoreName] = JSON.stringify(obj);
+                window.localStorage.setItem(window.config.historyLocalStoreName, JSON.stringify(obj));
             }
         }
 
@@ -106,8 +225,9 @@
          */
         function getLocalStorage() {
             if (isSupportLocalStorage) {
-                if (window.localStorage[window.config.historyLocalStoreName]) {
-                    return JSON.parse(window.localStorage[window.config.historyLocalStoreName]);
+                var items = window.localStorage.getItem(window.config.historyLocalStoreName);
+                if (items) {
+                    return JSON.parse(items);
                 } else {
                     return new Array();
                 }
@@ -122,7 +242,7 @@
                 var url/*上次浏览*/ = getPrev();
                 if (url != null) {
                     removeLast();//移除最后浏览（当前页）                    
-                    window.location = url;
+                    window.location.href = url;
                 }
             }
         }
@@ -135,35 +255,56 @@
             if (isSupportLocalStorage) {
                 var _history = getLocalStorage();
                 if (_history.length > 0) {
-                    if (_history[_history.length - 1] !== url) {
-                        _history.push(url);
-                    } else {
-                        return;
+                    for (var i = _history.length - 1; i >= 0; i--) {
+                        if (_history[i] === url) {
+                            _history.removeAt(i);
+                            i--;
+                        }
                     }
+                    _history.push(url);
                 } else {
                     _history.push(url);
                 }
                 resetLocalStorage(_history);
+            } else {
+                return alert("浏览器版本太老，请升级浏览器");
             }
         }
 
-        function doState(e) {
-            debugger
+        /**
+         * 设置物理返回键（针对安卓的返回键）的地址
+         * @method setBackURL    
+         * @author [杨瑜堃]
+         * @version 1.0.1
+         * @param {String} url
+         */
+        function setBackURL(url) {
+            backUrl = url;
+            if (history && history.pushState) {
+                window.history.pushState(null, null, null);
+                window.onpopstate = function doState(e) {
+                    //移除当前路径
+                    removeLast();
+                    //跳转到指定路径
+                    window.location.href = backUrl;
+                };
+            } else {
+                return alert("浏览器版本太老，请升级浏览器");
+            }
         }
-
-        if (history && history.pushState) {
-            window.onpopstate = doState.bind(getLocalStorage);
-        }
-
-
 
         return {
             back: back,
-            pushHistory: pushHistory
+            pushHistory: pushHistory,
+            setBackURL: setBackURL
         };
     };
 
+    $(function onDocumentReady() {
+        window.common.history.pushHistory(window.location.pathname);
+    });
 
+    //post内部使用的一些方法
     window.$_c4 = {
         /**
         * 
@@ -253,31 +394,6 @@
     };
 
     /**
-     * 弹出消息框
-     * @param {String} msg 消息
-     * @param {Function} fn 可选：显示后回调的函数
-     * @param {Number} duration 显示的时间
-     */
-    window.alert = function AlertWindow(msg, fn, duration) {
-        duration = isNaN(duration) ? 2000 : duration;
-
-        if ($(".alert_box").length) {
-            $(".alert_box .content p:first").text(msg).parents(".alert_box").css({ "opacity": "1", "width": "100%", "height": "100%" });
-        }
-        else {
-            var win = $(window.config.alertDivHTMLString.format(msg));
-            $("body").append(win);
-        }
-        setTimeout(function () {
-            var d = 0.7;
-            $(".alert_box")[0].style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
-            $(".alert_box")[0].style.opacity = '0';
-            if (fn) fn();
-            setTimeout(function () { $(".alert_box").remove(); }, d * 1000);
-        }, 2000);
-    };
-
-    /**
      * ajax post 
      * @param {String} url 提交的地址
      * @param {Json} data 提交的数据
@@ -357,46 +473,6 @@
     };
 
     /**
-     * 
-     * 对Date的扩展，将 Date 转化为指定格式的String
-     * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
-     * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
-     * 
-     * @for Date
-     * @author [杨瑜堃]
-     * @version 1.0.1
-     * @param {String} fmt 格式化字符串
-     * @returns {String} 结果 
-     * 
-     * @example
-     *  
-     * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
-     * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-     */
-    Date.prototype.Format = function (fmt) {
-        var o = {
-            "M+": this.getMonth() + 1, //月份 
-            "d+": this.getDate(), //日 
-            "h+": this.getHours(), //小时 
-            "m+": this.getMinutes(), //分 
-            "s+": this.getSeconds(), //秒 
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-            "S": this.getMilliseconds() //毫秒 
-        };
-        for (var time in o) {
-            if (isNaN(o[time])) {
-                return "";
-            }
-        }
-        if (/(y+)/.test(fmt))
-            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-            if (new RegExp("(" + k + ")").test(fmt))
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        return fmt;
-    };
-
-    /**
      * 带确认取消按钮的确认框
      * @param {String} msg 提示的信息
      * @param {Object} okOptopn 确认按钮配置，格式如下：{"text":"确定按钮",fn:function(){ //这里是按了确定后触发的事件 }}
@@ -472,41 +548,5 @@
         document.body.appendChild(divBackground);
     };
 
-    /**
-     * 
-     * 格式化字符串
-     * 
-     * @method format     
-     * @author [杨瑜堃]
-     * @version 1.0.1
-     * @param {Stringp[]} args 要格式化的替换值数组
-     * @returns {String} 格式化结果 
-     * 
-     * @example
-     * 
-     * "这个就是格式化字符串的列子:{0}".format("列子")
-     */
-    String.prototype.format = function (args) {
-        var result = this;
-        if (arguments.length > 0) {
-            if (arguments.length == 1 && typeof (args) == "object") {
-                for (var key in args) {
-                    if (args[key] != undefined) {
-                        var reg = new RegExp("({)" + key + "(})", "g");
-                        result = result.replace(reg, args[key]);
-                    }
-                }
-            }
-            else {
-                for (var i = 0; i < arguments.length; i++) {
-                    if (arguments[i] != undefined) {
-                        var reg = new RegExp("({)" + i + "(})", "g");
-                        result = result.replace(reg, arguments[i]);
-                    }
-                }
-            }
-        }
-        return result;
-    };
 }());
 

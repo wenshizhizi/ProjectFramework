@@ -32,6 +32,7 @@
      * @param {string} url
      */
     function choseTab(title, tab, url) {
+        debugger
         var extab = tab.tabs("getTab", title);
         if (!f.definededAndNotNull(extab)) {
             var count = tab.tabs("tabs").length;

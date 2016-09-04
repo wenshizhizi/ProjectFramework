@@ -40,7 +40,7 @@ namespace Framework.web.Controllers
         /// <param name="requestContext"></param>
         protected override void Initialize(RequestContext requestContext)
         {
-            var session = Session == null ? null : Session[SessionInfo.SESSION_NAME] as SessionInfo;
+            var session = requestContext.HttpContext.Session == null ? null : requestContext.HttpContext.Session[SessionInfo.SESSION_NAME] as SessionInfo;
             SessionUser = session != null ? session.SessionUser : null;
 
             //ajax提交上来的请求

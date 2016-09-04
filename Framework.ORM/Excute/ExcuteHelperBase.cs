@@ -97,6 +97,33 @@ namespace Framework.Dapper
             }
         }
 
+        public sealed override int ExcuteTransaction(string sql)
+        {
+            SqlConnection conn = null;
+            IDbTransaction tran = null;
+            try
+            {
+                conn = GetSqlConnection();
+                if (conn == null) throw new ApplicationException("未获取到连接对象。");
+                tran = conn.BeginTransaction();
+                return DoExcuteTransaction(conn,tran,sql);
+            }
+            catch (Exception ex)
+            {
+                Logs.GetLog().WriteErrorLog(ex);
+                if (tran != null)
+                {
+                    tran.Rollback();
+                }
+                return 0;
+            }
+            finally
+            {
+                if (tran != null) tran.Dispose();
+                CloseConnect(conn);
+            }
+        }
+
         public override sealed int Insert(string sql, object param)
         {
             SqlConnection conn = null;
@@ -183,7 +210,7 @@ namespace Framework.Dapper
                 CloseConnect(conn);
             }
         }
-
+        
         protected abstract int DoInsertSingle<T>(SqlConnection conn, T t);
         protected abstract int DoInsertMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t);
         protected abstract int DoInsert(SqlConnection conn, string sql, object param);
@@ -191,5 +218,6 @@ namespace Framework.Dapper
         protected abstract int DoUpdateSingle<T>(SqlConnection conn, T t, string where);
         protected abstract int DoUpdateMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t, string where);
         protected abstract int DoUpdate(SqlConnection conn, string sql, object param);
+        protected abstract int DoExcuteTransaction(SqlConnection conn, IDbTransaction tran, string sql);
     }
 }

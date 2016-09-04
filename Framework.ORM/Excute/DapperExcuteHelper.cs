@@ -11,6 +11,20 @@ namespace Framework.Dapper
 {
     public class DapperExcuteHelper : ExcuteHelperBase
     {
+        protected override int DoExcuteTransaction(SqlConnection conn, IDbTransaction tran, string sql)
+        {
+            int ret = conn.Execute(sql, null, tran, null, CommandType.Text);
+            if (ret > 0)
+            {
+                tran.Commit();
+            }
+            else
+            {
+                tran.Rollback();
+            }
+            return ret;
+        }
+
         protected override int DoInsert(SqlConnection conn, string sql, object param)
         {
             return conn.Execute(sql, param, null, null, System.Data.CommandType.Text);

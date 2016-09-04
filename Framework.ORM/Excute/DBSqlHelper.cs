@@ -99,5 +99,22 @@ namespace Framework.Dapper
             mySQL.Append(where + ";");
             return mySQL.ToString();
         }
+
+        /// <summary>
+        /// 获取物理删除的语句
+        /// </summary>
+        /// <typeparam name="T">要删除的对象类型</typeparam>
+        /// <param name="t">要删除的对象</param>
+        /// <param name="where">删除的条件</param>
+        /// <returns>删除语句</returns>
+        public static string GetDeleteSQL<T>(T t,string where)
+        {
+            StringBuilder mySQL = new StringBuilder();
+            var tbName = t.GetType().GetCustomAttribute<Framework.DTO.TableInfo>().TableName;
+            mySQL.AppendFormat("DELETE [{0}]",tbName);
+            mySQL.Append(where.StartsWith(" ") ? "" : " ");
+            mySQL.Append(where + ";");
+            return mySQL.ToString();
+        }
     }
 }

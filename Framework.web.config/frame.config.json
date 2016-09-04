@@ -1,7 +1,7 @@
 ﻿{
   "logPath": "SystemLogs/Log\\",
-  "connectionString": "server=192.168.1.5;database=EHECD_VoteSystem;User = sa; Password = Test1234;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;",
-  "validateCodeRandomArray": "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0",
+  "connectionString": "server=10.2.1.199;database=EHECD_VoteSystem;User = sa; Password = Test1234;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;",
+  "validateCodeRandomArray": "1,2,3,4,5,6,7,8,9,0",
   "randomCodeAngle": 10,
   "VImgCodeMaxCount": 3,
   "VImgCodeTimeOut": 10,
