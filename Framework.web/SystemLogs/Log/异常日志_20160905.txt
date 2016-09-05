@@ -1,0 +1,41 @@
+﻿
+===================================================================================================
+异常时间：2016-09-05 10:57:25,029 
+异常级别：ERROR 
+引发类型：System.Data.SqlClient.SqlConnection
+所在方法：OnError
+异常简述：'EHECD_Privilege' 附近有语法错误。
+字符串 '));' 后的引号不完整。
+详细信息：
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Dapper.SqlMapper.ExecuteCommand(IDbConnection cnn, CommandDefinition& command, Action`2 paramReader)
+   在 Dapper.SqlMapper.ExecuteImpl(IDbConnection cnn, CommandDefinition& command)
+   在 Dapper.SqlMapper.Execute(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   在 Framework.Dapper.DapperExcuteHelper.DoExcuteTransaction(SqlConnection conn, IDbTransaction tran, String sql) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Excute\DapperExcuteHelper.cs:行号 16
+   在 Framework.Dapper.ExcuteHelperBase.ExcuteTransaction(String sql) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Excute\ExcuteHelperBase.cs:行号 109
+
+===================================================================================================
+异常时间：2016-09-05 10:57:29,531 
+异常级别：ERROR 
+引发类型：System.Data.SqlClient.SqlConnection
+所在方法：OnError
+异常简述：'DEDELETE' 附近有语法错误。
+详细信息：
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteNonQueryTds(String methodName, Boolean async, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Dapper.SqlMapper.ExecuteCommand(IDbConnection cnn, CommandDefinition& command, Action`2 paramReader)
+   在 Dapper.SqlMapper.ExecuteImpl(IDbConnection cnn, CommandDefinition& command)
+   在 Dapper.SqlMapper.Execute(IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
+   在 Framework.Dapper.DapperExcuteHelper.DoExcuteTransaction(SqlConnection conn, IDbTransaction tran, String sql) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Excute\DapperExcuteHelper.cs:行号 16
+   在 Framework.Dapper.ExcuteHelperBase.ExcuteTransaction(String sql) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Excute\ExcuteHelperBase.cs:行号 109

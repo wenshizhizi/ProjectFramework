@@ -299,7 +299,7 @@
             setBackURL: setBackURL
         };
     };
-
+    
     $(function onDocumentReady() {
         window.common.history.pushHistory(window.location.pathname);
     });
