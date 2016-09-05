@@ -11,5 +11,8 @@ namespace Framework.BLL
     public abstract class IRoleManager : BaseBll
     {
         public abstract PagingRet<EHECD_RoleDTO> LoadRoles(dynamic where);
+
+        public abstract bool AddRole(dynamic data);
+        public abstract bool EditRole(EHECD_RoleDTO role);
     }
 }

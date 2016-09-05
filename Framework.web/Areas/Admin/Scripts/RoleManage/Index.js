@@ -4,7 +4,9 @@
     var f = modules.get("func");
     var grid = $("#role_grid");
 
-
+    /**
+     * 初始化事件
+     */
     function initEvent() {
         $("a[data-id='search_rol_button']").click(function () {
             eui.search(grid, true);
@@ -14,11 +16,16 @@
         $("a[data-id='del_role_button']").click(delRole);
     }
 
+    /**
+     * 载入角色列表
+     * @param {Number} pageNumber 页码
+     * @param {Number} pageSize 每页显示条数
+     */
     function loadRole(pageNumber, pageSize) {
         try {
-            var param = $("#role_form").serializeObject();
-            param.pageNumber = pageNumber;
-            param.pageSize = pageSize;
+            var param/*查询参数*/ = $("#role_form").serializeObject();
+            param.pageNumber/*当前页码*/ = pageNumber;
+            param.pageSize/*每页显示条数*/ = pageSize;
             f.post("/Admin/RoleManage/LoadRoles", param, function (r) {
                 grid.datagrid("loadData", r.Data.Result);
                 grid.datagrid("getPager").pagination({
@@ -34,12 +41,109 @@
         }
     }
 
+    /**
+     * 添加角色
+     */
     function addRole() {
-        alert("addRole");
+        var div = $("<div/>");
+        div.dialog({
+            title: "添加角色",
+            width: 400,
+            height: 200,
+            cache: false,
+            href: '/Admin/RoleManage/ToAddRole',
+            modal: true,
+            collapsible: false,
+            minimizable: false,
+            maximizable: false,
+            resizable: false,
+            buttons: [{
+                text: '保存',
+                iconCls: 'icon-save',
+                handler: function () {
+                    if ($("#add_role_form").form("validate")) {
+                        debugger
+                        var json = $("#add_role_form").serializeObject();
+                        f.post("/Admin/RoleManage/AddRole", json,
+                            function (ret) {
+                                eui.alertMsg("添加角色成功");
+                                eui.search(grid,false);
+                                $(div).dialog("close");
+                            }, function (ret) {
+                                eui.alertErr(ret.Msg);
+                            });
+                    }
+                }
+            }, {
+                text: '关闭',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $(div).dialog("close");
+                }
+            }],
+            onClose: function () {
+                $(div).dialog("destroy");
+            },
+            onLoad: function () {
+                //var form = $("#nodata");
+                //if (form.length > 0) {
+                //    div.parent().find("a>span")[0].remove();
+                //}
+            }
+        });
     }
 
     function editRole() {
-        alert("editRole");
+        eui.checkSelectedRow(grid, function (selectedRow) {
+            var div = $("<div/>");
+            div.dialog({
+                title: "编辑角色",
+                width: 400,
+                height: 200,
+                cache: false,
+                href: '/Admin/RoleManage/ToEditRole',
+                queryParams:selectedRow,
+                modal: true,
+                collapsible: false,
+                minimizable: false,
+                maximizable: false,
+                resizable: false,
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-save',
+                    handler: function () {
+                        if ($("#edit_role_form").form("validate")) {
+                            debugger
+                            var json = $("#edit_role_form").serializeObject();
+                            json.ID = selectedRow.ID;                            
+                            f.post("/Admin/RoleManage/EditRole", json,
+                                function (ret) {
+                                    eui.alertMsg("编辑角色成功");
+                                    eui.search(grid, true);
+                                    $(div).dialog("close");
+                                }, function (ret) {
+                                    eui.alertErr(ret.Msg);
+                                });
+                        }
+                    }
+                }, {
+                    text: '关闭',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        $(div).dialog("close");
+                    }
+                }],
+                onClose: function () {
+                    $(div).dialog("destroy");
+                },
+                onLoad: function () {
+                    var form = $("#nodata");
+                    if (form.length > 0) {
+                        div.parent().find("a>span")[0].remove();
+                    }
+                }
+            });
+        }, "请选择您要编辑的角色");
     }
 
     function delRole() {
@@ -55,6 +159,7 @@
             fitColumns: true,
             pagination: true,
             rownumbers: true,
+            singleSelect:true,
             columns: [[
             { field: 'checkbox', checkbox: true },
             { field: 'sRoleName', title: '角色名字', align: 'center', width: 100 },

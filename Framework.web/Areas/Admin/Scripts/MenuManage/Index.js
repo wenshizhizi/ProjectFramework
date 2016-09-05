@@ -172,7 +172,7 @@
      * @param {objec} node 菜单节点
      */
     function createEditMenuDialog(node) {
-        try {
+        try {            
             var div = $("<div/>");
             div.dialog({
                 title: "编辑菜单",
@@ -215,8 +215,7 @@
                 onClose: function () {
                     $(div).dialog("destroy");
                 },
-                onLoad: function () {
-                    debugger
+                onLoad: function () {                    
                     var form = $("#nodata");
                     if (form.length > 0) {
                         div.parent().find("a>span")[0].remove();
@@ -382,8 +381,7 @@
                 onClose: function () {
                     $(div).dialog("destroy");
                 },
-                onLoad: function () {
-                    debugger
+                onLoad: function () {                    
                     var form = $("#nodata");
                     if (form.length > 0) {
                         div.parent().find("a>span")[0].remove();

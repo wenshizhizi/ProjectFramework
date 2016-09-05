@@ -125,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\gridtable.css" />
     <Content Include="Areas\Admin\Scripts\Login\Index.js" />
     <Content Include="Areas\Admin\Scripts\Main\Index.js" />
     <Content Include="Areas\Admin\Scripts\MenuManage\Index.js" />
@@ -653,6 +654,8 @@
     <Content Include="Areas\Admin\Views\Shared\_Button.cshtml" />
     <Content Include="Areas\Admin\Views\MenuManage\EditMenu.cshtml" />
     <Content Include="Areas\Admin\Views\RoleManage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\RoleManage\AddRole.cshtml" />
+    <Content Include="Areas\Admin\Views\RoleManage\EditRole.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="scripts\jquery-1.11.3.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
