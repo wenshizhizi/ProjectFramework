@@ -429,6 +429,12 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
                         tool.hide();
                     }
                 }
+                debugger
+
+                if (json.indexOf("<script>") >= 0) {
+                    
+                    return;
+                }
 
                 var result = JSON.parse(json || null);
                 try {

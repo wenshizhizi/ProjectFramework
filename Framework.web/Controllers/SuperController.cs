@@ -64,11 +64,12 @@ namespace Framework.web.Controllers
             {
                 var crtl = filterContext.HttpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
 
-                //排出掉登录和获取验证码的rote
+                //排除掉登录和获取验证码的控制器
                 if (crtl != "Login" && crtl != "ValidateCode")
                 {
                     string url = new UrlHelper(filterContext.RequestContext).Action("Index", "Login");
                     //防止ajax调用分部视图出现登陆超时，在局部跳转URL的问题   
+                    filterContext.HttpContext.Response.ContentType = "text/html";
                     filterContext.HttpContext.Response.Write("<script> $.messager.alert('登录超时','抱歉，您已登录超时，系统将于3秒后返回登录页重新登录','info');setTimeout(function(){ window.location.href='" + url + "';},3000); </script>");
                     filterContext.HttpContext.Response.End();
                 }

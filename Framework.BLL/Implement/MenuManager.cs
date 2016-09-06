@@ -89,7 +89,8 @@ namespace Framework.BLL
             foreach (var item in ids)
             {
                 //2.删除菜单数据
-                sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_FunctionMenuDTO>(menu, string.Format("where ID = '{0}'", item)));
+                //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_FunctionMenuDTO>(menu, string.Format("where ID = '{0}'", item)));
+                sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_FunctionMenuDTO>(new EHECD_FunctionMenuDTO { bIsDeleted = true }, string.Format("where ID = '{0}'", item)));
 
                 //3.找到菜单的按钮信息
                 var menus = helper.QueryList<EHECD_MenuButtonDTO>(@"WITH CTE AS (
@@ -113,14 +114,17 @@ namespace Framework.BLL
                 foreach (var button in menus)
                 {
                     //4.删除对应的菜单按钮
-                    sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_MenuButtonDTO>(button, string.Format("where ID = '{0}'", button.ID.ToString())));
+                    //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_MenuButtonDTO>(button, string.Format("where ID = '{0}'", button.ID.ToString())));
+                    sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_MenuButtonDTO>(new EHECD_MenuButtonDTO { bIsDeleted = true }, string.Format("where ID = '{0}'", button.ID.ToString())));
 
                     //5.删除对应这个按钮在特权表中分发给其他所有者的特权信息（如分发给角色和指定用户的按钮特权）
-                    sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'role' AND sBelong = 'role'/*分发给角色的*/) or (sPrivilegeMaster = 'user' AND sBelong = 'user'/*分发给用户的*/)) AND sPrivilegeAccess = 'button' and sPrivilegeAccessValue = '{0}'", button.ID.ToString())));
+                    //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'role' AND sBelong = 'role'/*分发给角色的*/) or (sPrivilegeMaster = 'user' AND sBelong = 'user'/*分发给用户的*/)) AND sPrivilegeAccess = 'button' and sPrivilegeAccessValue = '{0}'", button.ID.ToString())));
+                    sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO { bIsDeleted = true }, string.Format("where ((sPrivilegeMaster = 'role' AND sBelong = 'role'/*分发给角色的*/) or (sPrivilegeMaster = 'user' AND sBelong = 'user'/*分发给用户的*/)) AND sPrivilegeAccess = 'button' and sPrivilegeAccessValue = '{0}'", button.ID.ToString())));
                 }
 
                 //6.解除菜单对应的特权信息
-                sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'menu' AND sPrivilegeMasterValue = '{0}') or (sPrivilegeAccess = 'menu' and sPrivilegeAccessValue = '{0}') or (sBelong = 'menu' and sBelongValue = '{0}'))", item)));
+                //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'menu' AND sPrivilegeMasterValue = '{0}') or (sPrivilegeAccess = 'menu' and sPrivilegeAccessValue = '{0}') or (sBelong = 'menu' and sBelongValue = '{0}'))", item)));
+                sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO { bIsDeleted = true }, string.Format("where ((sPrivilegeMaster = 'menu' AND sPrivilegeMasterValue = '{0}') or (sPrivilegeAccess = 'menu' and sPrivilegeAccessValue = '{0}') or (sBelong = 'menu' and sBelongValue = '{0}'))", item)));
             }
 
             //执行删除

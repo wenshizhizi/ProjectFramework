@@ -19,6 +19,7 @@ namespace Framework.web.Areas.Admin.Controllers
         public RedirectResult ExitSystem()
         {
             SetSessionInfo(SessionInfo.USER_SESSION_NAME,null);
+            SetSessionInfo(SessionInfo.USER_MENUS, null);
             return Redirect("/Admin/Login");
         }
         /// <summary>

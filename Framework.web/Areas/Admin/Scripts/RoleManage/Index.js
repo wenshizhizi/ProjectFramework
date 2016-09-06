@@ -26,7 +26,7 @@
             var param/*查询参数*/ = $("#role_form").serializeObject();
             param.pageNumber/*当前页码*/ = pageNumber;
             param.pageSize/*每页显示条数*/ = pageSize;
-            f.post("/Admin/RoleManage/LoadRoles", param, function (r) {
+            f.post("/Admin/RoleManage/LoadRoles", param, function (r) {                
                 grid.datagrid("loadData", r.Data.Result);
                 grid.datagrid("getPager").pagination({
                     pageNumber: pageNumber,

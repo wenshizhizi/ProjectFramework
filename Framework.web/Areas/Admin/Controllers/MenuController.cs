@@ -14,8 +14,15 @@ namespace Framework.web.Areas.Admin.Controllers
         // GET: Admin/Menu
         public ActionResult Index()
         {
-            var userRoleMenu = (UserRoleMenuInfo)Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/];
-            return View(userRoleMenu);
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
+            if (userRoleMenu != null)
+            {
+                return View(userRoleMenu);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

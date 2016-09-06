@@ -12,11 +12,19 @@
             onlyLeafCheck: true,
             checkbox: false,
             lines: true,
+            animate: true,
             onContextMenu: function (e, node) {
                 //不要执行与事件关联的默认动作
                 e.preventDefault();
                 //创建菜单
                 createMenu(e, node);
+            },
+            onDblClick: function (node) {
+                if (node.state === "closed"){
+                    allMenu.tree("expand", node.target);
+                } else {
+                    allMenu.tree("collapse", node.target);
+                }
             }
         });
 
@@ -172,7 +180,7 @@
      * @param {objec} node 菜单节点
      */
     function createEditMenuDialog(node) {
-        try {            
+        try {
             var div = $("<div/>");
             div.dialog({
                 title: "编辑菜单",
@@ -215,7 +223,7 @@
                 onClose: function () {
                     $(div).dialog("destroy");
                 },
-                onLoad: function () {                    
+                onLoad: function () {
                     var form = $("#nodata");
                     if (form.length > 0) {
                         div.parent().find("a>span")[0].remove();
@@ -381,7 +389,7 @@
                 onClose: function () {
                     $(div).dialog("destroy");
                 },
-                onLoad: function () {                    
+                onLoad: function () {
                     var form = $("#nodata");
                     if (form.length > 0) {
                         div.parent().find("a>span")[0].remove();

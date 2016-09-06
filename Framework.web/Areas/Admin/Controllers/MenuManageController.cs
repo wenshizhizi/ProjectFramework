@@ -74,14 +74,13 @@ namespace Framework.web.Areas.Admin.Controllers
         /// </summary>
         public void AddMenu()
         {
-            //传入的菜单参数
-            EHECD_FunctionMenuDTO menu = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.data.ToString());
+            EHECD_FunctionMenuDTO menu/*要添加的菜单*/ = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.data.ToString());
 
             //菜单业务对象
             IMenuManager menubll = DI.DIEntity.GetInstance().GetImpl<IMenuManager>();
 
             //添加菜单
-            var ret = menubll.AddMenu(menu);
+            var ret = menubll.AddMenu(menu/*要添加的菜单*/);
 
             if (ret != null)
             {
@@ -90,14 +89,14 @@ namespace Framework.web.Areas.Admin.Controllers
                 {
                     id = ret.ID,
                     text = ret.sMenuName,
-                    state = "open",
+                    state = "closed",
                     @checked = false,
-                    attributes = new { type = "menu", url = ret.sUrl },
+                    attributes = new { type = "menu", url = ret.sUrl, order = ret.iOrder },
                     children = new object[0]
                 };
 
                 //从session获取用户的权限和菜单等信息
-                var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+                var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
 
                 if (userRoleMenu != null)
                 {
@@ -122,9 +121,7 @@ namespace Framework.web.Areas.Admin.Controllers
 
                 //重新获取菜单结构
                 userRoleMenu.UserMenu = InitMenu(userRoleMenu.AllMenu);
-
-                Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
-
+                SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);
                 result.Succeeded = true;
             }
             else
@@ -139,7 +136,7 @@ namespace Framework.web.Areas.Admin.Controllers
         /// </summary>
         public void AddButton()
         {
-            var requestData = JSONHelper.GetModel<Dictionary<string, object>>(RequestParameters.data.ToString());
+            var requestData = JSONHelper.GetModel<Dictionary<string, object>>(RequestParameters.dataStr);
             EHECD_MenuButtonDTO addbutton = JSONHelper.GetModel<EHECD_MenuButtonDTO>(requestData["btn"].ToString());
             string menuID = requestData["menuID"].ToString();
             //菜单业务对象
@@ -149,10 +146,11 @@ namespace Framework.web.Areas.Admin.Controllers
             if (addbutton != null)
             {
                 //从session获取用户的权限和菜单等信息
-                var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+                var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
 
                 if (userRoleMenu != null)
                 {
+                    //构建返回给界面的节点信息
                     result.Data = new
                     {
                         id = addbutton.ID,
@@ -160,9 +158,10 @@ namespace Framework.web.Areas.Admin.Controllers
                         attributes = new { type = "btn" },
                         text = addbutton.sButtonName,
                         iconCls = addbutton.sIcon,
-                        state = "open"
+                        state = "closed"
                     };
 
+                    //从会话用户菜单中找到这个按钮所属的按钮并将其添加进去
                     Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
                     {
                         if (userRoleMenu.AllMenu[index].ID.ToString() == menuID)
@@ -182,9 +181,7 @@ namespace Framework.web.Areas.Admin.Controllers
 
                     //重新获取菜单结构
                     userRoleMenu.UserMenu = InitMenu(userRoleMenu.AllMenu);
-
-                    Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
-
+                    SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);
                     result.Succeeded = true;
                 }
                 else
@@ -207,7 +204,6 @@ namespace Framework.web.Areas.Admin.Controllers
         public void EditButton()
         {
             EHECD_MenuButtonDTO editbutton = JSONHelper.GetModel<EHECD_MenuButtonDTO>(RequestParameters.dataStr);
-
             editbutton = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditButton(editbutton);
 
             if (editbutton != null)
@@ -220,19 +216,16 @@ namespace Framework.web.Areas.Admin.Controllers
                     sDataID = editbutton.sDataID,
                     sIcon = editbutton.sIcon
                 };
-
-                UpdateSessionMenuButton(ret);
-
-                result.Data = new
+                result.Data/*构建返回的按钮节点数据*/ = new
                 {
                     id = ret.ID,
                     @checked = true,
                     attributes = new { type = "btn" },
                     text = ret.sButtonName,
                     iconCls = ret.sIcon,
-                    state = "open"
+                    state = "closed"
                 };
-
+                UpdateSessionMenuButton(ret/*更新用户会话信息中的按钮信息*/);
                 result.Succeeded = true;
             }
             else
@@ -251,16 +244,14 @@ namespace Framework.web.Areas.Admin.Controllers
             var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditMenu(menu);
             if (editmenu != null)
             {
-                UpdateSessionMenu(editmenu);
-
                 result.Data = new
                 {
                     id = editmenu.ID,
                     attributes = new { type = "menu", url = editmenu.sUrl },
                     text = editmenu.sMenuName
                 };
-
                 result.Succeeded = true;
+                UpdateSessionMenu(editmenu);
             }
             else
             {
@@ -290,7 +281,7 @@ namespace Framework.web.Areas.Admin.Controllers
 
         #endregion
 
-        #region 私有方法（主要是操作session中的菜单哪一类的）
+        #region 创建界面上的菜单树节点数据
         //创建菜单节点数据
         private dynamic CreateMenuData(IList<UserMenu> t)
         {
@@ -315,7 +306,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         text = item.sMenuName,
                         attributes = new { type = "menu", url = "", order = item.iOrder },
                         @checked = true,
-                        state = "closed",
+                        state = "open",
                         children = child
                     });
                 }
@@ -378,7 +369,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         attributes = new { type = "btn", order = t[i].iOrder },
                         text = t[i].sButtonName,
                         iconCls = t[i].sIcon,
-                        state = "open"
+                        state = "closed"
                     });
                 }
                 return ret.OrderBy(km => ((dynamic)((dynamic)km).attributes).order).ToList();
@@ -388,6 +379,9 @@ namespace Framework.web.Areas.Admin.Controllers
                 return new List<object>();
             }
         }
+        #endregion
+
+        #region 私有方法（主要是操作session中的菜单哪一类的）
 
         //重新构建菜单层级结构
         private IList<UserMenu> InitMenu(IList<UserMenu> t)
@@ -410,7 +404,7 @@ namespace Framework.web.Areas.Admin.Controllers
             return userMs.OrderBy(m => m.iOrder).ToList();
         }
 
-        // 递归从集合中载入指定菜单的下级菜单，直到没有下级菜单        
+        // 给指定菜单重新设置其层级关系
         private void RecursionLoadLevelUserMenu(IList<UserMenu> t, UserMenu m)
         {
             Parallel.For(0, t.Count, index =>
@@ -510,7 +504,7 @@ namespace Framework.web.Areas.Admin.Controllers
             }
         }
 
-        //更新会话中的菜单
+        //更新会话中的用户菜单
         private void UpdateSessionMenu(EHECD_FunctionMenuDTO editmenu)
         {
             var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
@@ -526,7 +520,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         break;
                     }
                 }
-                var userMenu = InitMenu(userRoleMenu.AllMenu);
+                var userMenu = InitMenu(userRoleMenu.AllMenu/*重构菜单的层级关系*/);
                 userRoleMenu.UserMenu = userMenu;
                 SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);
             }
@@ -536,33 +530,31 @@ namespace Framework.web.Areas.Admin.Controllers
             }
         }
 
-        //删除session中的menu
+        //删除session中指定ID的menu
         private void DeleteSessionMenu(string v)
         {
             var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
                 var temp/*载入要删除的菜单（他的所有有层级关系的下级）*/ = RecursionLoadMenus(userRoleMenu.AllMenu, new UserMenu { ID = Guid.Parse(v) });
-                temp.Add(new UserMenu { ID = Guid.Parse(v) });
+                temp.Add(new UserMenu { ID = Guid.Parse(v)/*连要删除的菜单一起放入删除列表*/ });
 
                 for (int i = 0; i < temp.Count; i++)
                 {
                     var id = temp[i].ID;
 
-                    Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                    //将不要的菜单移除
+                    for (int index = 0; index < userRoleMenu.AllMenu.Count; index++)
                     {
                         if (userRoleMenu.AllMenu[index].ID == id)
                         {
                             userRoleMenu.AllMenu.RemoveAt(index);
-                            state.Stop();
-                            return;
                         }
-                    });
+                    }
                 }
-
-                var userMenu = InitMenu(userRoleMenu.AllMenu);
+                var userMenu = InitMenu(userRoleMenu.AllMenu/*重构菜单的层级关系*/);
                 userRoleMenu.UserMenu = userMenu;
-                Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
+                SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);
             }
             else
             {
@@ -570,24 +562,18 @@ namespace Framework.web.Areas.Admin.Controllers
             }
         }
 
-        /// <summary>
-        /// 递归载入菜单
-        /// </summary>
-        /// <param name="t"></param>
-        /// <param name="m"></param>
-        /// <returns></returns>
+        //载入指定菜单的所有下级菜单
         private IList<UserMenu> RecursionLoadMenus(IList<UserMenu> t, UserMenu m)
         {
             List<UserMenu> ret = new List<UserMenu>();
-            Parallel.For(0, t.Count, index =>
+            foreach (var item in t)
             {
-                var temp = t[index];
-                if (m.ID == temp.sPID)
+                if (m.ID == item.sPID)
                 {
-                    ret.Add(temp);
-                    ret.AddRange(RecursionLoadMenus(t, temp));
+                    ret.Add(item);
+                    ret.AddRange(RecursionLoadMenus(t, item));
                 }
-            });
+            }
             return ret;
         }
         #endregion
