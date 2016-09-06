@@ -26,7 +26,7 @@ namespace Framework.web.Areas.Admin.Controllers
             var user = JSONHelper.GetModel<EHECD_SystemUserDTO>(RequestParameters.data.ToString());
 
             //获取session信息
-            SessionInfo session = (SessionInfo)Session[SessionInfo.SESSION_NAME];
+            SessionInfo session = (SessionInfo)Session[SessionInfo.USER_SESSION_NAME];
 
             //校验验证码:这里偷了个懒，用的EHECD_SystemUserDTO的sUserName临时装了一下
             if (user.sUserName.ToLower() != session.ImgCode.VCodeContent.ToLower())
@@ -47,7 +47,7 @@ namespace Framework.web.Areas.Admin.Controllers
                 if (userRoleMenu.LoadSuccess)
                 {
                     session.SessionUser.User = dto;
-                    Session[SessionInfo.SESSION_NAME/*用户的信息*/] = session;
+                    Session[SessionInfo.USER_SESSION_NAME/*用户的信息*/] = session;
                     Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
                     result.Succeeded = true;
                     result.Data = "/Admin/Main";

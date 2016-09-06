@@ -16,7 +16,11 @@ namespace Framework.web.Areas.Admin.Controllers
             var user = SessionUser;
             return View("Index", user.User);
         }
-
+        public RedirectResult ExitSystem()
+        {
+            SetSessionInfo(SessionInfo.USER_SESSION_NAME,null);
+            return Redirect("/Admin/Login");
+        }
         /// <summary>
         /// 获取上传图片服务器地址
         /// </summary>

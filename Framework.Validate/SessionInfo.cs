@@ -47,7 +47,7 @@ namespace Framework.Validate
     [Serializable]
     public class SessionInfo
     {
-        public static readonly string SESSION_NAME = "$-@k-76^";
+        public static readonly string USER_SESSION_NAME = "$-@k-76^";
         public static readonly string APISESSION_NAME = "$-@k-71^";
         public static readonly string USER_MENUS = "$-@k-72^";
 

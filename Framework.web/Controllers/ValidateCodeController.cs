@@ -17,7 +17,7 @@ namespace Framework.web.Controllers
         {
             await Task.Run(() =>
             {
-                SessionInfo session = (SessionInfo)Session[SessionInfo.SESSION_NAME];
+                SessionInfo session = (SessionInfo)Session[SessionInfo.USER_SESSION_NAME];
 
                 if (session == null) session = new SessionInfo();
 
@@ -48,7 +48,7 @@ namespace Framework.web.Controllers
                     vc.VCodeCount++;
 
                     session.ImgCode = vc;
-                    Session[SessionInfo.SESSION_NAME] = session;                    
+                    Session[SessionInfo.USER_SESSION_NAME] = session;                    
 
                     result.Data = codes;
                     result.Succeeded = true;

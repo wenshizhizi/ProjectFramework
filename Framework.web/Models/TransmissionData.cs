@@ -33,6 +33,8 @@ namespace Framework.web
     /// </summary>
     public class RequestData
     {        
+        public dynamic dynamicData { get; set; }
+
         public object data { get; set; }
 
         public string identity { get; set; }

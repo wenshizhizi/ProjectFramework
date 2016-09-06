@@ -25,7 +25,7 @@ namespace Framework.web.Areas.Admin.Controllers
         /// </summary>
         public void LoadAllMenu()
         {
-            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             result.Succeeded = userRoleMenu != null ? true : false;
 
             //开始组装菜单的数据
@@ -294,30 +294,33 @@ namespace Framework.web.Areas.Admin.Controllers
         //创建菜单节点数据
         private dynamic CreateMenuData(IList<UserMenu> t)
         {
-            var userMs = new List<object>();
+            var userMs/*组装好的用户菜单*/ = new List<object>();
 
             //初始化菜单层级关系
             foreach (var item in t)
             {
-                //载入当前菜单的层级关系节点
-                var child = LoadLevelUserMenu(t, item);
-                //载入当前菜单的按钮
-                child.AddRange(CreateButtons(item.Buttons));
-                //顶层菜单
+                //1.判断当前菜单是否是顶层菜单
                 if (item.sPID == null)
                 {
+                    //2.载入当前菜单的层级关系树节点
+                    var child = LoadLevelUserMenu(t/*要筛选的菜单*/, item/*当前菜单*/);
+
+                    //3.载入当前菜单的按钮树节点
+                    child.AddRange(CreateButtons(item.Buttons));
+
+                    //4.将构建好的节点装入结果集
                     userMs.Add(new
                     {
                         id = item.ID,
                         text = item.sMenuName,
                         attributes = new { type = "menu", url = "", order = item.iOrder },
                         @checked = true,
-                        state = "open",
+                        state = "closed",
                         children = child
                     });
                 }
             }
-            
+
             //给整个菜单创建一个根目录
             return new
             {
@@ -332,21 +335,24 @@ namespace Framework.web.Areas.Admin.Controllers
         //载入带层级的菜单节点
         private List<object> LoadLevelUserMenu(IList<UserMenu> t, UserMenu m)
         {
-            var userMs = new List<object>();
+            var userMs/*指定的菜单的下级菜单*/ = new List<object>();
+
             for (int i = 0; i < t.Count; i++)
             {
-                var temp = t[i];
-                if (m.ID == temp.sPID)
+                var temp/*从菜单集合中取出操作的菜单*/ = t[i];
+
+                if (m.ID == temp.sPID /*判断该菜单是否是指定菜单的下级菜单*/)
                 {
-                    //载入他的下级节点
+                    //1.载入他的下级节点
                     var child = LoadLevelUserMenu(t, temp);
-                    //载入他的菜单按钮
-                    child.AddRange(CreateButtons(temp.Buttons.OrderBy(mx => mx.iOrder).ToList()));
+                    //2.载入他的菜单按钮
+                    child.AddRange(CreateButtons(temp.Buttons));
+
                     var menu = new
                     {
                         id = temp.ID,
                         text = temp.sMenuName,
-                        state = "open",
+                        state = "closed",
                         attributes = new { type = "menu", url = temp.sUrl, order = temp.iOrder },
                         @checked = true,
                         children = child
@@ -354,7 +360,7 @@ namespace Framework.web.Areas.Admin.Controllers
                     userMs.Add(menu);
                 }
             }
-            return userMs.OrderBy(km => ((dynamic)((dynamic)km).attributes).order).ToList();
+            return /*由于这里的都是同级的菜单，返回前对菜单进行一个排序*/userMs.OrderBy(km => ((dynamic)((dynamic)km).attributes).order).ToList();
         }
 
         //创建按钮节点
@@ -386,19 +392,17 @@ namespace Framework.web.Areas.Admin.Controllers
         //重新构建菜单层级结构
         private IList<UserMenu> InitMenu(IList<UserMenu> t)
         {
-            Parallel.For(0, t.Count, index =>
-            {
-                t[index].ChildMenu.Clear();
-            });
+            //清除掉原菜单的层级关系
+            Parallel.For(0, t.Count, index => t[index].ChildMenu.Clear());
 
-            var userMs = new List<UserMenu>();
+            var userMs/*重构后的层级菜单*/ = new List<UserMenu>();
 
             //初始化菜单层级关系
             foreach (var item in t)
             {
-                //顶层菜单
-                if (item.sPID == null)
+                if (item.sPID == null/*是否是顶层菜单*/)
                 {
+                    //载入这个菜单的层级关系，直到没有底层菜单
                     RecursionLoadLevelUserMenu(t, item);
                     userMs.Add(item);
                 }
@@ -415,44 +419,40 @@ namespace Framework.web.Areas.Admin.Controllers
                 if (m.ID == temp.sPID)
                 {
                     m.ChildMenu.Add(temp);
-                    RecursionLoadLevelUserMenu(t, temp);
+                    RecursionLoadLevelUserMenu(t, temp);//再载入这个菜单的下级菜单
                 }
             });
-            m.ChildMenu = m.ChildMenu != null ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
+            m.ChildMenu = m.ChildMenu != null ? m.ChildMenu.OrderBy(x => x.iOrder/*根据排序号排序*/).ToList() : new List<UserMenu>();
         }
 
         //找到指定的按钮信息
         private UserMenuButton LoadMenuButtonById(string id)
         {
             UserMenuButton ret = null;
-            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
-
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
                 var isfind = false;
-                Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                for (int index = 0; index < userRoleMenu.AllMenu.Count; index++)
                 {
                     if (isfind)
                     {
-                        state.Stop();
-                        return;
+                        break;
                     }
                     else
                     {
-                        Parallel.ForEach<UserMenuButton>(userRoleMenu.AllMenu[index].Buttons, (button, innerstate) =>
+                        foreach (var button in userRoleMenu.AllMenu[index].Buttons)
                         {
                             if (button.ID.ToString() == id)
                             {
                                 ret = button;
                                 isfind = true;
-                                innerstate.Stop();
-                                return;
+                                break;
                             }
-                        });
+                        }
                     }
-                });
+                }
             }
-
             return ret;
         }
 
@@ -460,18 +460,17 @@ namespace Framework.web.Areas.Admin.Controllers
         private UserMenu LoadMenuById(string id)
         {
             UserMenu ret = null;
-            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
-                Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                for (int index = 0; index < userRoleMenu.AllMenu.Count; index++)
                 {
                     if (userRoleMenu.AllMenu[index].ID.ToString() == id)
                     {
                         ret = userRoleMenu.AllMenu[index];
-                        state.Stop();
-                        return;
+                        break;
                     }
-                });
+                }
             }
             return ret;
 
@@ -480,33 +479,30 @@ namespace Framework.web.Areas.Admin.Controllers
         //更新会话中的按钮
         private void UpdateSessionMenuButton(UserMenuButton m)
         {
-            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
-
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
                 var isfind = false;
-                Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                for (int index = 0; index < userRoleMenu.AllMenu.Count; index++)
                 {
                     if (isfind)
                     {
-                        state.Stop();
-                        return;
+                        break;
                     }
                     else
                     {
-                        Parallel.For(0, userRoleMenu.AllMenu[index].Buttons.Count, (innerindex, innerstate) =>
+                        for (int innerindex = 0; innerindex < userRoleMenu.AllMenu[index].Buttons.Count; innerindex++)
                         {
                             if (userRoleMenu.AllMenu[index].Buttons[innerindex].ID == m.ID)
                             {
                                 userRoleMenu.AllMenu[index].Buttons[innerindex] = m;
-                                userRoleMenu.AllMenu = userRoleMenu.AllMenu.OrderBy(mx => mx.iOrder).ToList();
                                 isfind = true;
-                                innerstate.Stop();
-                                return;
+                                break;
                             }
-                        });
+                        }
                     }
-                });
+                }
+                SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);
             }
             else
             {
@@ -517,24 +513,22 @@ namespace Framework.web.Areas.Admin.Controllers
         //更新会话中的菜单
         private void UpdateSessionMenu(EHECD_FunctionMenuDTO editmenu)
         {
-            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
-
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
-                Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                for (int index = 0; index < userRoleMenu.AllMenu.Count; index++)
                 {
                     if (userRoleMenu.AllMenu[index].ID == editmenu.ID)
                     {
                         userRoleMenu.AllMenu[index].iOrder = editmenu.iOrder;
                         userRoleMenu.AllMenu[index].sMenuName = editmenu.sMenuName;
                         userRoleMenu.AllMenu[index].sUrl = editmenu.sUrl;
-                        state.Stop();
-                        return;
+                        break;
                     }
-                });
+                }
                 var userMenu = InitMenu(userRoleMenu.AllMenu);
                 userRoleMenu.UserMenu = userMenu;
-                Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
+                SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);
             }
             else
             {
@@ -545,11 +539,10 @@ namespace Framework.web.Areas.Admin.Controllers
         //删除session中的menu
         private void DeleteSessionMenu(string v)
         {
-            var userRoleMenu = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
-                var temp = RecursionLoadMenus(userRoleMenu.AllMenu, new UserMenu { ID = Guid.Parse(v) });
-
+                var temp/*载入要删除的菜单（他的所有有层级关系的下级）*/ = RecursionLoadMenus(userRoleMenu.AllMenu, new UserMenu { ID = Guid.Parse(v) });
                 temp.Add(new UserMenu { ID = Guid.Parse(v) });
 
                 for (int i = 0; i < temp.Count; i++)

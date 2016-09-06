@@ -30,6 +30,7 @@ namespace Framework.web.Areas.Admin.Controllers
             result.Succeeded = true;
         }
 
+        #region 跳转动作
         /// <summary>
         /// 跳转到添加角色页面
         /// </summary>
@@ -47,9 +48,11 @@ namespace Framework.web.Areas.Admin.Controllers
         public PartialViewResult ToEditRole(EHECD_RoleDTO role)
         {
             return PartialView("EditRole", role);
-        }
+        } 
+        #endregion
 
-
+        #region 对角色的操作
+        //编辑角色
         public void EditRole()
         {
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
@@ -65,6 +68,7 @@ namespace Framework.web.Areas.Admin.Controllers
             }
         }
 
+        //添加角色
         public void AddRole()
         {
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
@@ -79,5 +83,22 @@ namespace Framework.web.Areas.Admin.Controllers
                 result.Msg = "添加失败，请联系管理员";
             }
         }
+
+        //删除角色
+        public void DeleteRole()
+        {
+            var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
+            var ret = manager.DeleteRole(((dynamic)RequestParameters.data).ID.ToString());
+            if (ret > 0)
+            {
+                result.Succeeded = true;
+            }
+            else
+            {
+                result.Succeeded = false;
+                result.Msg = "删除失败，请联系管理员";
+            }
+        } 
+        #endregion
     }
 }

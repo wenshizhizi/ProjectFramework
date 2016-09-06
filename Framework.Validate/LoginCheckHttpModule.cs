@@ -47,7 +47,7 @@ namespace Framework.Validate
             }
 
             //获取用户会话
-            SessionInfo session = (SessionInfo)context.Session[SessionInfo.SESSION_NAME];
+            SessionInfo session = (SessionInfo)context.Session[SessionInfo.USER_SESSION_NAME];
 
             if (session == null || session.SessionUser == null || session.SessionUser.User == null)
             {

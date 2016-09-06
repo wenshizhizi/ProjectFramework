@@ -757,7 +757,6 @@
     <Content Include="Areas\Admin\Views\Main\Index.cshtml" />
     <None Include="Properties\PublishProfiles\companyweb.pubxml" />
     <Content Include="scripts\jquery-1.11.3.min.map" />
-    <Content Include="unity.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

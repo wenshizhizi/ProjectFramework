@@ -24,9 +24,11 @@ namespace Framework.web.Controllers
         protected RequestData RequestParameters = new RequestData
         {
             data = null,
-            identity = ""
+            identity = "",
+            dataStr = ""
         };
 
+        //SessionUser
         protected UserInfo SessionUser = null;
 
         /// <summary>
@@ -35,14 +37,11 @@ namespace Framework.web.Controllers
         protected Boolean NeedMenuButton = false;
 
         /// <summary>
-        /// 处理前
+        /// 初始化的时候
         /// </summary>
         /// <param name="requestContext"></param>
         protected override void Initialize(RequestContext requestContext)
         {
-            var session = requestContext.HttpContext.Session == null ? null : requestContext.HttpContext.Session[SessionInfo.SESSION_NAME] as SessionInfo;
-            SessionUser = session != null ? session.SessionUser : null;
-
             //ajax提交上来的请求
             if (requestContext.HttpContext.Request.IsAjaxRequest() && requestContext.HttpContext.Request.RequestType.ToLower() == "post")
             {
@@ -50,6 +49,34 @@ namespace Framework.web.Controllers
                 RequestParameters = ParameterLoader.LoadAjaxPostParameters(requestContext.HttpContext.Request.InputStream);
             }
             base.Initialize(requestContext);
+        }
+
+        /// <summary>
+        /// 处理action前
+        /// </summary>
+        /// <param name="filterContext"></param>
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            //载入后台的用户session信息
+            SessionInfo session = (SessionInfo)GetSessionInfo(SessionInfo.USER_SESSION_NAME);
+
+            if (session == null || session.SessionUser == null || session.SessionUser.User == null)
+            {
+                var crtl = filterContext.HttpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
+
+                //排出掉登录和获取验证码的rote
+                if (crtl != "Login" && crtl != "ValidateCode")
+                {
+                    string url = new UrlHelper(filterContext.RequestContext).Action("Index", "Login");
+                    //防止ajax调用分部视图出现登陆超时，在局部跳转URL的问题   
+                    filterContext.HttpContext.Response.Write("<script> $.messager.alert('登录超时','抱歉，您已登录超时，系统将于3秒后返回登录页重新登录','info');setTimeout(function(){ window.location.href='" + url + "';},3000); </script>");
+                    filterContext.HttpContext.Response.End();
+                }
+            }
+            else
+            {
+                SessionUser = session != null && session.SessionUser != null ? session.SessionUser : null;
+            }
         }
 
         /// <summary>
@@ -71,7 +98,7 @@ namespace Framework.web.Controllers
                     filterContext.ExceptionHandled = true;
                     if (ex != null && ex.IsLog)
                     {
-                        SystemLog.Logs.GetLog().WriteErrorLog(ex);
+                        SystemLog.Logs.GetLog().WriteErrorLog(ex);/*记录日志*/
                         result.Succeeded = false;
                         result.Msg = ex.Message;
                         filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
@@ -79,7 +106,7 @@ namespace Framework.web.Controllers
                     else
                     {
                         result.Succeeded = false;
-                        result.Msg = ex.Message;
+                        result.Msg = ex != null ? ex.Message : "后台执行中出现异常";
                         filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
                     }
                 }
@@ -97,10 +124,11 @@ namespace Framework.web.Controllers
             {
                 //请求是脚本 ajax POST 的请求
                 filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
-
             }
             else if (isAjaxRequest && requestType == "get")
             {
+                //这里一般是通过easyui的panel或者dialog的get请求请求部分数据的处理
+
                 var controller = filterContext.RequestContext.RouteData.Values["controller"].ToString().ToLower();
                 var action = filterContext.RequestContext.RouteData.Values["action"].ToString().ToLower();
 
@@ -122,7 +150,7 @@ namespace Framework.web.Controllers
                         if (userMenu != default(UserMenu))
                         {
                             //添加这个菜单有的btn,这里是会排序的，如果编辑了菜单按钮的排序，刷新就可以了
-                            filterContext.Controller.ViewData.Add("btns", userMenu.Buttons.OrderBy(m=>m.iOrder).ToList());
+                            filterContext.Controller.ViewData.Add("btns", userMenu.Buttons.OrderBy(m => m.iOrder).ToList());
                         }
                     }
                 }
@@ -131,6 +159,26 @@ namespace Framework.web.Controllers
             {
                 //其他方式的请求：暂无
             }
+        }
+
+        /// <summary>
+        /// 载入指定会话内容
+        /// </summary>
+        /// <param name="sessionName"></param>
+        /// <returns></returns>
+        protected object GetSessionInfo(string sessionName)
+        {
+            return Session[sessionName];
+        }
+
+        /// <summary>
+        /// 设置指定session内容
+        /// </summary>
+        /// <param name="sessionName"></param>
+        /// <param name="sessionInfo"></param>
+        protected void SetSessionInfo(string sessionName,object sessionInfo)
+        {
+            Session[sessionName] = sessionInfo;
         }
     }
 }

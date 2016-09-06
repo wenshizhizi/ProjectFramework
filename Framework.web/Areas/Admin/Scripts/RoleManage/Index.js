@@ -8,7 +8,7 @@
      * 初始化事件
      */
     function initEvent() {
-        $("a[data-id='search_rol_button']").click(function () {
+        $("a[data-id='search_role_button']").click(function () {
             eui.search(grid, true);
         });
         $("a[data-id='add_role_button']").click(addRole);
@@ -66,8 +66,8 @@
                         var json = $("#add_role_form").serializeObject();
                         f.post("/Admin/RoleManage/AddRole", json,
                             function (ret) {
-                                eui.alertMsg("添加角色成功");
-                                eui.search(grid,false);
+                                eui.alertInfo("添加角色成功");
+                                eui.search(grid, false);
                                 $(div).dialog("close");
                             }, function (ret) {
                                 eui.alertErr(ret.Msg);
@@ -93,6 +93,9 @@
         });
     }
 
+    /**
+     * 编辑角色
+     */
     function editRole() {
         eui.checkSelectedRow(grid, function (selectedRow) {
             var div = $("<div/>");
@@ -102,7 +105,7 @@
                 height: 200,
                 cache: false,
                 href: '/Admin/RoleManage/ToEditRole',
-                queryParams:selectedRow,
+                queryParams: selectedRow,
                 modal: true,
                 collapsible: false,
                 minimizable: false,
@@ -115,10 +118,10 @@
                         if ($("#edit_role_form").form("validate")) {
                             debugger
                             var json = $("#edit_role_form").serializeObject();
-                            json.ID = selectedRow.ID;                            
+                            json.ID = selectedRow.ID;
                             f.post("/Admin/RoleManage/EditRole", json,
                                 function (ret) {
-                                    eui.alertMsg("编辑角色成功");
+                                    eui.alertInfo("编辑角色成功");
                                     eui.search(grid, true);
                                     $(div).dialog("close");
                                 }, function (ret) {
@@ -146,10 +149,30 @@
         }, "请选择您要编辑的角色");
     }
 
+    /**
+     * 删除角色
+     */
     function delRole() {
-        alert("delRole");
+        try {
+            eui.confirmDomain(grid, function (selectedRow) {
+                f.post("/Admin/RoleManage/DeleteRole", { ID: selectedRow.ID }, function (r) {
+                    eui.alertInfo("删除角色成功");
+                    eui.search(grid, false);
+                }, function (r) {
+                    eui.alertErr(r.Msg);
+                });
+            }, undefined, "请选择您要删除的角色。",
+            function (selectedRow) {
+                return "您是否确认要删除【{0}】？<span style='color:red'>该操作是不可逆的！这将造成该拥有该角色用户失去该角色菜单权限和按钮权限，那些用户登录后将没有对应的菜单和按钮。</span>".format(selectedRow.sRoleName);
+            });
+        } catch (e) {
+            eui.alertErr(e.message);
+        }
     }
 
+    /**
+     * 初始化grid数据
+     */
     function initData() {
         eui.bindPaginationEvent(grid, {
             idField: "ID",
@@ -159,7 +182,7 @@
             fitColumns: true,
             pagination: true,
             rownumbers: true,
-            singleSelect:true,
+            singleSelect: true,
             columns: [[
             { field: 'checkbox', checkbox: true },
             { field: 'sRoleName', title: '角色名字', align: 'center', width: 100 },
