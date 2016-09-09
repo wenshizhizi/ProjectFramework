@@ -131,6 +131,7 @@
     <Content Include="Areas\Admin\Scripts\MenuManage\Index.js" />
     <Content Include="Areas\Admin\Scripts\Menu\Index.js" />
     <Content Include="Areas\Admin\Scripts\RoleManage\Index.js" />
+    <Content Include="Content\backload.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\themes\14-15111615263S59.jpg" />
     <Content Include="Content\themes\14-15111615263S591.jpg" />

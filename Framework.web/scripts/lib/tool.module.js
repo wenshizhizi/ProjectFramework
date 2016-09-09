@@ -284,11 +284,15 @@ modules.define("tool", [], function ToolDomain() {
      */
     function show(msg) {
         var h = $(document).height();
-        maskmsg = $('<div style="height:100%;width:100%;position:fixed;z-index:99999;background: rgba(255,255,255,0.8);left:0px;top:0px;">' +
-                        '<div style="position:absolute;overflow:hidden;left:50%;top:50%;margin-left:-34px;margin-top:-34px;height:68px;width:68px;text-align:center;">' +
-                            '<span class="circles-loader"></span>' +
-                        '</div>' +
-                    '</div>');
+        maskmsg = $('<div class="thecube">' +
+			                '<div class="cube c1"></div>' +
+			                '<div class="cube c2"></div>' +
+			                '<div class="cube c4"></div>' +
+			                '<div class="cube c3"></div>' +
+		                '</div>' +
+                '<div class="textedit">' +
+                  '<h1>页面数据加载中，请稍候...</h1>' +
+                '</div>');
         if (msg) {
             maskmsg.find("div").text(msg);
         }

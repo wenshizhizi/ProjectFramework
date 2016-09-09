@@ -1,13 +1,13 @@
 ﻿{
   "logPath": "SystemLogs/Log\\",
   //"connectionString": "server=192.168.1.5;database=EHECD_VoteSystem;User = sa; Password = Test1234;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;",
-  //"connectionString": "server=192.168.1.5;database=EHECD_PermissionSystem;User = sa; Password = Test1234;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;",
-  "connectionString": "server=10.2.1.199;database=EHECD_PermissionSystem;User = sa; Password = Test1234;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;",
+  "connectionString": "server=192.168.1.5;database=EHECD_PermissionSystem;User = sa; Password = Test1234;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;",
+  //"connectionString": "server=10.2.1.199;database=EHECD_PermissionSystem;User = sa; Password = Test1234;pooling=true;Min pool size = 1;Max pool size = 1000;Connection lifetime = 0;Connection timeout = 30;",
   "validateCodeRandomArray": "1,2,3,4,5,6,7,8,9,0",
   "randomCodeAngle": 10,
   "VImgCodeMaxCount": 3,
   "VImgCodeTimeOut": 10,
-  "imgCodeLength": 4,
+  "imgCodeLength": 4,//生成的图片验证码字符长度
   "url": "http://115.28.48.78:8092/api/upload/controller?module=CompanyAppp&field=CompanyAppp&appKey=695MK4VF6PQE9T30L5O8W2UCA1SYIRXNJDBK", //图片服务器地址
   "UseUserRole": 0, //是否启用角色绑定
   "UseMenuBottn": 0 //是否启用菜单按钮绑定

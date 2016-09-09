@@ -378,7 +378,7 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
         try {
             if (template) {
                 template.helper(filterName, callBack);
-            } 
+            }
         } catch (e) {
             throw new Error("template辅助方法出错，错误原因是：{0}".format(e.message));
         }
@@ -406,7 +406,7 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
 
         modal = (modal === false ? false : true);
         if (modal) {
-            if(tool){
+            if (tool) {
                 tool.show();
             }
         }
@@ -429,10 +429,10 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
                         tool.hide();
                     }
                 }
-                debugger
-
+                                
                 if (json.indexOf("<script>") >= 0) {
-                    
+                    json = json.replace("<script>", "").replace("</script>", "");
+                    eval(json);
                     return;
                 }
 
@@ -582,7 +582,7 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
         return !(a.protocol == location.protocol && a.hostname == location.hostname &&
         (a.port == location.port || (a.port == '80' && location.port == '') || (a.port == '' && location.port == '80')));
     }
-        
+
     /**
      * 
      * 字符串转json
@@ -602,7 +602,7 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
             return (new Function("return " + s.trim()))();
         }
     }
-        
+
     return {
         definededAndNotNull: definededAndNotNull,
         templateHelper: templateHelper,
@@ -621,7 +621,7 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
         isWebAddress: isWebAddress,
         isPhone: isPhone,
         timeCompare: timeCompare,
-        createStringSplitByCommaFromArray: createStringSplitByCommaFromArray,        
+        createStringSplitByCommaFromArray: createStringSplitByCommaFromArray,
         str2json: str2json,
         zip: zip
     };
