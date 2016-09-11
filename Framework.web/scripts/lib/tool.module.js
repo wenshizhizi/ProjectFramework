@@ -117,9 +117,8 @@ modules.define("tool", [], function ToolDomain() {
                     '"': '&quot;',
                     '>': '&gt;',
                     "'": '&#39;'
-                }[a]
+                }[a];
             }
-
         }) : '';
     }
 
@@ -148,7 +147,7 @@ modules.define("tool", [], function ToolDomain() {
                 '&gt;': '>',
                 '&#39;': "'",
                 '&nbsp;': ' '
-            }[m]
+            }[m];
         }) : '';
     }
 
@@ -270,77 +269,6 @@ modules.define("tool", [], function ToolDomain() {
         return typeof val === 'function';
     }
 
-    var maskmsg = null;
-
-    /**
-     * 
-     * 显示遮罩层
-     * 
-     * @method show
-     * @for Maskin
-     * @author [杨瑜堃]
-     * @version 1.0.1
-     * @param [String] msg 可选：要显示的遮罩层文本
-     */
-    function show(msg) {
-        var h = $(document).height();
-        maskmsg = $('<div class="thecube">' +
-			                '<div class="cube c1"></div>' +
-			                '<div class="cube c2"></div>' +
-			                '<div class="cube c4"></div>' +
-			                '<div class="cube c3"></div>' +
-		                '</div>' +
-                '<div class="textedit">' +
-                  '<h1>页面数据加载中，请稍候...</h1>' +
-                '</div>');
-        if (msg) {
-            maskmsg.find("div").text(msg);
-        }
-        maskmsg.appendTo("body");
-        setTimeout(
-        (function (maskmsg) {
-            return function () {
-                maskmsg.remove();
-            };
-        })(maskmsg), 10000);
-    }
-
-    /**
-     * 
-     * 隐藏遮罩层
-     * 
-     * @method hide
-     * @for Maskin
-     * @author [杨瑜堃]
-     * @version 1.0.1
-     */
-    function hide() {
-        if (maskmsg !== null) {
-            maskmsg.remove();
-        }
-    }
-
-    ///**
-    // * 
-    //* 创建一个遮罩层，如果不手动消除，则10秒后自动消除
-    //* 此处一定注意，遮罩层的等待效果在loader.css文件中，请记得引入页面
-    //* 
-    //* @method Maskin
-    //* @for ToolDomain
-    //* @author [杨瑜堃]
-    //* @version 1.0.1
-    //* @returns {Objec} 操作接口 
-    //*/
-    //function Maskin() {
-
-
-
-    //    return {
-    //        show: show,
-    //        hide: hide
-    //    }
-    //}
-
     return {
         isFile: isFile,
         isNumber: isNumber,
@@ -348,9 +276,6 @@ modules.define("tool", [], function ToolDomain() {
         isArray: isArray,
         isDecimal: isDecimal,
         isString: isString,
-        isFunction: isFunction,
-        show: show,
-        hide: hide
-        //Maskin: Maskin
+        isFunction: isFunction
     };
 });

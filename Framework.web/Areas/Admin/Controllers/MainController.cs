@@ -14,18 +14,25 @@ namespace Framework.web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var user = SessionUser;
-            return View("Index", user.User);
+            if (user != null)
+            {
+                return View("Index", user.User);
+            }
+            else
+            {
+                return ExitSystem();
+            }
         }
+
+        //退出系统后台
         public RedirectResult ExitSystem()
         {
-            SetSessionInfo(SessionInfo.USER_SESSION_NAME,null);
-            SetSessionInfo(SessionInfo.USER_MENUS, null);
+            SetSessionInfo/*清空用户信息*/(SessionInfo.USER_SESSION_NAME, null);
+            SetSessionInfo/*清空用户菜单信息*/(SessionInfo.USER_MENUS, null);
             return Redirect("/Admin/Login");
         }
-        /// <summary>
-        /// 获取上传图片服务器地址
-        /// </summary>
-        /// <returns></returns>
+
+        //获取上传图片服务器地址
         [HttpPost]
         public void GetServerUrl()
         {

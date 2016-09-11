@@ -1,9 +1,7 @@
-﻿@using Framework.web.Models
-@model Framework.DTO.UserRoleMenuInfo
-
+﻿<link href="~/Content/bootstrap-treeview.min.css" rel="stylesheet" />
+<script src="~/scripts/bootstrap-treeview.min.js"></script>
+@*<script src="~/scripts/bootstrap-treeview.js"></script>*@
 <script src="~/Areas/Admin/Scripts/Menu/Index.js"></script>
-
-<div id="menu_accordion" class="easyui-accordion" data-options="border:false,multiple:true">
-    @*创建左侧菜单栏*@
-    @(MenuTagCreator.CreateMenu(Model))
+<div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,border:false,fit:true" style="padding:1px;background-color:white">
+    <div id="tree"></div>   
 </div>

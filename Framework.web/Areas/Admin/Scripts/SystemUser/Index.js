@@ -3,32 +3,31 @@
         var eui = modules.get("eui");
         var t = modules.get("tool");
         var f = modules.get("func");
-        var grid = $("#role_grid");
+        var grid = $("#systemuser_grid");
 
         /**
          * 初始化事件
          */
         function initEvent() {
-            $("a[data-id='search_role_button']").click(function () {
+            $("a[data-id='search_user_button']").click(function () {
                 eui.search(grid, true);
             });
-            $("a[data-id='add_role_button']").click(addRole);
-            $("a[data-id='edit_role_button']").click(editRole);
-            $("a[data-id='del_role_button']").click(delRole);
+
+            $("a[data-id='add_systemuser_button']").click(addSystemUser);
         }
 
         /**
-         * 载入角色列表
+         * 载入系统用户列表
          * @param {Number} pageNumber 页码
          * @param {Number} pageSize 每页显示条数
          */
-        function loadRole(pageNumber, pageSize) {
+        function loadSystemUser(pageNumber, pageSize) {
             try {
-                if ($("#role_form").form("validate")) {
-                    var param/*查询参数*/ = $("#role_form").serializeObject();
+                if ($("#systemuser_form").form("validate")) {
+                    var param/*查询参数*/ = $("#systemuser_form").serializeObject();
                     param.pageNumber/*当前页码*/ = pageNumber;
                     param.pageSize/*每页显示条数*/ = pageSize;
-                    f.post("/Admin/RoleManage/LoadRoles", param, function (r) {
+                    f.post("/Admin/SystemUser/LoadSystemUser", param, function (r) {
                         grid.datagrid("loadData", r.Data.Result);
                         grid.datagrid("getPager").pagination({
                             pageNumber: pageNumber,
@@ -45,16 +44,16 @@
         }
 
         /**
-         * 添加角色
+         * 添加用户
          */
-        function addRole() {
+        function addSystemUser() {
             var div = $("<div/>");
             div.dialog({
-                title: "添加角色",
-                width: 400,
-                height: 200,
+                title: "添加用户",
+                width: 500,
+                height: 400,
                 cache: false,
-                href: '/Admin/RoleManage/ToAddRole',
+                href: '/Admin/SystemUser/ToAddSystemUser',
                 modal: true,
                 collapsible: false,
                 minimizable: false,
@@ -64,12 +63,20 @@
                     text: '保存',
                     iconCls: 'icon-save',
                     handler: function () {
-                        if ($("#add_role_form").form("validate")) {
-                            
-                            var json = $("#add_role_form").serializeObject();
-                            f.post("/Admin/RoleManage/AddRole", json,
+                        if ($("#add_systemuser_form").form("validate")) {
+                            debugger
+                            var json = $("#add_systemuser_form").serializeObject();
+
+                            if (json.sPassWord !== json.sPassWord2) {
+                                eui.alertErr("两次输入的密码不一致");
+                                return;
+                            }
+
+
+
+                            f.post("/Admin/SystemUser/AddSystemUser", json,
                                 function (ret) {
-                                    eui.alertInfo("添加角色成功");
+                                    eui.alertInfo("添加用户成功");
                                     eui.search(grid, false);
                                     $(div).dialog("close");
                                 }, function (ret) {
@@ -176,11 +183,11 @@
         /**
          * 初始化grid数据
          */
-        function initData() {
+        function initData() {            
             eui.bindPaginationEvent(grid, {
                 idField: "ID",
                 loadMsg: "正在加载...",
-                toolbar: "#role_grid_tool",
+                toolbar: "#systemuser_grid_tool",
                 fit: true,
                 fitColumns: true,
                 pagination: true,
@@ -188,16 +195,30 @@
                 singleSelect: true,
                 columns: [[
                 { field: 'checkbox', checkbox: true },
-                { field: 'sRoleName', title: '角色名字', align: 'center', width: 100 },
+                { field: 'sLoginName', title: '登录名', align: 'center', width: 100 },
+                { field: 'sUserName', title: '用户名', align: 'center', width: 100 },
+                {
+                    field: 'tUserState', title: '用户状态', align: 'center', width: 100, formatter: function (value, row, index) {
+                        if (row.tUserState === 0) {
+                            return "正常";
+                        }
+                    }
+                },
+                {
+                    field: 'tUserType', title: '用户类型', align: 'center', width: 100, formatter: function (value, row, index) {
+                        if (row.tUserType === 0) {
+                            return "后台用户";
+                        }
+                    }
+                },
+                { field: 'sUserNickName', title: '用户昵称', align: 'center', width: 100 },
                 { field: 'dCreateTime', title: '创建时间', align: 'center', width: 100 },
-                { field: 'dModifyTime', title: '修改时间', align: 'center', width: 100 },
-                { field: 'iOrder', title: '排序号', align: 'center', width: 100 },
-                { field: 'bEnable', title: '是否启用', align: 'center', width: 100 }
+                { field: 'dLastLoginTime', title: '最后登录时间', align: 'center', width: 100 }
                 ]],
                 onLoadSuccess: function () {
                     $(".datagrid-header-check input[type=checkbox]").remove();
                 }
-            }, loadRole).pagination("select");
+            }, loadSystemUser).pagination("select");
         }
 
         try {

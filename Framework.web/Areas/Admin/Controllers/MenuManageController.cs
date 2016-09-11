@@ -153,12 +153,10 @@ namespace Framework.web.Areas.Admin.Controllers
                     //构建返回给界面的节点信息
                     result.Data = new
                     {
-                        id = addbutton.ID,
-                        @checked = false,
+                        id = addbutton.ID,                        
                         attributes = new { type = "btn" },
                         text = addbutton.sButtonName,
-                        iconCls = addbutton.sIcon,
-                        state = "closed"
+                        iconCls = addbutton.sIcon
                     };
 
                     //从会话用户菜单中找到这个按钮所属的按钮并将其添加进去
@@ -279,6 +277,26 @@ namespace Framework.web.Areas.Admin.Controllers
             }
         }
 
+        /// <summary>
+        /// 删除菜单按钮
+        /// </summary>
+        public void DeleteButton()
+        {
+            EHECD_MenuButtonDTO button = JSONHelper.GetModel<EHECD_MenuButtonDTO>(RequestParameters.dataStr);
+            button.bIsDeleted = true;
+            var ret = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenuButton(button);
+
+            if (ret > 0)
+            {
+                DeleteSessionMenuButton(button.ID.ToString());
+                result.Succeeded = true;
+            }
+            else
+            {
+                result.Succeeded = false;
+                result.Msg = "删除菜单按钮失败，请联系管理员";
+            }
+        }
         #endregion
 
         #region 创建界面上的菜单树节点数据
@@ -304,8 +322,7 @@ namespace Framework.web.Areas.Admin.Controllers
                     {
                         id = item.ID,
                         text = item.sMenuName,
-                        attributes = new { type = "menu", url = "", order = item.iOrder },
-                        @checked = true,
+                        attributes = new { type = "menu", url = "", order = item.iOrder },                        
                         state = "open",
                         children = child
                     });
@@ -316,8 +333,7 @@ namespace Framework.web.Areas.Admin.Controllers
             return new
             {
                 text = "根目录",
-                attributes = new { type = "root", url = "", order = 0 },
-                @checked = true,
+                attributes = new { type = "root", url = "", order = 0 },               
                 state = "open",
                 children = userMs.OrderBy(m => ((dynamic)((dynamic)m).attributes).order).ToList()
             };
@@ -344,8 +360,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         id = temp.ID,
                         text = temp.sMenuName,
                         state = "closed",
-                        attributes = new { type = "menu", url = temp.sUrl, order = temp.iOrder },
-                        @checked = true,
+                        attributes = new { type = "menu", url = temp.sUrl, order = temp.iOrder },                        
                         children = child
                     };
                     userMs.Add(menu);
@@ -364,12 +379,10 @@ namespace Framework.web.Areas.Admin.Controllers
                 {
                     ret.Add(new
                     {
-                        id = t[i].ID,
-                        @checked = true,
+                        id = t[i].ID,                        
                         attributes = new { type = "btn", order = t[i].iOrder },
                         text = t[i].sButtonName,
-                        iconCls = t[i].sIcon,
-                        state = "closed"
+                        iconCls = t[i].sIcon
                     });
                 }
                 return ret.OrderBy(km => ((dynamic)((dynamic)km).attributes).order).ToList();
@@ -382,7 +395,7 @@ namespace Framework.web.Areas.Admin.Controllers
         #endregion
 
         #region 私有方法（主要是操作session中的菜单哪一类的）
-
+                
         //重新构建菜单层级结构
         private IList<UserMenu> InitMenu(IList<UserMenu> t)
         {
@@ -404,7 +417,7 @@ namespace Framework.web.Areas.Admin.Controllers
             return userMs.OrderBy(m => m.iOrder).ToList();
         }
 
-        // 给指定菜单重新设置其层级关系
+        //给指定菜单重新设置其层级关系
         private void RecursionLoadLevelUserMenu(IList<UserMenu> t, UserMenu m)
         {
             Parallel.For(0, t.Count, index =>
@@ -575,6 +588,33 @@ namespace Framework.web.Areas.Admin.Controllers
                 }
             }
             return ret;
+        }
+
+        //删除Session中对应的button
+        private void DeleteSessionMenuButton(string v)
+        {
+            var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
+            if (userRoleMenu != null)
+            {
+                Parallel.For(0, userRoleMenu.AllMenu.Count,(index,state)=> {
+                    for (int i = 0; i < userRoleMenu.AllMenu[index].Buttons.Count; i++)
+                    {
+                        if (userRoleMenu.AllMenu[index].Buttons[i].ID.ToString() == v)
+                        {
+                            userRoleMenu.AllMenu[index].Buttons.RemoveAt(i);
+                            state.Stop();
+                            return;
+                        }
+                    }
+                });
+                var userMenu = InitMenu(userRoleMenu.AllMenu/*重构菜单的层级关系*/);
+                userRoleMenu.UserMenu = userMenu;
+                SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);
+            }
+            else
+            {
+                throw new Domain.DomainInfoException("没有从会话中找到对应的菜单按钮，请联系管理员");
+            }
         }
         #endregion
     }

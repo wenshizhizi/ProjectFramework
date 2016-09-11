@@ -6,17 +6,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <!--主题样式：可选-->
+    <!--主题样式：可选-->    
     @*<link href="~/Content/themes/black/easyui.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />
     @*<link href="~/Content/themes/ui-pepper-grinder/easyui.css" rel="stylesheet" />*@
     @*<link href="~/Content/themes/ui-cupertino/easyui.css" rel="stylesheet" />*@
+    @*<link href="~/Content/themes/ui-sunny/easyui.css" rel="stylesheet" />*@
 
     <link href="~/Content/themes/icon.css" rel="stylesheet" />
     <link href="~/Content/themes/color.css" rel="stylesheet" />
     <link href="~/Content/themes/mobile.css" rel="stylesheet" />
     <link href="~/Content/backload.css" rel="stylesheet" />
-    @*<link href="~/Content/themes/ui-sunny/easyui.css" rel="stylesheet" />*@
 
     <script src="~/scripts/jquery-1.11.3.js"></script>
     <script src="~/scripts/jquery.easyui-1.4.5.js"></script>
@@ -26,31 +27,10 @@
     <script src="~/scripts/lib/tool.module.js"></script>
     <script src="~/scripts/lib/array.module.js"></script>
     <script src="~/scripts/lib/func.module.js"></script>
-    <script src="~/scripts/lib/easyui.module.js"></script>
+    <script src="~/scripts/lib/easyui.module.js"></script>    
     @*<script src="~/scripts/lib/client.common.js"></script>*@
 
     <title>亿合科技内部应用后台</title>
-
-    <style>
-        .menu_table {
-            width: 100%;
-        }
-
-        .menu_tr:hover {
-            background-color: cornsilk;
-            cursor: pointer;
-        }
-
-        .menu_tr {
-            background-color: burlywood;
-        }
-
-        .menu_td {
-            text-align: left;
-            height: 25px;
-            padding-left: 15px;
-        }
-    </style>
 
 </head>
 <body>
@@ -66,12 +46,11 @@
         <div data-options="region:'south',title:'',split:false" style="height:80px;"></div>
 
         <!--左布局 菜单-->
-        <div data-options="region:'west',title:'菜单',split:false,href:'/Admin/Menu'" style="width:280px;padding:1px"></div>
+        <div data-options="region:'west',title:'菜单',split:false,href:'/Admin/Menu',width:280" style="padding:1px"></div>
 
         <!--中间面板-->
         <div data-options="region:'center',title:''" style="padding:1px;background:#eee;">
             <div id="tabs" class="easyui-tabs" data-options="fit:true">
-
             </div>
         </div>
     </div>

@@ -326,6 +326,39 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
         }
     }
 
+    /**
+     * 带确认框的选中操作确认树点击事件
+     * @param {type} tree 树
+     * @param {type} callBackFuc 回调函数
+     * @param {type} judgeCallBack 确认操作回调函数
+     * @param {type} confirmMessage 确认消息
+     * @param {type} unSelectRowMessage 未选中的消息
+     * @param {type} formatConfirmMSGCallBack 需要格式化选中节点的回调函数
+     */
+    function confirmTreeNodeJudge(tree, callBackFuc, judgeCallBack, confirmMessage, unSelectRowMessage, formatConfirmMSGCallBack) {
+        try {
+            var selectedNode = null;
+            selectedNode = tree.tree("getSelected");
+            if (selectedNode !== null) {
+                var judeResult = true;
+                if (judgeCallBack) judeResult = judgeCallBack(selectedNode);
+                if (!judeResult) return;
+                if (formatConfirmMSGCallBack) {
+                    confirmMessage = formatConfirmMSGCallBack(selectedNode);
+                }
+                $.messager.confirm('操作确认', confirmMessage, function (result) {
+                    if (result) {
+                        callBackFuc(selectedNode);
+                    }
+                });
+            } else {
+                alertInfo(unSelectRowMessage);
+            }
+        } catch (e) {
+            throw e;
+        }
+    }
+
     return {
         alertMsg: alertMsg,
         alertErr: alertErr,
@@ -336,6 +369,7 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
         confirmDomainByMultiRows: confirmDomainByMultiRows,
         checkTreeSelected: checkTreeSelected,
         confirmTreeNode: confirmTreeNode,
+        confirmTreeNodeJudge: confirmTreeNodeJudge,
         search: search
     };
 });

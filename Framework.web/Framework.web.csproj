@@ -127,11 +127,13 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Content\gridtable.css" />
     <Content Include="Areas\Admin\Scripts\Login\Index.js" />
-    <Content Include="Areas\Admin\Scripts\Main\Index.js" />
     <Content Include="Areas\Admin\Scripts\MenuManage\Index.js" />
     <Content Include="Areas\Admin\Scripts\Menu\Index.js" />
     <Content Include="Areas\Admin\Scripts\RoleManage\Index.js" />
+    <Content Include="Areas\Admin\Scripts\SystemUser\Index.js" />
     <Content Include="Content\backload.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="scripts\city-picker\city-picker.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\themes\14-15111615263S59.jpg" />
     <Content Include="Content\themes\14-15111615263S591.jpg" />
@@ -620,7 +622,9 @@
     <Content Include="Content\themes\ui-sunny\tree.css" />
     <Content Include="Content\themes\ui-sunny\validatebox.css" />
     <Content Include="Content\themes\ui-sunny\window.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\images\drop-arrow.png" />
     <Content Include="scripts\ai.0.22.19-build00125.js" />
     <Content Include="scripts\ai.0.22.19-build00125.min.js" />
   </ItemGroup>
@@ -632,6 +636,7 @@
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SystemUserController.cs" />
     <Compile Include="Controllers\APISuperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
@@ -657,7 +662,18 @@
     <Content Include="Areas\Admin\Views\RoleManage\Index.cshtml" />
     <Content Include="Areas\Admin\Views\RoleManage\AddRole.cshtml" />
     <Content Include="Areas\Admin\Views\RoleManage\EditRole.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemUser\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemUser\AddSystemUser.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
+    <Content Include="Content\bootstrap-treeview.min.css" />
+    <Content Include="scripts\bootstrap-treeview.js" />
+    <Content Include="scripts\bootstrap-treeview.min.js" />
+    <Content Include="scripts\city-picker\bootstrap.js" />
+    <Content Include="scripts\city-picker\city-picker.data.js" />
+    <Content Include="scripts\city-picker\city-picker.js" />
     <Content Include="scripts\jquery-1.11.3.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\jquery.easyui-1.4.5.js" />
@@ -708,6 +724,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Scripts\Main\" />
     <Folder Include="SystemLogs\Log\" />
   </ItemGroup>
   <ItemGroup>

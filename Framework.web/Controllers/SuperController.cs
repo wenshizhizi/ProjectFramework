@@ -25,7 +25,7 @@ namespace Framework.web.Controllers
         {
             data = null,
             identity = "",
-            dataStr = ""
+            dataStr = ""            
         };
 
         //SessionUser
@@ -57,12 +57,11 @@ namespace Framework.web.Controllers
         /// <param name="filterContext"></param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            //载入后台的用户session信息
-            SessionInfo session = (SessionInfo)GetSessionInfo(SessionInfo.USER_SESSION_NAME);
+            SessionInfo session/*载入后台的用户session信息*/ = (SessionInfo)GetSessionInfo(SessionInfo.USER_SESSION_NAME);
 
             if (session == null || session.SessionUser == null || session.SessionUser.User == null)
             {
-                var crtl = filterContext.HttpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
+                var crtl/*获取请求的控制器路由字符串*/ = filterContext.HttpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
 
                 //排除掉登录和获取验证码的控制器
                 if (crtl != "Login" && crtl != "ValidateCode")
@@ -86,8 +85,8 @@ namespace Framework.web.Controllers
         /// <param name="filterContext"></param>
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            var isAjaxRequest = filterContext.HttpContext.Request.IsAjaxRequest();
-            var requestType = filterContext.HttpContext.Request.RequestType.ToLower();
+            var isAjaxRequest/*是否是ajax异步请求*/ = filterContext.HttpContext.Request.IsAjaxRequest();
+            var requestType/*请求类型*/ = filterContext.HttpContext.Request.RequestType.ToLower();
 
             //如果响应遇到异常
             if (filterContext.Exception != default(Exception))
@@ -96,7 +95,6 @@ namespace Framework.web.Controllers
                 if (filterContext.Exception.GetType() == typeof(DomainInfoException))
                 {
                     var ex = filterContext.Exception as DomainInfoException;
-                    filterContext.ExceptionHandled = true;
                     if (ex != null && ex.IsLog)
                     {
                         SystemLog.Logs.GetLog().WriteErrorLog(ex);/*记录日志*/
@@ -110,15 +108,16 @@ namespace Framework.web.Controllers
                         result.Msg = ex != null ? ex.Message : "后台执行中出现异常";
                         filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
                     }
+                    filterContext.ExceptionHandled = true;
                 }
                 else
                 {
                     //处理controller的异常
                     SystemLog.Logs.GetLog().WriteErrorLog(filterContext.Exception);
-                    filterContext.ExceptionHandled = true;
                     result.Succeeded = false;
                     result.Msg = filterContext.Exception.Message;
                     filterContext.Result = Content(ParameterLoader.LoadResponseJSONStr(result));
+                    filterContext.ExceptionHandled = true;
                 }
             }
             else if (isAjaxRequest && requestType == "post")
@@ -129,7 +128,6 @@ namespace Framework.web.Controllers
             else if (isAjaxRequest && requestType == "get")
             {
                 //这里一般是通过easyui的panel或者dialog的get请求请求部分数据的处理
-
                 var controller = filterContext.RequestContext.RouteData.Values["controller"].ToString().ToLower();
                 var action = filterContext.RequestContext.RouteData.Values["action"].ToString().ToLower();
 
@@ -138,7 +136,7 @@ namespace Framework.web.Controllers
                 if (controller != "login" && controller != "menu" && controller != "main" && action == "index" || NeedMenuButton)
                 {
                     //请求是get请求，一般都是打开某个菜单，获取会话中的用户权限菜单信息
-                    var menuinfo = Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] as UserRoleMenuInfo;
+                    var menuinfo = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
 
                     if (menuinfo != null)
                     {
@@ -177,7 +175,7 @@ namespace Framework.web.Controllers
         /// </summary>
         /// <param name="sessionName"></param>
         /// <param name="sessionInfo"></param>
-        protected void SetSessionInfo(string sessionName,object sessionInfo)
+        protected void SetSessionInfo(string sessionName, object sessionInfo)
         {
             Session[sessionName] = sessionInfo;
         }

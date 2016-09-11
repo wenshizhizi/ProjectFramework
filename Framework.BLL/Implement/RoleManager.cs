@@ -11,6 +11,7 @@ namespace Framework.BLL
 {
     public class RoleManager : IRoleManager
     {
+        //添加角色
         public override bool AddRole(dynamic data)
         {
             EHECD_RoleDTO role = new EHECD_RoleDTO
@@ -27,6 +28,7 @@ namespace Framework.BLL
             return excute.InsertSingle<EHECD_RoleDTO>(role) > 0;
         }
 
+        //删除角色
         public override int DeleteRole(string ID)
         {
             StringBuilder sb = new StringBuilder();
@@ -43,12 +45,14 @@ namespace Framework.BLL
             return excute.ExcuteTransaction(sb.ToString());
         }
 
+        //编辑角色
         public override bool EditRole(EHECD_RoleDTO role)
         {
             role.dModifyTime = DateTime.Now;
             return excute.UpdateSingle<EHECD_RoleDTO>(role, string.Format("where ID = '{0}'", role.ID.ToString())) > 0;
         }
 
+        //载入角色
         public override PagingRet<EHECD_RoleDTO> LoadRoles(dynamic where)
         {
             PageInfo pageinfo = new PageInfo

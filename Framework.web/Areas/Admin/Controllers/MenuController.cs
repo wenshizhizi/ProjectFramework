@@ -1,6 +1,7 @@
 ﻿using Framework.DTO;
 using Framework.Validate;
 using Framework.web.Controllers;
+using Framework.web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,23 @@ namespace Framework.web.Areas.Admin.Controllers
     {
         // GET: Admin/Menu
         public ActionResult Index()
+        {            
+            return View();
+        }
+
+        //载入菜单
+        public void LoadMenu()
         {
             var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
-                return View(userRoleMenu);
+                result.Data = MenuTagCreator.CreateBootStrapTreeMenu(userRoleMenu);
+                result.Succeeded = true;
             }
             else
             {
-                return null;
+                result.Data = "";
+                result.Succeeded = false;
             }
         }
     }

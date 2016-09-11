@@ -9,6 +9,51 @@ namespace Framework.web.Models
 {
     public class MenuTagCreator
     {
+        //创建bootstrap菜单的数据
+        public static List<dynamic> CreateBootStrapTreeMenu(UserRoleMenuInfo menuInfo)
+        {
+            return CreateBootStrapTreeMenuString(menuInfo.UserMenu);
+        }
+
+        //递归加载菜单
+        private static List<dynamic> CreateBootStrapTreeMenuString(IList<UserMenu> userMenu)
+        {
+            var itemlist = new List<dynamic>();
+
+            //遍历获取到的用户的菜单
+            foreach (var item in userMenu)
+            {
+
+                //如果有子菜单
+                if (item.ChildMenu.Count > 0)
+                {
+                    itemlist.Add(new
+                    {
+                        text = item.sMenuName,
+                        url = string.IsNullOrWhiteSpace(item.sUrl) ? "root" : item.sUrl,
+                        selectable = true,
+                        state = new { expanded = false, selected = false, @checked = false, disabled = false },
+                        //tags = new string[] { item.ChildMenu.Count.ToString() },
+                        nodes = CreateBootStrapTreeMenuString(item.ChildMenu)
+                    });
+                }
+                else
+                {
+                    itemlist.Add(new
+                    {
+                        text = item.sMenuName,
+                        url = string.IsNullOrWhiteSpace(item.sUrl) ? "root" : item.sUrl,
+                        selectable = true,
+                        state = new { expanded = false, selected = false, @checked = false, disabled = false }
+                        //,
+                        //tags = new string[] { "badge" }
+                    });
+                }
+            }
+            return itemlist;
+        }
+
+        [Obsolete("换用bootstrap，该方法弃用")]
         public static HtmlString CreateMenu(UserRoleMenuInfo menuInfo)
         {
             StringBuilder sb = new StringBuilder();
@@ -17,6 +62,7 @@ namespace Framework.web.Models
         }
 
         //获取菜单html，这里是递归了的，样式因为没有数据没有调整
+        [Obsolete("换用bootstrap，该方法弃用")]
         private static string GetMenuString(IList<UserMenu> menu)
         {
             StringBuilder sb = new StringBuilder();
@@ -63,7 +109,6 @@ namespace Framework.web.Models
                     sb.AppendLine("</tbody>");
                     sb.AppendLine("</table>");
                 }
-
                 sb.AppendLine("</div>");
             }
             return sb.ToString();

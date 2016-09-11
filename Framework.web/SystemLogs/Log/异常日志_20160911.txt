@@ -1,0 +1,148 @@
+﻿
+===================================================================================================
+异常时间：2016-09-11 11:30:26,959 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：LoadSystemUsers
+异常简述：未实现该方法或操作。
+详细信息：
+   在 Framework.BLL.SystemUserManager.LoadSystemUsers(PageInfo page, Object where) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManager.cs:行号 15
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute3[T0,T1,T2,TRet](CallSite site, T0 arg0, T1 arg1, T2 arg2)
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.LoadSystemUser() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 23
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-11 11:31:54,027 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：LoadSystemUsers
+异常简述：未实现该方法或操作。
+详细信息：
+   在 Framework.BLL.SystemUserManager.LoadSystemUsers(PageInfo page, Object where) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManager.cs:行号 15
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.LoadSystemUser() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 23
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-11 11:32:13,432 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：LoadSystemUsers
+异常简述：未实现该方法或操作。
+详细信息：
+   在 Framework.BLL.SystemUserManager.LoadSystemUsers(PageInfo page, Object where) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManager.cs:行号 15
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.LoadSystemUser() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 23
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-11 11:32:39,998 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：LoadSystemUsers
+异常简述：未实现该方法或操作。
+详细信息：
+   在 Framework.BLL.SystemUserManager.LoadSystemUsers(PageInfo page, Object where) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManager.cs:行号 15
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.LoadSystemUser() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 23
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-11 11:33:44,515 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：LoadSystemUsers
+异常简述：未实现该方法或操作。
+详细信息：
+   在 Framework.BLL.SystemUserManager.LoadSystemUsers(PageInfo page, Object where) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManager.cs:行号 15
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.LoadSystemUser() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 23
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-11 11:34:21,713 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：LoadSystemUsers
+异常简述：未实现该方法或操作。
+详细信息：
+   在 Framework.BLL.SystemUserManager.LoadSystemUsers(PageInfo page, Object where) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManager.cs:行号 15
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.LoadSystemUser() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 23
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-11 11:34:38,311 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：LoadSystemUsers
+异常简述：未实现该方法或操作。
+详细信息：
+   在 Framework.BLL.SystemUserManager.LoadSystemUsers(PageInfo page, Object where) 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManager.cs:行号 15
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.LoadSystemUser() 位置 C:\Users\yangy\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 23
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()

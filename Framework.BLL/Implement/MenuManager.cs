@@ -141,6 +141,20 @@ namespace Framework.BLL
             return excute.ExcuteTransaction(sb.ToString());
         }
 
+        //删除菜单按钮
+        public override int DeleteMenuButton(EHECD_MenuButtonDTO btn)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //1.删除当前菜单按钮
+            sb.AppendLine(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_MenuButtonDTO>(btn, string.Format("where ID = '{0}'", btn.ID.ToString())));
+
+            //2.解除这个按钮的所有特权信息
+            sb.AppendLine(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO { bIsDeleted = true }, string.Format("where sPrivilegeAccessValue = '{0}' AND sPrivilegeAccess = 'button'", btn.ID.ToString())));
+
+            return excute.ExcuteTransaction(sb.ToString());
+        }
+
         //更新按钮
         public override EHECD_MenuButtonDTO EditButton(EHECD_MenuButtonDTO dto)
         {

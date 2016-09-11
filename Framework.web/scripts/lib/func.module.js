@@ -112,11 +112,9 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
     function toFixed(number, precision, isFourHomesFive) {
         try {
             if (!precision) precision = 2;
-
             if (precision > 15 || precision < 0) {
                 return number;
             }
-
             var numberStr = number.toString();
 
             if (isFourHomesFive) {
@@ -401,14 +399,19 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
      * @param {Function} onError 失败回调函数,函数签名为  function (XMLHttpRequest, textStatus, errorThrown)
      * @param {Function} onComplete Ajax调用完成回调函数,函数签名为  function (XMLHttpRequest, textStatus)
      * @param {String} dataType Ajax返回数据类型,默认为 "text"
+     * @param {Object} maskcontent 遮罩层容器，如果不指定，默认为后台界面选中的tabs
      */
-    function post(url, data, onSuccess, unSucess, modal, async, onError, onComplete, dataType) {
-
+    function post(url, data, onSuccess, unSucess, modal, async, onError, onComplete, dataType, maskcontent) {
+        var mask = null;
         modal = (modal === false ? false : true);
         if (modal) {
-            if (tool) {
-                tool.show();
+            try {
+                maskcontent = maskcontent ? maskcontent : $("#tabs").tabs("getSelected");
+            } catch (e) {
             }
+            
+            mask = new Maskwin();           
+            mask.show(maskcontent);
         }
 
         var jsonData = {
@@ -425,11 +428,11 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
             async: (async == false ? async : true),
             success: function (json) {
                 if (modal) {
-                    if (tool) {
-                        tool.hide();
+                    if (mask) {
+                        mask.hide();
                     }
                 }
-                                
+
                 if (json.indexOf("<script>") >= 0) {
                     json = json.replace("<script>", "").replace("</script>", "");
                     eval(json);
@@ -452,8 +455,10 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
             },
             error: onError ? onError : function () {
                 ajaxHandler.abort();
-                if (tool) {
-                    tool.hide();
+                if (modal) {
+                    if (mask) {
+                        mask.hide();
+                    }
                 }
             },
             //请求完成后最终执行参数
@@ -462,13 +467,62 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
                     //超时,status还有success,error等值的情况
                     alert("访问超时");
                     ajaxHandler.abort();
-                    if (tool) {
-                        tool.hide();
+                    if (modal) {
+                        if (mask) {
+                            mask.hide();
+                        }
                     }
                 }
             }
         });
     }
+
+    /**
+     * 遮罩层对象
+     * @returns {Object} 遮罩层暴露的接口 
+     */
+    function Maskwin() {
+
+        /**
+         * 显示遮罩层
+         * @param {tab} 遮罩要放入的容器
+         */
+        function show(content) {
+            var h = $(content).height();
+            var w = $(content).width();
+            this.maskmsg = $('<div style="height:' + h + 'px;width:' + w + 'px;position:absolute;z-index:99999;background: rgba(255,255,255,0.5);left:2px;top:33px;">' +
+                        '<div style="position:absolute;overflow:hidden;left:40%;top:35%;height:400px;width:200px;">' +
+                                    '<div class="cssload-wrap">' +
+			                        '<div class="cssload-circle"></div>' +
+			                        '<div class="cssload-circle"></div>' +
+			                        '<div class="cssload-circle"></div>' +
+			                        '<div class="cssload-circle"></div>' +
+                                    '<div class="cssload-circle"></div>' +
+		                        '</div>' +
+                        '<div style="text-align:center">' +
+                          '<span style="font-size:12px">页面数据加载中，请稍候...</span>' +
+                        '</div>' +
+                        '</div>' +
+                    '</div>');
+            this.maskmsg.appendTo(content);
+        };
+
+        /**
+         * 移除遮罩层
+         */
+        function hide() {
+            setTimeout((function (maskmsg) {
+                return function () {
+                    maskmsg.remove();
+                };
+            })(this.maskmsg), 500);
+        };
+
+        return {
+            show: show,
+            hide: hide
+        };
+    };
 
     /**
      * 
