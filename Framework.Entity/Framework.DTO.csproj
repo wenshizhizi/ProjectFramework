@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationData\DataBaseInfo\CreateSQL\crebas.sql" />
+    <Content Include="ApplicationData\DataBaseInfo\CreateSQL\dbo.sql" />
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup />

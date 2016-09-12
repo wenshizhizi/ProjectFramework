@@ -1,11 +1,10 @@
 ﻿
 <link href="~/Areas/Admin/Content/gridtable.css" rel="stylesheet" />
 <link href="~/scripts/city-picker/city-picker.css" rel="stylesheet" />
-<script src="~/scripts/city-picker/bootstrap.js"></script>
 <script src="~/scripts/city-picker/city-picker.data.js"></script>
 <script src="~/scripts/city-picker/city-picker.js"></script>
 
-<div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,border:false,fit:true" style="padding:2px">
+<div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,border:false,fit:false" style="padding:1px;margin:1px">
     <form style="width:100%;height:100%;" id="add_systemuser_form">
         <table class="styletable" style="height:100%">
             <tbody>
@@ -31,7 +30,21 @@
                     <td>所处地区</td>
                     <td>
                         <div style="position: relative;">
-                            <input style="width:180px" required readonly type="text" name="region" data-toggle="city-picker">
+                            <input style="width:180px" value="四川省/成都市/锦江区" readonly type="text" name="region" data-toggle="city-picker">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>联系地址</td>
+                    <td>
+                        <input class="easyui-textbox" data-options="width:180,type:'text',required:false,validType:['maxLength[30]','isHtmlValidate']" name="sAddress" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>联系手机</td>
+                    <td>
+                        <div style="position: relative;">
+                            <input class="easyui-textbox" data-options="width:180,type:'text',missingMessage:'请输入联系电话',required:true,validType:['isPhoneNum']" name="sMobileNum" />
                         </div>
                     </td>
                 </tr>
@@ -45,6 +58,12 @@
                     <td>用户昵称</td>
                     <td>
                         <input class="easyui-textbox" data-options="width:180,type:'text',missingMessage:'请输入用户昵称',required:true,validType:['chartLengthBetween[4,20,\'用户昵称\']','isHtmlValidate']" name="sUserNickName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户性别</td>
+                    <td>
+                        <input type="radio" name="tSex" value="1" checked />男&emsp;/&emsp;<input type="radio" name="tSex" value="0" />女
                     </td>
                 </tr>
             </tbody>

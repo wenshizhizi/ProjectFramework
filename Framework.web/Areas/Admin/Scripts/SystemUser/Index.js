@@ -14,6 +14,8 @@
             });
 
             $("a[data-id='add_systemuser_button']").click(addSystemUser);
+
+            $("a[data-id='edit_systemuser_button']").click(editSystemUser);
         }
 
         /**
@@ -64,15 +66,40 @@
                     iconCls: 'icon-save',
                     handler: function () {
                         if ($("#add_systemuser_form").form("validate")) {
-                            debugger
+
                             var json = $("#add_systemuser_form").serializeObject();
 
                             if (json.sPassWord !== json.sPassWord2) {
-                                eui.alertErr("两次输入的密码不一致");
-                                return;
+                                return eui.alertErr("两次输入的密码不一致");                                
                             }
+                            
+                            delete json.sPassWord2;
 
+                            /*
+                            * 初始化区域数据
+                            */
+                            var region = json.region.split("/");
 
+                            if (region.length > 0) {
+
+                                delete json.region;
+
+                                if (region.length === 1) {
+                                    json.sProvice = region[0];
+                                    json.sCity = "";
+                                    json.sCounty = "";
+                                } else if (region.length === 2) {
+                                    json.sProvice = region[0];
+                                    json.sCity = region[1];
+                                    json.sCounty = "";
+                                } else {
+                                    json.sProvice = region[0];
+                                    json.sCity = region[1];
+                                    json.sCounty = region[2];
+                                }
+                            } else {
+                                return eui.alertErr("请选择系统用户所在区域");                                
+                            }
 
                             f.post("/Admin/SystemUser/AddSystemUser", json,
                                 function (ret) {
@@ -106,15 +133,15 @@
         /**
          * 编辑角色
          */
-        function editRole() {
+        function editSystemUser() {
             eui.checkSelectedRow(grid, function (selectedRow) {
                 var div = $("<div/>");
                 div.dialog({
-                    title: "编辑角色",
+                    title: "编辑用户信息",
                     width: 400,
                     height: 200,
                     cache: false,
-                    href: '/Admin/RoleManage/ToEditRole',
+                    href: '/Admin/SystemUser/ToEditSystemUser',
                     queryParams: selectedRow,
                     modal: true,
                     collapsible: false,
@@ -125,19 +152,19 @@
                         text: '保存',
                         iconCls: 'icon-save',
                         handler: function () {
-                            if ($("#edit_role_form").form("validate")) {
+                            //if ($("#edit_role_form").form("validate")) {
                                 
-                                var json = $("#edit_role_form").serializeObject();
-                                json.ID = selectedRow.ID;
-                                f.post("/Admin/RoleManage/EditRole", json,
-                                    function (ret) {
-                                        eui.alertInfo("编辑角色成功");
-                                        eui.search(grid, true);
-                                        $(div).dialog("close");
-                                    }, function (ret) {
-                                        eui.alertErr(ret.Msg);
-                                    });
-                            }
+                            //    var json = $("#edit_role_form").serializeObject();
+                            //    json.ID = selectedRow.ID;
+                            //    f.post("/Admin/RoleManage/EditRole", json,
+                            //        function (ret) {
+                            //            eui.alertInfo("编辑角色成功");
+                            //            eui.search(grid, true);
+                            //            $(div).dialog("close");
+                            //        }, function (ret) {
+                            //            eui.alertErr(ret.Msg);
+                            //        });
+                            //}
                         }
                     }, {
                         text: '关闭',

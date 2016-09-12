@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(function () {    
     void function () {
         var eui = modules.get("eui");
         var t = modules.get("tool");

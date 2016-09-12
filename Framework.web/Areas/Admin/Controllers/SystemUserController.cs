@@ -17,6 +17,21 @@ namespace Framework.web.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 添加系统用户
+        /// </summary>
+        public void AddSystemUser()
+        {
+            var user = JSONHelper.GetModel<DTO.EHECD_SystemUserDTO>(RequestParameters.dataStr);
+
+            result.Succeeded = DI.DIEntity
+                                .GetInstance()
+                                .GetImpl<ISystemUserManager>()
+                                .AddSystemUser(user) > 0;
+
+            result.Msg = !result.Succeeded ? "添加用户失败，请联系系统管理员" : "";
+        }
+
+        /// <summary>
         /// 载入系统用户
         /// </summary>
         public void LoadSystemUser()

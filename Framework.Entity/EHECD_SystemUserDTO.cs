@@ -47,7 +47,7 @@ namespace Framework.DTO
         }
 
         /// <summary>
-        /// 用户状态
+        /// 用户状态 0：正常 1：冻结
         /// </summary>
         [FieldInfo(DataFieldLength = 1,FiledName = "tUserState",Required = true)]
         public Byte? tUserState
@@ -56,7 +56,7 @@ namespace Framework.DTO
         }
 
         /// <summary>
-        /// 用户类型
+        /// 用户类型 0：后台用户
         /// </summary>
         [FieldInfo(DataFieldLength = 1,FiledName = "tUserType",Required = true)]
         public Byte? tUserType
@@ -128,7 +128,7 @@ namespace Framework.DTO
         }
 
         /// <summary>
-        /// 性别
+        /// 性别 0:女 1:男
         /// </summary>
         [FieldInfo(DataFieldLength = 1,FiledName = "tSex",Required = true)]
         public Byte? tSex
@@ -143,6 +143,15 @@ namespace Framework.DTO
         public Boolean? bIsDeleted
         {
             get; set;
+        }
+
+        /// <summary>
+        /// 联系手机
+        /// </summary>
+        [FieldInfo(DataFieldLength = 25, FiledName = "sMobileNum", Required = true)]
+        public string sMobileNum
+        {
+            get;set;
         }
     }
 }
