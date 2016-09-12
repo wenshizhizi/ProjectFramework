@@ -37,7 +37,7 @@ namespace Framework.web.Areas.Admin.Controllers
             }
 
             ILogin login = DIEntity.GetInstance().GetImpl<ILogin>();
-
+            user.sAddress = RequestParameters.dynamicData.IP.Value.ToString();
             var dto = login.Login(user);
 
             if (dto != null)

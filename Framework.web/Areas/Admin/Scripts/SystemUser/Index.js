@@ -70,9 +70,9 @@
                             var json = $("#add_systemuser_form").serializeObject();
 
                             if (json.sPassWord !== json.sPassWord2) {
-                                return eui.alertErr("两次输入的密码不一致");                                
+                                return eui.alertErr("两次输入的密码不一致");
                             }
-                            
+
                             delete json.sPassWord2;
 
                             /*
@@ -98,7 +98,7 @@
                                     json.sCounty = region[2];
                                 }
                             } else {
-                                return eui.alertErr("请选择系统用户所在区域");                                
+                                return eui.alertErr("请选择系统用户所在区域");
                             }
 
                             f.post("/Admin/SystemUser/AddSystemUser", json,
@@ -153,7 +153,7 @@
                         iconCls: 'icon-save',
                         handler: function () {
                             //if ($("#edit_role_form").form("validate")) {
-                                
+
                             //    var json = $("#edit_role_form").serializeObject();
                             //    json.ID = selectedRow.ID;
                             //    f.post("/Admin/RoleManage/EditRole", json,
@@ -210,7 +210,7 @@
         /**
          * 初始化grid数据
          */
-        function initData() {            
+        function initData() {
             eui.bindPaginationEvent(grid, {
                 idField: "ID",
                 loadMsg: "正在加载...",
@@ -239,6 +239,7 @@
                     }
                 },
                 { field: 'sUserNickName', title: '用户昵称', align: 'center', width: 100 },
+                { field: 'sMobileNum', title: '手机号', align: 'center', width: 100 },
                 { field: 'dCreateTime', title: '创建时间', align: 'center', width: 100 },
                 { field: 'dLastLoginTime', title: '最后登录时间', align: 'center', width: 100 }
                 ]],

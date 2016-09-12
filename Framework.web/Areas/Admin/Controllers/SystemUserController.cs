@@ -22,11 +22,11 @@ namespace Framework.web.Areas.Admin.Controllers
         public void AddSystemUser()
         {
             var user = JSONHelper.GetModel<DTO.EHECD_SystemUserDTO>(RequestParameters.dataStr);
-
+            CreateSyslogInfo();
             result.Succeeded = DI.DIEntity
                                 .GetInstance()
                                 .GetImpl<ISystemUserManager>()
-                                .AddSystemUser(user) > 0;
+                                .AddSystemUser(user, RequestParameters.dynamicData) > 0;
 
             result.Msg = !result.Succeeded ? "添加用户失败，请联系系统管理员" : "";
         }

@@ -25,7 +25,7 @@ namespace Framework.web.Controllers
         {
             data = null,
             identity = "",
-            dataStr = ""            
+            dataStr = ""
         };
 
         //SessionUser
@@ -47,6 +47,8 @@ namespace Framework.web.Controllers
             {
                 //封装一下ajax的数据
                 RequestParameters = ParameterLoader.LoadAjaxPostParameters(requestContext.HttpContext.Request.InputStream);
+                if (RequestParameters.dynamicData != null)
+                    RequestParameters.dynamicData.IP = requestContext.HttpContext.Request.UserHostAddress == "::1" ? "127.0.0.1" : requestContext.HttpContext.Request.UserHostAddress;
             }
             base.Initialize(requestContext);
         }
@@ -178,6 +180,14 @@ namespace Framework.web.Controllers
         protected void SetSessionInfo(string sessionName, object sessionInfo)
         {
             Session[sessionName] = sessionInfo;
+        }
+
+        protected void CreateSyslogInfo()
+        {
+            if (RequestParameters.dynamicData == null) RequestParameters.dynamicData = new { };
+            RequestParameters.dynamicData.sLoginName = SessionUser.User.sLoginName;
+            RequestParameters.dynamicData.sUserName = SessionUser.User.sUserName;
+            RequestParameters.dynamicData.IP = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress;
         }
     }
 }

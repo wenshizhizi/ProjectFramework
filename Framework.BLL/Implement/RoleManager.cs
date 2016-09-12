@@ -12,7 +12,7 @@ namespace Framework.BLL
     public class RoleManager : IRoleManager
     {
         //添加角色
-        public override bool AddRole(dynamic data)
+        public override bool AddRole(dynamic data, dynamic p)
         {
             EHECD_RoleDTO role = new EHECD_RoleDTO
             {
@@ -25,11 +25,42 @@ namespace Framework.BLL
                 sRoleName = data.sRoleName.Value
             };
 
-            return excute.InsertSingle<EHECD_RoleDTO>(role) > 0;
+            var ret = excute.InsertSingle<EHECD_RoleDTO>(role) > 0;
+
+            if (ret)
+            {
+                var log = new EHECD_SystemLogDTO
+                {
+                    bIsDeleted = false,
+                    dInsertTime = DateTime.Now,
+                    ID = GuidHelper.GetSecuentialGuid(),
+                    sIPAddress = p.IP.ToString(),
+                    sLoginName = p.sLoginName.ToString(),
+                    sUserName = p.sUserName.ToString(),
+                    sDomainDetail = "系统用户添加角色" + role.ID
+                };
+                sysLog.InsertSystemLog(log, excute);
+            }
+            else
+            {
+                var log = new EHECD_SystemLogDTO
+                {
+                    bIsDeleted = false,
+                    dInsertTime = DateTime.Now,
+                    ID = GuidHelper.GetSecuentialGuid(),
+                    sIPAddress = p.IP.ToString(),
+                    sLoginName = p.sLoginName.ToString(),
+                    sUserName = p.sUserName.ToString(),
+                    sDomainDetail = "系统用户添加角色" + role.ID + "失败"
+                };
+                sysLog.InsertSystemLog(log, excute);
+            }
+
+            return ret;
         }
 
         //删除角色
-        public override int DeleteRole(string ID)
+        public override int DeleteRole(string ID, dynamic p)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -37,19 +68,81 @@ namespace Framework.BLL
             sb.Append(DBSqlHelper.GetUpdateSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO { bIsDeleted = true }, string.Format("WHERE ((sPrivilegeMaster = 'role' AND sPrivilegeMasterValue = '{0}'/*类别是角色*/) OR (sBelong = 'role' AND sBelongValue = '{0}'/*所有者是角色*/) OR (sPrivilegeAccess = 'role' AND sPrivilegeAccessValue = '{0}'/*提供者是角色*/))", ID)));
 
             //2.逻辑删除这个角色
-            sb.Append(DBSqlHelper.GetUpdateSQL<EHECD_RoleDTO>(new EHECD_RoleDTO { ID = Guid.Parse(ID), bIsDeleted = true },String.Format("WHERE ID = '{0}'",ID)));
+            sb.Append(DBSqlHelper.GetUpdateSQL<EHECD_RoleDTO>(new EHECD_RoleDTO { ID = Guid.Parse(ID), bIsDeleted = true }, String.Format("WHERE ID = '{0}'", ID)));
 
             //3.逻辑删除这个角色绑定的客户
             sb.Append(DBSqlHelper.GetUpdateSQL<EHECD_SystemUser_R_RoleDTO>(new EHECD_SystemUser_R_RoleDTO { sRoleID = Guid.Parse(ID), bIsDeleted = true }, String.Format("WHERE sRoleID = '{0}'", ID)));
 
-            return excute.ExcuteTransaction(sb.ToString());
+            var ret = excute.ExcuteTransaction(sb.ToString());
+
+            if (ret > 0)
+            {
+                var log = new EHECD_SystemLogDTO
+                {
+                    bIsDeleted = false,
+                    dInsertTime = DateTime.Now,
+                    ID = GuidHelper.GetSecuentialGuid(),
+                    sIPAddress = p.IP.ToString(),
+                    sLoginName = p.sLoginName.ToString(),
+                    sUserName = p.sUserName.ToString(),
+                    sDomainDetail = "系统用户删除角色" + ID
+                };
+                sysLog.InsertSystemLog(log, excute);
+            }
+            else
+            {
+                var log = new EHECD_SystemLogDTO
+                {
+                    bIsDeleted = false,
+                    dInsertTime = DateTime.Now,
+                    ID = GuidHelper.GetSecuentialGuid(),
+                    sIPAddress = p.IP.ToString(),
+                    sLoginName = p.sLoginName.ToString(),
+                    sUserName = p.sUserName.ToString(),
+                    sDomainDetail = "系统用户删除角色" + ID + "失败"
+                };
+                sysLog.InsertSystemLog(log, excute);
+            }
+
+            return ret;
         }
 
         //编辑角色
-        public override bool EditRole(EHECD_RoleDTO role)
+        public override bool EditRole(EHECD_RoleDTO role, dynamic p)
         {
             role.dModifyTime = DateTime.Now;
-            return excute.UpdateSingle<EHECD_RoleDTO>(role, string.Format("where ID = '{0}'", role.ID.ToString())) > 0;
+            var ret = excute.UpdateSingle<EHECD_RoleDTO>(role, string.Format("where ID = '{0}'", role.ID.ToString())) > 0;
+
+            if (ret)
+            {
+                var log = new EHECD_SystemLogDTO
+                {
+                    bIsDeleted = false,
+                    dInsertTime = DateTime.Now,
+                    ID = GuidHelper.GetSecuentialGuid(),
+                    sIPAddress = p.IP.ToString(),
+                    sLoginName = p.sLoginName.ToString(),
+                    sUserName = p.sUserName.ToString(),
+                    sDomainDetail = "系统用户编辑角色" + role.ID
+                };
+                sysLog.InsertSystemLog(log, excute);
+            }
+            else
+            {
+                var log = new EHECD_SystemLogDTO
+                {
+                    bIsDeleted = false,
+                    dInsertTime = DateTime.Now,
+                    ID = GuidHelper.GetSecuentialGuid(),
+                    sIPAddress = p.IP.ToString(),
+                    sLoginName = p.sLoginName.ToString(),
+                    sUserName = p.sUserName.ToString(),
+                    sDomainDetail = "系统用户编辑角色" + role.ID + "失败"
+                };
+                sysLog.InsertSystemLog(log, excute);
+            }
+
+            return ret;
         }
 
         //载入角色

@@ -52,6 +52,7 @@
     <Compile Include="EHECD_MenuButtonDTO.cs" />
     <Compile Include="EHECD_PrivilegeDTO.cs" />
     <Compile Include="EHECD_RoleDTO.cs" />
+    <Compile Include="EHECD_SystemLogDTO.cs" />
     <Compile Include="EHECD_SystemUserDTO.cs" />
     <Compile Include="EHECD_SystemUser_R_RoleDTO.cs" />
     <Compile Include="FieldInfo.cs" />

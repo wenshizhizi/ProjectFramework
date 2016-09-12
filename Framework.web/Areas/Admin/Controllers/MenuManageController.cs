@@ -19,7 +19,7 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             return View();
         }
-
+        
         /// <summary>
         /// 载入菜单
         /// </summary>
@@ -75,12 +75,13 @@ namespace Framework.web.Areas.Admin.Controllers
         public void AddMenu()
         {
             EHECD_FunctionMenuDTO menu/*要添加的菜单*/ = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.data.ToString());
-
+                        
             //菜单业务对象
             IMenuManager menubll = DI.DIEntity.GetInstance().GetImpl<IMenuManager>();
 
+            CreateSyslogInfo();
             //添加菜单
-            var ret = menubll.AddMenu(menu/*要添加的菜单*/);
+            var ret = menubll.AddMenu(menu/*要添加的菜单*/, RequestParameters.dynamicData);
 
             if (ret != null)
             {
@@ -141,7 +142,8 @@ namespace Framework.web.Areas.Admin.Controllers
             string menuID = requestData["menuID"].ToString();
             //菜单业务对象
             IMenuManager menubll = DI.DIEntity.GetInstance().GetImpl<IMenuManager>();
-            addbutton = menubll.AddButton(addbutton, menuID);
+            CreateSyslogInfo();
+            addbutton = menubll.AddButton(addbutton, menuID,RequestParameters.dynamicData);
 
             if (addbutton != null)
             {
@@ -153,7 +155,7 @@ namespace Framework.web.Areas.Admin.Controllers
                     //构建返回给界面的节点信息
                     result.Data = new
                     {
-                        id = addbutton.ID,                        
+                        id = addbutton.ID,
                         attributes = new { type = "btn" },
                         text = addbutton.sButtonName,
                         iconCls = addbutton.sIcon
@@ -202,7 +204,8 @@ namespace Framework.web.Areas.Admin.Controllers
         public void EditButton()
         {
             EHECD_MenuButtonDTO editbutton = JSONHelper.GetModel<EHECD_MenuButtonDTO>(RequestParameters.dataStr);
-            editbutton = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditButton(editbutton);
+            CreateSyslogInfo();
+            editbutton = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditButton(editbutton,RequestParameters.dynamicData);
 
             if (editbutton != null)
             {
@@ -239,7 +242,8 @@ namespace Framework.web.Areas.Admin.Controllers
         public void EditMenu()
         {
             EHECD_FunctionMenuDTO menu = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.dataStr);
-            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditMenu(menu);
+            CreateSyslogInfo();
+            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditMenu(menu,RequestParameters.dynamicData);
             if (editmenu != null)
             {
                 result.Data = new
@@ -264,7 +268,8 @@ namespace Framework.web.Areas.Admin.Controllers
         public void DeleteMenu()
         {
             EHECD_FunctionMenuDTO menu = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.dataStr);
-            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenu(menu);
+            CreateSyslogInfo();
+            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenu(menu,RequestParameters.dynamicData);
             if (editmenu > 0)
             {
                 DeleteSessionMenu(menu.ID.ToString());
@@ -284,7 +289,8 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             EHECD_MenuButtonDTO button = JSONHelper.GetModel<EHECD_MenuButtonDTO>(RequestParameters.dataStr);
             button.bIsDeleted = true;
-            var ret = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenuButton(button);
+            CreateSyslogInfo();
+            var ret = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenuButton(button,RequestParameters.dynamicData);
 
             if (ret > 0)
             {
@@ -322,7 +328,7 @@ namespace Framework.web.Areas.Admin.Controllers
                     {
                         id = item.ID,
                         text = item.sMenuName,
-                        attributes = new { type = "menu", url = "", order = item.iOrder },                        
+                        attributes = new { type = "menu", url = "", order = item.iOrder },
                         state = "open",
                         children = child
                     });
@@ -333,7 +339,7 @@ namespace Framework.web.Areas.Admin.Controllers
             return new
             {
                 text = "根目录",
-                attributes = new { type = "root", url = "", order = 0 },               
+                attributes = new { type = "root", url = "", order = 0 },
                 state = "open",
                 children = userMs.OrderBy(m => ((dynamic)((dynamic)m).attributes).order).ToList()
             };
@@ -360,7 +366,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         id = temp.ID,
                         text = temp.sMenuName,
                         state = "closed",
-                        attributes = new { type = "menu", url = temp.sUrl, order = temp.iOrder },                        
+                        attributes = new { type = "menu", url = temp.sUrl, order = temp.iOrder },
                         children = child
                     };
                     userMs.Add(menu);
@@ -379,7 +385,7 @@ namespace Framework.web.Areas.Admin.Controllers
                 {
                     ret.Add(new
                     {
-                        id = t[i].ID,                        
+                        id = t[i].ID,
                         attributes = new { type = "btn", order = t[i].iOrder },
                         text = t[i].sButtonName,
                         iconCls = t[i].sIcon
@@ -395,7 +401,7 @@ namespace Framework.web.Areas.Admin.Controllers
         #endregion
 
         #region 私有方法（主要是操作session中的菜单哪一类的）
-                
+
         //重新构建菜单层级结构
         private IList<UserMenu> InitMenu(IList<UserMenu> t)
         {
@@ -596,7 +602,8 @@ namespace Framework.web.Areas.Admin.Controllers
             var userRoleMenu = GetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/) as UserRoleMenuInfo;
             if (userRoleMenu != null)
             {
-                Parallel.For(0, userRoleMenu.AllMenu.Count,(index,state)=> {
+                Parallel.For(0, userRoleMenu.AllMenu.Count, (index, state) =>
+                {
                     for (int i = 0; i < userRoleMenu.AllMenu[index].Buttons.Count; i++)
                     {
                         if (userRoleMenu.AllMenu[index].Buttons[i].ID.ToString() == v)

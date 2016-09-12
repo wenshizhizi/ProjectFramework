@@ -254,18 +254,40 @@ namespace Framework.BLL
             m.ChildMenu = m.ChildMenu != null ? m.ChildMenu.OrderBy(x => x.iOrder).ToList() : new List<UserMenu>();
         }
 
+        //后台登录
         public override EHECD_SystemUserDTO Login(EHECD_SystemUserDTO t)
         {
+            var log = new EHECD_SystemLogDTO
+            {
+                bIsDeleted = false,
+                dInsertTime = DateTime.Now,
+                ID = GuidHelper.GetSecuentialGuid(),
+                sDomainDetail = "系统用户登录",
+                sLoginName = t.sLoginName,                
+                sIPAddress = t.sAddress
+            };
+
             //查询数据
             t = helper.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE sLoginName = @name and sPassWord = @pwd AND bIsDeleted = 0;", new { name = t.sLoginName, pwd = Security.GetMD5Hash(t.sPassWord) });
 
             if (t != default(EHECD_SystemUserDTO))
             {
+                var sb = new StringBuilder();
+
+                log.sUserName = t.sUserName;
+
+                sb.AppendLine(Dapper.DBSqlHelper.GetInsertSQL<EHECD_SystemLogDTO>(log));
+
+                sb.AppendLine(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_SystemUserDTO>(new EHECD_SystemUserDTO { dLastLoginTime = log.dInsertTime }, string.Format("where ID = '{0}'", t.ID.ToString())));
+
+                excute.ExcuteTransaction(sb.ToString());
                 //登录成功                
                 return t;
             }
             else
             {
+                log.sDomainDetail = "系统用户登录失败";
+                sysLog.InsertSystemLog(log, excute);
                 return null;
             }
         }

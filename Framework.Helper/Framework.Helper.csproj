@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonHelper.cs" />
     <Compile Include="DateHelpr.cs" />
     <Compile Include="HTMLTranscoding.cs" />
     <Compile Include="Security.cs" />

@@ -11,5 +11,6 @@ namespace Framework.BLL
     {
         protected Dapper.QueryHelper helper = DIEntity.GetInstance().GetImpl<Dapper.QueryHelper>();
         protected Dapper.ExcuteHelper excute = DIEntity.GetInstance().GetImpl<Dapper.ExcuteHelper>();
+        protected ISystemLogManager sysLog = DIEntity.GetInstance().GetImpl<ISystemLogManager>();
     }
 }

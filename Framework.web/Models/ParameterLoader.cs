@@ -26,7 +26,7 @@ namespace Framework.web
                     {
                         r.dataStr = rdata.ToString();
                         r.data = JSONHelper.GetModel<object>(r.dataStr);
-                        r.dynamicData = JSONHelper.GetModel<dynamic>(r.dataStr);
+                        r.dynamicData = JSONHelper.GetModel<dynamic>(r.dataStr);                       
                     }
                 }
             }

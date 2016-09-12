@@ -23,6 +23,6 @@ namespace Framework.BLL
         /// </summary>
         /// <param name="user">系统用户</param>
         /// <returns>添加结果</returns>
-        public abstract int AddSystemUser(EHECD_SystemUserDTO user);
+        public abstract int AddSystemUser(EHECD_SystemUserDTO user,dynamic p);
     }
 }

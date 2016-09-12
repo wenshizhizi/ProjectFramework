@@ -22,20 +22,20 @@ namespace Framework.BLL
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public abstract bool AddRole(dynamic data);
+        public abstract bool AddRole(dynamic data,dynamic p);
 
         /// <summary>
         /// 编辑角色信息
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
-        public abstract bool EditRole(EHECD_RoleDTO role);
+        public abstract bool EditRole(EHECD_RoleDTO role, dynamic p);
 
         /// <summary>
         /// 删除角色
         /// </summary>
         /// <param name="ID">角色ID</param>
         /// <returns></returns>
-        public abstract int DeleteRole(string ID);
+        public abstract int DeleteRole(string ID, dynamic p);
     }
 }

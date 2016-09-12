@@ -56,7 +56,8 @@ namespace Framework.web.Areas.Admin.Controllers
         public void EditRole()
         {
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
-            var ret = manager.EditRole(JSONHelper.GetModel<EHECD_RoleDTO>(RequestParameters.dataStr));
+            CreateSyslogInfo();
+            var ret = manager.EditRole(JSONHelper.GetModel<EHECD_RoleDTO>(RequestParameters.dataStr),RequestParameters.dynamicData);
             if (ret)
             {
                 result.Succeeded = true;
@@ -72,7 +73,8 @@ namespace Framework.web.Areas.Admin.Controllers
         public void AddRole()
         {
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
-            var ret = manager.AddRole(RequestParameters.data);
+            CreateSyslogInfo();
+            var ret = manager.AddRole(RequestParameters.data, RequestParameters.dynamicData);
             if (ret)
             {
                 result.Succeeded = true;
@@ -88,7 +90,8 @@ namespace Framework.web.Areas.Admin.Controllers
         public void DeleteRole()
         {
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
-            var ret = manager.DeleteRole(((dynamic)RequestParameters.data).ID.ToString());
+            CreateSyslogInfo();
+            var ret = manager.DeleteRole(((dynamic)RequestParameters.data).ID.ToString(), RequestParameters.dynamicData);
             if (ret > 0)
             {
                 result.Succeeded = true;
