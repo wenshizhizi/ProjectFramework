@@ -37,5 +37,11 @@ namespace Framework.BLL
         /// <param name="ID">角色ID</param>
         /// <returns></returns>
         public abstract int DeleteRole(string ID, dynamic p);
+
+        /// <summary>
+        /// 载入所有角色
+        /// </summary>
+        /// <returns>角色集合</returns>
+        public abstract IList<EHECD_RoleDTO> LoadAllRoles();
     }
 }

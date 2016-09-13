@@ -1,0 +1,25 @@
+﻿@model Framework.DTO.EHECD_SystemUserDTO
+
+<link href="~/Areas/Admin/Content/gridtable.css" rel="stylesheet" />
+<div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,border:false,fit:true" style="padding:2px;margin:1px">
+    <form style="width:99%;height:99%;" id="distribution_role_form">
+        <table class="styletable" style="height:100%">
+            <tbody>
+                <tr>
+                    <td style="width:60px;padding:0px;text-align:center">系统角色</td>
+                    <td valign="top">
+                        @{
+                            var data = ViewBag.RoleData as List<Framework.DTO.EHECD_RoleDTO>;
+                            for (int i = 0; i < data.Count; i++)
+                            {
+                                <input type="checkbox" data-checkbox="box" value="@data[i].ID.ToString()" />
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                                @data[i].sRoleName
+                            }
+                        }
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+    </form>
+</div>

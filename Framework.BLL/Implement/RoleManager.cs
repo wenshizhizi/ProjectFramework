@@ -115,5 +115,11 @@ namespace Framework.BLL
             };
             return helper.PaginationQuery<EHECD_RoleDTO>("select * from EHECD_Role where bIsDeleted = 0 and sRoleName like @sRoleName", pageinfo, new { sRoleName = "%" + where.sRoleName.Value + "%" });
         }
+
+        //载入所有角色
+        public override IList<EHECD_RoleDTO> LoadAllRoles()
+        {
+            return helper.QueryList<EHECD_RoleDTO>("SELECT ID,sRoleName FROM EHECD_Role WHERE bIsDeleted = 0 AND bEnable = 1",null);
+        }
     }
 }

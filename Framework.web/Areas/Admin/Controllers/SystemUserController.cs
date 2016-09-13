@@ -99,6 +99,7 @@ namespace Framework.web.Areas.Admin.Controllers
         /// <summary>
         /// 跳转到编辑系统用户
         /// </summary>
+        /// <param name="user">系统用户</param>
         /// <returns>部分视图</returns>
         public PartialViewResult ToEditSystemUser(DTO.EHECD_SystemUserDTO user)
         {
@@ -107,6 +108,30 @@ namespace Framework.web.Areas.Admin.Controllers
                        .GetImpl<BLL.ISystemUserManager>()
                        .GetSystemUserInfoById(user);
             return PartialView("EditSystemUser", user);
+        }
+
+        /// <summary>
+        /// 跳转到分配角色
+        /// </summary>
+        /// <param name="user">系统用户</param>
+        /// <returns>部分视图</returns>
+        public PartialViewResult ToDistributionRole(DTO.EHECD_SystemUserDTO user)
+        {
+            var rols = DI.DIEntity
+                        .GetInstance()
+                        .GetImpl<IRoleManager>()
+                        .LoadAllRoles();
+
+            if (rols.Count > 0)
+            {
+                ViewBag.RoleData = rols;
+            }
+            else
+            {
+                ViewBag.RoleData = new List<DTO.EHECD_RoleDTO>();
+            }
+
+            return PartialView("DistributionRole", user);
         }
     }
 }

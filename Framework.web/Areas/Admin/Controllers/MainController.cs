@@ -12,6 +12,7 @@ namespace Framework.web.Areas.Admin.Controllers
 {
     public class MainController : SuperController
     {
+        //进入首页主页面
         public ActionResult Index()
         {
             var user = SessionUser;

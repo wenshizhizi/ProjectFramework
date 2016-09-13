@@ -42,6 +42,13 @@ namespace Framework.web.Areas.Admin.Controllers
 
             if (dto != null)
             {
+                if(dto.tUserState == 1)
+                {
+                    result.Succeeded = false;
+                    result.Msg = "登录失败，该用户已被冻结";
+                    return;
+                }
+
                 //获取该用户的权限
                 var userRoleMenu = login.LoadUserRoleMenuInfo(dto);
                 if (userRoleMenu.LoadSuccess)

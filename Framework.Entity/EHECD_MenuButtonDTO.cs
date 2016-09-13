@@ -58,7 +58,7 @@ namespace Framework.DTO
         /// <summary>
         /// 按钮标识
         /// </summary>
-        [FieldInfo(DataFieldLength = 25, FiledName = "sDataID", Required = true)]
+        [FieldInfo(DataFieldLength = 50, FiledName = "sDataID", Required = true)]
         public string sDataID
         {
             get; set;

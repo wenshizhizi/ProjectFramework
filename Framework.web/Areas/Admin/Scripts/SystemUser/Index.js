@@ -20,6 +20,8 @@
             $("a[data-id='del_systemuser_button']").click(delSystemUser);
 
             $("a[data-id='frozen_systemuser_button']").click(frozenSystemUser);
+
+            $("a[data-id='distribution_role_to_systemuser']").click(distributionRoleToSystemuser);
         }
 
         /**
@@ -261,6 +263,93 @@
                         return "您是否确认要解冻【{0}】？".format(selectedRow.sUserName);
                     }
                 });
+            } catch (e) {
+                eui.alertErr(e.message);
+            }
+        }
+
+        /**
+         * 分配角色
+         */
+        function distributionRoleToSystemuser() {
+            try {
+                eui.checkSelectedRow(grid, function (selectedRow) {
+                    var div = $("<div/>");
+                    div.dialog({
+                        title: "编辑用户信息",
+                        width: 400,
+                        height: 400,
+                        cache: false,
+                        href: '/Admin/SystemUser/ToDistributionRole?ID=' + selectedRow.ID,
+                        modal: true,
+                        collapsible: false,
+                        minimizable: false,
+                        maximizable: false,
+                        resizable: false,
+                        buttons: [{
+                            text: '保存',
+                            iconCls: 'icon-save',
+                            handler: function () {
+                                if ($("#distribution_role_form").form("validate")) {
+
+                                    ////序列化提交数据
+                                    //var json = $("#edit_systemuser_form").serializeObject();
+                                    //json.ID = selectedRow.ID;
+                                    ///*
+                                    //* 初始化区域数据
+                                    //*/
+                                    //var region = json.region.split("/");
+
+                                    //if (region.length > 0) {
+
+                                    //    delete json.region;
+
+                                    //    if (region.length === 1) {
+                                    //        json.sProvice = region[0];
+                                    //        json.sCity = "";
+                                    //        json.sCounty = "";
+                                    //    } else if (region.length === 2) {
+                                    //        json.sProvice = region[0];
+                                    //        json.sCity = region[1];
+                                    //        json.sCounty = "";
+                                    //    } else {
+                                    //        json.sProvice = region[0];
+                                    //        json.sCity = region[1];
+                                    //        json.sCounty = region[2];
+                                    //    }
+
+                                    //} else {
+                                    //    return eui.alertErr("请选择系统用户所在区域");
+                                    //}
+
+                                    //f.post("/Admin/SystemUser/DistributionRole", json,
+                                    //    function (ret) {
+                                    //        eui.alertInfo("编辑用户成功");
+                                    //        $(div).dialog("close");
+                                    //        eui.search(grid, true);
+                                    //    }, function (ret) {
+                                    //        eui.alertErr(ret.Msg);
+                                    //    });
+                                }
+                            }
+                        }, {
+                            text: '关闭',
+                            iconCls: 'icon-cancel',
+                            handler: function () {
+                                $(div).dialog("close");
+                            }
+                        }],
+                        onClose: function () {
+                            $(div).dialog("destroy");
+                        },
+                        onLoad: function () {
+                            var form = $("#nodata");
+                            if (form.length > 0) {
+                                div.parent().find("a>span")[0].remove();
+                            }
+                        }
+                    });
+                }, "请选择要分配角色的用户");
             } catch (e) {
                 eui.alertErr(e.message);
             }

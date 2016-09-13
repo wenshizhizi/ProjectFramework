@@ -271,7 +271,7 @@ namespace Framework.BLL
                 (Int16)(SYSTEM_LOG_TYPE.LOGON | SYSTEM_LOG_TYPE.SYSTEMUSER),
                 "系统用户登录",
                 t.ID.ToString() == null ? "": t.ID.ToString(),
-                t != default(EHECD_SystemUserDTO));
+                t != default(EHECD_SystemUserDTO) && t.tUserState == 0);
 
             if (t != default(EHECD_SystemUserDTO))
             {
