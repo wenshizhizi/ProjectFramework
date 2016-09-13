@@ -13,9 +13,11 @@ namespace Framework.BLL
         //添加按钮
         public override EHECD_MenuButtonDTO AddButton(EHECD_MenuButtonDTO dto, string menuID, dynamic p)
         {
+            //1.完善按钮信息
             dto.bIsDeleted = false;
             dto.ID = Helper.GuidHelper.GetSecuentialGuid();
 
+            //2.创建按钮和菜单的特权信息
             EHECD_PrivilegeDTO pri = new EHECD_PrivilegeDTO
             {
                 bIsDeleted = false,
@@ -29,83 +31,46 @@ namespace Framework.BLL
                 sPrivilegeMasterValue = Guid.Parse(menuID)
             };
 
-            //var param = new List<object>();
-            //param.AddRange(new object[] { dto, pri });
-
             StringBuilder sb = new StringBuilder();
 
             sb.Append(/*插入按钮SQL*/Framework.Dapper.DBSqlHelper.GetInsertSQL<EHECD_MenuButtonDTO>(dto));
             sb.Append(/*插入对应按钮菜单特权SQL*/Framework.Dapper.DBSqlHelper.GetInsertSQL<EHECD_PrivilegeDTO>(pri));
 
-            var ret = excute.ExcuteTransaction(sb.ToString()); //如果不需要包裹事务可以这样处理 excute.InsertMultiple<object>(param);
-            if (ret > 0)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户在菜单" + menuID + "下添加按钮" + dto.sButtonName
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return dto;
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户在菜单" + menuID + "下添加按钮" + dto.sButtonName + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return null;
-            }
+            var ret = excute.ExcuteTransaction(sb.ToString());
+
+            //3.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.ADD | SYSTEM_LOG_TYPE.BUTTON),
+                "系统用户在菜单" + menuID + "下添加按钮" + dto.sButtonName,
+                string.Concat(dto.ID, ",", menuID),
+                ret > 0);
+
+            return ret > 0 ? dto : null;
         }
 
         //添加菜单
         public override EHECD_FunctionMenuDTO AddMenu(EHECD_FunctionMenuDTO dto, dynamic p)
         {
+            //1.完善菜单信息
             dto.bIsDeleted = false;
             dto.ID = Helper.GuidHelper.GetSecuentialGuid();
+
+            //2.添加菜单
             var ret = excute.InsertSingle<EHECD_FunctionMenuDTO>(dto);
-            if (ret > 0)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户创建菜单" + dto.sMenuName
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return dto;
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户创建菜单" + dto.sMenuName + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return null;
-            }
+
+            //3.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.ADD | SYSTEM_LOG_TYPE.MENU),
+                "系统用户创建菜单" + dto.sMenuName, dto.ID.ToString(),
+                ret > 0);
+
+            return ret > 0 ? dto : null;
         }
 
         //删菜单
@@ -143,7 +108,7 @@ namespace Framework.BLL
             foreach (var menuId in ids)
             {
                 //2.删除菜单数据
-                //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_FunctionMenuDTO>(menu, string.Format("where ID = '{0}'", item)));
+                //注释的代码是物理删除：sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_FunctionMenuDTO>(menu, string.Format("where ID = '{0}'", item)));
                 sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_FunctionMenuDTO>(new EHECD_FunctionMenuDTO { bIsDeleted = true }, string.Format("where ID = '{0}'", menuId)));
 
                 //3.找到菜单的按钮信息
@@ -168,50 +133,32 @@ namespace Framework.BLL
                 foreach (var button in menus)
                 {
                     //4.删除对应的菜单按钮
-                    //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_MenuButtonDTO>(button, string.Format("where ID = '{0}'", button.ID.ToString())));
+                    //注释的代码是物理删除：sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_MenuButtonDTO>(button, string.Format("where ID = '{0}'", button.ID.ToString())));
                     sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_MenuButtonDTO>(new EHECD_MenuButtonDTO { bIsDeleted = true }, string.Format("where ID = '{0}'", button.ID.ToString())));
 
                     //5.删除对应这个按钮在特权表中分发给其他所有者的特权信息（如分发给角色和指定用户的按钮特权）
-                    //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'role' AND sBelong = 'role'/*分发给角色的*/) or (sPrivilegeMaster = 'user' AND sBelong = 'user'/*分发给用户的*/)) AND sPrivilegeAccess = 'button' and sPrivilegeAccessValue = '{0}'", button.ID.ToString())));
+                    //注释的代码是物理删除：sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'role' AND sBelong = 'role'/*分发给角色的*/) or (sPrivilegeMaster = 'user' AND sBelong = 'user'/*分发给用户的*/)) AND sPrivilegeAccess = 'button' and sPrivilegeAccessValue = '{0}'", button.ID.ToString())));
                     sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO { bIsDeleted = true }, string.Format("where ((sPrivilegeMaster = 'role' AND sBelong = 'role'/*分发给角色的*/) or (sPrivilegeMaster = 'user' AND sBelong = 'user'/*分发给用户的*/)) AND sPrivilegeAccess = 'button' and sPrivilegeAccessValue = '{0}'", button.ID.ToString())));
                 }
 
                 //6.解除菜单对应的特权信息
-                //sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'menu' AND sPrivilegeMasterValue = '{0}') or (sPrivilegeAccess = 'menu' and sPrivilegeAccessValue = '{0}') or (sBelong = 'menu' and sBelongValue = '{0}'))", item)));
+                //注释的代码是物理删除：sb.Append(Dapper.DBSqlHelper.GetDeleteSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO(), string.Format("where ((sPrivilegeMaster = 'menu' AND sPrivilegeMasterValue = '{0}') or (sPrivilegeAccess = 'menu' and sPrivilegeAccessValue = '{0}') or (sBelong = 'menu' and sBelongValue = '{0}'))", item)));
                 sb.Append(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_PrivilegeDTO>(new EHECD_PrivilegeDTO { bIsDeleted = true }, string.Format("where ((sPrivilegeMaster = 'menu' AND sPrivilegeMasterValue = '{0}') or (sPrivilegeAccess = 'menu' and sPrivilegeAccessValue = '{0}') or (sBelong = 'menu' and sBelongValue = '{0}'))", menuId)));
             }
 
             //执行删除
             var ret = excute.ExcuteTransaction(sb.ToString());
 
-            if (ret > 0)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户删除菜单" + menu.ID.ToString()
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户删除菜单" + menu.ID.ToString() + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
+            //7.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.DELETE | SYSTEM_LOG_TYPE.MENU),
+                "系统用户删除菜单" + menu.ID.ToString(),
+                menu.ID.ToString(),
+                ret > 0);
+
             return ret;
         }
 
@@ -228,108 +175,55 @@ namespace Framework.BLL
 
             var ret = excute.ExcuteTransaction(sb.ToString());
 
-            if (ret > 0)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户删除菜单按钮" + btn.ID
-                };
-                sysLog.InsertSystemLog(log, excute);
-                
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户删除菜单按钮" + btn.ID + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);                
-            }
+            //3.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.DELETE | SYSTEM_LOG_TYPE.BUTTON),
+                "系统用户删除菜单按钮" + btn.ID,
+                btn.ID.ToString(),
+                ret > 0);
+
             return ret;
         }
 
         //更新按钮
         public override EHECD_MenuButtonDTO EditButton(EHECD_MenuButtonDTO dto, dynamic p)
         {
+            //1.更新按钮信息
             var ret = excute.UpdateSingle<EHECD_MenuButtonDTO>(dto, string.Format("WHERE [ID] = '{0}'", dto.ID.ToString()));
-            if (ret > 0)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户更新菜单按钮" + dto.ID
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return dto;
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户更新菜单按钮" + dto.ID + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return null;
-            }
+
+            //2.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.MODIFY | SYSTEM_LOG_TYPE.BUTTON),
+                "系统用户更新菜单按钮" + dto.ID,
+                dto.ID.ToString(),
+                ret > 0);
+
+            return ret > 0 ? dto : null;
         }
 
         //更新菜单
         public override EHECD_FunctionMenuDTO EditMenu(EHECD_FunctionMenuDTO menu, dynamic p)
         {
+            //1.更新菜单信息
             var ret = excute.UpdateSingle<EHECD_FunctionMenuDTO>(menu, string.Format("WHERE [ID] = '{0}'", menu.ID.ToString()));
-            if (ret > 0)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户更新菜单" + menu.ID
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return menu;
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户更新菜单" + menu.ID + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-                return null;
-            }
+
+            //2.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(), 
+                p.sUserName.ToString(), 
+                p.IP.ToString(), 
+                (Int16)(SYSTEM_LOG_TYPE.MODIFY | SYSTEM_LOG_TYPE.MENU), 
+                "系统用户更新菜单" + menu.ID, 
+                menu.ID.ToString(), 
+                ret > 0);
+
+            return ret > 0 ? menu : null;
         }
     }
 }

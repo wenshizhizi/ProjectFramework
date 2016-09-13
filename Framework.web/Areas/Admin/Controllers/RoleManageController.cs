@@ -48,7 +48,7 @@ namespace Framework.web.Areas.Admin.Controllers
         public PartialViewResult ToEditRole(EHECD_RoleDTO role)
         {
             return PartialView("EditRole", role);
-        } 
+        }
         #endregion
 
         #region 对角色的操作
@@ -57,16 +57,9 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
             CreateSyslogInfo();
-            var ret = manager.EditRole(JSONHelper.GetModel<EHECD_RoleDTO>(RequestParameters.dataStr),RequestParameters.dynamicData);
-            if (ret)
-            {
-                result.Succeeded = true;
-            }
-            else
-            {
-                result.Succeeded = false;
-                result.Msg = "编辑失败，请联系管理员";
-            }
+            var ret = manager.EditRole(JSONHelper.GetModel<EHECD_RoleDTO>(RequestParameters.dataStr), RequestParameters.dynamicData);
+            result.Succeeded = ret > 0;
+            result.Msg = !result.Succeeded ? ret == -1 ? "编辑角色失败，已有相同角色名" : "编辑角色失败，请联系系统管理员" : "";
         }
 
         //添加角色
@@ -75,15 +68,8 @@ namespace Framework.web.Areas.Admin.Controllers
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
             CreateSyslogInfo();
             var ret = manager.AddRole(RequestParameters.data, RequestParameters.dynamicData);
-            if (ret)
-            {
-                result.Succeeded = true;
-            }
-            else
-            {
-                result.Succeeded = false;
-                result.Msg = "添加失败，请联系管理员";
-            }
+            result.Succeeded = ret > 0;
+            result.Msg = !result.Succeeded ? ret == -1 ? "添加角色失败，已有相同角色名" : "添加角色失败，请联系系统管理员" : "";
         }
 
         //删除角色
@@ -101,7 +87,7 @@ namespace Framework.web.Areas.Admin.Controllers
                 result.Succeeded = false;
                 result.Msg = "删除失败，请联系管理员";
             }
-        } 
+        }
         #endregion
     }
 }

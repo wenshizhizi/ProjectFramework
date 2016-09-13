@@ -16,6 +16,10 @@
             $("a[data-id='add_systemuser_button']").click(addSystemUser);
 
             $("a[data-id='edit_systemuser_button']").click(editSystemUser);
+
+            $("a[data-id='del_systemuser_button']").click(delSystemUser);
+
+            $("a[data-id='frozen_systemuser_button']").click(frozenSystemUser);
         }
 
         /**
@@ -67,8 +71,10 @@
                     handler: function () {
                         if ($("#add_systemuser_form").form("validate")) {
 
+                            //序列化提交数据
                             var json = $("#add_systemuser_form").serializeObject();
 
+                            //验证密码是否两次输入一致
                             if (json.sPassWord !== json.sPassWord2) {
                                 return eui.alertErr("两次输入的密码不一致");
                             }
@@ -97,6 +103,7 @@
                                     json.sCity = region[1];
                                     json.sCounty = region[2];
                                 }
+
                             } else {
                                 return eui.alertErr("请选择系统用户所在区域");
                             }
@@ -104,8 +111,8 @@
                             f.post("/Admin/SystemUser/AddSystemUser", json,
                                 function (ret) {
                                     eui.alertInfo("添加用户成功");
-                                    eui.search(grid, false);
                                     $(div).dialog("close");
+                                    eui.search(grid, false);
                                 }, function (ret) {
                                     eui.alertErr(ret.Msg);
                                 });
@@ -122,16 +129,12 @@
                     $(div).dialog("destroy");
                 },
                 onLoad: function () {
-                    //var form = $("#nodata");
-                    //if (form.length > 0) {
-                    //    div.parent().find("a>span")[0].remove();
-                    //}
                 }
             });
         }
 
         /**
-         * 编辑角色
+         * 编辑用户
          */
         function editSystemUser() {
             eui.checkSelectedRow(grid, function (selectedRow) {
@@ -139,10 +142,9 @@
                 div.dialog({
                     title: "编辑用户信息",
                     width: 400,
-                    height: 200,
+                    height: 400,
                     cache: false,
-                    href: '/Admin/SystemUser/ToEditSystemUser',
-                    queryParams: selectedRow,
+                    href: '/Admin/SystemUser/ToEditSystemUser?ID=' + selectedRow.ID,
                     modal: true,
                     collapsible: false,
                     minimizable: false,
@@ -152,19 +154,47 @@
                         text: '保存',
                         iconCls: 'icon-save',
                         handler: function () {
-                            //if ($("#edit_role_form").form("validate")) {
+                            if ($("#edit_systemuser_form").form("validate")) {
 
-                            //    var json = $("#edit_role_form").serializeObject();
-                            //    json.ID = selectedRow.ID;
-                            //    f.post("/Admin/RoleManage/EditRole", json,
-                            //        function (ret) {
-                            //            eui.alertInfo("编辑角色成功");
-                            //            eui.search(grid, true);
-                            //            $(div).dialog("close");
-                            //        }, function (ret) {
-                            //            eui.alertErr(ret.Msg);
-                            //        });
-                            //}
+                                //序列化提交数据
+                                var json = $("#edit_systemuser_form").serializeObject();
+                                json.ID = selectedRow.ID;
+                                /*
+                                * 初始化区域数据
+                                */
+                                var region = json.region.split("/");
+
+                                if (region.length > 0) {
+
+                                    delete json.region;
+
+                                    if (region.length === 1) {
+                                        json.sProvice = region[0];
+                                        json.sCity = "";
+                                        json.sCounty = "";
+                                    } else if (region.length === 2) {
+                                        json.sProvice = region[0];
+                                        json.sCity = region[1];
+                                        json.sCounty = "";
+                                    } else {
+                                        json.sProvice = region[0];
+                                        json.sCity = region[1];
+                                        json.sCounty = region[2];
+                                    }
+
+                                } else {
+                                    return eui.alertErr("请选择系统用户所在区域");
+                                }
+
+                                f.post("/Admin/SystemUser/EditSystemUser", json,
+                                    function (ret) {
+                                        eui.alertInfo("编辑用户成功");
+                                        $(div).dialog("close");
+                                        eui.search(grid, true);
+                                    }, function (ret) {
+                                        eui.alertErr(ret.Msg);
+                                    });
+                            }
                         }
                     }, {
                         text: '关闭',
@@ -187,20 +217,49 @@
         }
 
         /**
-         * 删除角色
+         * 删除用户
          */
-        function delRole() {
+        function delSystemUser() {
             try {
                 eui.confirmDomain(grid, function (selectedRow) {
-                    f.post("/Admin/RoleManage/DeleteRole", { ID: selectedRow.ID }, function (r) {
+                    f.post("/Admin/SystemUser/DeleteSystemUser", { ID: selectedRow.ID }, function (r) {
                         eui.alertInfo("删除角色成功");
                         eui.search(grid, false);
                     }, function (r) {
                         eui.alertErr(r.Msg);
                     });
-                }, undefined, "请选择您要删除的角色。",
+                }, undefined, "请选择您要删除的系统用户。",
                 function (selectedRow) {
-                    return "您是否确认要删除【{0}】？<span style='color:red'>该操作是不可逆的！这将造成该拥有该角色用户失去该角色菜单权限和按钮权限，那些用户登录后将没有对应的菜单和按钮。</span>".format(selectedRow.sRoleName);
+                    return "您是否确认要删除【{0}】？<span style='color:red'>该操作是不可逆的！将删除该用户及分配给该用户的所有菜单和按钮。</span>".format(selectedRow.sUserName);
+                });
+            } catch (e) {
+                eui.alertErr(e.message);
+            }
+        }
+
+        /**
+         * 冻结用户
+         */
+        function frozenSystemUser() {
+            try {
+                eui.confirmDomain(grid, function (selectedRow) {
+                    f.post("/Admin/SystemUser/FrozenSystemUser", { ID: selectedRow.ID, tUserState: selectedRow.tUserState }, function (r) {
+                        if (selectedRow.tUserState === 0) {
+                            eui.alertInfo("冻结用户成功");
+                        } else {
+                            eui.alertInfo("解冻用户成功");
+                        }
+                        eui.search(grid, true);
+                    }, function (r) {
+                        eui.alertErr(r.Msg);
+                    });
+                }, undefined, "请选择您要冻结或解冻的系统用户。",
+                function (selectedRow) {
+                    if (selectedRow.tUserState === 0) {
+                        return "您是否确认要冻结【{0}】？<span style='color:red'>用户冻结后将不能登录系统。</span>".format(selectedRow.sUserName);
+                    } else {
+                        return "您是否确认要解冻【{0}】？".format(selectedRow.sUserName);
+                    }
                 });
             } catch (e) {
                 eui.alertErr(e.message);
@@ -226,8 +285,13 @@
                 { field: 'sUserName', title: '用户名', align: 'center', width: 100 },
                 {
                     field: 'tUserState', title: '用户状态', align: 'center', width: 100, formatter: function (value, row, index) {
-                        if (row.tUserState === 0) {
-                            return "正常";
+                        switch (row.tUserState) {
+                            case 0:
+                                return "正常";
+                            case 1:
+                                return "冻结";
+                            default:
+                                break;
                         }
                     }
                 },
@@ -245,6 +309,10 @@
                 ]],
                 onLoadSuccess: function () {
                     $(".datagrid-header-check input[type=checkbox]").remove();
+                }, rowStyler: function (index, row) {
+                    if (row.tUserState === 1) {
+                        return 'background-color:gray;color:white';
+                    }
                 }
             }, loadSystemUser).pagination("select");
         }

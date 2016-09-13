@@ -12,8 +12,9 @@ namespace Framework.BLL
     public class RoleManager : IRoleManager
     {
         //添加角色
-        public override bool AddRole(dynamic data, dynamic p)
+        public override int AddRole(dynamic data, dynamic p)
         {
+            //1.创建角色对象
             EHECD_RoleDTO role = new EHECD_RoleDTO
             {
                 ID = GuidHelper.GetSecuentialGuid(),
@@ -25,36 +26,29 @@ namespace Framework.BLL
                 sRoleName = data.sRoleName.Value
             };
 
-            var ret = excute.InsertSingle<EHECD_RoleDTO>(role) > 0;
+            var sqlIf = @"IF EXISTS(SELECT 1 FROM EHECD_Role WHERE sRoleName = @sRoleName)
+                        BEGIN
+	                        SELECT -1 RET;
+                        END
+                        ELSE
+                        BEGIN
+	                        {0}
+                        END;";
 
-            if (ret)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户添加角色" + role.ID
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户添加角色" + role.ID + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
+            sqlIf = string.Format(sqlIf, DBSqlHelper.GetInsertSQL<EHECD_RoleDTO>(role));
+
+            //2.插入角色信息
+            var ret = excute.Insert(sqlIf, new { sRoleName = role.sRoleName });
+
+            //3.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.ADD | SYSTEM_LOG_TYPE.ROLE),
+                "系统用户添加角色" + role.ID,
+                role.ID.ToString(),
+                ret > 0);
 
             return ret;
         }
@@ -75,72 +69,36 @@ namespace Framework.BLL
 
             var ret = excute.ExcuteTransaction(sb.ToString());
 
-            if (ret > 0)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户删除角色" + ID
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户删除角色" + ID + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
+            //4.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.DELETE | SYSTEM_LOG_TYPE.ROLE),
+                "系统用户删除角色" + ID,
+                ID,
+                ret > 0);
 
             return ret;
         }
 
         //编辑角色
-        public override bool EditRole(EHECD_RoleDTO role, dynamic p)
+        public override int EditRole(EHECD_RoleDTO role, dynamic p)
         {
+            //1.完善角色信息
             role.dModifyTime = DateTime.Now;
-            var ret = excute.UpdateSingle<EHECD_RoleDTO>(role, string.Format("where ID = '{0}'", role.ID.ToString())) > 0;
 
-            if (ret)
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户编辑角色" + role.ID
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
-            else
-            {
-                var log = new EHECD_SystemLogDTO
-                {
-                    bIsDeleted = false,
-                    dInsertTime = DateTime.Now,
-                    ID = GuidHelper.GetSecuentialGuid(),
-                    sIPAddress = p.IP.ToString(),
-                    sLoginName = p.sLoginName.ToString(),
-                    sUserName = p.sUserName.ToString(),
-                    sDomainDetail = "系统用户编辑角色" + role.ID + "失败"
-                };
-                sysLog.InsertSystemLog(log, excute);
-            }
+            //2.更新角色信息
+            var ret = excute.UpdateSingle<EHECD_RoleDTO>(role, string.Format("where ID = '{0}'", role.ID.ToString()));
+
+            //3.记录系统日志
+            InsertSystemLog(
+                p.sLoginName.ToString(),
+                p.sUserName.ToString(),
+                p.IP.ToString(),
+                (Int16)(SYSTEM_LOG_TYPE.MODIFY | SYSTEM_LOG_TYPE.ROLE),
+                "系统用户编辑角色" + role.ID,
+                role.ID.ToString(), ret > 0);
 
             return ret;
         }

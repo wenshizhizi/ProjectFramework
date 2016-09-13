@@ -74,7 +74,7 @@ namespace Framework.Helper
         /// <param name="s"></param>
         /// <param name="def"></param>
         /// <returns></returns>
-        public static byte ToByte(this object s, byte def = default(byte))
+        public static byte ToByte(this object s, byte def = default(Byte))
         {
             byte result;
             return Byte.TryParse(s.ToString(), out result) ? result : def;

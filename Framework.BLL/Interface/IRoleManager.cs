@@ -22,14 +22,14 @@ namespace Framework.BLL
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public abstract bool AddRole(dynamic data,dynamic p);
+        public abstract int AddRole(dynamic data,dynamic p);
 
         /// <summary>
         /// 编辑角色信息
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
-        public abstract bool EditRole(EHECD_RoleDTO role, dynamic p);
+        public abstract int EditRole(EHECD_RoleDTO role, dynamic p);
 
         /// <summary>
         /// 删除角色

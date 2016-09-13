@@ -67,7 +67,7 @@ namespace Framework.Dapper
 
         protected override int DoUpdate(SqlConnection conn, string sql, object param)
         {
-            return conn.Execute(sql);
+            return conn.Execute(sql,param);
         }
 
         protected override int DoUpdateMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t, string where)

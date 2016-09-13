@@ -10,7 +10,7 @@ namespace Framework.Helper
         //引用外部dll的生成序列方法
         public static extern int UuidCreateSequential(out Guid guid);
         private const int RPC_S_OK = 0;
-        
+
         /// <summary>
         /// 引用远程程序调用(RPC)应用程序接口API库生成GUID
         /// </summary>
@@ -31,7 +31,7 @@ namespace Framework.Helper
             else
                 return Guid.NewGuid();
         }
-                
+
         /// <summary>
         /// 生成序列GUID
         /// </summary>
@@ -52,13 +52,13 @@ namespace Framework.Helper
             secuentialGuid[4] = uid[4];
             secuentialGuid[5] = uid[5];
             secuentialGuid[6] = uid[6];
-            
+
             /*
              * 将第个八字节的第一部分设置为“1100”，以便将来能够验证它是由我们生成的
              * 0xc0转换为二进制是11000000，后面的操作是对0xf（二进制：00001111）与guid
              * 字节数组的第七位进行按位与运算
              */
-            secuentialGuid[7] = (byte)(0xc0 | (0xf & uid[7]));
+            secuentialGuid[7] = (Byte)(0xc0 | (0xf & uid[7]));
 
             // 后8字节是序列,    
             // it minimizes index fragmentation   

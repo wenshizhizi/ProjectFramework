@@ -12,6 +12,7 @@ namespace Framework.BLL
 {
     public class UserLogin : ILogin
     {
+        //载入权限菜单
         public override UserRoleMenuInfo LoadUserRoleMenuInfo(EHECD_SystemUserDTO t)
         {
             //用户的权限和菜单、菜单按钮信息
@@ -219,7 +220,7 @@ namespace Framework.BLL
         /// <param name="t"></param>
         /// <returns></returns>
         private IList<UserMenu> InitMenu(IList<UserMenu> t)
-        {            
+        {
             var userMs = new List<UserMenu>();
 
             //初始化菜单层级关系
@@ -257,37 +258,30 @@ namespace Framework.BLL
         //后台登录
         public override EHECD_SystemUserDTO Login(EHECD_SystemUserDTO t)
         {
-            var log = new EHECD_SystemLogDTO
-            {
-                bIsDeleted = false,
-                dInsertTime = DateTime.Now,
-                ID = GuidHelper.GetSecuentialGuid(),
-                sDomainDetail = "系统用户登录",
-                sLoginName = t.sLoginName,                
-                sIPAddress = t.sAddress
-            };
+            var IP = t.sAddress;
 
-            //查询数据
+            //1.查询用户数据
             t = helper.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE sLoginName = @name and sPassWord = @pwd AND bIsDeleted = 0;", new { name = t.sLoginName, pwd = Security.GetMD5Hash(t.sPassWord) });
+
+            //2.记录系统日志
+            InsertSystemLog(
+                t.sLoginName,
+                t.sUserName == null ? "用户": t.sUserName,
+                IP,
+                (Int16)(SYSTEM_LOG_TYPE.LOGON | SYSTEM_LOG_TYPE.SYSTEMUSER),
+                "系统用户登录",
+                t.ID.ToString() == null ? "": t.ID.ToString(),
+                t != default(EHECD_SystemUserDTO));
 
             if (t != default(EHECD_SystemUserDTO))
             {
-                var sb = new StringBuilder();
-
-                log.sUserName = t.sUserName;
-
-                sb.AppendLine(Dapper.DBSqlHelper.GetInsertSQL<EHECD_SystemLogDTO>(log));
-
-                sb.AppendLine(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_SystemUserDTO>(new EHECD_SystemUserDTO { dLastLoginTime = log.dInsertTime }, string.Format("where ID = '{0}'", t.ID.ToString())));
-
-                excute.ExcuteTransaction(sb.ToString());
+                //3.更新最后登录时间
+                excute.ExcuteTransaction(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_SystemUserDTO>(new EHECD_SystemUserDTO { dLastLoginTime = DateTime.Now }, string.Format("where ID = '{0}'", t.ID.ToString())));
                 //登录成功                
                 return t;
             }
             else
-            {
-                log.sDomainDetail = "系统用户登录失败";
-                sysLog.InsertSystemLog(log, excute);
+            {                
                 return null;
             }
         }

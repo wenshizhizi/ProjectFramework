@@ -424,8 +424,7 @@
     };
 
     CityPicker.DEFAULTS = {
-        responsive: false,
-        placeholder: '四川省/成都市/锦江区',
+        responsive: false,        
         level: 'district',
         province: '',
         city: '',

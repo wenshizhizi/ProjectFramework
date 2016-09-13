@@ -72,5 +72,23 @@ namespace Framework.DTO
         {
             get; set;
         }
+
+        /// <summary>
+        /// 操作类型ID
+        /// </summary>
+        [FieldInfo(DataFieldLength = 255, FiledName = "sDoMainId", Required = true)]
+        public string sDoMainId
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// 操作类型
+        /// </summary>
+        [FieldInfo(DataFieldLength = 1, FiledName = "tDoType", Required = true)]
+        public Int16? tDoType
+        {
+            get; set;
+        }
     }
 }

@@ -42,7 +42,9 @@ namespace Framework.web.Areas.Admin.Controllers
                                         sDomainDetail = "系统用户退出登录",
                                         sIPAddress = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress,
                                         sLoginName = SessionUser.User.sLoginName,
-                                        sUserName = SessionUser.User.sUserName
+                                        sUserName = SessionUser.User.sUserName,
+                                        sDoMainId = SessionUser.User.ID.ToString(),
+                                        tDoType = (Int16)(DTO.SYSTEM_LOG_TYPE.LOGON | DTO.SYSTEM_LOG_TYPE.SYSTEMUSER)
                                     },
                                      DI.DIEntity
                                     .GetInstance()

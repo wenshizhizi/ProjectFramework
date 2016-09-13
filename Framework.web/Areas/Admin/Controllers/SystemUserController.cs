@@ -17,18 +17,63 @@ namespace Framework.web.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 编辑系统用户
+        /// </summary>
+        public void EditSystemUser()
+        {
+            var user = JSONHelper.GetModel<DTO.EHECD_SystemUserDTO>(RequestParameters.dataStr);
+            CreateSyslogInfo();
+            var ret = DI.DIEntity
+                                .GetInstance()
+                                .GetImpl<ISystemUserManager>()
+                                .EditSystemUser(user, RequestParameters.dynamicData);
+            result.Succeeded = ret > 0;
+            result.Msg = !result.Succeeded ? ret == -1 ? "编辑用户失败，已有相同登录名用户" : "编辑用户失败，请联系系统管理员" : "";
+        }
+
+        /// <summary>
+        /// 删除系统用户
+        /// </summary>
+        public void DeleteSystemUser()
+        {
+            var user = JSONHelper.GetModel<DTO.EHECD_SystemUserDTO>(RequestParameters.dataStr);
+            CreateSyslogInfo();
+            var ret = DI.DIEntity
+                                .GetInstance()
+                                .GetImpl<ISystemUserManager>()
+                                .DeleteSystemUser(user, RequestParameters.dynamicData);
+            result.Succeeded = ret > 0;
+            result.Msg = !result.Succeeded ? "删除用户失败，请联系系统管理员" : "";
+        }
+
+        /// <summary>
+        /// 冻结用户
+        /// </summary>
+        public void FrozenSystemUser()
+        {
+            var user = JSONHelper.GetModel<DTO.EHECD_SystemUserDTO>(RequestParameters.dataStr);
+            CreateSyslogInfo();
+            var ret = DI.DIEntity
+                                .GetInstance()
+                                .GetImpl<ISystemUserManager>()
+                                .FrozenSystemUser(user, RequestParameters.dynamicData);
+            result.Succeeded = ret > 0;
+            result.Msg = !result.Succeeded ? "冻结用户失败，请联系系统管理员" : "";
+        }
+
+        /// <summary>
         /// 添加系统用户
         /// </summary>
         public void AddSystemUser()
         {
             var user = JSONHelper.GetModel<DTO.EHECD_SystemUserDTO>(RequestParameters.dataStr);
             CreateSyslogInfo();
-            result.Succeeded = DI.DIEntity
+            var ret = DI.DIEntity
                                 .GetInstance()
                                 .GetImpl<ISystemUserManager>()
-                                .AddSystemUser(user, RequestParameters.dynamicData) > 0;
-
-            result.Msg = !result.Succeeded ? "添加用户失败，请联系系统管理员" : "";
+                                .AddSystemUser(user, RequestParameters.dynamicData);
+            result.Succeeded = ret > 0;
+            result.Msg = !result.Succeeded ? ret == -1 ? "添加用户失败，已有相同登录名用户" : "添加用户失败，请联系系统管理员" : "";
         }
 
         /// <summary>
@@ -45,10 +90,23 @@ namespace Framework.web.Areas.Admin.Controllers
         /// <summary>
         /// 跳转到添加系统用户
         /// </summary>
-        /// <returns>部分试图</returns>
+        /// <returns>部分视图</returns>
         public PartialViewResult ToAddSystemUser()
         {
             return PartialView("AddSystemUser");
+        }
+
+        /// <summary>
+        /// 跳转到编辑系统用户
+        /// </summary>
+        /// <returns>部分视图</returns>
+        public PartialViewResult ToEditSystemUser(DTO.EHECD_SystemUserDTO user)
+        {
+            user = DI.DIEntity
+                       .GetInstance()
+                       .GetImpl<BLL.ISystemUserManager>()
+                       .GetSystemUserInfoById(user);
+            return PartialView("EditSystemUser", user);
         }
     }
 }

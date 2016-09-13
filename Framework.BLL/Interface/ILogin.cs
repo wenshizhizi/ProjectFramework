@@ -5,6 +5,7 @@ namespace Framework.BLL
 {
     public abstract class ILogin : BaseBll
     {
+        
         /// <summary>
         /// 后台用户登录
         /// </summary>

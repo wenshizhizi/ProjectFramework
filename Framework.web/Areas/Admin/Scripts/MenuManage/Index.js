@@ -468,10 +468,10 @@
             $("a[data-id='add_menubutton_button']").click(function () {
                 try {
                     eui.checkTreeSelected(allMenu, function (selectedNode) {
-                        if (selectedNode.attributes.type === "menu") {
+                        if (selectedNode.attributes.type === "menu" && selectedNode.attributes.url.trim().length > 0) {
                             createAddButtonDialog(selectedNode);
                         } else {
-                            eui.alertErr("请选择您要添加的按钮所属菜单，您当前选择的不是菜单");
+                            eui.alertErr("请选择您要添加的按钮所属菜单，您当前选择的不是菜单或当前菜单没有具体的操作地址");
                         }
                     }, "请选择您要添加的按钮所属菜单");
                 } catch (e) {
