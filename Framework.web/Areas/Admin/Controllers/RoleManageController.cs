@@ -54,7 +54,7 @@ namespace Framework.web.Areas.Admin.Controllers
         #region 对角色的操作
         //编辑角色
         public void EditRole()
-        {
+        {            
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
             CreateSyslogInfo();
             var ret = manager.EditRole(JSONHelper.GetModel<EHECD_RoleDTO>(RequestParameters.dataStr), RequestParameters.dynamicData);

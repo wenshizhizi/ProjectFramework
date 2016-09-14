@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <!--主题样式：可选-->    
+    <!--主题样式：可选-->
     @*<link href="~/Content/themes/black/easyui.css" rel="stylesheet" />*@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />
@@ -27,7 +27,7 @@
     <script src="~/scripts/lib/tool.module.js"></script>
     <script src="~/scripts/lib/array.module.js"></script>
     <script src="~/scripts/lib/func.module.js"></script>
-    <script src="~/scripts/lib/easyui.module.js"></script>    
+    <script src="~/scripts/lib/easyui.module.js"></script>
     @*<script src="~/scripts/lib/client.common.js"></script>*@
 
     <title>亿合科技内部应用后台</title>
@@ -37,8 +37,8 @@
     <div id="layout" class="easyui-layout" data-options="fit:true">
         <!--上布局-->
         <div data-options="region:'north',title:'',split:false" style="height:100px;position:relative">
-            <div style="width:200px;height:20px;right:0px;position:absolute;right:0px;bottom:0px">
-                当前登录用户：@Model.sUserName <a href="/Admin/Main/ExitSystem">安全退出</a>
+            <div style="width:240px;height:20px;right:0px;position:absolute;right:0px;bottom:0px">
+                当前登录用户：<span class="glyphicon glyphicon-user"><span style="margin-left:2px">@(Model.sUserName)&emsp;</span></span><a href="/Admin/Main/ExitSystem" class="glyphicon glyphicon-log-out"><span style="margin-left:2px">安全退出</span></a>
             </div>
         </div>
 

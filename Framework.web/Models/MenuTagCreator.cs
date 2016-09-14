@@ -33,7 +33,7 @@ namespace Framework.web.Models
                         url = string.IsNullOrWhiteSpace(item.sUrl) ? "root" : item.sUrl,
                         selectable = true,
                         state = new { expanded = false, selected = false, @checked = false, disabled = false },
-                        //tags = new string[] { item.ChildMenu.Count.ToString() },
+                        tags = new string[] { item.ChildMenu.Count.ToString() },
                         nodes = CreateBootStrapTreeMenuString(item.ChildMenu)
                     });
                 }

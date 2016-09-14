@@ -43,5 +43,12 @@ namespace Framework.BLL
         /// </summary>
         /// <returns>角色集合</returns>
         public abstract IList<EHECD_RoleDTO> LoadAllRoles();
+
+        /// <summary>
+        /// 载入用户的角色
+        /// </summary>
+        /// <param name="user">用户</param>
+        /// <returns>用户的角色</returns>
+        public abstract IList<EHECD_RoleDTO> LoadUserRole(EHECD_SystemUserDTO user);
     }
 }

@@ -56,5 +56,6 @@ namespace Framework.BLL
         /// <param name="user">用户</param>
         /// <returns>完整用户信息</returns>
         public abstract EHECD_SystemUserDTO GetSystemUserInfoById(EHECD_SystemUserDTO user);
+        
     }
 }

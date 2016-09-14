@@ -121,5 +121,11 @@ namespace Framework.BLL
         {
             return helper.QueryList<EHECD_RoleDTO>("SELECT ID,sRoleName FROM EHECD_Role WHERE bIsDeleted = 0 AND bEnable = 1",null);
         }
+
+        //载入用户权限
+        public override IList<EHECD_RoleDTO> LoadUserRole(EHECD_SystemUserDTO user)
+        {
+            return helper.QueryList<EHECD_RoleDTO>("SELECT ID FROM EHECD_Role r,EHECD_SystemUser_R_Role srr WHERE r.bIsDeleted = 0 AND r.bEnable = 1 AND r.ID = srr.sRoleID AND srr.sUserID = @ID", new { ID = user.ID.ToString() });
+        }
     }
 }

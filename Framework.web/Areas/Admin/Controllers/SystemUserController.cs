@@ -117,20 +117,48 @@ namespace Framework.web.Areas.Admin.Controllers
         /// <returns>部分视图</returns>
         public PartialViewResult ToDistributionRole(DTO.EHECD_SystemUserDTO user)
         {
-            var rols = DI.DIEntity
+            var bs = DI.DIEntity
                         .GetInstance()
-                        .GetImpl<IRoleManager>()
-                        .LoadAllRoles();
+                        .GetImpl<IRoleManager>();
 
-            if (rols.Count > 0)
-            {
-                ViewBag.RoleData = rols;
-            }
-            else
-            {
-                ViewBag.RoleData = new List<DTO.EHECD_RoleDTO>();
-            }
+            var rols = bs.LoadAllRoles();
 
+            var alreadyHasRoles = bs.LoadUserRole(user);
+
+            if (rols != null && rols.Count > 0)
+            {
+                
+                if (alreadyHasRoles != null && alreadyHasRoles.Count > 0)
+                {
+                    var ret = (from o in rols
+                               select new
+                               {
+                                   ID = o.ID.ToString(),
+                                   sRoleName = o.sRoleName,
+                                   check = alreadyHasRoles.Select(m =>
+                                   {
+                                       if (o.ID == m.ID)
+                                           return "checked";
+                                       else return "";
+                                   }).FirstOrDefault()
+                               }).ToList<dynamic>();
+
+                    ViewBag.RoleData = ret;
+                }
+                else
+                {
+                    var ret = (from o in rols
+                               select new
+                               {
+                                   ID = o.ID.ToString(),
+                                   sRoleName = o.sRoleName,
+                                   check = ""
+                               }).ToList<dynamic>();
+
+                    ViewBag.RoleData = ret;
+                }
+            }
+            
             return PartialView("DistributionRole", user);
         }
     }

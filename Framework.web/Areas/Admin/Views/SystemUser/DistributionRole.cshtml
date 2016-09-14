@@ -9,12 +9,12 @@
                     <td style="width:60px;padding:0px;text-align:center">系统角色</td>
                     <td valign="top">
                         @{
-                            var data = ViewBag.RoleData as List<Framework.DTO.EHECD_RoleDTO>;
+                            var data = ViewBag.RoleData as List<dynamic>;
                             for (int i = 0; i < data.Count; i++)
                             {
-                                <input type="checkbox" data-checkbox="box" value="@data[i].ID.ToString()" />
-                                <span class="glyphicon glyphicon-list-alt"></span>
-                                @data[i].sRoleName
+                                <input type="checkbox" data-checkbox="box" @(data[i].check.ToString()) value="@(data[i].ID.ToString())" />
+                                <span class="glyphicon glyphicon-user"></span>
+                                @(data[i].sRoleName)
                             }
                         }
                     </td>

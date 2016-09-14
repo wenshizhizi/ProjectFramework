@@ -8,7 +8,7 @@
 
             $('#tree').treeview({
                 data: r.Data,
-                showTags: false,
+                showTags: true,
                 collapseIcon: "glyphicon glyphicon-folder-open",
                 expandIcon: "glyphicon glyphicon-folder-close",
                 emptyIcon: "glyphicon glyphicon-tasks",
