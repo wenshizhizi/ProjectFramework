@@ -9,16 +9,19 @@
                     <td style="width:60px;padding:0px;text-align:center">系统角色</td>
                     <td valign="top">
                         @{
-                            var data = ViewBag.RoleData as List<dynamic>;
-                            for (int i = 0; i < data.Count; i++)
+                            var data = ViewBag.RoleData as List<object>;
+                            if (data != null)
                             {
-                                <input type="checkbox" data-checkbox="box" @(data[i].check.ToString()) value="@(data[i].ID.ToString())" />
-                                <span class="glyphicon glyphicon-user"></span>
-                                @(data[i].sRoleName)
+                                for (int i = 0; i < data.Count; i++)
+                                {
+                                    <input type="checkbox" data-checkbox="box" @(((dynamic)data[i]).check.ToString()) value="@(((dynamic)data[i]).ID.ToString())" />
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    @(((dynamic)data[i]).sRoleName)
+                                }
                             }
                         }
                     </td>
-                </tr>                
+                </tr>
             </tbody>
         </table>
     </form>

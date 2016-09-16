@@ -1,7 +1,7 @@
-﻿$(function () {    
-    void function () {
+﻿$(function () {
+    modules.get("cache").setMenuDomain("角色管理", new function () {
+
         var eui = modules.get("eui");
-        var t = modules.get("tool");
         var f = modules.get("func");
         var grid = $("#role_grid");
 
@@ -9,12 +9,135 @@
          * 初始化事件
          */
         function initEvent() {
-            $("a[data-id='search_role_button']").click(function () {
-                eui.search(grid, true);
-            });
-            $("a[data-id='add_role_button']").click(addRole);
-            $("a[data-id='edit_role_button']").click(editRole);
-            $("a[data-id='del_role_button']").click(delRole);
+            $("#role_grid_tool")
+                .on("click", "a[data-id='search_role_button']", function () {
+                    eui.search(grid, true);
+                })
+                .on("click", "a[data-id='add_role_button']", addRole)
+                .on("click", "a[data-id='edit_role_button']", editRole)
+                .on("click", "a[data-id='del_role_button']", delRole)
+                .on("click", "a[data-id='distribution_menu_authority']", distributionMenuRole)
+                .on("click", "a[data-id='distribution_button_authority']", distributionButtonRole);            
+        }
+
+        /**
+         * 分配角色按钮
+         */
+        function distributionButtonRole() {
+            eui.checkSelectedRow(grid, function (selectedRow) {
+                try {
+                    var div = $("<div/>");
+                    div.dialog({
+                        title: "分配按钮给角色",
+                        width: 480,
+                        height: 400,
+                        cache: false,
+                        href: '/Admin/RoleManage/ToDistributionButton',
+                        queryParams: selectedRow,
+                        modal: true,
+                        collapsible: false,
+                        minimizable: false,
+                        maximizable: false,
+                        resizable: false,
+                        buttons: [{
+                            text: '保存',
+                            iconCls: 'icon-save',
+                            handler: function () {
+                                //if ($("#edit_role_form").form("validate")) {
+
+                                //    var json = $("#edit_role_form").serializeObject();
+                                //    json.ID = selectedRow.ID;
+                                //    f.post("/Admin/RoleManage/EditRole", json,
+                                //        function (ret) {
+                                //            eui.alertInfo("编辑角色成功");
+                                //            eui.search(grid, true);
+                                //            $(div).dialog("close");
+                                //        }, function (ret) {
+                                //            eui.alertErr(ret.Msg);
+                                //        });
+                                //}
+                            }
+                        }, {
+                            text: '关闭',
+                            iconCls: 'icon-cancel',
+                            handler: function () {
+                                $(div).dialog("close");
+                            }
+                        }],
+                        onClose: function () {
+                            $(div).dialog("destroy"); div = null;
+                        },
+                        onLoad: function () {
+                            var form = $("#nodata");
+                            if (form.length > 0) {
+                                div.parent().find("a>span")[0].remove();
+                            }
+                        }
+                    });
+                } catch (e) {
+                    eui.alertErr(e.message);
+                }
+            }, "请选中你要分配的角色");
+        }
+
+        /**
+         * 分配角色菜单
+         */
+        function distributionMenuRole() {
+            eui.checkSelectedRow(grid, function (selectedRow) {
+                try {
+                    var div = $("<div/>");
+                    div.dialog({
+                        title: "分配菜单给角色",
+                        width: 480,
+                        height: 400,
+                        cache: false,
+                        href: '/Admin/RoleManage/ToDistributionMenu?ID=' + selectedRow.ID,
+                        queryParams: selectedRow,
+                        modal: true,
+                        collapsible: false,
+                        minimizable: false,
+                        maximizable: false,
+                        resizable: false,
+                        buttons: [{
+                            text: '保存',
+                            iconCls: 'icon-save',
+                            handler: function () {
+                                //if ($("#edit_role_form").form("validate")) {
+
+                                //    var json = $("#edit_role_form").serializeObject();
+                                //    json.ID = selectedRow.ID;
+                                //    f.post("/Admin/RoleManage/EditRole", json,
+                                //        function (ret) {
+                                //            eui.alertInfo("编辑角色成功");
+                                //            eui.search(grid, true);
+                                //            $(div).dialog("close");
+                                //        }, function (ret) {
+                                //            eui.alertErr(ret.Msg);
+                                //        });
+                                //}
+                            }
+                        }, {
+                            text: '关闭',
+                            iconCls: 'icon-cancel',
+                            handler: function () {
+                                $(div).dialog("close");
+                            }
+                        }],
+                        onClose: function () {
+                            $(div).dialog("destroy"); div = null;
+                        },
+                        onLoad: function () {
+                            var form = $("#nodata");
+                            if (form.length > 0) {
+                                div.parent().find("a>span")[0].remove();
+                            }
+                        }
+                    });
+                } catch (e) {
+                    eui.alertErr(e.message);
+                }
+            }, "请选中你要分配的角色");
         }
 
         /**
@@ -65,7 +188,7 @@
                     iconCls: 'icon-save',
                     handler: function () {
                         if ($("#add_role_form").form("validate")) {
-                            
+
                             var json = $("#add_role_form").serializeObject();
                             f.post("/Admin/RoleManage/AddRole", json,
                                 function (ret) {
@@ -85,7 +208,7 @@
                     }
                 }],
                 onClose: function () {
-                    $(div).dialog("destroy");
+                    $(div).dialog("destroy"); div = null;
                 },
                 onLoad: function () {
                     //var form = $("#nodata");
@@ -119,7 +242,7 @@
                         iconCls: 'icon-save',
                         handler: function () {
                             if ($("#edit_role_form").form("validate")) {
-                                
+
                                 var json = $("#edit_role_form").serializeObject();
                                 json.ID = selectedRow.ID;
                                 f.post("/Admin/RoleManage/EditRole", json,
@@ -140,7 +263,7 @@
                         }
                     }],
                     onClose: function () {
-                        $(div).dialog("destroy");
+                        $(div).dialog("destroy"); div = null;
                     },
                     onLoad: function () {
                         var form = $("#nodata");
@@ -206,5 +329,5 @@
         } catch (e) {
             eui.alertErr(e.message);
         }
-    }();
+    });
 });

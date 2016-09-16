@@ -11,7 +11,7 @@
 modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
 
     var browser = vers ? vers.browser : undefined;
-
+    
     /**
      * 
      * 生成UUID
@@ -31,6 +31,19 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
         s[14] = "4";
         s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);
         s[8] = s[13] = s[18] = s[23] = "-";
+        var uuid = s.join("");
+        return uuid;
+    }
+
+    function vertid() {
+        var s = [];
+        var hexDigits = "abcdefghijklmnopqrstuvwxyz";
+        for (var i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4";
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);
+        s[8] = s[13] = s[18] = s[23] = "_";
         var uuid = s.join("");
         return uuid;
     }
@@ -677,6 +690,7 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
         timeCompare: timeCompare,
         createStringSplitByCommaFromArray: createStringSplitByCommaFromArray,
         str2json: str2json,
-        zip: zip
+        zip: zip,
+        vertid: vertid
     };
 });

@@ -50,5 +50,12 @@ namespace Framework.BLL
         /// <param name="user">用户</param>
         /// <returns>用户的角色</returns>
         public abstract IList<EHECD_RoleDTO> LoadUserRole(EHECD_SystemUserDTO user);
+
+        /// <summary>
+        /// 载入分配角色的菜单（所有）
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public abstract dynamic LoadDistributionMenu(EHECD_RoleDTO role);        
     }
 }

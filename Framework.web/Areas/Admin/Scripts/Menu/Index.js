@@ -3,8 +3,16 @@
         var eui = modules.get("eui");
         var f = modules.get("func");
         var mainTab = $("#tabs");
+        var global = modules.get("cache");
+
 
         f.post(/*载入菜单数据*/"/Admin/Menu/LoadMenu", null, function (r) {
+
+            mainTab.tabs({
+                onClose: function (title, index) {                    
+                    global.cleanMenuDomain(title);                    
+                }
+            });
 
             $('#tree').treeview({
                 data: r.Data,
@@ -56,7 +64,6 @@
             }, 3000);
         }, true, true, null, null, "text", "body");
 
-
         function chooseTab(data) {
             var extab/*获取指定面板*/ = mainTab.tabs("getTab", data.text);
             if (!f.definededAndNotNull(extab)) {
@@ -71,7 +78,7 @@
                     closable: true,
                     href: data.url,
                     justified: true,
-                    style: { padding: 1 }
+                    style: { padding: 1 }                    
                 });
             } else {
                 mainTab.tabs("select",

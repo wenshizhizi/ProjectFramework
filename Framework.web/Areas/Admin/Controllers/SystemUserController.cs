@@ -88,6 +88,21 @@ namespace Framework.web.Areas.Admin.Controllers
         }
 
         /// <summary>
+        /// 给系统用户分配角色
+        /// </summary>
+        public void DistributionRole(DTO.EHECD_SystemUserDTO user)
+        {
+            CreateSyslogInfo();
+            var ret = DI.DIEntity
+                .GetInstance()
+                .GetImpl<ISystemUserManager>()
+                .DistributionRole(user, RequestParameters.dynamicData);
+
+            result.Succeeded = ret > 0;
+            result.Msg = result.Succeeded ? "" : "分配用户角色失败，请联系管理员";
+        }
+
+        /// <summary>
         /// 跳转到添加系统用户
         /// </summary>
         /// <returns>部分视图</returns>
@@ -127,7 +142,7 @@ namespace Framework.web.Areas.Admin.Controllers
 
             if (rols != null && rols.Count > 0)
             {
-                
+
                 if (alreadyHasRoles != null && alreadyHasRoles.Count > 0)
                 {
                     var ret = (from o in rols
@@ -135,13 +150,11 @@ namespace Framework.web.Areas.Admin.Controllers
                                {
                                    ID = o.ID.ToString(),
                                    sRoleName = o.sRoleName,
-                                   check = alreadyHasRoles.Select(m =>
-                                   {
-                                       if (o.ID == m.ID)
-                                           return "checked";
-                                       else return "";
-                                   }).FirstOrDefault()
-                               }).ToList<dynamic>();
+                                   check = alreadyHasRoles.Where(m => o.ID == m.ID).Select(m =>
+                                    {
+                                        return "checked";
+                                    }).FirstOrDefault()
+                               }).Select(m => JSONHelper.GetModel<object>(JSONHelper.GetJsonString<object>(m))).ToList();
 
                     ViewBag.RoleData = ret;
                 }
@@ -153,12 +166,12 @@ namespace Framework.web.Areas.Admin.Controllers
                                    ID = o.ID.ToString(),
                                    sRoleName = o.sRoleName,
                                    check = ""
-                               }).ToList<dynamic>();
+                               }).Select(m => JSONHelper.GetModel<object>(JSONHelper.GetJsonString<object>(m))).ToList();
 
                     ViewBag.RoleData = ret;
                 }
             }
-            
+
             return PartialView("DistributionRole", user);
         }
     }

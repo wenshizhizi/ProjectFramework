@@ -119,13 +119,104 @@ namespace Framework.BLL
         //载入所有角色
         public override IList<EHECD_RoleDTO> LoadAllRoles()
         {
-            return helper.QueryList<EHECD_RoleDTO>("SELECT ID,sRoleName FROM EHECD_Role WHERE bIsDeleted = 0 AND bEnable = 1",null);
+            return helper.QueryList<EHECD_RoleDTO>("SELECT ID,sRoleName FROM EHECD_Role WHERE bIsDeleted = 0 AND bEnable = 1", null);
         }
 
         //载入用户权限
         public override IList<EHECD_RoleDTO> LoadUserRole(EHECD_SystemUserDTO user)
         {
-            return helper.QueryList<EHECD_RoleDTO>("SELECT ID FROM EHECD_Role r,EHECD_SystemUser_R_Role srr WHERE r.bIsDeleted = 0 AND r.bEnable = 1 AND r.ID = srr.sRoleID AND srr.sUserID = @ID", new { ID = user.ID.ToString() });
+            return helper.QueryList<EHECD_RoleDTO>("SELECT r.ID FROM EHECD_Role r,EHECD_SystemUser_R_Role srr WHERE r.bIsDeleted = 0 AND r.bEnable = 1 AND r.ID = srr.sRoleID AND srr.bIsDeleted = 0 AND srr.sUserID = @ID", new { ID = user.ID.ToString() });
+        }
+
+        //载入菜单
+        public override dynamic LoadDistributionMenu(EHECD_RoleDTO role)
+        {
+            try
+            {
+                //1.获取所有菜单
+                var allMenus = helper.QueryList<EHECD_FunctionMenuDTO>("SELECT * FROM EHECD_FunctionMenu WHERE bIsDeleted = 0;", null);
+
+                //2.获取角色的菜单
+                var roleMenus = helper.QueryList<EHECD_FunctionMenuDTO>(
+                                                            @"SELECT
+	                                                            sPrivilegeAccessValue ID
+                                                            FROM
+	                                                            EHECD_Privilege
+                                                            WHERE
+	                                                            sPrivilegeMaster = 'role'
+                                                            AND sPrivilegeAccess = 'menu'
+                                                            AND sBelong = 'role'
+                                                            AND bIsDeleted = 0
+                                                            AND bPrivilegeOperation = 0
+                                                            AND sPrivilegeMasterValue = @ID;", new { ID = role.ID });
+
+                var temp/*转换用户数据结构*/ = (from o in allMenus
+                                        select new UserMenu
+                                        {
+                                            ID = o.ID,
+                                            Buttons = new List<UserMenuButton>(),
+                                            ChildMenu = new List<UserMenu>(),
+                                            iOrder = o.iOrder,
+                                            sMenuName = o.sMenuName,
+                                            sPID = o.sPID,
+                                            sUrl = o.sUrl
+                                        }).ToList();
+
+                //载入用户菜单层级关系
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    if (temp[i].sPID == null)
+                    {
+                        temp[i].ChildMenu = LoadMenuData(temp, temp[i]);
+                    }
+                }
+
+                //创建菜单数据
+                var ret = temp.Where(m => m.sPID == null).Select(o => new
+                {
+                    id = o.ID,
+                    text = o.sMenuName,
+                    @checked = roleMenus.Count > 0 ? roleMenus.Where(m => m.ID == o.ID).FirstOrDefault() != default(EHECD_FunctionMenuDTO) : false,
+                    children = CreateChidrenMenuTreeData(o.ChildMenu, roleMenus)
+                }).ToList();
+                                
+                return JSONHelper.GetJsonString<dynamic>(ret);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        
+        private List<dynamic> CreateChidrenMenuTreeData(IList<UserMenu> childMenu, IList<EHECD_FunctionMenuDTO> roleMenus)
+        {
+            var ret = new List<dynamic>();
+            for (int i = 0; i < childMenu.Count; i++)
+            {
+                ret.Add(new
+                {
+                    id = childMenu[i].ID,
+                    text = childMenu[i].sMenuName,
+                    @checked = roleMenus.Count > 0 ? roleMenus.Where(m => m.ID == childMenu[i].ID).FirstOrDefault() != default(EHECD_FunctionMenuDTO) : false,
+                    children = CreateChidrenMenuTreeData(childMenu[i].ChildMenu,roleMenus)
+                });
+            }
+            return ret;
+        }
+
+        private List<UserMenu> LoadMenuData(List<UserMenu> menu, UserMenu parent)
+        {
+            var ret = new List<UserMenu>();
+            for (int i = 0; i < menu.Count; i++)
+            {
+                if (parent.ID == menu[i].sPID)
+                {
+                    //parent.ChildMenu
+                    ret.Add(menu[i]);
+                    menu[i].ChildMenu = LoadMenuData(menu, menu[i]);
+                }
+            }
+            return ret;
         }
     }
 }

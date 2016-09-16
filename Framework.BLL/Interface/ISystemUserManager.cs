@@ -56,6 +56,13 @@ namespace Framework.BLL
         /// <param name="user">用户</param>
         /// <returns>完整用户信息</returns>
         public abstract EHECD_SystemUserDTO GetSystemUserInfoById(EHECD_SystemUserDTO user);
-        
+
+        /// <summary>
+        /// 给用户分配角色
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public abstract int DistributionRole(DTO.EHECD_SystemUserDTO user,dynamic p);
     }
 }

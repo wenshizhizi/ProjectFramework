@@ -49,12 +49,26 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             return PartialView("EditRole", role);
         }
+
+        /// <summary>
+        /// 跳转到分配菜单给角色页面
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public PartialViewResult ToDistributionMenu(EHECD_RoleDTO role)
+        {
+            ViewBag.TreeData = DI.DIEntity
+                            .GetInstance()
+                            .GetImpl<IRoleManager>()
+                            .LoadDistributionMenu(role);
+            return PartialView("DistributionMenu");
+        }
         #endregion
 
         #region 对角色的操作
         //编辑角色
         public void EditRole()
-        {            
+        {
             var manager = DIEntity.GetInstance().GetImpl<IRoleManager>();
             CreateSyslogInfo();
             var ret = manager.EditRole(JSONHelper.GetModel<EHECD_RoleDTO>(RequestParameters.dataStr), RequestParameters.dynamicData);

@@ -2,6 +2,7 @@
 /// <reference path="lib/modules.manager.js" />
 /// <reference path="lib/version.module.js" />
 /// <reference path="lib/tool.module.js" />
+/// <reference path="lib/global.variable.module.js" />
 
 /// <reference path="lib/array.module.js" />
 /// <reference path="lib/easyui.module.js" />

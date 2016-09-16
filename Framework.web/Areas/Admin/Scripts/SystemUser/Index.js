@@ -1,7 +1,7 @@
 ﻿$(function () {
-    void function () {
+    modules.get("cache").setMenuDomain("用户管理", new function () {
+
         var eui = modules.get("eui");
-        var t = modules.get("tool");
         var f = modules.get("func");
         var grid = $("#systemuser_grid");
 
@@ -9,19 +9,20 @@
          * 初始化事件
          */
         function initEvent() {
-            $("a[data-id='search_user_button']").click(function () {
-                eui.search(grid, true);
+
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 10,
+                format: 'YYYY年MM月DD日 h时mm分'
             });
 
-            $("a[data-id='add_systemuser_button']").click(addSystemUser);
-
-            $("a[data-id='edit_systemuser_button']").click(editSystemUser);
-
-            $("a[data-id='del_systemuser_button']").click(delSystemUser);
-
-            $("a[data-id='frozen_systemuser_button']").click(frozenSystemUser);
-
-            $("a[data-id='distribution_role_to_systemuser']").click(distributionRoleToSystemuser);
+            $("#systemuser_grid_tool")
+                .on("click", "a[data-id='search_user_button']", function () { eui.search(grid, true); })
+                .on("click", "a[data-id='add_systemuser_button']", addSystemUser)
+                .on("click", "a[data-id='edit_systemuser_button']", editSystemUser)
+                .on("click", "a[data-id='del_systemuser_button']", delSystemUser)
+                .on("click", "a[data-id='frozen_systemuser_button']", frozenSystemUser)
+                .on("click", "a[data-id='distribution_role_to_systemuser']", distributionRoleToSystemuser);
         }
 
         /**
@@ -128,7 +129,7 @@
                     }
                 }],
                 onClose: function () {
-                    $(div).dialog("destroy");
+                    $(div).dialog("destroy"); div = null;
                 },
                 onLoad: function () {
                 }
@@ -206,7 +207,7 @@
                         }
                     }],
                     onClose: function () {
-                        $(div).dialog("destroy");
+                        $(div).dialog("destroy"); div = null;
                     },
                     onLoad: function () {
                         var form = $("#nodata");
@@ -245,16 +246,20 @@
         function frozenSystemUser() {
             try {
                 eui.confirmDomain(grid, function (selectedRow) {
-                    f.post("/Admin/SystemUser/FrozenSystemUser", { ID: selectedRow.ID, tUserState: selectedRow.tUserState }, function (r) {
-                        if (selectedRow.tUserState === 0) {
-                            eui.alertInfo("冻结用户成功");
-                        } else {
-                            eui.alertInfo("解冻用户成功");
-                        }
-                        eui.search(grid, true);
-                    }, function (r) {
-                        eui.alertErr(r.Msg);
-                    });
+                    f.post("/Admin/SystemUser/FrozenSystemUser",
+                        {
+                            ID: selectedRow.ID,
+                            tUserState: selectedRow.tUserState
+                        }, function (r) {
+                            if (selectedRow.tUserState === 0) {
+                                eui.alertInfo("冻结用户成功");
+                            } else {
+                                eui.alertInfo("解冻用户成功");
+                            }
+                            eui.search(grid, true);
+                        }, function (r) {
+                            eui.alertErr(r.Msg);
+                        });
                 }, undefined, "请选择您要冻结或解冻的系统用户。",
                 function (selectedRow) {
                     if (selectedRow.tUserState === 0) {
@@ -291,45 +296,25 @@
                             iconCls: 'icon-save',
                             handler: function () {
                                 if ($("#distribution_role_form").form("validate")) {
+                                    debugger
+                                    var rolesIds = "";
 
-                                    ////序列化提交数据
-                                    //var json = $("#edit_systemuser_form").serializeObject();
-                                    //json.ID = selectedRow.ID;
-                                    ///*
-                                    //* 初始化区域数据
-                                    //*/
-                                    //var region = json.region.split("/");
+                                    $("input[data-checkbox='box']:checked")
+                                        .each(function () {
+                                            rolesIds += $(this).val() + ",";
+                                        });
 
-                                    //if (region.length > 0) {
+                                    if (rolesIds.length > 0) rolesIds = rolesIds.slice(0, rolesIds.length - 1);
 
-                                    //    delete json.region;
 
-                                    //    if (region.length === 1) {
-                                    //        json.sProvice = region[0];
-                                    //        json.sCity = "";
-                                    //        json.sCounty = "";
-                                    //    } else if (region.length === 2) {
-                                    //        json.sProvice = region[0];
-                                    //        json.sCity = region[1];
-                                    //        json.sCounty = "";
-                                    //    } else {
-                                    //        json.sProvice = region[0];
-                                    //        json.sCity = region[1];
-                                    //        json.sCounty = region[2];
-                                    //    }
-
-                                    //} else {
-                                    //    return eui.alertErr("请选择系统用户所在区域");
-                                    //}
-
-                                    //f.post("/Admin/SystemUser/DistributionRole", json,
-                                    //    function (ret) {
-                                    //        eui.alertInfo("编辑用户成功");
-                                    //        $(div).dialog("close");
-                                    //        eui.search(grid, true);
-                                    //    }, function (ret) {
-                                    //        eui.alertErr(ret.Msg);
-                                    //    });
+                                    f.post("/Admin/SystemUser/DistributionRole?ID=" + selectedRow.ID, { ids: rolesIds },
+                                        function (ret) {
+                                            eui.alertInfo("分配用户角色成功");
+                                            $(div).dialog("close");
+                                            eui.search(grid, true);
+                                        }, function (ret) {
+                                            eui.alertErr(ret.Msg);
+                                        });
                                 }
                             }
                         }, {
@@ -340,7 +325,7 @@
                             }
                         }],
                         onClose: function () {
-                            $(div).dialog("destroy");
+                            $(div).dialog("destroy"); div = null;
                         },
                         onLoad: function () {
                             var form = $("#nodata");
@@ -412,5 +397,5 @@
         } catch (e) {
             eui.alertErr(e.message);
         }
-    }();
+    });
 });
