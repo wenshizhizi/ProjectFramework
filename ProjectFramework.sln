@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.AppCache", "Frame
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.BLL", "Framework.BLL\Framework.BLL.csproj", "{128012BA-AA90-4E30-ACA8-36C6E36FD204}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectFramework.MonoCecil", "ProjectFramework.MonoCecil\ProjectFramework.MonoCecil.csproj", "{D0116FD6-D485-4276-9EBB-006232E71162}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{128012BA-AA90-4E30-ACA8-36C6E36FD204}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{128012BA-AA90-4E30-ACA8-36C6E36FD204}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{128012BA-AA90-4E30-ACA8-36C6E36FD204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0116FD6-D485-4276-9EBB-006232E71162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0116FD6-D485-4276-9EBB-006232E71162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0116FD6-D485-4276-9EBB-006232E71162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0116FD6-D485-4276-9EBB-006232E71162}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

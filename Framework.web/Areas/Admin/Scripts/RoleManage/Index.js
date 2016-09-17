@@ -17,7 +17,7 @@
                 .on("click", "a[data-id='edit_role_button']", editRole)
                 .on("click", "a[data-id='del_role_button']", delRole)
                 .on("click", "a[data-id='distribution_menu_authority']", distributionMenuRole)
-                .on("click", "a[data-id='distribution_button_authority']", distributionButtonRole);            
+                .on("click", "a[data-id='distribution_button_authority']", distributionButtonRole);
         }
 
         /**
@@ -43,19 +43,24 @@
                             text: '保存',
                             iconCls: 'icon-save',
                             handler: function () {
-                                //if ($("#edit_role_form").form("validate")) {
+                                //获取选中的项
+                                var allchecked = $("#distribut_all_menu_button").tree("getChecked");
 
-                                //    var json = $("#edit_role_form").serializeObject();
-                                //    json.ID = selectedRow.ID;
-                                //    f.post("/Admin/RoleManage/EditRole", json,
-                                //        function (ret) {
-                                //            eui.alertInfo("编辑角色成功");
-                                //            eui.search(grid, true);
-                                //            $(div).dialog("close");
-                                //        }, function (ret) {
-                                //            eui.alertErr(ret.Msg);
-                                //        });
-                                //}
+                                var checkedbtn = [];
+
+                                //筛选出按钮项
+                                $.each(allchecked, function (index, item) {
+                                    if (item.attributes.isLeaf) {
+                                        checkedbtn.push({ id: item.id, menuid: item.attributes.munuid });
+                                    }
+                                });
+
+                                f.post('/Admin/RoleManage/DistributionButton?ID=' + selectedRow.ID, checkedbtn, function (ret) {
+                                    eui.alertInfo("分配角色菜单按钮权限成功");
+                                    $(div).dialog("close");
+                                }, function (ret) {
+                                    eui.alertErr(ret.Msg);
+                                });
                             }
                         }, {
                             text: '关闭',
@@ -103,19 +108,16 @@
                             text: '保存',
                             iconCls: 'icon-save',
                             handler: function () {
-                                //if ($("#edit_role_form").form("validate")) {
-
-                                //    var json = $("#edit_role_form").serializeObject();
-                                //    json.ID = selectedRow.ID;
-                                //    f.post("/Admin/RoleManage/EditRole", json,
-                                //        function (ret) {
-                                //            eui.alertInfo("编辑角色成功");
-                                //            eui.search(grid, true);
-                                //            $(div).dialog("close");
-                                //        }, function (ret) {
-                                //            eui.alertErr(ret.Msg);
-                                //        });
-                                //}
+                                debugger
+                                var menus = $("#distribut_all_menu").tree("getChecked", ["checked", "indeterminate"]);
+                                var json = [];
+                                if (menus.length > 0) $.each(menus, function (index, item) { json.push(item.id); });
+                                f.post('/Admin/RoleManage/DistributionMenu?ID=' + selectedRow.ID, json, function (ret) {
+                                    eui.alertInfo("分配角色菜单权限成功");
+                                    $(div).dialog("close");
+                                }, function (ret) {
+                                    eui.alertErr(ret.Msg);
+                                });
                             }
                         }, {
                             text: '关闭',
@@ -128,10 +130,6 @@
                             $(div).dialog("destroy"); div = null;
                         },
                         onLoad: function () {
-                            var form = $("#nodata");
-                            if (form.length > 0) {
-                                div.parent().find("a>span")[0].remove();
-                            }
                         }
                     });
                 } catch (e) {

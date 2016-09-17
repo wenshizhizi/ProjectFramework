@@ -19,7 +19,7 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// 载入菜单
         /// </summary>
@@ -69,13 +69,24 @@ namespace Framework.web.Areas.Admin.Controllers
         #endregion
 
         #region 操作方法（编辑、添加）
+
+        /// <summary>
+        ///物理删除逻辑删除的数据
+        /// </summary>
+        public void DelDeletedData()
+        {
+            CreateSyslogInfo();
+            result.Succeeded = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DelDeletedData(RequestParameters.dynamicData);
+            result.Msg = result.Succeeded ? "" : "清除失败，请联系系统管理员";
+        }
+
         /// <summary>
         /// 添加菜单
         /// </summary>
         public void AddMenu()
         {
             EHECD_FunctionMenuDTO menu/*要添加的菜单*/ = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.data.ToString());
-                        
+
             //菜单业务对象
             IMenuManager menubll = DI.DIEntity.GetInstance().GetImpl<IMenuManager>();
 
@@ -143,7 +154,7 @@ namespace Framework.web.Areas.Admin.Controllers
             //菜单业务对象
             IMenuManager menubll = DI.DIEntity.GetInstance().GetImpl<IMenuManager>();
             CreateSyslogInfo();
-            addbutton = menubll.AddButton(addbutton, menuID,RequestParameters.dynamicData);
+            addbutton = menubll.AddButton(addbutton, menuID, RequestParameters.dynamicData);
 
             if (addbutton != null)
             {
@@ -205,7 +216,7 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             EHECD_MenuButtonDTO editbutton = JSONHelper.GetModel<EHECD_MenuButtonDTO>(RequestParameters.dataStr);
             CreateSyslogInfo();
-            editbutton = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditButton(editbutton,RequestParameters.dynamicData);
+            editbutton = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditButton(editbutton, RequestParameters.dynamicData);
 
             if (editbutton != null)
             {
@@ -243,7 +254,7 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             EHECD_FunctionMenuDTO menu = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.dataStr);
             CreateSyslogInfo();
-            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditMenu(menu,RequestParameters.dynamicData);
+            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditMenu(menu, RequestParameters.dynamicData);
             if (editmenu != null)
             {
                 result.Data = new
@@ -269,7 +280,7 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             EHECD_FunctionMenuDTO menu = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.dataStr);
             CreateSyslogInfo();
-            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenu(menu,RequestParameters.dynamicData);
+            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenu(menu, RequestParameters.dynamicData);
             if (editmenu > 0)
             {
                 DeleteSessionMenu(menu.ID.ToString());
@@ -290,7 +301,7 @@ namespace Framework.web.Areas.Admin.Controllers
             EHECD_MenuButtonDTO button = JSONHelper.GetModel<EHECD_MenuButtonDTO>(RequestParameters.dataStr);
             button.bIsDeleted = true;
             CreateSyslogInfo();
-            var ret = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenuButton(button,RequestParameters.dynamicData);
+            var ret = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenuButton(button, RequestParameters.dynamicData);
 
             if (ret > 0)
             {

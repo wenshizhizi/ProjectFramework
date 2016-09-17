@@ -32,7 +32,7 @@ namespace Framework.web.Models
                         text = item.sMenuName,
                         url = string.IsNullOrWhiteSpace(item.sUrl) ? "root" : item.sUrl,
                         selectable = true,
-                        state = new { expanded = false, selected = false, @checked = false, disabled = false },
+                        state = new { expanded = true, selected = false, @checked = false, disabled = false },
                         tags = new string[] { item.ChildMenu.Count.ToString() },
                         nodes = CreateBootStrapTreeMenuString(item.ChildMenu)
                     });
@@ -44,7 +44,7 @@ namespace Framework.web.Models
                         text = item.sMenuName,
                         url = string.IsNullOrWhiteSpace(item.sUrl) ? "root" : item.sUrl,
                         selectable = true,
-                        state = new { expanded = false, selected = false, @checked = false, disabled = false }
+                        state = new { expanded = true, selected = false, @checked = false, disabled = false }
                         //,
                         //tags = new string[] { "badge" }
                     });

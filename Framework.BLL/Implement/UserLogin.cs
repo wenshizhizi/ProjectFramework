@@ -1,10 +1,8 @@
-﻿using Framework.DI;
-using Framework.DTO;
+﻿using Framework.DTO;
 using Framework.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Framework.web.config;
 
@@ -24,11 +22,8 @@ namespace Framework.BLL
                 //获取用户和用户角色下的菜单
                 ret.UserMenu = LoadUserAndRolesMenu(t.ID);
 
-                //判断是否开启绑定到菜单按钮
-                if (WebConfig.LoadElement("UseMenuBottn") == "1")
-                {
-                    //获取用户的权限
-                    ret.UserRole = helper.QueryList<UserRole>(@"SELECT
+                //获取用户的角色
+                ret.UserRole = query.QueryList<UserRole>(@"SELECT
 	                                                            r.ID,
 	                                                            r.sRoleName,
 	                                                            r.dModifyTime,
@@ -43,6 +38,9 @@ namespace Framework.BLL
                                                             AND r.bEnable = 1
                                                             AND srr.sUserID = @id ORDER BY r.iOrder;", new { id = t.ID });
 
+                //判断是否开启绑定到菜单按钮
+                if (WebConfig.LoadElement("UseMenuBottn") == "1")
+                {
                     //获取这个用户所有的角色ID
                     string userRoles = string.Join(",", ret.UserRole.Select(m => string.Concat("'", m.ID, "'")));
 
@@ -57,7 +55,7 @@ namespace Framework.BLL
                     //如果不启用菜单按钮和角色与客户绑定的话，则获取每个菜单的按钮
                     for (int i = 0; i < ret.UserMenu.Count; i++)
                     {
-                        ret.UserMenu[i].Buttons = helper.QueryList<UserMenuButton>(@"SELECT
+                        ret.UserMenu[i].Buttons = query.QueryList<UserMenuButton>(@"SELECT
 	                                                                                        *
                                                                                         FROM
 	                                                                                        EHECD_MenuButton
@@ -70,6 +68,8 @@ namespace Framework.BLL
 		                                                                                        WHERE
 			                                                                                        sBelong = 'menu'
 		                                                                                        AND sBelongValue = @ID
+                                                                                                AND sPrivilegeMaster = 'menu'
+                                                                                                AND sPrivilegeMasterValue = @ID
 		                                                                                        AND sPrivilegeAccess = 'button'
 	                                                                                        )
                                                                                         AND bIsDeleted = 0
@@ -85,20 +85,23 @@ namespace Framework.BLL
             else
             {
                 //如果不启用权限，就获取所有菜单
-                ret.UserMenu = helper.QueryList<UserMenu>("SELECT ID,sMenuName,sPID,sUrl,iOrder from EHECD_FunctionMenu WHERE bIsDeleted = 0 ORDER BY iOrder;", null);
+                ret.UserMenu = query.QueryList<UserMenu>("SELECT ID,sMenuName,sPID,sUrl,iOrder from EHECD_FunctionMenu WHERE bIsDeleted = 0 ORDER BY iOrder;", null);
 
                 //判断是否开启菜单按钮配置：在不开启权限的情况下，这里的菜单按钮只获取绑定到个人身上的，不再获取绑定到权限的
                 if (WebConfig.LoadElement("UseMenuBottn") == "1")
                 {
                     //获取用户菜单按钮
-
+                    for (int i = 0; i < ret.UserMenu.Count; i++)
+                    {
+                        ret.UserMenu[i].Buttons = LoadUserMenuButton(ret.UserMenu[i].ID, t.ID);
+                    }
                 }
                 else
                 {
                     //获取所有菜单按钮
                     for (int i = 0; i < ret.UserMenu.Count; i++)
                     {
-                        ret.UserMenu[i].Buttons = helper.QueryList<UserMenuButton>(@"SELECT
+                        ret.UserMenu[i].Buttons = query.QueryList<UserMenuButton>(@"SELECT
 	                                                                                        *
                                                                                         FROM
 	                                                                                        EHECD_MenuButton
@@ -111,6 +114,8 @@ namespace Framework.BLL
 		                                                                                        WHERE
 			                                                                                        sBelong = 'menu'
 		                                                                                        AND sBelongValue = @ID
+                                                                                                AND sPrivilegeMaster = 'menu'
+                                                                                                AND sPrivilegeMasterValue = @ID
 		                                                                                        AND sPrivilegeAccess = 'button'
 	                                                                                        )
                                                                                         AND bIsDeleted = 0
@@ -133,7 +138,7 @@ namespace Framework.BLL
         //获取用户和用户角色下的菜单
         private IList<UserMenu> LoadUserAndRolesMenu(Guid? ID)
         {
-            return helper.QueryList<UserMenu>(@"SELECT * FROM EHECD_FunctionMenu WHERE ID IN(
+            return query.QueryList<UserMenu>(@"SELECT * FROM EHECD_FunctionMenu WHERE ID IN(
                                                             SELECT
 	                                                            a.sPrivilegeAccessValue
                                                             FROM
@@ -176,40 +181,61 @@ namespace Framework.BLL
         //获取用户和用户角色的菜单按钮
         private IList<UserMenuButton> LoadUserAndRolesMenuButton(string userRoles, Guid? menuID, Guid? userID)
         {
-            return helper.QueryList<UserMenuButton>(string.Format(@"SELECT * from EHECD_MenuButton WHERE ID IN (
-                                                                                        SELECT
-	                                                                                        a.sPrivilegeAccessValue
-                                                                                        FROM
-	                                                                                        EHECD_Privilege a,
-	                                                                                        EHECD_MenuButton b
-                                                                                        WHERE
-	                                                                                        a.sPrivilegeAccessValue = b.ID
-                                                                                        AND b.bIsDeleted = 0
-                                                                                        AND a.sPrivilegeMaster = 'role' /*指定该特权属于角色特权*/
-                                                                                        AND a.sBelong = 'menu' /*指定该特权是属于菜单的*/
-                                                                                        AND a.sPrivilegeAccess = 'button' /*指定该特权类型是一个按钮特权*/
-                                                                                        AND a.sPrivilegeMasterValue IN (
-	                                                                                        {0}
-                                                                                        ) /*指定该特权所属的具体角色*/
-                                                                                        AND a.sBelongValue = @ID /*指定该特权属于哪个菜单*/
-                                                                                        AND a.bIsDeleted = 0
-                                                                                        AND a.bPrivilegeOperation = 0
-                                                                                        UNION
-	                                                                                        SELECT
-		                                                                                        a.sPrivilegeAccessValue
-	                                                                                        FROM
-		                                                                                        EHECD_Privilege a,
-		                                                                                        EHECD_MenuButton b
-	                                                                                        WHERE
-		                                                                                        a.sPrivilegeAccessValue = b.ID
-	                                                                                        AND b.bIsDeleted = 0
-	                                                                                        AND a.sPrivilegeMaster = 'user' /*指定该特权属于用户特权*/
-	                                                                                        AND a.sBelong = 'menu' /*指定该特权是属于菜单的*/
-	                                                                                        AND a.sPrivilegeAccess = 'button' /*指定该特权类型是一个按钮特权*/
-	                                                                                        AND a.sPrivilegeMasterValue = @userID /*指定该特权所属的用户*/
-	                                                                                        AND a.sBelongValue = @ID /*指定该特权属于哪个菜单*/
-	                                                                                        AND a.bIsDeleted = 0
-	                                                                                        AND a.bPrivilegeOperation = 0) ORDER BY iOrder;", userRoles), new { ID = menuID, userID = userID });
+            return query.QueryList<UserMenuButton>(string.Format(@"SELECT * from EHECD_MenuButton WHERE ID IN (
+                                                                   SELECT
+	                                                                   a.sPrivilegeAccessValue
+                                                                   FROM
+	                                                                   EHECD_Privilege a,
+	                                                                   EHECD_MenuButton b
+                                                                   WHERE
+	                                                                   a.sPrivilegeAccessValue = b.ID
+                                                                   AND b.bIsDeleted = 0
+                                                                   AND a.sPrivilegeMaster = 'role' /*指定该特权属于角色特权*/
+                                                                   AND a.sBelong = 'menu' /*指定该特权是属于菜单的*/
+                                                                   AND a.sPrivilegeAccess = 'button' /*指定该特权类型是一个按钮特权*/
+                                                                   AND a.sPrivilegeMasterValue IN (
+	                                                                   {0}
+                                                                   ) /*指定该特权所属的具体角色*/
+                                                                   AND a.sBelongValue = @ID /*指定该特权属于哪个菜单*/
+                                                                   AND a.bIsDeleted = 0
+                                                                   AND a.bPrivilegeOperation = 0
+                                                                   UNION
+	                                                               SELECT
+		                                                               a.sPrivilegeAccessValue
+	                                                               FROM
+		                                                               EHECD_Privilege a,
+		                                                               EHECD_MenuButton b
+	                                                               WHERE
+		                                                               a.sPrivilegeAccessValue = b.ID
+	                                                               AND b.bIsDeleted = 0
+	                                                               AND a.sPrivilegeMaster = 'user' /*指定该特权属于用户特权*/
+	                                                               AND a.sBelong = 'menu' /*指定该特权是属于菜单的*/
+	                                                               AND a.sPrivilegeAccess = 'button' /*指定该特权类型是一个按钮特权*/
+	                                                               AND a.sPrivilegeMasterValue = @userID /*指定该特权所属的用户*/
+	                                                               AND a.sBelongValue = @ID /*指定该特权属于哪个菜单*/
+	                                                               AND a.bIsDeleted = 0
+	                                                               AND a.bPrivilegeOperation = 0) ORDER BY iOrder;", userRoles), new { ID = menuID, userID = userID });
+        }
+
+        //获取用户的菜单按钮
+        private IList<UserMenuButton> LoadUserMenuButton(Guid? menuID, Guid? userID)
+        {
+            return query.QueryList<UserMenuButton>(string.Format(@"SELECT * from EHECD_MenuButton WHERE ID IN (
+                                                                   SELECT
+	                                                                   a.sPrivilegeAccessValue
+                                                                   FROM
+	                                                                   EHECD_Privilege a,
+	                                                                   EHECD_MenuButton b
+                                                                   WHERE
+	                                                                   a.sPrivilegeAccessValue = b.ID
+                                                                   AND b.bIsDeleted = 0
+                                                                   AND a.sPrivilegeMaster = 'user' /*指定该特权属于角色特权*/
+                                                                   AND a.sBelong = 'menu' /*指定该特权是属于菜单的*/
+                                                                   AND a.sPrivilegeAccess = 'button' /*指定该特权类型是一个按钮特权*/
+                                                                   AND a.sPrivilegeMasterValue = @userID /*指定该特权所属的用户*/
+                                                                   AND a.sBelongValue = @menuID /*指定该特权属于哪个菜单*/
+                                                                   AND a.bIsDeleted = 0
+                                                                   AND a.bPrivilegeOperation = 0) ORDER BY iOrder;"), new { menuID = menuID, userID = userID });
         }
 
         #endregion
@@ -261,16 +287,16 @@ namespace Framework.BLL
             var IP = t.sAddress;
 
             //1.查询用户数据
-            t = helper.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE sLoginName = @name and sPassWord = @pwd AND bIsDeleted = 0;", new { name = t.sLoginName, pwd = Security.GetMD5Hash(t.sPassWord) });
+            t = query.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE sLoginName = @name and sPassWord = @pwd AND bIsDeleted = 0;", new { name = t.sLoginName, pwd = Security.GetMD5Hash(t.sPassWord) });
 
             //2.记录系统日志
             InsertSystemLog(
                 t.sLoginName,
-                t.sUserName == null ? "用户": t.sUserName,
+                t.sUserName == null ? "用户" : t.sUserName,
                 IP,
                 (Int16)(SYSTEM_LOG_TYPE.LOGON | SYSTEM_LOG_TYPE.SYSTEMUSER),
                 "系统用户登录",
-                t.ID.ToString() == null ? "": t.ID.ToString(),
+                t.ID.ToString() == null ? "" : t.ID.ToString(),
                 t != default(EHECD_SystemUserDTO) && t.tUserState == 0);
 
             if (t != default(EHECD_SystemUserDTO))
@@ -281,7 +307,7 @@ namespace Framework.BLL
                 return t;
             }
             else
-            {                
+            {
                 return null;
             }
         }

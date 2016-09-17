@@ -9,12 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Framework.BLL</RootNamespace>
     <AssemblyName>Framework.BLL</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,10 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implement\MenuManager.cs" />
-    <Compile Include="Implement\RoleManager.cs" />
+    <Compile Include="CustomerCodeFile.cs" />
+    <Compile Include="Implement\MenuManagerExcute.cs" />
+    <Compile Include="Implement\MenuManagerQuery.cs" />
+    <Compile Include="Implement\RoleManagerExcute.cs" />
+    <Compile Include="Implement\RoleManagerQuery.cs" />
     <Compile Include="Implement\SystemLogManager.cs" />
-    <Compile Include="Implement\SystemUserManager.cs" />
+    <Compile Include="Implement\SystemUserManagerExcute.cs" />
+    <Compile Include="Implement\SystemUserManagerQuery.cs" />
     <Compile Include="Implement\UserLogin.cs" />
     <Compile Include="Interface\BaseBll.cs" />
     <Compile Include="Interface\ILogin.cs" />

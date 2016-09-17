@@ -10,14 +10,15 @@
     <!--bootstrap-->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-    <!--主题样式：可选-->    
+    <!--主题样式：可选-->
     <link id="them" href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />
-       
+
     @*http://www.jeasyui.com/themebuilder/index.php*@
 
     <link href="~/Content/themes/icon.css" rel="stylesheet" />
     <link href="~/Content/themes/color.css" rel="stylesheet" />
-    <link href="~/Content/themes/mobile.css" rel="stylesheet" />    
+    <link href="~/Content/themes/mobile.css" rel="stylesheet" />
+    <link href="~/Content/backload.css" rel="stylesheet" />
 
     <script src="~/scripts/jquery-1.11.3.js"></script>
     <script src="~/scripts/jquery.easyui-1.4.5.js"></script>
@@ -38,29 +39,39 @@
 <body>
     <div id="layout" class="easyui-layout" data-options="fit:true">
         <!--上布局-->
-        <div data-options="region:'north',title:'',split:false" style="height:100px;position:relative">
-            <div style="width:380px;height:20px;right:0px;position:absolute;right:0px;bottom:5px">
-                切换主题：
-                <select class="easyui-combobox" data-options="editable:false,onSelect: function(rec){$('#them').attr('href',rec.value);}" style="width:80px;">
-                    <option value="/Content/themes/default/easyui.css">默认</option>
-                    <option value="/Content/themes/bootstrap/easyui.css" selected>bootstrap</option>
-                    <option value="/Content/themes/gray/easyui.css">灰阶</option>
-                    <option value="/Content/themes/black/easyui.css">夜间</option>
-                    <option value="/Content/themes/material/easyui.css">质感</option>
-                    <option value="/Content/themes/metro/easyui.css">地铁</option>
-                    <option value="/Content/themes/ui-pepper-grinder/easyui.css">胡椒色</option>
-                    <option value="/Content/themes/ui-cupertino/easyui.css">Cupertino</option>
-                    <option value="/Content/themes/ui-sunny/easyui.css">阳光</option>
-                </select>
-                当前登录用户：<span class="glyphicon glyphicon-user"><span style="margin-left:2px">@(Model.sUserName)&emsp;</span></span><a href="/Admin/Main/ExitSystem" class="glyphicon glyphicon-log-out"><span style="margin-left:2px">安全退出</span></a>
+        <div data-options="region:'north',title:'',split:false" style="height:60px;">
+            <div style="height:100%;width:100%;position:relative;" class="tabs-header">
+                <div style="width:auto;height:20px;right:15px;position:absolute;bottom:5px">
+                    切换主题：
+                    <select class="easyui-combobox" data-options="editable:false,onSelect: function(rec){$('#them').attr('href',rec.value);}" style="width:100px;">
+                        <option value="/Content/themes/default/easyui.css">默认</option>
+                        <option value="/Content/themes/bootstrap/easyui.css" selected>bootstrap</option>
+                        <option value="/Content/themes/gray/easyui.css">灰阶</option>
+                        <option value="/Content/themes/ui-dark-hive/easyui.css">夜间</option>
+                        <option value="/Content/themes/material/easyui.css">质感</option>
+                        <option value="/Content/themes/metro-blue/easyui.css">磁帖(蓝)</option>
+                        <option value="/Content/themes/metro-gray/easyui.css">磁帖(灰)</option>
+                        <option value="/Content/themes/metro-green/easyui.css">磁帖(绿)</option>
+                        <option value="/Content/themes/metro-orange/easyui.css">磁帖(橙)</option>
+                        <option value="/Content/themes/metro-red/easyui.css">磁帖(红)</option>
+                        <option value="/Content/themes/ui-pepper-grinder/easyui.css">胡椒色</option>
+                        <option value="/Content/themes/ui-cupertino/easyui.css">Cupertino</option>
+                        <option value="/Content/themes/ui-sunny/easyui.css">阳光</option>
+                    </select>
+                    当前登录用户：<span class="glyphicon glyphicon-user"><span style="margin-left:2px">@(Model.sUserName)&emsp;</span></span><a href="/Admin/Main/ExitSystem" class="glyphicon glyphicon-log-out"><span style="margin-left:2px">安全退出</span></a>
+                </div>
             </div>
         </div>
 
         <!--下布局-->
-        <div data-options="region:'south',title:'',split:false" style="height:80px;"></div>
+        <div data-options="region:'south',title:'',split:false" style="height:60px;">
+            <div style="height:100%;width:100%;line-height:55px;text-align:center" class="tabs-header">
+                XXXX后台管理系统  技术支持-成都亿合科技
+            </div>
+        </div>
 
         <!--左布局 菜单-->
-        <div data-options="region:'west',title:'菜单',split:false,href:'/Admin/Menu',width:280" style="padding:1px"></div>
+        <div class="tabs-header" data-options="region:'west',title:'菜单',split:false,href:'/Admin/Menu',width:280"></div>
 
         <!--中间面板-->
         <div data-options="region:'center',title:''" style="padding:1px;background:#eee;">

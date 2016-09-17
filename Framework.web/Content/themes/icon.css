@@ -68,7 +68,6 @@
 	background:url('icons/more.png') no-repeat center center;
 }
 
-
 .icon-mini-add{
 	background:url('icons/mini_add.png') no-repeat center center;
 }
@@ -94,3 +93,12 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
+
+.icon-clipboard{
+    background:url('icons/clipboard.png') no-repeat center center;
+}
+
+.icon-folder{
+	background:url('icons/folder.png') no-repeat center center;
+}
+

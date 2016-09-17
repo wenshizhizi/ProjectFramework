@@ -251,6 +251,24 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
     }
 
     /**
+     * 开启一个普通确认框
+     * @param {Function} callBackFuc 点了确定后回调的函数 
+     * @param {String} confirmMessage 要提示的信息 默认值是“您是否确认执行该操作”
+     */
+    function confirm(callBackFuc, confirmMessage) {
+        try {
+            confirmMessage = confirmMessage ? confirmMessage : "您是否确认执行该操作？";
+            $.messager.confirm('确认', confirmMessage, function (result) {
+                if (result) {
+                    callBackFuc();
+                }
+            });
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    /**
      * 带多行验证的确认提示框
      * @param {Datagrid} datagrid datagrid对象
      * @param {Function} callBackFuc 点了确定后回调的函数
@@ -370,6 +388,7 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
         checkTreeSelected: checkTreeSelected,
         confirmTreeNode: confirmTreeNode,
         confirmTreeNodeJudge: confirmTreeNodeJudge,
-        search: search
+        search: search,
+        confirm: confirm
     };
 });

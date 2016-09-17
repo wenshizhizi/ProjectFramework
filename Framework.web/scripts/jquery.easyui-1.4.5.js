@@ -4956,8 +4956,8 @@
 		}
 	};
 	$.messager.defaults = $.extend({}, $.fn.dialog.defaults, {
-		ok: "Ok",
-		cancel: "Cancel",
+		ok: "确定",
+		cancel: "取消",
 		width: 300,
 		height: "auto",
 		minHeight: 150,

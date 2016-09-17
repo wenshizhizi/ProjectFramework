@@ -16,7 +16,9 @@ namespace Framework.web
             RequestData r = new RequestData();
             using (StreamReader sr = new StreamReader(stream))
             {
-                var requstDic = JSONHelper.GetModel<IDictionary<string, object>>(HttpUtility.UrlDecode(sr.ReadToEnd()));
+                var sourceData = HttpUtility.UrlDecode(sr.ReadToEnd());
+
+                var requstDic = JSONHelper.GetModel<IDictionary<string, object>>(sourceData);
 
                 object rdata = "";
 
@@ -26,7 +28,7 @@ namespace Framework.web
                     {
                         r.dataStr = rdata.ToString();
                         r.data = JSONHelper.GetModel<object>(r.dataStr);
-                        r.dynamicData = JSONHelper.GetModel<dynamic>(r.dataStr);                       
+                        r.dynamicData = JSONHelper.GetModel<dynamic>(sourceData);                       
                     }
                 }
             }

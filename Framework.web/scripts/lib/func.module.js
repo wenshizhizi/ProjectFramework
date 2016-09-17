@@ -428,7 +428,10 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
         }
 
         var jsonData = {
-            data: data
+            data: data,
+            IP: "",
+            sLoginName: "",
+            sUserName:""
         };
 
         var ajaxHandler = $.ajax({

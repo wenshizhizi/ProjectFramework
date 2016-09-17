@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Framework.DTO
 {
+    /// <summary>
+    /// 用户权限信息
+    /// </summary>
     [Serializable]
     public class UserRoleMenuInfo
     {

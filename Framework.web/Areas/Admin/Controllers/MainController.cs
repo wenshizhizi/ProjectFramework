@@ -31,26 +31,29 @@ namespace Framework.web.Areas.Admin.Controllers
         {
             SetSessionInfo/*清空用户信息*/(SessionInfo.USER_SESSION_NAME, null);
             SetSessionInfo/*清空用户菜单信息*/(SessionInfo.USER_MENUS, null);
-            var sysLog = DI.DIEntity
-                                .GetInstance()
-                                .GetImpl<ISystemLogManager>()
-                                .InsertSystemLog(
-                                    new DTO.EHECD_SystemLogDTO
-                                    {
-                                        bIsDeleted = false,
-                                        dInsertTime = DateTime.Now,
-                                        ID = Helper.GuidHelper.GetSecuentialGuid(),
-                                        sDomainDetail = "系统用户退出登录",
-                                        sIPAddress = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress,
-                                        sLoginName = SessionUser.User.sLoginName,
-                                        sUserName = SessionUser.User.sUserName,
-                                        sDoMainId = SessionUser.User.ID.ToString(),
-                                        tDoType = (Int16)(DTO.SYSTEM_LOG_TYPE.LOGON | DTO.SYSTEM_LOG_TYPE.SYSTEMUSER)
-                                    },
-                                     DI.DIEntity
-                                    .GetInstance()
-                                    .GetImpl<Dapper.ExcuteHelper>()
-                                );
+            if (SessionUser != null)
+            {
+                DI.DIEntity
+                    .GetInstance()
+                    .GetImpl<ISystemLogManager>()
+                    .InsertSystemLog(
+                        new DTO.EHECD_SystemLogDTO
+                        {
+                            bIsDeleted = false,
+                            dInsertTime = DateTime.Now,
+                            ID = Helper.GuidHelper.GetSecuentialGuid(),
+                            sDomainDetail = "系统用户退出登录",
+                            sIPAddress = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress,
+                            sLoginName = SessionUser.User.sLoginName,
+                            sUserName = SessionUser.User.sUserName,
+                            sDoMainId = SessionUser.User.ID.ToString(),
+                            tDoType = (Int16)(DTO.SYSTEM_LOG_TYPE.LOGON | DTO.SYSTEM_LOG_TYPE.SYSTEMUSER)
+                        },
+                         DI.DIEntity
+                        .GetInstance()
+                        .GetImpl<Dapper.ExcuteHelper>()
+                    );
+            }
             return Redirect("/Admin/Login");
         }
 

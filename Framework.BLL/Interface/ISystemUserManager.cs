@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Framework.Dapper;
+﻿using Framework.Dapper;
 using Framework.DTO;
 
 namespace Framework.BLL
 {
     public abstract class ISystemUserManager:BaseBll
-    {
+    {       
         /// <summary>
         /// 分页载入系统用户
         /// </summary>

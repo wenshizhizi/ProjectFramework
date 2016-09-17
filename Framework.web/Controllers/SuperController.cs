@@ -47,8 +47,6 @@ namespace Framework.web.Controllers
             {
                 //封装一下ajax的数据
                 RequestParameters = ParameterLoader.LoadAjaxPostParameters(requestContext.HttpContext.Request.InputStream);
-                if (RequestParameters.dynamicData != null)
-                    RequestParameters.dynamicData.IP = requestContext.HttpContext.Request.UserHostAddress == "::1" ? "127.0.0.1" : requestContext.HttpContext.Request.UserHostAddress;
             }
             base.Initialize(requestContext);
         }
@@ -71,7 +69,8 @@ namespace Framework.web.Controllers
                     string url = new UrlHelper(filterContext.RequestContext).Action("Index", "Login");
                     //防止ajax调用分部视图出现登陆超时，在局部跳转URL的问题   
                     filterContext.HttpContext.Response.ContentType = "text/html";
-                    filterContext.HttpContext.Response.Write("<script> $.messager.alert('登录超时','抱歉，您已登录超时，系统将于3秒后返回登录页重新登录','info');setTimeout(function(){ window.location.href='" + url + "';},3000); </script>");
+                    //$.messager.alert('登录超时','抱歉，您已登录超时，系统将于3秒后返回登录页重新登录','info')
+                    filterContext.HttpContext.Response.Write("<script> alert('抱歉，您已登录超时，系统将于3秒后返回登录页重新登录');setTimeout(function(){ window.location.href='" + url + "';},3000); </script>");
                     filterContext.HttpContext.Response.End();
                 }
             }
@@ -184,10 +183,34 @@ namespace Framework.web.Controllers
 
         protected void CreateSyslogInfo()
         {
-            if (RequestParameters.dynamicData == null) RequestParameters.dynamicData = new { };
-            RequestParameters.dynamicData.sLoginName = SessionUser.User.sLoginName;
-            RequestParameters.dynamicData.sUserName = SessionUser.User.sUserName;
-            RequestParameters.dynamicData.IP = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress;
+            if (RequestParameters.dynamicData == null)
+            {
+                RequestParameters.dynamicData =
+                    new
+                    {
+                        sLoginName = SessionUser.User.sLoginName,
+                        sUserName = SessionUser.User.sUserName,
+                        IP = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress
+                    };
+
+                //如果不使用mono.cecil来对程序集中的匿名类型修改，
+                //将其指定为访问权限为public（默认是internal）,那
+                //就用下面的json插件的类型来装，不然匿名类传到其他
+                //程序集就无法访问了
+
+                //JObject.Parse(JSONHelper.GetJsonString(new
+                //{
+                //    sLoginName = SessionUser.User.sLoginName,
+                //    sUserName = SessionUser.User.sUserName,
+                //    IP = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress
+                //}));
+            }
+            else
+            {
+                RequestParameters.dynamicData.sLoginName = SessionUser.User.sLoginName;
+                RequestParameters.dynamicData.sUserName = SessionUser.User.sUserName;
+                RequestParameters.dynamicData.IP = Request.UserHostAddress == "::1" ? "127.0.0.1" : Request.UserHostAddress;
+            }
         }
     }
 }

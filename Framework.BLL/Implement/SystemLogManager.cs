@@ -10,6 +10,7 @@ namespace Framework.BLL
 {
     public class SystemLogManager : ISystemLogManager
     {
+        //记录系统日志
         public override int InsertSystemLog(EHECD_SystemLogDTO loginfo, ExcuteHelper excute)
         {
             return excute.InsertSingle<EHECD_SystemLogDTO>(loginfo);
