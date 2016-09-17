@@ -338,6 +338,7 @@ namespace Framework.web.Areas.Admin.Controllers
                     userMs.Add(new
                     {
                         id = item.ID,
+                        iconCls = "icon-folder",
                         text = item.sMenuName,
                         attributes = new { type = "menu", url = "", order = item.iOrder },
                         state = "open",
@@ -350,6 +351,7 @@ namespace Framework.web.Areas.Admin.Controllers
             return new
             {
                 text = "根目录",
+                iconCls = "icon-folder",
                 attributes = new { type = "root", url = "", order = 0 },
                 state = "open",
                 children = userMs.OrderBy(m => ((dynamic)((dynamic)m).attributes).order).ToList()
@@ -377,6 +379,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         id = temp.ID,
                         text = temp.sMenuName,
                         state = "closed",
+                        iconCls = string.IsNullOrWhiteSpace(temp.sUrl) ? "icon-folder" : "icon-clipboard",
                         attributes = new { type = "menu", url = temp.sUrl, order = temp.iOrder },
                         children = child
                     };

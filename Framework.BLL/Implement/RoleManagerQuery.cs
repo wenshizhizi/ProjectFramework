@@ -119,11 +119,10 @@ namespace Framework.BLL
 	                    WHERE
 		                    sPrivilegeMaster = 'role'
 	                    AND sPrivilegeAccess = 'button'
-	                    AND sBelong = 'role'
+	                    AND sBelong = 'menu'
 	                    AND bIsDeleted = 0
 	                    AND bPrivilegeOperation = 0
 	                    AND sPrivilegeMasterValue = @ID
-                        AND sBelongValue = @ID
                     ) SELECT
 	                    A.ID,
 	                    A.sButtonName
