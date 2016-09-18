@@ -9,7 +9,7 @@ namespace Framework.BLL
         public override EHECD_SystemUserDTO GetSystemUserInfoById(EHECD_SystemUserDTO user)
         {
             user = query.SingleQuery<EHECD_SystemUserDTO>("SELECT * FROM EHECD_SystemUser WHERE ID = @ID", new { ID = user.ID });
-            return user != default(EHECD_SystemUserDTO) ? null : user;            
+            return user == default(EHECD_SystemUserDTO) ? null : user;            
         }
 
         //分页系统用户

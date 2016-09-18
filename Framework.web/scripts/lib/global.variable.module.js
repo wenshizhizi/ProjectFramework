@@ -12,7 +12,6 @@ modules.define("cache", ["func"], function CacheDomain(func) {
         menus: {}
     };
 
-
     /**
      * 清除指定的key对应的全局变量
      * @param {String} key 键
@@ -75,6 +74,22 @@ modules.define("cache", ["func"], function CacheDomain(func) {
     }
 
     /**
+     * 获取菜单操作域
+     * @param {type} title 菜单标题（中文）
+     * @returns {type} 操作域
+     */
+    function getMenuDomain(title) {
+        var domain = null;
+        for (var i in global.menus) {
+            if (global.menus[i].title === title) {
+                domain = global.menus[i].domain;
+                break;
+            }
+        }
+        return domain;
+    }
+
+    /**
      * 清理菜单操作域
      * @param {type} title 菜单名称
      */
@@ -95,6 +110,7 @@ modules.define("cache", ["func"], function CacheDomain(func) {
         cleanCache: cleanVariable,
         global: global,
         setMenuDomain: setMenuDomain,
-        cleanMenuDomain: cleanMenuDomain
+        cleanMenuDomain: cleanMenuDomain,
+        getMenuDomain: getMenuDomain
     };
 });

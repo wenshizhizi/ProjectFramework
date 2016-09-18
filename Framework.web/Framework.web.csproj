@@ -84,10 +84,6 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -130,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\gridtable.css" />
+    <Content Include="Areas\Admin\Scripts\GoodsCategory\Index.js" />
     <Content Include="Areas\Admin\Scripts\Login\Index.js" />
     <Content Include="Areas\Admin\Scripts\MenuManage\Index.js" />
     <Content Include="Areas\Admin\Scripts\Menu\Index.js" />
@@ -454,7 +451,11 @@
     <Content Include="Content\themes\ui-dark-hive\tree.css" />
     <Content Include="Content\themes\ui-dark-hive\validatebox.css" />
     <Content Include="Content\themes\ui-dark-hive\window.css" />
-    <Content Include="scripts\city-picker\city-picker.css" />
+    <Content Include="scripts\plug-in\address\baiduaddress\index.htm" />
+    <Content Include="scripts\plug-in\address\baiduaddress\scripts\area.js" />
+    <Content Include="scripts\plug-in\address\baiduaddress\scripts\demo.js" />
+    <Content Include="scripts\plug-in\address\baiduaddress\style\demo.css" />
+    <Content Include="scripts\plug-in\address\city-picker\city-picker.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\themes\bootstrap\accordion.css" />
     <Content Include="Content\themes\bootstrap\calendar.css" />
@@ -842,13 +843,14 @@
     <Content Include="Content\themes\ui-sunny\window.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="scripts\city-picker\drop-arrow.png" />
+    <Content Include="scripts\plug-in\address\city-picker\drop-arrow.png" />
     <Content Include="scripts\ai.0.22.19-build00125.js" />
     <Content Include="scripts\ai.0.22.19-build00125.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\GoodsCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MainController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
@@ -889,17 +891,17 @@
     <Content Include="Areas\Admin\Views\SystemUser\DistributionRole.cshtml" />
     <Content Include="Areas\Admin\Views\RoleManage\DistributionMenu.cshtml" />
     <Content Include="Areas\Admin\Views\RoleManage\DistributionButton.cshtml" />
+    <Content Include="Areas\Admin\Views\GoodsCategory\Index.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="Content\bootstrap-treeview.min.css" />
     <Content Include="scripts\bootstrap-treeview.js" />
     <Content Include="scripts\bootstrap-treeview.min.js" />
-    <Content Include="scripts\city-picker\bootstrap.js" />
-    <Content Include="scripts\city-picker\city-picker.data.js" />
-    <Content Include="scripts\city-picker\city-picker.js" />
-    <Content Include="scripts\date-picker\daterangepicker-bs2.css" />
-    <Content Include="scripts\date-picker\daterangepicker-bs3.css" />
-    <Content Include="scripts\date-picker\daterangepicker.js" />
-    <Content Include="scripts\date-picker\moment.js" />
+    <Content Include="scripts\plug-in\address\city-picker\bootstrap.js" />
+    <Content Include="scripts\plug-in\address\city-picker\city-picker.data.js" />
+    <Content Include="scripts\plug-in\address\city-picker\city-picker.js" />
+    <Content Include="scripts\plug-in\date\date-picker\daterangepicker-bs3.css" />
+    <Content Include="scripts\plug-in\date\date-picker\daterangepicker.js" />
+    <Content Include="scripts\plug-in\date\date-picker\moment.js" />
     <Content Include="scripts\jquery-1.11.3.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\jquery.easyui-1.4.5.js" />
@@ -952,6 +954,25 @@
     <Content Include="scripts\login-back\html5.js" />
     <Content Include="scripts\login-back\normalize.css" />
     <Content Include="scripts\login-back\TweenLite.min.js" />
+    <Content Include="scripts\plug-in\date\date-picker\ReadMe.txt" />
+    <Content Include="scripts\plug-in\date\laydate-master\laydate.dev.js" />
+    <Content Include="scripts\plug-in\date\laydate-master\laydate.js" />
+    <Content Include="scripts\plug-in\date\laydate-master\need\laydate.css" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\dahong\icon.png" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\dahong\laydate.css" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\danlan\icon.png" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\danlan\laydate.css" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\default\icon.png" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\default\laydate.css" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\molv\icon.png" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\molv\laydate.css" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\qianhuang\icon.png" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\qianhuang\laydate.css" />
+    <Content Include="scripts\plug-in\date\laydate-master\ReadMe.txt" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\yahui\icon.png" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\yahui\laydate.css" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\yalan\icon.png" />
+    <Content Include="scripts\plug-in\date\laydate-master\skins\yalan\laydate.css" />
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -962,9 +983,15 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Scripts\Main\" />
+    <Folder Include="scripts\plug-in\address\baiduaddress\style\images\" />
+    <Folder Include="scripts\plug-in\input\" />
     <Folder Include="SystemLogs\Log\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Framework.AppCache\Framework.AppCache.csproj">
+      <Project>{e9c326c7-db54-47dd-ac57-a55a75c6024e}</Project>
+      <Name>Framework.AppCache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework.BLL\Framework.BLL.csproj">
       <Project>{128012BA-AA90-4E30-ACA8-36C6E36FD204}</Project>
       <Name>Framework.BLL</Name>

@@ -1,0 +1,20 @@
+﻿
+===================================================================================================
+异常时间：2016-09-18 10:06:36,785 
+异常级别：ERROR 
+引发类型：Framework.BLL.SystemUserManager
+所在方法：GetSystemUserInfoById
+异常简述：未将对象引用设置到对象的实例。
+详细信息：
+   在 Framework.BLL.SystemUserManager.GetSystemUserInfoById(EHECD_SystemUserDTO user) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.BLL\Implement\SystemUserManagerQuery.cs:行号 11
+   在 Framework.web.Areas.Admin.Controllers.SystemUserController.ToEditSystemUser(EHECD_SystemUserDTO user) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\SystemUserController.cs:行号 121
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()

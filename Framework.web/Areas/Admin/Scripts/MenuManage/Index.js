@@ -15,10 +15,10 @@
                 lines: false,
                 animate: true,
                 onContextMenu: function (e, node) {
-                    ////不要执行与事件关联的默认动作
-                    //e.preventDefault();
-                    ////创建菜单
-                    //createMenu(e, node);
+                    //不要执行与事件关联的默认动作
+                    e.preventDefault();
+                    //创建菜单
+                    createMenu(e, node);
                 },
                 onDblClick: function (node) {
                     if (node.state === "closed") {
@@ -34,10 +34,9 @@
             }, function (ret) {
                 eui.alertErr(ret.Msg);
             });
-
         }
 
-        //#region 右键菜单的创建：暂时没有开启，可以随时开启
+        //#region 右键菜单的创建
         /**
          * 动态创建右键菜单
          */

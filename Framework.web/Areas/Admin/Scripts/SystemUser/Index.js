@@ -8,14 +8,7 @@
         /**
          * 初始化事件
          */
-        function initEvent() {
-
-            $('#reservationtime').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 10,
-                format: 'YYYY年MM月DD日 h时mm分'
-            });
-
+        function initEvent() {            
             $("#systemuser_grid_tool")
                 .on("click", "a[data-id='search_user_button']", function () { eui.search(grid, true); })
                 .on("click", "a[data-id='add_systemuser_button']", addSystemUser)
@@ -397,5 +390,15 @@
         } catch (e) {
             eui.alertErr(e.message);
         }
+
+        /**
+        * 如果你要暴露域接口，请使用以下方式，其他域如果要互动，可以
+        * 通过modules.get("cache").getMenuDomain("菜单标题（中文）")
+        * 的方式来获取对应的菜单域，并调用他们提供的公共方法，但有一
+        * 点请注意，如果提供方法的菜单已经关闭，则无法取到他的操作域
+        * */
+        //return {
+        //    editSystemUser: editSystemUser
+        //};
     });
 });

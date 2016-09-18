@@ -1,6 +1,14 @@
-﻿<link href="~/scripts/date-picker/daterangepicker-bs3.css" rel="stylesheet" />
-<script src="~/scripts/date-picker/moment.js"></script>
-<script src="~/scripts/date-picker/daterangepicker.js"></script>
+﻿
+<script src="~/scripts/plug-in/address/select2/js/area.js"></script>
+<script src="~/scripts/plug-in/address/select2/js/location.js"></script>
+<script src="~/scripts/plug-in/address/select2/js/select2.js"></script>
+<script src="~/scripts/plug-in/address/select2/js/select2_locale_zh-CN.js"></script>
+<link href="~/scripts/plug-in/address/select2/css/common.css" rel="stylesheet" />
+<link href="~/scripts/plug-in/address/select2/js/select2.css" rel="stylesheet" />
+
+<link href="~/scripts/plug-in/date/laydate-master/need/laydate.css" rel="stylesheet" />
+<link href="~/scripts/plug-in/date/laydate-master/skins/molv/laydate.css" rel="stylesheet" />
+<script src="~/scripts/plug-in/date/laydate-master/laydate.dev.js"></script>
 <script src="~/Areas/Admin/Scripts/SystemUser/Index.js"></script>
 
 <div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,border:false,fit:true" style="padding:2px;">
@@ -9,7 +17,26 @@
         <div id="systemuser_grid_tool" style="padding:15px;display:none;">
             用户登录名或名字：<input class="easyui-textbox" name="sLoginName" data-options="width:160,validType:['maxLength[20]']" />
             &emsp;
-            注册时间：<input type="text" style="width: 300px;height:22px;" name="reservation" id="reservationtime" class="textbox" /><br /><br />
+
+            <div class="main">
+                <center>
+                    <select id="loc_province" style="width:120px;"></select>
+                    <select id="loc_city" style="width:120px; margin-left: 10px"></select>
+                    <select id="loc_town" style="width:120px;margin-left: 10px"></select>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="button" id="btnval" value="获取值" style="padding:5px 15px;" />
+                    <input type="button" id="btntext" value="获取文本" style="padding:5px 15px;" />
+                </center>
+            </div>
+
+            注册时间：
+            <input onclick="laydate({ istime: true })" class="textbox" style="height:20px;">&emsp;至&emsp;
+            <input onclick="laydate({ istime: true })" class="textbox" style="height:20px;">
+            <br />
+            <br />
             @Html.Partial("~/Areas/Admin/Views/Shared/_Button.cshtml")
         </div>
     </form>
