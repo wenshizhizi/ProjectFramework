@@ -1,0 +1,18 @@
+﻿<!--该控件为百度地图加地址选择插件-->
+<!--css-->
+<link href="~/scripts/plug-in/address/baiduaddress/style/baidu-address.css" rel="stylesheet" />
+<!--javascript-->
+<script src="~/scripts/plug-in/address/baiduaddress/scripts/baidu.map.js">百度地图</script>
+<script src="~/scripts/plug-in/address/baiduaddress/scripts/area.data.js">地理信息数据</script>
+<script src="~/scripts/plug-in/address/baiduaddress/scripts/choose.address.baidu.js">地图操作</script>
+
+<div class="ctrl_container">
+    <div id="select_ctrs">
+        省份：<select class="select_address" name="province"></select>
+        城市：<select class="select_address" name="city"></select>
+        县区：<select class="select_address" name="county" id="county"></select>&emsp;<span class="tips" style="color: green">请输入地址</span>
+        <input class="address_text" type="text" name="fname" id="suggestId" />
+        <a id="baidu_map_choose_search" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
+    </div>
+    <div class="map_container" id="map"></div>
+</div>

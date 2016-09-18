@@ -1,0 +1,49 @@
+﻿
+.select_address {
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    height: 23px;
+    border: 1px solid #D4D4D4;
+    background-color: #fff;
+    vertical-align: middle;
+}
+
+.address_text {
+    position: relative;
+    border: 1px solid #D4D4D4;
+    background-color: #fff;
+    vertical-align: middle;
+    display: inline-block;
+    height: 23px;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.map_container {
+    border: 1px solid #D4D4D4;
+    margin-top: 15px;
+    min-height: 400px;
+    max-height:500px;
+    min-width: 450px;
+    max-width:550px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.ctrl_container{
+    border: 1px solid #D4D4D4;
+    margin-top: 15px;
+    min-height: 400px;
+    max-height:400px;
+    min-width: 450px;
+    max-width:600px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}

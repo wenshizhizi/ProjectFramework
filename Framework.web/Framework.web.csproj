@@ -452,9 +452,10 @@
     <Content Include="Content\themes\ui-dark-hive\validatebox.css" />
     <Content Include="Content\themes\ui-dark-hive\window.css" />
     <Content Include="scripts\plug-in\address\baiduaddress\index.htm" />
-    <Content Include="scripts\plug-in\address\baiduaddress\scripts\area.js" />
-    <Content Include="scripts\plug-in\address\baiduaddress\scripts\demo.js" />
-    <Content Include="scripts\plug-in\address\baiduaddress\style\demo.css" />
+    <Content Include="scripts\plug-in\address\baiduaddress\scripts\area.data.js" />
+    <Content Include="scripts\plug-in\address\baiduaddress\scripts\baidu.map.js" />
+    <Content Include="scripts\plug-in\address\baiduaddress\scripts\choose.address.baidu.js" />
+    <Content Include="scripts\plug-in\address\baiduaddress\style\baidu-address.css" />
     <Content Include="scripts\plug-in\address\city-picker\city-picker.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\themes\bootstrap\accordion.css" />
@@ -892,6 +893,7 @@
     <Content Include="Areas\Admin\Views\RoleManage\DistributionMenu.cshtml" />
     <Content Include="Areas\Admin\Views\RoleManage\DistributionButton.cshtml" />
     <Content Include="Areas\Admin\Views\GoodsCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_BaiduAddressChoose.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="Content\bootstrap-treeview.min.css" />
     <Content Include="scripts\bootstrap-treeview.js" />

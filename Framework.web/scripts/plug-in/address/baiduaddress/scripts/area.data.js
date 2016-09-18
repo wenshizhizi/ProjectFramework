@@ -1,10 +1,10 @@
-var areas = [
+modules.get("cache").setCache("areas", [
 { "code": "110000", "parentCode": "0", "level": "1", "name": "北京市", "latitude": "39.929986", "longitude": "116.395645" },
 { "code": "110100", "parentCode": "110000", "level": "2", "name": "市辖区", "latitude": "", "longitude": "" },
 { "code": "110101", "parentCode": "110100", "level": "3", "name": "东城区", "latitude": "39.938574", "longitude": "116.421885" },
-{ "code": "110102", "parentCode": "110100", "level": "3", "name": "西城区", "latitude": "9.93428", "longitude": "116.37319" },
+{ "code": "110102", "parentCode": "110100", "level": "3", "name": "西城区", "latitude": "39.93428", "longitude": "116.37319" },
 { "code": "110105", "parentCode": "110100", "level": "3", "name": "朝阳区", "latitude": "39.958953", "longitude": "116.521695" },
-{ "code": "110106", "parentCode": "110100", "level": "3", "name": "丰台区", "latitude": "9.841938", "longitude": "116.25837" },
+{ "code": "110106", "parentCode": "110100", "level": "3", "name": "丰台区", "latitude": "39.841938", "longitude": "116.25837" },
 { "code": "110107", "parentCode": "110100", "level": "3", "name": "石景山区", "latitude": "39.938867", "longitude": "116.184556" },
 { "code": "110108", "parentCode": "110100", "level": "3", "name": "海淀区", "latitude": "40.033162", "longitude": "116.239678" },
 { "code": "110109", "parentCode": "110100", "level": "3", "name": "门头沟区", "latitude": "40.000893", "longitude": "115.795795" },
@@ -3511,7 +3511,7 @@ var areas = [
 { "code": "659002", "parentCode": "659000", "level": "3", "name": "阿拉尔市", "latitude": "40.61568", "longitude": "81.291737" },
 { "code": "659003", "parentCode": "659000", "level": "3", "name": "图木舒克市", "latitude": "39.889223", "longitude": "79.198155" },
 { "code": "659004", "parentCode": "659000", "level": "3", "name": "五家渠市", "latitude": "44.368899", "longitude": "87.565449" },
-//{"code":"710000","parentCode":"0","level":"1","name":"台湾省","latitude":"","longitude":""},
+{ "code": "710000", "parentCode": "0", "level": "1", "name": "台湾省", "latitude": "", "longitude": "" },
 { "code": "810000", "parentCode": "0", "level": "1", "name": "香港特别行政区", "latitude": "22.293586", "longitude": "114.186124" },
 { "code": "820000", "parentCode": "0", "level": "1", "name": "澳门特别行政区", "latitude": "22.204118", "longitude": "113.557519" }
-];
+]);
