@@ -1,7 +1,9 @@
-﻿(function (map) {    
-    modules.get("cache").setCache("baidumap", map);
-})(new function MapAddressChoose() {
-    var areas = modules.get("cache").getCacheNoResident("areas");
+﻿//(function (map) {    
+//    modules.get("cache").setCache("baidumap", map);
+//})(new );
+
+var map =new function MapAddressChoose() {
+    //var areas = modules.get("cache").getCacheNoResident("areas");
 
     //var clickPoint;
 
@@ -62,7 +64,8 @@
 
         // 将地址解析结果显示在地图上,并调整地图视野
         myGeo.getPoint(document.getElementById('suggestId').value, function (p) {
-            if (p) {
+            debugger
+            if (p) {                
                 lat = p.lat;
                 lng = p.lng;
                 map.centerAndZoom(p, 12);
@@ -72,7 +75,7 @@
             else {
                 alert("您输入的地址没有解析到结果!");
             }
-        }, document.getElementById('county').value);
+        }, document.getElementById('county').options[document.getElementById('county').options.selectedIndex].text);
 
     }
 
@@ -199,20 +202,20 @@
                     }
                 }
             })
-            .on("click", "#baidu_map_choose_search", function (e) {
-                debugger
+            .on("click", "#baidu_map_choose_search", function (e) {                
                 setPlace();
             })
 
-        return this;
+        loadPlace(104.4, 30.75, 12);
     }
 
     return {
         loadPlace: loadPlace,
         init: initSelection
     };
-});
+}
 
-$(function () {
-    modules.get("cache").getCacheNoResident("baidumap").init().loadPlace(104.4, 30.75, 12);
-});
+//$(function () {
+//    //modules.get("cache").getCacheNoResident("baidumap").init().loadPlace(104.4, 30.75, 12);
+//    map.init();
+//});

@@ -451,11 +451,11 @@
     <Content Include="Content\themes\ui-dark-hive\tree.css" />
     <Content Include="Content\themes\ui-dark-hive\validatebox.css" />
     <Content Include="Content\themes\ui-dark-hive\window.css" />
-    <Content Include="scripts\plug-in\address\baiduaddress\index.htm" />
     <Content Include="scripts\plug-in\address\baiduaddress\scripts\area.data.js" />
     <Content Include="scripts\plug-in\address\baiduaddress\scripts\baidu.map.js" />
     <Content Include="scripts\plug-in\address\baiduaddress\scripts\choose.address.baidu.js" />
     <Content Include="scripts\plug-in\address\baiduaddress\style\baidu-address.css" />
+    <Content Include="scripts\plug-in\address\baiduaddress\_baiduaddress.html" />
     <Content Include="scripts\plug-in\address\city-picker\city-picker.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\themes\bootstrap\accordion.css" />

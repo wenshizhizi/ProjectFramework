@@ -41,11 +41,13 @@
 
     <style type="text/css">
         .title {
+            color: white;
             width: 100px;
             text-align: right;
         }
 
         .tdcontent {
+            vertical-align: central;
             padding-left: 5px;
         }
 
@@ -91,8 +93,8 @@
         <div class="content">
             <div id="large-header" class="large-header">
                 <canvas id="canvas_container"></canvas>
-                <div id="lg_panel" class="easyui-panel" title="这里是登录框的标题"
-                     style="width:450px;height:250px;padding:10px;background:#fafafa;"
+                <div id="lg_panel" class="easyui-panel"
+                     style="width:450px;height:250px;padding:10px;background-color:rgba(255,255,255,0.0);border:0px"
                      data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,style:{position:'absolute'}">
                     <form id="lg_form" action="/Admin/Login/Login" method="post">
                         <table style="width:100%;">
@@ -113,20 +115,21 @@
                                 <tr>
                                     <td class="title">验证码：</td>
                                     <td class="tdcontent">
-                                        <img id="vcodepic" />
+                                        <img id="vcodepic" style="vertical-align: middle;border-radius:4px;width:85px;height:23px" />
+                                       
                                         <input id="vcode" class="easyui-textbox" data-options="height:25,width:90,required:true,missingMessage:'请输入4位验证码',type:'text',value:'请输入验证码',validType:['chartLengthEquire[4,\'验证码\']','isHtmlValidate']" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="text-align:center;vertical-align:bottom">
-                                        <a id="btn_reset" href="javascript:;" class="easyui-linkbutton" data-options="width:100">重置</a>
-                                        <a id="btn_lgon" href="javascript:;" class="easyui-linkbutton" data-options="width:100">登录</a>
+                                    <td colspan="2" style="padding-left:117px;vertical-align:bottom">
+                                        <a id="btn_reset" href="javascript:;" class="easyui-linkbutton" data-options="width:88">重置</a>
+                                        <a id="btn_lgon" href="javascript:;" class="easyui-linkbutton" data-options="width:88">登录</a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </form>
-                </div>               
+                </div>
             </div>
         </div>
     </div>

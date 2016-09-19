@@ -9,8 +9,16 @@
         f.post(/*载入菜单数据*/"/Admin/Menu/LoadMenu", null, function (r) {
 
             mainTab.tabs({
-                onClose: function (title, index) {                    
-                    global.cleanMenuDomain(title);                    
+                onClose: function (title, index) {
+                    global.cleanMenuDomain(title);
+                }, onBeforeClose: function () {
+                    /* 如果套用了iframe就回收内存 */                    
+                    var frame = $('iframe', this);
+                    if (frame.length > 0) {
+                        frame[0].contentWindow.document.write('');
+                        frame[0].contentWindow.close();
+                        frame.remove();                        
+                    }
                 }
             });
 
@@ -78,7 +86,7 @@
                     closable: true,
                     href: data.url,
                     justified: true,
-                    style: { padding: 1 }                    
+                    style: { padding: 1 }
                 });
             } else {
                 mainTab.tabs("select",
