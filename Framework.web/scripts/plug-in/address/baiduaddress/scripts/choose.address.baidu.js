@@ -1,12 +1,6 @@
-﻿
-$(function () {
-    var mapCTL = new MapAddressChoose();
-    mapCTL.init();
-    mapCTL.loadPlace(104.4, 30.75, 12);
-});
-
-function MapAddressChoose() {
-
+﻿(function (map) {    
+    modules.get("cache").setCache("baidumap", map);
+})(new function MapAddressChoose() {
     var areas = modules.get("cache").getCacheNoResident("areas");
 
     //var clickPoint;
@@ -86,8 +80,8 @@ function MapAddressChoose() {
      * 地图点击事件
      */
     map.addEventListener("click", function (e) {
-        alert(e.point.lng + "," + e.point.lat);
-        //add_overlay(e.point);
+        //alert(e.point.lng + "," + e.point.lat);
+        add_overlay(e.point);
     });
 
     //添加覆盖物
@@ -137,8 +131,6 @@ function MapAddressChoose() {
                         }
                     }
                 } else {
-
-
                     $("[name='city'] option:gt(0)").remove();
                     $("[name='county'] option:gt(0)").remove();
                 }
@@ -146,12 +138,9 @@ function MapAddressChoose() {
                 if (code > 0) {
                     for (var i = 0; i < areas.length; i++) {
                         if (parseInt(areas[i].code) == code) {
-
                             var longitude = areas[i].longitude;
                             var latitude = areas[i].latitude;
-
                             loadPlace(longitude, latitude, 10);
-
                             break;
                         }
                     }
@@ -215,10 +204,15 @@ function MapAddressChoose() {
                 setPlace();
             })
 
+        return this;
     }
 
     return {
         loadPlace: loadPlace,
         init: initSelection
     };
-}
+});
+
+$(function () {
+    modules.get("cache").getCacheNoResident("baidumap").init().loadPlace(104.4, 30.75, 12);
+});

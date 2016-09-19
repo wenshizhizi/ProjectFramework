@@ -38,10 +38,7 @@
 
 .ctrl_container{
     border: 1px solid #D4D4D4;
-    margin-top: 15px;
-    min-height: 400px;
-    max-height:400px;
-    min-width: 450px;
+    margin: 15px;
     max-width:600px;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
