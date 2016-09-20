@@ -49,6 +49,7 @@
     <Compile Include="ApplicationData\RoleMenus\UserMenu.cs" />
     <Compile Include="ApplicationData\RoleMenus\UserRole.cs" />
     <Compile Include="ApplicationData\RoleMenus\UserRoleMenuInfo.cs" />
+    <Compile Include="EHECD_CategoriesDTO.cs" />
     <Compile Include="EHECD_FunctionMenuDTO.cs" />
     <Compile Include="EHECD_MenuButtonDTO.cs" />
     <Compile Include="EHECD_PrivilegeDTO.cs" />
@@ -63,6 +64,7 @@
   <ItemGroup>
     <Content Include="ApplicationData\DataBaseInfo\CreateSQL\crebas.sql" />
     <Content Include="ApplicationData\DataBaseInfo\CreateSQL\dbo.sql" />
+    <Content Include="ApplicationData\DTOCreator\TableToDTOGenerator.exe" />
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup />

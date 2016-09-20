@@ -25,6 +25,7 @@ namespace Framework.MapperConfig
                 cfg.CreateMap<UserRole, EHECD_RoleDTO>();
                 cfg.CreateMap<UserMenu, EHECD_FunctionMenuDTO>();
                 cfg.CreateMap<UserMenuButton, EHECD_MenuButtonDTO>();
+                                
             });
         }
     }

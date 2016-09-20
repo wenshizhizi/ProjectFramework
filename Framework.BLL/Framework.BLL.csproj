@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerCodeFile.cs" />
+    <Compile Include="Implement\GoodsCategoriesManagerExcute.cs" />
+    <Compile Include="Implement\GoodsCategoriesManagerQuery.cs" />
     <Compile Include="Implement\MenuManagerExcute.cs" />
     <Compile Include="Implement\MenuManagerQuery.cs" />
     <Compile Include="Implement\RoleManagerExcute.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Implement\SystemUserManagerQuery.cs" />
     <Compile Include="Implement\UserLogin.cs" />
     <Compile Include="Interface\BaseBll.cs" />
+    <Compile Include="Interface\IGoodsCategoriesManager.cs" />
     <Compile Include="Interface\ILogin.cs" />
     <Compile Include="Interface\IMenuManager.cs" />
     <Compile Include="Interface\IRoleManager.cs" />
