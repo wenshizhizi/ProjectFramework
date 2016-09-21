@@ -12,7 +12,7 @@ namespace Framework.BLL
     {
         public override string LoadGoodsCategories()
         {
-            var goodsCatories = query.QueryList<EHECD_CategoriesDTO>(@"SELECT ID,PID,sCategoryName,sCategoryCaption,iOrder,sImgUri FROM EHECD_Categories WHERE bIsDeleted = 0", null);
+            var goodsCatories = query.QueryList<EHECD_CategoriesDTO>(@"SELECT ID,PID,sCategoryName,sCategoryCaption,iOrder,sImgUri,dInsertTime FROM EHECD_Categories WHERE bIsDeleted = 0", null);
             var ret = LoadLevelCategories(goodsCatories, goodsCatories.Where(m => m.PID == null).FirstOrDefault());
             return JSONHelper.GetJsonString(ret);
         }
@@ -28,23 +28,15 @@ namespace Framework.BLL
                     {
                         id = categories[i].ID,
                         text = categories[i].sCategoryName,
-                        children = LoadLevelCategories(categories, categories[i])
-                        //iconCls = m.sIcon,
-                        // attributes = new { isLeaf = true, munuid = childMenu[i].ID },
-                        //@checked = roleMenuButtons != null && roleMenuButtons.Count > 0 ? roleMenuButtons.Contains(m, buttonCompare) : false,
+                        sCategoryCaption  = categories[i].sCategoryCaption,
+                        addDate = categories[i].dInsertTime,
+                        iOrder = categories[i].iOrder,
+                        sPID = categories[i].PID,
+                        sImgUri= categories[i].sImgUri,
+                        children = LoadLevelCategories(categories, categories[i])                       
                     });
                 }
-            }
-
-            //var ret = new
-            //{
-            //    id = parent.ID,
-            //    text = parent.sCategoryName,
-            //    children = ca
-            //    //iconCls = m.sIcon,
-            //    // attributes = new { isLeaf = true, munuid = childMenu[i].ID },
-            //    //@checked = roleMenuButtons != null && roleMenuButtons.Count > 0 ? roleMenuButtons.Contains(m, buttonCompare) : false,
-            //};
+            }            
             return ca;
 
         }

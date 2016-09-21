@@ -134,6 +134,7 @@
     <Content Include="Areas\Admin\Scripts\SystemUser\Index.js" />
     <Content Include="Content\backload.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\noimg.png" />
     <Content Include="Content\themes\icons\clipboard.png" />
     <Content Include="Content\themes\icons\folder.png" />
     <Content Include="Content\themes\metro-blue\accordion.css" />
