@@ -1,0 +1,105 @@
+﻿
+===================================================================================================
+异常时间：2016-09-21 15:27:08,374 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperQueryDBHelper+<>c__2`1[T]
+所在方法：<DoQueryList>b__2_3
+异常简述：无法将类型为“System.Collections.Generic.Dictionary`2[System.String,System.Object]”的对象强制转换为类型“System.Collections.Generic.Dictionary`2[System.String,System.String]”。
+详细信息：
+   在 Framework.Dapper.DapperQueryDBHelper.<>c__2`1.<DoQueryList>b__2_3(IDictionary`2 m) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 Framework.Dapper.DapperQueryDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-09-21 15:28:03,001 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperQueryDBHelper+<>c__2`1[T]
+所在方法：<DoQueryList>b__2_3
+异常简述：无法将类型为“System.Collections.Generic.Dictionary`2[System.String,System.Object]”的对象强制转换为类型“System.Collections.Generic.Dictionary`2[System.String,System.String]”。
+详细信息：
+   在 Framework.Dapper.DapperQueryDBHelper.<>c__2`1.<DoQueryList>b__2_3(IDictionary`2 m) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 Framework.Dapper.DapperQueryDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-09-21 15:28:19,467 
+异常级别：ERROR 
+引发类型：System.Linq.Enumerable
+所在方法：Select
+异常简述：值不能为 null。
+参数名: source
+详细信息：
+   在 System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)
+   在 Framework.BLL.RoleManager.DistributionMenuButton(EHECD_RoleDTO role, Object dynamicData) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.BLL\Implement\RoleManagerExcute.cs:行号 190
+   在 CallSite.Target(Closure , CallSite , IRoleManager , EHECD_RoleDTO , Object )
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute3[T0,T1,T2,TRet](CallSite site, T0 arg0, T1 arg1, T2 arg2)
+   在 Framework.web.Areas.Admin.Controllers.RoleManageController.DistributionButton(EHECD_RoleDTO role) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\RoleManageController.cs:行号 95
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-21 15:31:17,177 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperQueryDBHelper+<>c__2`1[T]
+所在方法：<DoQueryList>b__2_3
+异常简述：无法将类型为“System.Collections.Generic.Dictionary`2[System.String,System.Object]”的对象强制转换为类型“System.Collections.Generic.Dictionary`2[System.String,System.String]”。
+详细信息：
+   在 Framework.Dapper.DapperQueryDBHelper.<>c__2`1.<DoQueryList>b__2_3(IDictionary`2 m) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 Framework.Dapper.DapperQueryDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\QueryHelperBase.cs:行号 97
+
+===================================================================================================
+异常时间：2016-09-21 15:31:18,260 
+异常级别：ERROR 
+引发类型：System.Linq.Enumerable
+所在方法：Select
+异常简述：值不能为 null。
+参数名: source
+详细信息：
+   在 System.Linq.Enumerable.Select[TSource,TResult](IEnumerable`1 source, Func`2 selector)
+   在 Framework.BLL.RoleManager.DistributionMenuButton(EHECD_RoleDTO role, Object dynamicData) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.BLL\Implement\RoleManagerExcute.cs:行号 190
+   在 CallSite.Target(Closure , CallSite , IRoleManager , EHECD_RoleDTO , Object )
+   在 Framework.web.Areas.Admin.Controllers.RoleManageController.DistributionButton(EHECD_RoleDTO role) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.web\Areas\Admin\Controllers\RoleManageController.cs:行号 95
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+
+===================================================================================================
+异常时间：2016-09-21 15:33:25,632 
+异常级别：ERROR 
+引发类型：Framework.Dapper.DapperQueryDBHelper+<>c__2`1[T]
+所在方法：<DoQueryList>b__2_3
+异常简述：无法将类型为“System.Collections.Generic.Dictionary`2[System.String,System.Object]”的对象强制转换为类型“System.Collections.Generic.Dictionary`2[System.String,System.String]”。
+详细信息：
+   在 Framework.Dapper.DapperQueryDBHelper.<>c__2`1.<DoQueryList>b__2_3(IDictionary`2 m) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 Framework.Dapper.DapperQueryDBHelper.DoQueryList[T](SqlConnection conn, String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\DapperQueryDBHelper.cs:行号 98
+   在 Framework.Dapper.QueryHelperBase.QueryList[T](String sqlCommand, Object parameter) 位置 C:\Users\Administrator\Source\Repos\ProjectFramework\Framework.ORM\Query\QueryHelperBase.cs:行号 97

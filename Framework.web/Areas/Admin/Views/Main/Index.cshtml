@@ -11,7 +11,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
     <!--主题样式：可选-->
-    <link id="them" href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link id="them" href="~/Content/themes/ui-sunny/easyui.css" rel="stylesheet" />
 
     @*http://www.jeasyui.com/themebuilder/index.php*@
 
@@ -47,7 +47,7 @@
                     切换主题：
                     <select class="easyui-combobox" data-options="editable:false,onSelect: function(rec){$('#them').attr('href',rec.value);}" style="width:100px;">
                         <option value="/Content/themes/default/easyui.css">默认</option>
-                        <option value="/Content/themes/bootstrap/easyui.css" selected>bootstrap</option>
+                        <option value="/Content/themes/bootstrap/easyui.css">bootstrap</option>
                         <option value="/Content/themes/gray/easyui.css">灰阶</option>
                         <option value="/Content/themes/ui-dark-hive/easyui.css">夜间</option>
                         <option value="/Content/themes/material/easyui.css">质感</option>
@@ -58,7 +58,7 @@
                         <option value="/Content/themes/metro-red/easyui.css">磁帖(红)</option>
                         <option value="/Content/themes/ui-pepper-grinder/easyui.css">胡椒色</option>
                         <option value="/Content/themes/ui-cupertino/easyui.css">Cupertino</option>
-                        <option value="/Content/themes/ui-sunny/easyui.css">阳光</option>
+                        <option value="/Content/themes/ui-sunny/easyui.css" selected>阳光</option>
                     </select>
                     当前登录用户：<span class="glyphicon glyphicon-user"><span style="margin-left:2px">@(Model.sUserName)&emsp;</span></span><a href="/Admin/Main/ExitSystem" class="glyphicon glyphicon-log-out"><span style="margin-left:2px">安全退出</span></a>
                 </div>
@@ -76,7 +76,7 @@
         <div class="tabs-header" data-options="region:'west',title:'菜单',split:false,href:'/Admin/Menu',width:280"></div>
 
         <!--中间面板-->
-        <div data-options="region:'center',title:''" style="padding:1px;background:#eee;">
+        <div data-options="region:'center',title:''">
             <div id="tabs" class="easyui-tabs" data-options="fit:true">
             </div>
         </div>

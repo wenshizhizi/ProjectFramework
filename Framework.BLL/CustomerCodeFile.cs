@@ -1,5 +1,6 @@
 ﻿using Framework.DTO;
 using System.Collections.Generic;
+using System;
 
 namespace Framework.BLL
 {
@@ -12,6 +13,19 @@ namespace Framework.BLL
         }
 
         public int GetHashCode(UserMenuButton obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+
+    internal class ButtonMenuRoleCompare : IEqualityComparer<object>
+    {
+        public new bool Equals(object x, object y)
+        {
+            return ((dynamic)x).id == ((dynamic)y).id && ((dynamic)x).menuid == ((dynamic)y).menuid;
+        }
+
+        public int GetHashCode(object obj)
         {
             return obj.GetHashCode();
         }

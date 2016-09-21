@@ -1,4 +1,6 @@
-﻿using Framework.web.Controllers;
+﻿using Framework.BLL;
+using Framework.DI;
+using Framework.web.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,13 @@ namespace Framework.web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public void LoadGoodsCategory()
+        {
+            var bll = DIEntity.GetInstance().GetImpl<IGoodsCategoriesManager>();
+            result.Data = bll.LoadGoodsCategories();
+            result.Succeeded = true;
         }
     }
 }

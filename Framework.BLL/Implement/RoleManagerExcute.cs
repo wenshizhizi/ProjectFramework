@@ -187,7 +187,7 @@ namespace Framework.BLL
                 //var btsid = bts.Select(m => m.id.Value.ToString()).ToList();
 
                 //2.获取角色已有的按钮ID
-                var roleBtnIds = query.QueryList<Dictionary<string,string>>(
+                var roleBtnIds = query.QueryList<Dictionary<string,object>>(
                     @"
                         SELECT 
                             sPrivilegeAccessValue id,
@@ -197,19 +197,18 @@ namespace Framework.BLL
                         WHERE sPrivilegeMaster = 'role' 
                         AND sBelong = 'menu' 
                         AND sPrivilegeAccess = 'button'
-                        AND sBelongValue = @ID 
                         AND bIsDeleted = 0
                         AND sPrivilegeMasterValue = @ID;", new { ID = role.ID }
                     ).Select(m=>new {
-                        id= m["ID"],
-                        menuid = m["menuid"]
+                        id= m["id"].ToString(),
+                        menuid = m["menuid"].ToString()
                     }).ToList();
 
                 //3.获取交集用以更新和插入
-                var jb = btnsDy.Union(roleBtnIds).ToList();
+                var jb = btnsDy.Union(roleBtnIds,new ButtonMenuRoleCompare()).ToList();
 
                 ////4.获取差集用以解除没有选中的按钮权限
-                var cb = roleBtnIds.Except(btnsDy).ToList();
+                var cb = roleBtnIds.Except(btnsDy, new ButtonMenuRoleCompare()).ToList();
 
                 StringBuilder sb = new StringBuilder();
 

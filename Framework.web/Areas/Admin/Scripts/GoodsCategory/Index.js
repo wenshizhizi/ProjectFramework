@@ -23,13 +23,8 @@
          */
         function initData() {
             try {
-                f.post("/Admin/GoodsCategory/LoadGoodsCategory", param, function (r) {
-                    grid.datagrid("loadData", r.Data.Result);
-                    grid.datagrid("getPager").pagination({
-                        pageNumber: pageNumber,
-                        pageSize: pageSize,
-                        total: r.Data.MaxCount
-                    });
+                f.post("/Admin/GoodsCategory/LoadGoodsCategory", null, function (r) {                    
+                    $("#goods_category_tree").tree("loadData",r.Data);
                 }, function (r) {
                     eui.alertErr(r.Msg);
                 });

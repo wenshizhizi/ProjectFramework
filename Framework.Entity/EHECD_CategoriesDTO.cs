@@ -11,7 +11,7 @@ namespace Framework.DTO
     {
 
         /// <summary>
-        /// 上级ID
+        /// 父分类ID
         /// </summary>
         [FieldInfo(DataFieldLength = 16,FiledName = "PID",Required = false)]
         public Guid? PID
@@ -20,7 +20,7 @@ namespace Framework.DTO
         }
 
         /// <summary>
-        /// 商品种类名
+        /// 分类名称
         /// </summary>
         [FieldInfo(DataFieldLength = 255,FiledName = "sCategoryName",Required = true)]
         public String sCategoryName
@@ -29,16 +29,16 @@ namespace Framework.DTO
         }
 
         /// <summary>
-        /// 商品种类简述
+        /// 分类简述
         /// </summary>
-        [FieldInfo(DataFieldLength = 255,FiledName = "sCategoryCaption",Required = true)]
+        [FieldInfo(DataFieldLength = 0,FiledName = "sCategoryCaption",Required = true)]
         public String sCategoryCaption
         {
             get; set;
         }
 
         /// <summary>
-        /// 排序
+        /// 排序编号
         /// </summary>
         [FieldInfo(DataFieldLength = 4,FiledName = "iOrder",Required = true)]
         public Int32? iOrder
@@ -56,7 +56,7 @@ namespace Framework.DTO
         }
 
         /// <summary>
-        /// 创建时间
+        /// 插入时间
         /// </summary>
         [FieldInfo(DataFieldLength = 8,FiledName = "dInsertTime",Required = true)]
         public DateTime? dInsertTime
