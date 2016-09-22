@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\gridtable.css" />
+    <Content Include="Areas\Admin\Scripts\ClientManager\Index.js" />
     <Content Include="Areas\Admin\Scripts\GoodsCategory\Index.js" />
     <Content Include="Areas\Admin\Scripts\Login\Index.js" />
     <Content Include="Areas\Admin\Scripts\Main\index.js" />
@@ -854,6 +855,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientManagerController.cs" />
     <Compile Include="Areas\Admin\Controllers\GoodsCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MainController.cs" />
@@ -897,6 +899,7 @@
     <Content Include="Areas\Admin\Views\RoleManage\DistributionButton.cshtml" />
     <Content Include="Areas\Admin\Views\GoodsCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_BaiduAddressChoose.cshtml" />
+    <Content Include="Areas\Admin\Views\ClientManager\Index.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="Content\bootstrap-treeview.min.css" />
     <Content Include="scripts\bootstrap-treeview.js" />
@@ -1320,7 +1323,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Main\Index.cshtml" />
     <None Include="Properties\PublishProfiles\companyweb.pubxml" />
@@ -1350,7 +1355,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>16912</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:12139/</IISUrl>
+          <IISUrl>http://localhost:12138/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
