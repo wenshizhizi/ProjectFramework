@@ -1,8 +1,8 @@
 ﻿$(function () {
-    modules.get("cache").setMenuDomain("菜单管理", new function () {
+    modules.get(enums.Modules.CACHE).setMenuDomain("菜单管理", new function () {
 
-        var eui = modules.get("eui");
-        var f = modules.get("func");
+        var eui = modules.get(enums.Modules.JQUERY_EASYUI);
+        var f = modules.get(enums.Modules.FUNC);
         var allMenu = $("#all_menu");
 
         /**

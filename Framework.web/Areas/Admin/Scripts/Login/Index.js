@@ -1,7 +1,7 @@
 ﻿$(function () {
     void function () {
-        var f = modules.get("func");/*方法模块*/
-        var eui = modules.get("eui");/*easyui模块*/
+        var f = modules.get(enums.Modules.FUNC);/*方法模块*/
+        var eui = modules.get(enums.Modules.JQUERY_EASYUI);/*easyui模块*/
         var btn_reset = $("#btn_reset");/*重置按钮*/
         var btn_lgon = $("#btn_lgon");/*登录按钮*/
         var code = $("#vcodepic");/*验证码框*/

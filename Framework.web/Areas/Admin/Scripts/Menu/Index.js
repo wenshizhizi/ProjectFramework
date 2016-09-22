@@ -1,11 +1,10 @@
 ﻿$(function () {
     void function () {
-        var eui = modules.get("eui");
-        var f = modules.get("func");
+        var eui = modules.get(enums.Modules.JQUERY_EASYUI);
+        var f = modules.get(enums.Modules.FUNC);
+        var global = modules.get(enums.Modules.CACHE);
         var mainTab = $("#tabs");
-        var global = modules.get("cache");
-
-
+        
         f.post(/*载入菜单数据*/"/Admin/Menu/LoadMenu", null, function (r) {
 
             mainTab.tabs({

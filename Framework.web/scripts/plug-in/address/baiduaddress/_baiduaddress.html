@@ -17,8 +17,8 @@
         <div id="select_ctrs">
             省份：<select class="select_address" name="province" id="province"></select>
             城市：<select class="select_address" name="city" id="city"></select>
-            县区：<select class="select_address" name="county" id="county"></select>&emsp;<span class="tips" style="color: green">请输入地址</span>
-            <input class="address_text" type="text" name="fname" id="suggestId" />
+            县区：<select class="select_address" name="county" id="county"></select><br /><br />
+            地址：<input class="address_text" type="text" name="fname" id="suggestId" />
             <a id="baidu_map_choose_search" href="javascript:;">搜索</a>
         </div>
         <div class="map_container" id="map"></div>
@@ -109,6 +109,11 @@
                     lng = p.lng;
                     map.centerAndZoom(p, 12);
                     map.addOverlay(new BMap.Marker(p));
+
+                    var baddressRet = getRet();
+                    baddressRet.lat = lat;
+                    baddressRet.lng = lng;
+                    setRet(baddressRet);
                 }
                 else {
                     alert("您输入的地址没有解析到结果!");
@@ -136,7 +141,27 @@
             map.clearOverlays();
         }
 
+        function setRet(ret) {
+            window.parent.modules.get(window.parent.enums.Modules.CACHE).setCache(window.parent.enums.VARIABLE.BAIDU_MAP_ADDRESS_CHOOSER, ret);
+        }
+
+        function getRet() {
+            var ret = window.parent.modules.get(window.parent.enums.Modules.CACHE).getCache(window.parent.enums.VARIABLE.BAIDU_MAP_ADDRESS_CHOOSER);
+            return ret;
+        }
+
+        function initRet() {
+            var baddressRet = {};
+            baddressRet.s = "请选择省份";
+            baddressRet.c = "请选择城市";
+            baddressRet.q = "请选择县区";
+            baddressRet.lat = 0;
+            baddressRet.lng = 0;
+            window.parent.modules.get(window.parent.enums.Modules.CACHE).setCache(window.parent.enums.VARIABLE.BAIDU_MAP_ADDRESS_CHOOSER, baddressRet);
+        }
+
         function initSelection() {
+            initRet();
 
             //设置默认值
             var option = $("<option>").val("0").text("请选择省份");
@@ -158,9 +183,8 @@
 
             $("#select_ctrs")
                 .on("change", "[name='province']", function () {
-
                     var code = parseInt($(this).val());
-
+                    var s = getRet();
                     //加载城市
                     if (code > 0) {
                         $("[name='city'] option:gt(0)").remove();
@@ -169,6 +193,7 @@
                             if (parseInt(areas[i].parentCode) == code) {
                                 option = $("<option>").val(areas[i].code).text(areas[i].name);
                                 $("[name='city']").append(option);
+                                s.s = option;
                             }
                         }
                     } else {
@@ -182,14 +207,17 @@
                                 var longitude = areas[i].longitude;
                                 var latitude = areas[i].latitude;
                                 loadPlace(longitude, latitude, 10);
+                                s.lat = latitude;
+                                s.lng = longitude;
                                 break;
                             }
                         }
                     }
+                    setRet(s);
                 })
                 .on("change", "[name='city']", function () {
                     var code = parseInt($(this).val());
-
+                    var c = getRet();
                     //加载县区
                     if (code > 0) {
                         $("[name='county'] option:gt(0)").remove();
@@ -198,6 +226,7 @@
                             if (parseInt(areas[i].parentCode) == code) {
                                 option = $("<option>").val(areas[i].code).text(areas[i].name);
                                 $("[name='county']").append(option);
+                                c.c = option;
                             }
                         }
                     } else {
@@ -212,14 +241,14 @@
 
                                 var longitude = areas[i].longitude;
                                 var latitude = areas[i].latitude;
-
                                 loadPlace(longitude, latitude, 12);
-
+                                c.lat = latitude;
+                                c.lng = longitude;
                                 break;
                             }
                         }
                     }
-
+                    setRet(c);
                 })
                 .on("change", "[name='county']", function () {
                     var code = parseInt($(this).val());

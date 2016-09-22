@@ -4,9 +4,15 @@
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     height: 23px;
+    width:130px;
     border: 1px solid #D4D4D4;
     background-color: #fff;
     vertical-align: middle;
+    margin-right: 10px;
+}
+
+#select_ctrs {
+    padding: 15px;
 }
 
 .address_text {
@@ -15,7 +21,8 @@
     background-color: #fff;
     vertical-align: middle;
     display: inline-block;
-    height: 23px;
+    height: 20px;
+    width:260px;
     white-space: nowrap;
     margin: 0;
     padding: 0;
@@ -25,21 +32,19 @@
 }
 
 .map_container {
-    border: 1px solid #D4D4D4;
-    margin-top: 15px;
-    min-height: 400px;
-    max-height:500px;
+    border-top: 1px solid #D4D4D4;    
+    min-height: 300px;
+    max-height: 380px;
     min-width: 450px;
-    max-width:550px;
-    -moz-border-radius: 5px 5px 5px 5px;
+    max-width: 650px;
+    /*-moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;*/
 }
 
-.ctrl_container{
+.ctrl_container {
     border: 1px solid #D4D4D4;
-    margin: 15px;
-    max-width:600px;
+    max-width: 650px;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;

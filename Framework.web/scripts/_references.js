@@ -10,6 +10,7 @@
 /// <reference path="lib/easyui.module.js" />
 /// <reference path="lib/func.module.js" />
 
+/// <reference path="lib/emuns.module.js" />
 /// <reference path="lib/object.module.js" />
 
 
