@@ -22,8 +22,7 @@
 
     <script src="~/scripts/jquery-1.11.3.min.js"></script>
     <script src="~/scripts/jquery.easyui-1.4.5.min.js"></script>
-    @*<script src="~/scripts/jquery-1.11.3.js"></script>
-        <script src="~/scripts/jquery.easyui-1.4.5.js"></script>*@
+
     <script src="~/scripts/lib/modules.manager.js"></script>
     <script src="~/scripts/lib/emuns.module.js"></script>
     <script src="~/scripts/lib/md5.module.js"></script>
@@ -36,14 +35,15 @@
     <script src="~/scripts/lib/easyui.module.js"></script>
     <script src="~/scripts/lib/global.variable.module.js"></script>
     <script src="~/Areas/Admin/Scripts/Main/index.js"></script>
+        
     <title>项目首页标题</title>
-
 </head>
 <body>
     <div id="layout" class="easyui-layout" data-options="fit:true">
         <!--上布局-->
-        <div data-options="region:'north',title:'',split:false" style="height:60px;">
+        <div data-options="region:'north',title:'',split:false" style="height:60px;">            
             <div style="height:100%;width:100%;position:relative;" class="tabs-header">
+                <span style="font-size:22px;line-height:60px;margin-left:30px">XXXX后台管理系统</span>
                 <div style="width:auto;height:20px;right:15px;position:absolute;bottom:5px">
                     切换主题：
                     <select class="easyui-combobox" data-options="editable:false,onSelect: function(rec){$('#them').attr('href',rec.value);}" style="width:100px;">
@@ -78,7 +78,7 @@
 
         <!--中间面板-->
         <div data-options="region:'center',title:''">
-            <div id="tabs" class="easyui-tabs" data-options="fit:true">
+            <div id="tabs" class="easyui-tabs" data-options="fit:true" >
             </div>
         </div>
     </div>

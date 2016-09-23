@@ -13,9 +13,16 @@ namespace Framework.DTO
     public class FieldInfo:Attribute
     {       
         /// <summary>
-        /// 数据字段长度
+        /// 数据字段字节长度
         /// </summary>
         public int DataFieldLength { get; set; }
+
+        /// <summary>
+        /// 数据字段精度
+        /// </summary>
+        public int DataFieldPrecision { get; set; }
+
+        public int DataFieldCcale { get; set; }
 
         /// <summary>
         /// 数据字段是否是必填(不能为空)

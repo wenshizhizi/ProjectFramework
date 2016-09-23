@@ -85,6 +85,7 @@
                     closable: true,
                     href: data.url,
                     justified: true,
+                    
                     style: { padding: 1 }
                 });
             } else {
