@@ -13,7 +13,7 @@ namespace Framework.DTO
         /// <summary>
         /// 唯一标识
         /// </summary>
-        [FieldInfo(DataFieldLength = 16,FiledName = "ID",Required = true)]
+        [FieldInfo(DataFieldLength = 16,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "ID",Required = true,DataLength = 32)]
         public Guid? ID
         {
             get; set;
@@ -22,7 +22,7 @@ namespace Framework.DTO
         /// <summary>
         /// 登录名
         /// </summary>
-        [FieldInfo(DataFieldLength = 20,FiledName = "sLoginName",Required = true)]
+        [FieldInfo(DataFieldLength = 40,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sLoginName",Required = true,DataLength = 20)]
         public String sLoginName
         {
             get; set;
@@ -31,7 +31,7 @@ namespace Framework.DTO
         /// <summary>
         /// 登录密码
         /// </summary>
-        [FieldInfo(DataFieldLength = 50,FiledName = "sPassWord",Required = true)]
+        [FieldInfo(DataFieldLength = 100,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sPassWord",Required = true,DataLength = 50)]
         public String sPassWord
         {
             get; set;
@@ -40,7 +40,7 @@ namespace Framework.DTO
         /// <summary>
         /// 用户姓名
         /// </summary>
-        [FieldInfo(DataFieldLength = 15,FiledName = "sUserName",Required = true)]
+        [FieldInfo(DataFieldLength = 30,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sUserName",Required = true,DataLength = 15)]
         public String sUserName
         {
             get; set;
@@ -49,7 +49,7 @@ namespace Framework.DTO
         /// <summary>
         /// 用户状态 0：正常 1：冻结
         /// </summary>
-        [FieldInfo(DataFieldLength = 1,FiledName = "tUserState",Required = true)]
+        [FieldInfo(DataFieldLength = 1,DataFieldPrecision = 3,DataFieldScale = 0,FiledName = "tUserState",Required = true,DataLength = 1)]
         public Byte? tUserState
         {
             get; set;
@@ -58,7 +58,7 @@ namespace Framework.DTO
         /// <summary>
         /// 用户类型 0：后台用户
         /// </summary>
-        [FieldInfo(DataFieldLength = 1,FiledName = "tUserType",Required = true)]
+        [FieldInfo(DataFieldLength = 1,DataFieldPrecision = 3,DataFieldScale = 0,FiledName = "tUserType",Required = true,DataLength = 1)]
         public Byte? tUserType
         {
             get; set;
@@ -67,7 +67,7 @@ namespace Framework.DTO
         /// <summary>
         /// 用户昵称
         /// </summary>
-        [FieldInfo(DataFieldLength = 20,FiledName = "sUserNickName",Required = true)]
+        [FieldInfo(DataFieldLength = 40,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sUserNickName",Required = true,DataLength = 20)]
         public String sUserNickName
         {
             get; set;
@@ -76,7 +76,7 @@ namespace Framework.DTO
         /// <summary>
         /// 创建时间
         /// </summary>
-        [FieldInfo(DataFieldLength = 8,FiledName = "dCreateTime",Required = true)]
+        [FieldInfo(DataFieldLength = 8,DataFieldPrecision = 23,DataFieldScale = 3,FiledName = "dCreateTime",Required = true,DataLength = 8)]
         public DateTime? dCreateTime
         {
             get; set;
@@ -85,7 +85,7 @@ namespace Framework.DTO
         /// <summary>
         /// 最后登录时间
         /// </summary>
-        [FieldInfo(DataFieldLength = 8,FiledName = "dLastLoginTime",Required = true)]
+        [FieldInfo(DataFieldLength = 8,DataFieldPrecision = 23,DataFieldScale = 3,FiledName = "dLastLoginTime",Required = true,DataLength = 8)]
         public DateTime? dLastLoginTime
         {
             get; set;
@@ -94,7 +94,7 @@ namespace Framework.DTO
         /// <summary>
         /// 所在省
         /// </summary>
-        [FieldInfo(DataFieldLength = 20,FiledName = "sProvice",Required = true)]
+        [FieldInfo(DataFieldLength = 40,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sProvice",Required = true,DataLength = 20)]
         public String sProvice
         {
             get; set;
@@ -103,7 +103,7 @@ namespace Framework.DTO
         /// <summary>
         /// 所在市
         /// </summary>
-        [FieldInfo(DataFieldLength = 20,FiledName = "sCity",Required = true)]
+        [FieldInfo(DataFieldLength = 40,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sCity",Required = true,DataLength = 20)]
         public String sCity
         {
             get; set;
@@ -112,7 +112,7 @@ namespace Framework.DTO
         /// <summary>
         /// 所在地区
         /// </summary>
-        [FieldInfo(DataFieldLength = 20,FiledName = "sCounty",Required = true)]
+        [FieldInfo(DataFieldLength = 40,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sCounty",Required = true,DataLength = 20)]
         public String sCounty
         {
             get; set;
@@ -121,7 +121,7 @@ namespace Framework.DTO
         /// <summary>
         /// 详细地址
         /// </summary>
-        [FieldInfo(DataFieldLength = 30,FiledName = "sAddress",Required = true)]
+        [FieldInfo(DataFieldLength = 60,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sAddress",Required = true,DataLength = 30)]
         public String sAddress
         {
             get; set;
@@ -130,7 +130,7 @@ namespace Framework.DTO
         /// <summary>
         /// 性别 0:女 1:男
         /// </summary>
-        [FieldInfo(DataFieldLength = 1,FiledName = "tSex",Required = true)]
+        [FieldInfo(DataFieldLength = 1,DataFieldPrecision = 3,DataFieldScale = 0,FiledName = "tSex",Required = true,DataLength = 1)]
         public Byte? tSex
         {
             get; set;
@@ -139,19 +139,19 @@ namespace Framework.DTO
         /// <summary>
         /// 是否删除
         /// </summary>
-        [FieldInfo(DataFieldLength = 1,FiledName = "bIsDeleted",Required = true)]
+        [FieldInfo(DataFieldLength = 1,DataFieldPrecision = 1,DataFieldScale = 0,FiledName = "bIsDeleted",Required = true,DataLength = 1)]
         public Boolean? bIsDeleted
         {
             get; set;
         }
 
         /// <summary>
-        /// 联系手机
+        /// 手机号码
         /// </summary>
-        [FieldInfo(DataFieldLength = 25, FiledName = "sMobileNum", Required = true)]
-        public string sMobileNum
+        [FieldInfo(DataFieldLength = 50,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sMobileNum",Required = true,DataLength = 25)]
+        public String sMobileNum
         {
-            get;set;
+            get; set;
         }
     }
 }

@@ -181,6 +181,29 @@ namespace Framework.web.Controllers
             Session[sessionName] = sessionInfo;
         }
 
+        /// <summary>
+        /// 将传入的jsonstr转为指定的对象
+        /// </summary>
+        /// <typeparam name="T">转换的对象类型</typeparam>
+        /// <returns>转换类型</returns>
+        protected T LoadParam<T>()
+        {
+            return JSONHelper.GetModel<T>(RequestParameters.dataStr);
+        }
+
+        /// <summary>
+        /// 载入操作对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        protected T LoadInterface<T>()
+        {
+            return DI.DIEntity.GetInstance().GetImpl<T>();
+        }
+
+        /// <summary>
+        /// 创建系统日志信息
+        /// </summary>
         protected void CreateSyslogInfo()
         {
             if (RequestParameters.dynamicData == null)

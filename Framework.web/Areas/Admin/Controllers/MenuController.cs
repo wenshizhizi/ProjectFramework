@@ -13,9 +13,10 @@ namespace Framework.web.Areas.Admin.Controllers
     public class MenuController : SuperController
     {
         // GET: Admin/Menu
-        public ActionResult Index()
-        {            
-            return View();
+        [HttpPost]
+        public PartialViewResult Index()
+        {
+            return PartialView();
         }
 
         //载入菜单

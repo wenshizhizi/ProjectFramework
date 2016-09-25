@@ -10,6 +10,11 @@ namespace Framework.BLL
 {
     public partial class GoodsCategoriesManager : IGoodsCategoriesManager
     {
+        public override EHECD_CategoriesDTO LoadGoodsCategorie(EHECD_CategoriesDTO c)
+        {
+            return query.SingleQuery<EHECD_CategoriesDTO>("SELECT * FROM EHECD_Categories WHERE ID = @ID;", new { ID = c.ID });
+        }
+
         public override string LoadGoodsCategories()
         {
             var goodsCatories = query.QueryList<EHECD_CategoriesDTO>(@"SELECT ID,PID,sCategoryName,sCategoryCaption,iOrder,sImgUri,dInsertTime FROM EHECD_Categories WHERE bIsDeleted = 0", null);

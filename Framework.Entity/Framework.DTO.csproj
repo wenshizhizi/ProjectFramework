@@ -50,6 +50,8 @@
     <Compile Include="ApplicationData\RoleMenus\UserRole.cs" />
     <Compile Include="ApplicationData\RoleMenus\UserRoleMenuInfo.cs" />
     <Compile Include="EHECD_CategoriesDTO.cs" />
+    <Compile Include="EHECD_ClientAddressDTO.cs" />
+    <Compile Include="EHECD_ClientDTO.cs" />
     <Compile Include="EHECD_FunctionMenuDTO.cs" />
     <Compile Include="EHECD_MenuButtonDTO.cs" />
     <Compile Include="EHECD_PrivilegeDTO.cs" />

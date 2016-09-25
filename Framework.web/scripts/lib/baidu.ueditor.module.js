@@ -6,7 +6,7 @@
  * 
  */
 
-modules.define("ue", [], function UEDomain() {
+modules.define("ue", ["cache"], function UEDomain(cache) {
 
     var ue = null;
 
@@ -208,7 +208,7 @@ modules.define("ue", [], function UEDomain() {
         UE.delEditor(name);
         // var initCfg = getCfg();
         ue = UE.getEditor(name, {
-            serverUrl: window.global.ServerUrl,
+            serverUrl: cache.getCache(enums.VARIABLE.UEDITOR_URL),
             //onready: function () {
             //    if (defaultContent) {
             //        ue.setContent(defaultContent);
@@ -237,9 +237,7 @@ modules.define("ue", [], function UEDomain() {
    * @param {String} content 富文本内容     
    */
     function setContent(ue, defaultContent) {
-
         ue.setContent(defaultContent);
-
     }
 
 

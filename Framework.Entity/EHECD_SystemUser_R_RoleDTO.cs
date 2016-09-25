@@ -13,7 +13,7 @@ namespace Framework.DTO
         /// <summary>
         /// 唯一标识
         /// </summary>
-        [FieldInfo(DataFieldLength = 16,FiledName = "ID",Required = true)]
+        [FieldInfo(DataFieldLength = 16,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "ID",Required = true,DataLength = 32)]
         public Guid? ID
         {
             get; set;
@@ -22,7 +22,7 @@ namespace Framework.DTO
         /// <summary>
         /// 用户的ID
         /// </summary>
-        [FieldInfo(DataFieldLength = 16,FiledName = "sUserID",Required = true)]
+        [FieldInfo(DataFieldLength = 16,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sUserID",Required = true,DataLength = 32)]
         public Guid? sUserID
         {
             get; set;
@@ -31,7 +31,7 @@ namespace Framework.DTO
         /// <summary>
         /// 角色的ID
         /// </summary>
-        [FieldInfo(DataFieldLength = 16,FiledName = "sRoleID",Required = true)]
+        [FieldInfo(DataFieldLength = 16,DataFieldPrecision = 0,DataFieldScale = 0,FiledName = "sRoleID",Required = true,DataLength = 32)]
         public Guid? sRoleID
         {
             get; set;
@@ -40,7 +40,7 @@ namespace Framework.DTO
         /// <summary>
         /// 是否删除
         /// </summary>
-        [FieldInfo(DataFieldLength = 1,FiledName = "bIsDeleted",Required = true)]
+        [FieldInfo(DataFieldLength = 1,DataFieldPrecision = 1,DataFieldScale = 0,FiledName = "bIsDeleted",Required = true,DataLength = 1)]
         public Boolean? bIsDeleted
         {
             get; set;

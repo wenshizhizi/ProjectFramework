@@ -1,9 +1,9 @@
 /*
 Navicat SQL Server Data Transfer
 
-Source Server         : 05服务器
+Source Server         : 199
 Source Server Version : 105000
-Source Host           : 192.168.1.5:1433
+Source Host           : 10.2.1.199:1433
 Source Database       : EHECD_PermissionSystem
 Source Schema         : dbo
 
@@ -11,7 +11,7 @@ Target Server Type    : SQL Server
 Target Server Version : 105000
 File Encoding         : 65001
 
-Date: 2016-09-21 18:32:14
+Date: 2016-09-26 07:36:07
 */
 
 
@@ -161,21 +161,731 @@ GO
 -- ----------------------------
 -- Records of EHECD_Categories
 -- ----------------------------
-INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'测试目录2', N'测试目录2', N'0', N'0', N'2016-09-21 17:22:30.123', N'', N'15D9F01B-A74E-4671-91E2-09CC5D77160D')
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'D2C230AC-4487-46AD-B7F7-654DFF91A7F8', N'fff', N'fff', N'1', N'1', N'2016-09-24 17:21:14.000', N'', N'E57C8ACD-0638-C75A-8B2B-08D3E45C21CC')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E57C8ACD-0638-C75A-8B2B-08D3E45C21CC', N'mm', N'mm', N'1', N'1', N'2016-09-24 17:21:35.000', N'', N'61B2B16D-8878-CAD8-0AA7-08D3E45C2EA0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'D2C230AC-4487-46AD-B7F7-654DFF91A7F8', N'fsx', N'fsx', N'1', N'1', N'2016-09-24 17:22:16.000', N'', N'60EA3F72-9F36-C7F8-297B-08D3E45C46B3')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'sfsafasdfa', N'asfdasdfasdf', N'1', N'1', N'2016-09-24 17:24:32.000', N'', N'C2325120-1558-C7B3-1B60-08D3E45C981C')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'测试目录2', N'测试目录2', N'0', N'1', N'2016-09-21 17:22:30.123', N'', N'15D9F01B-A74E-4671-91E2-09CC5D77160D')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'88', N'88', N'88', N'1', N'2016-09-24 15:37:44.043', N'', N'2095EF85-4E6F-4A01-96B2-23F0449EF615')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'11', N'11', N'11', N'1', N'2016-09-24 15:36:20.087', N'', N'B17DC60E-03D2-402C-BA24-2C6872E18835')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'33', N'33', N'33', N'1', N'2016-09-24 15:38:28.830', N'', N'B38C913C-5A43-4F7F-AF73-2E71EDC2CF85')
 GO
 GO
 INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'D3FF250A-CA9B-40E4-AFC8-F2735667F1BF', N'所有种类', N'所有种类', N'0', N'0', N'2016-09-21 17:21:55.523', N'', N'F68D3E4C-391A-4BF5-BC1C-60024F85C224')
 GO
 GO
-INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'F68D3E4C-391A-4BF5-BC1C-60024F85C224', N'测试目录1', N'测试目录1', N'0', N'0', N'2016-09-21 17:22:12.677', N'', N'E13F2D16-BC33-403B-9409-68C44FBB6231')
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'123', N'123', N'123', N'1', N'2016-09-24 15:27:14.090', N'', N'D2C230AC-4487-46AD-B7F7-654DFF91A7F8')
 GO
 GO
-INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'15D9F01B-A74E-4671-91E2-09CC5D77160D', N'测试目录3', N'测试目录3', N'0', N'0', N'2016-09-21 17:22:48.323', N'', N'C6BEC6E4-A1A6-4EF1-96A2-AFF20883B50C')
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'F68D3E4C-391A-4BF5-BC1C-60024F85C224', N'测试目录1', N'测试目录1', N'0', N'1', N'2016-09-21 17:22:12.677', N'', N'E13F2D16-BC33-403B-9409-68C44FBB6231')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'2095EF85-4E6F-4A01-96B2-23F0449EF615', N'44', N'44', N'44', N'1', N'2016-09-24 15:39:08.280', N'', N'435F1D15-7766-4B1D-AD53-7171D16BF830')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'123', N'123', N'123', N'1', N'2016-09-24 15:26:56.210', N'', N'28C8D263-674B-4E5F-A8D2-83434673AC33')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'15D9F01B-A74E-4671-91E2-09CC5D77160D', N'测试目录3', N'测试目录3', N'0', N'1', N'2016-09-21 17:22:48.323', N'', N'C6BEC6E4-A1A6-4EF1-96A2-AFF20883B50C')
 GO
 GO
 INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (null, N'根目录', N'根目录', N'0', N'0', N'2016-09-20 22:42:08.553', N'', N'D3FF250A-CA9B-40E4-AFC8-F2735667F1BF')
 GO
 GO
+INSERT INTO [dbo].[EHECD_Categories] ([PID], [sCategoryName], [sCategoryCaption], [iOrder], [bIsDeleted], [dInsertTime], [sImgUri], [ID]) VALUES (N'E13F2D16-BC33-403B-9409-68C44FBB6231', N'123', N'123', N'123', N'1', N'2016-09-24 15:37:08.110', N'', N'5C324E3A-43B7-47E0-99AE-FE2AABC4F75F')
+GO
+GO
+
+-- ----------------------------
+-- Table structure for EHECD_Client
+-- ----------------------------
+DROP TABLE [dbo].[EHECD_Client]
+GO
+CREATE TABLE [dbo].[EHECD_Client] (
+[ID] uniqueidentifier NOT NULL DEFAULT (newid()) ,
+[sName] nvarchar(255) NOT NULL DEFAULT '' ,
+[sPhone] nvarchar(11) NOT NULL DEFAULT '' ,
+[sPassWord] nvarchar(50) NOT NULL DEFAULT '' ,
+[sHeadPic] nvarchar(255) NOT NULL DEFAULT '' ,
+[iState] int NOT NULL DEFAULT ((1)) ,
+[bIsDeleted] bit NOT NULL DEFAULT ((0)) ,
+[dAddTime] datetime NOT NULL DEFAULT (getdate()) ,
+[dAccountBalance] decimal(18,2) NOT NULL DEFAULT ((0)) ,
+[iClientType] int NOT NULL DEFAULT ((0)) ,
+[sPayPassWord] nvarchar(50) NOT NULL DEFAULT '' ,
+[sPayPassWordGrade] int NOT NULL DEFAULT ((0)) ,
+[sMail] nvarchar(50) NOT NULL DEFAULT '' ,
+[sRemark] nvarchar(MAX) NOT NULL DEFAULT ('暂无备注') ,
+[sRegCode] nvarchar(30) NOT NULL DEFAULT '' ,
+[dLoginEndTime] datetime NOT NULL DEFAULT (getdate()) ,
+[iSource] int NOT NULL DEFAULT ((0)) ,
+[sNickName] nvarchar(30) NOT NULL DEFAULT '' ,
+[iSex] int NOT NULL DEFAULT ((0)) ,
+[sQQ] nvarchar(30) NOT NULL DEFAULT '' ,
+[dBirthday] datetime NOT NULL DEFAULT (getdate()) ,
+[iAge] int NOT NULL DEFAULT ((0)) ,
+[sEduBackground] nvarchar(30) NOT NULL DEFAULT '' ,
+[sPofessional] nvarchar(50) NOT NULL DEFAULT '' ,
+[dIncome] decimal(12,2) NOT NULL DEFAULT ((0)) ,
+[sIDType] nvarchar(50) NOT NULL DEFAULT '' ,
+[sIDCard] nvarchar(50) NOT NULL DEFAULT '' ,
+[iIntegral] int NOT NULL DEFAULT ((0)) 
+)
+
+
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'ID')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'ID'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'ID'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'ID'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'ID'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sName')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'客户姓名'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sName'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'客户姓名'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sName'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sPhone')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'电话'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPhone'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'电话'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPhone'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sPassWord')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'密码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPassWord'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'密码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPassWord'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sHeadPic')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'头像地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sHeadPic'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'头像地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sHeadPic'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'iState')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'1-正常   0-冻结'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iState'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'1-正常   0-冻结'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iState'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'bIsDeleted')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'删除标志'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'bIsDeleted'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'删除标志'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'bIsDeleted'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'dAddTime')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'添加时间'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dAddTime'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'添加时间'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dAddTime'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'dAccountBalance')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'账户余额'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dAccountBalance'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'账户余额'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dAccountBalance'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'iClientType')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'0-普通客户'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iClientType'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'0-普通客户'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iClientType'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sPayPassWord')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'支付密码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPayPassWord'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'支付密码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPayPassWord'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sPayPassWordGrade')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'支付密码安全等级 0.无  1.弱  2.中 3.强'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPayPassWordGrade'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'支付密码安全等级 0.无  1.弱  2.中 3.强'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPayPassWordGrade'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sMail')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'电子邮件'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sMail'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'电子邮件'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sMail'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sRemark')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'备注'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sRemark'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'备注'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sRemark'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sRegCode')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'注册邀请码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sRegCode'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'注册邀请码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sRegCode'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'dLoginEndTime')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'最后登录时间'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dLoginEndTime'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'最后登录时间'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dLoginEndTime'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'iSource')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'数据来源（1-PC，2-微信，3-安卓，4-IOS）'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iSource'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'数据来源（1-PC，2-微信，3-安卓，4-IOS）'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iSource'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sNickName')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'昵称'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sNickName'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'昵称'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sNickName'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'iSex')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'性别:1男,2女'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iSex'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'性别:1男,2女'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iSex'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sQQ')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'qq'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sQQ'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'qq'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sQQ'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'dBirthday')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'生日'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dBirthday'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'生日'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dBirthday'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'iAge')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'年龄'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iAge'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'年龄'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iAge'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sEduBackground')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'学历 （文盲 小学 中学 高中  学士  硕士 博士）'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sEduBackground'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'学历 （文盲 小学 中学 高中  学士  硕士 博士）'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sEduBackground'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sPofessional')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'职业'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPofessional'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'职业'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sPofessional'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'dIncome')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'收入'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dIncome'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'收入'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'dIncome'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sIDType')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'证件类型'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sIDType'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'证件类型'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sIDType'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'sIDCard')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'证件号码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sIDCard'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'证件号码'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'sIDCard'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_Client', 
+'COLUMN', N'iIntegral')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'积分'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iIntegral'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'积分'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_Client'
+, @level2type = 'COLUMN', @level2name = N'iIntegral'
+GO
+
+-- ----------------------------
+-- Records of EHECD_Client
+-- ----------------------------
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'E8F0121A-5B11-4C10-A82C-06AB4187A101', N'周建1', N'13880422567', N'E10ADC3949BA59ABBE56E057F20F883E', N'/Files/2016-04/20160413173925763.jpg', N'1', N'0', N'2016-03-25 10:23:38.913', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'583E4CF6-E7E7-4ACC-BBA5-293694B55150', N'文大爷', N'13281843979', N'E10ADC3949BA59ABBE56E057F20F883E', N'/Files/2016-04/20160419091225655.jpg', N'1', N'0', N'2016-03-30 16:05:48.850', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'1BF7FBD5-4030-4AE6-96C5-86D5C3CF0249', N'jbgxhgfcv', N'13880422367', N'96E79218965EB72C92A549DD5A330112', N'/Files/2016-04/20160413174834037.jpg', N'1', N'0', N'2016-04-13 17:46:20.260', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'3F746EA3-2B28-4055-AC60-9C532F9739CE', N'', N'13551892614', N'E10ADC3949BA59ABBE56E057F20F883E', N'', N'1', N'0', N'2016-04-21 17:13:56.657', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'10D439D6-1EEA-4DD2-A3F4-B0A9FDE87C96', N'', N'13512345678', N'E10ADC3949BA59ABBE56E057F20F883E', N'', N'1', N'0', N'2016-04-18 14:07:53.500', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'8EB73E78-EB30-4223-BF3C-C1C5108964F9', N'', N'15555555555', N'E10ADC3949BA59ABBE56E057F20F883E', N'', N'1', N'0', N'2016-04-13 16:06:28.913', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'BD7315E9-D9D9-47E5-8D16-C47D27187DFB', N'', N'18380470194', N'E10ADC3949BA59ABBE56E057F20F883E', N'', N'1', N'0', N'2016-04-21 17:06:11.987', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'0201A77B-24F7-4A2F-BEA5-DD8CA12557BC', N'', N'13222222222', N'E10ADC3949BA59ABBE56E057F20F883E', N'', N'1', N'0', N'2016-04-13 16:03:00.493', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'41CDEE5F-CCA6-483D-A0D3-EE62D84E2534', N'', N'18096228185', N'E10ADC3949BA59ABBE56E057F20F883E', N'', N'1', N'0', N'2016-04-25 11:22:38.643', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'45556B18-FB9B-44BD-87B8-F6AFB415C97D', N'光华锦哈哈', N'18780106390', N'E10ADC3949BA59ABBE56E057F20F883E', N'/Files/2016-05/20160503175136222.jpg', N'1', N'0', N'2016-04-14 10:11:23.410', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Client] ([ID], [sName], [sPhone], [sPassWord], [sHeadPic], [iState], [bIsDeleted], [dAddTime], [dAccountBalance], [iClientType], [sPayPassWord], [sPayPassWordGrade], [sMail], [sRemark], [sRegCode], [dLoginEndTime], [iSource], [sNickName], [iSex], [sQQ], [dBirthday], [iAge], [sEduBackground], [sPofessional], [dIncome], [sIDType], [sIDCard], [iIntegral]) VALUES (N'37BF2575-2DC0-4515-88EA-FE64E499EC13', N'', N'13551384875', N'E10ADC3949BA59ABBE56E057F20F883E', N'', N'1', N'0', N'2016-04-21 17:11:38.637', N'.00', N'1', N'', N'0', N'', N'', N'', N'2016-03-25 10:23:38.913', N'0', N'', N'0', N' ', N'2016-03-25 10:23:38.913', N'0', N' ', N' ', N'.00', N'0', N' ', N'0')
+GO
+GO
+
+-- ----------------------------
+-- Table structure for EHECD_ClientAddress
+-- ----------------------------
+DROP TABLE [dbo].[EHECD_ClientAddress]
+GO
+CREATE TABLE [dbo].[EHECD_ClientAddress] (
+[ID] uniqueidentifier NOT NULL DEFAULT (newid()) ,
+[sClientID] uniqueidentifier NOT NULL DEFAULT (newid()) ,
+[sUserName] nvarchar(100) NOT NULL DEFAULT '' ,
+[sPhone] nvarchar(30) NOT NULL DEFAULT '' ,
+[sProvince] nvarchar(20) NOT NULL DEFAULT '' ,
+[sCity] nvarchar(20) NOT NULL DEFAULT '' ,
+[sCounty] nvarchar(20) NOT NULL DEFAULT '' ,
+[sAddress] nvarchar(150) NOT NULL DEFAULT '' ,
+[bIsInThreeRound] bit NOT NULL DEFAULT ((0)) ,
+[bIsDeleted] bit NOT NULL DEFAULT ((0)) ,
+[bIsDefault] bit NOT NULL DEFAULT ((0)) ,
+[bIsToVillage] bit NOT NULL DEFAULT ((0)) ,
+[dLatitude] decimal(9,6) NOT NULL ,
+[dLongtidude] decimal(9,6) NOT NULL 
+)
+
+
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+NULL, NULL)) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'客户地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'客户地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'sClientID')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'客户ID'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sClientID'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'客户ID'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sClientID'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'sUserName')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'联系人'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sUserName'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'联系人'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sUserName'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'sPhone')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'联系电话'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sPhone'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'联系电话'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sPhone'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'sProvince')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'省'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sProvince'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'省'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sProvince'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'sCity')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'市'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sCity'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'市'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sCity'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'sCounty')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'区县'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sCounty'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'区县'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sCounty'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'sAddress')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'具体地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sAddress'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'具体地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'sAddress'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'bIsInThreeRound')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'是否三环内'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'bIsInThreeRound'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'是否三环内'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'bIsInThreeRound'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'bIsDefault')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'是否是默认地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'bIsDefault'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'是否是默认地址'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'bIsDefault'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'bIsToVillage')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'是否送达乡镇'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'bIsToVillage'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'是否送达乡镇'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'bIsToVillage'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'dLatitude')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'维度'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'dLatitude'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'维度'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'dLatitude'
+GO
+IF ((SELECT COUNT(*) from fn_listextendedproperty('MS_Description', 
+'SCHEMA', N'dbo', 
+'TABLE', N'EHECD_ClientAddress', 
+'COLUMN', N'dLongtidude')) > 0) 
+EXEC sp_updateextendedproperty @name = N'MS_Description', @value = N'经度'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'dLongtidude'
+ELSE
+EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'经度'
+, @level0type = 'SCHEMA', @level0name = N'dbo'
+, @level1type = 'TABLE', @level1name = N'EHECD_ClientAddress'
+, @level2type = 'COLUMN', @level2name = N'dLongtidude'
+GO
+
+-- ----------------------------
+-- Records of EHECD_ClientAddress
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for EHECD_FunctionMenu
@@ -284,7 +994,13 @@ GO
 INSERT INTO [dbo].[EHECD_FunctionMenu] ([ID], [sMenuName], [sPID], [sUrl], [bIsDeleted], [iOrder]) VALUES (N'8D469A2F-070D-CD6E-2650-08D3DF08EEA0', N'商品管理', null, N'', N'0', N'1')
 GO
 GO
-INSERT INTO [dbo].[EHECD_FunctionMenu] ([ID], [sMenuName], [sPID], [sUrl], [bIsDeleted], [iOrder]) VALUES (N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'商品种类管理', N'8D469A2F-070D-CD6E-2650-08D3DF08EEA0', N'/Admin/GoodsCategory', N'0', N'0')
+INSERT INTO [dbo].[EHECD_FunctionMenu] ([ID], [sMenuName], [sPID], [sUrl], [bIsDeleted], [iOrder]) VALUES (N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'商品分类管理', N'8D469A2F-070D-CD6E-2650-08D3DF08EEA0', N'/Admin/GoodsCategory', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_FunctionMenu] ([ID], [sMenuName], [sPID], [sUrl], [bIsDeleted], [iOrder]) VALUES (N'EAA410FB-8019-CC11-B6C5-08D3E2FB0203', N'客户管理', null, N'', N'0', N'2')
+GO
+GO
+INSERT INTO [dbo].[EHECD_FunctionMenu] ([ID], [sMenuName], [sPID], [sUrl], [bIsDeleted], [iOrder]) VALUES (N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'客户管理', N'EAA410FB-8019-CC11-B6C5-08D3E2FB0203', N'/Admin/ClientManager', N'0', N'0')
 GO
 GO
 INSERT INTO [dbo].[EHECD_FunctionMenu] ([ID], [sMenuName], [sPID], [sUrl], [bIsDeleted], [iOrder]) VALUES (N'B138CE7D-048E-4293-AEB5-210F55FCB674', N'菜单管理', N'A04BADFD-4F07-46BD-9816-A71EC4776B84', N'/Admin/MenuManage', N'0', N'0')
@@ -468,6 +1184,21 @@ INSERT INTO [dbo].[EHECD_MenuButton] ([ID], [sButtonName], [bIsDeleted], [iOrder
 GO
 GO
 INSERT INTO [dbo].[EHECD_MenuButton] ([ID], [sButtonName], [bIsDeleted], [iOrder], [sIcon], [sDataID]) VALUES (N'48D39F58-9ACB-C717-A2ED-08D3E1FDD1AD', N'删除种类', N'0', N'2', N'icon-remove', N'del_goods_category')
+GO
+GO
+INSERT INTO [dbo].[EHECD_MenuButton] ([ID], [sButtonName], [bIsDeleted], [iOrder], [sIcon], [sDataID]) VALUES (N'4AC8EA60-7EB6-C8CE-BE8C-08D3E2FB30C6', N'查询客户', N'0', N'0', N'icon-search', N'search_client_domain')
+GO
+GO
+INSERT INTO [dbo].[EHECD_MenuButton] ([ID], [sButtonName], [bIsDeleted], [iOrder], [sIcon], [sDataID]) VALUES (N'6854A804-7B34-CB0A-A1FC-08D3E2FB3A19', N'编辑客户', N'0', N'1', N'icon-edit', N'edit')
+GO
+GO
+INSERT INTO [dbo].[EHECD_MenuButton] ([ID], [sButtonName], [bIsDeleted], [iOrder], [sIcon], [sDataID]) VALUES (N'9783595C-8BC2-C2BF-B624-08D3E2FB4BFF', N'删除客户', N'0', N'2', N'icon-remove', N'delete_client_domain')
+GO
+GO
+INSERT INTO [dbo].[EHECD_MenuButton] ([ID], [sButtonName], [bIsDeleted], [iOrder], [sIcon], [sDataID]) VALUES (N'1C282C3A-D839-C047-E493-08D3E2FB7274', N'冻结客户', N'0', N'3', N'icon-filter', N'forzen_client_domain')
+GO
+GO
+INSERT INTO [dbo].[EHECD_MenuButton] ([ID], [sButtonName], [bIsDeleted], [iOrder], [sIcon], [sDataID]) VALUES (N'8B429131-CF53-CFFE-9A2B-08D3E3CB71E5', N'导入客户', N'0', N'4', N'icon-print', N'import_client_domain')
 GO
 GO
 
@@ -740,6 +1471,21 @@ GO
 INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'9DCA649A-6677-C977-A2ED-08D3E1FDD1AD', N'menu', N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'button', N'48D39F58-9ACB-C717-A2ED-08D3E1FDD1AD', N'menu', N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'0', N'0')
 GO
 GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'EE52A52E-06E5-CC13-E5A7-08D3E2FB30C6', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'button', N'4AC8EA60-7EB6-C8CE-BE8C-08D3E2FB30C6', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'3F9CA92E-2959-C198-A1FC-08D3E2FB3A19', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'button', N'6854A804-7B34-CB0A-A1FC-08D3E2FB3A19', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'FAB479AA-ED7B-C46E-B624-08D3E2FB4BFF', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'button', N'9783595C-8BC2-C2BF-B624-08D3E2FB4BFF', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'8139760C-582E-C6D1-E493-08D3E2FB7274', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'button', N'1C282C3A-D839-C047-E493-08D3E2FB7274', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'A5C20AE3-A63C-C19A-9A2B-08D3E3CB71E5', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'button', N'8B429131-CF53-CFFE-9A2B-08D3E3CB71E5', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
 INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'1B896684-DA7F-E611-8EF1-2C56DCDC514B', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'button', N'051C4BA1-1B3E-C61B-846B-08D3E1FDBC8F', N'menu', N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'0', N'0')
 GO
 GO
@@ -894,6 +1640,63 @@ INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMaster
 GO
 GO
 INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'7CEEF3F3-EF7C-E611-8D93-60A44C3DDDA6', N'role', N'D89D5E7E-931A-CAE2-0101-08D3DE1DACB6', N'button', N'6F85B3F8-9ACB-CA9B-F84F-08D3D4C74935', N'menu', N'7E7D35EB-A425-4288-8D0F-9ABEA6EDCEB9', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'6A11AF95-D780-E611-8D94-60A44C3DDDA6', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'menu', N'EAA410FB-8019-CC11-B6C5-08D3E2FB0203', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'6B11AF95-D780-E611-8D94-60A44C3DDDA6', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'8211AF95-D780-E611-8D94-60A44C3DDDA6', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'button', N'4AC8EA60-7EB6-C8CE-BE8C-08D3E2FB30C6', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'8311AF95-D780-E611-8D94-60A44C3DDDA6', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'button', N'6854A804-7B34-CB0A-A1FC-08D3E2FB3A19', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'8411AF95-D780-E611-8D94-60A44C3DDDA6', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'button', N'9783595C-8BC2-C2BF-B624-08D3E2FB4BFF', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'8511AF95-D780-E611-8D94-60A44C3DDDA6', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'button', N'1C282C3A-D839-C047-E493-08D3E2FB7274', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'0DD96A7D-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'menu', N'EAA410FB-8019-CC11-B6C5-08D3E2FB0203', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'0ED96A7D-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'9EB77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'button', N'051C4BA1-1B3E-C61B-846B-08D3E1FDBC8F', N'menu', N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'9FB77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'button', N'6A2DF70E-E4F9-C63A-E072-08D3E1FDC691', N'menu', N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'A0B77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'button', N'48D39F58-9ACB-C717-A2ED-08D3E1FDD1AD', N'menu', N'CDCCA5C8-EFF6-C039-E31B-08D3DF09330B', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'A1B77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'button', N'4AC8EA60-7EB6-C8CE-BE8C-08D3E2FB30C6', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'A2B77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'button', N'6854A804-7B34-CB0A-A1FC-08D3E2FB3A19', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'A3B77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'button', N'9783595C-8BC2-C2BF-B624-08D3E2FB4BFF', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'A4B77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'689A7510-70EF-42CD-9AD1-1611B29061D2', N'button', N'1C282C3A-D839-C047-E493-08D3E2FB7274', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'AAB77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'D89D5E7E-931A-CAE2-0101-08D3DE1DACB6', N'menu', N'EAA410FB-8019-CC11-B6C5-08D3E2FB0203', N'role', N'D89D5E7E-931A-CAE2-0101-08D3DE1DACB6', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'ABB77786-9581-E611-8D94-60A44C3DDDA6', N'role', N'D89D5E7E-931A-CAE2-0101-08D3DE1DACB6', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'role', N'D89D5E7E-931A-CAE2-0101-08D3DE1DACB6', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'78AA6B98-9581-E611-8D94-60A44C3DDDA6', N'role', N'D89D5E7E-931A-CAE2-0101-08D3DE1DACB6', N'button', N'4AC8EA60-7EB6-C8CE-BE8C-08D3E2FB30C6', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
+GO
+GO
+INSERT INTO [dbo].[EHECD_Privilege] ([ID], [sPrivilegeMaster], [sPrivilegeMasterValue], [sPrivilegeAccess], [sPrivilegeAccessValue], [sBelong], [sBelongValue], [bPrivilegeOperation], [bIsDeleted]) VALUES (N'1D868292-A781-E611-8D94-60A44C3DDDA6', N'role', N'A0EB4D90-3276-CC7A-19E9-08D3DD61893E', N'button', N'8B429131-CF53-CFFE-9A2B-08D3E3CB71E5', N'menu', N'EB0D9A25-6A72-C217-F524-08D3E2FB14B8', N'0', N'0')
 GO
 GO
 
@@ -1505,6 +2308,144 @@ GO
 INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'F2322C82-7EEE-C56E-D34B-08D3E1FFBD70', N'系统用户分配角色菜单a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'admin', N'系统管理员', N'2016-09-21 17:14:50.000', N'0', N'127.0.0.1', N'a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'28689')
 GO
 GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'489741D5-1A5E-C64C-5988-08D3E2183F26', N'系统用户退出登录', N'admin', N'系统管理员', N'2016-09-21 20:10:15.000', N'0', N'127.0.0.1', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'59BDE3A0-7A11-C0AC-AA2B-08D3E218419F', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-21 20:10:19.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'73B3663F-D719-CB01-C3EB-08D3E22F71A1', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-21 22:56:18.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'252E5B0C-3C81-C1DC-6D8A-08D3E2FAEC52', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-22 23:12:52.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'D39E48BF-06A9-CE8B-3DA4-08D3E2FB0205', N'系统用户创建菜单客户管理', N'admin', N'系统管理员', N'2016-09-22 23:13:28.000', N'0', N'127.0.0.1', N'eaa410fb-8019-cc11-b6c5-08d3e2fb0203', N'16385')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'063E866A-CE7A-CB04-434C-08D3E2FB14B9', N'系统用户创建菜单客户管理', N'admin', N'系统管理员', N'2016-09-22 23:14:00.000', N'0', N'127.0.0.1', N'eb0d9a25-6a72-c217-f524-08d3e2fb14b8', N'16385')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'2A69D513-1EF9-CAD3-6C81-08D3E2FB30C8', N'系统用户在菜单eb0d9a25-6a72-c217-f524-08d3e2fb14b8下添加按钮查询客户', N'admin', N'系统管理员', N'2016-09-22 23:14:47.000', N'0', N'127.0.0.1', N'4ac8ea60-7eb6-c8ce-be8c-08d3e2fb30c6,eb0d9a25-6a72-c217-f524-08d3e2fb14b8', N'16386')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'E82B7F72-7277-C809-6584-08D3E2FB3A1A', N'系统用户在菜单eb0d9a25-6a72-c217-f524-08d3e2fb14b8下添加按钮编辑客户', N'admin', N'系统管理员', N'2016-09-22 23:15:02.000', N'0', N'127.0.0.1', N'6854a804-7b34-cb0a-a1fc-08d3e2fb3a19,eb0d9a25-6a72-c217-f524-08d3e2fb14b8', N'16386')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'A1B8170C-C8F6-C251-2B8D-08D3E2FB4C00', N'系统用户在菜单eb0d9a25-6a72-c217-f524-08d3e2fb14b8下添加按钮删除客户', N'admin', N'系统管理员', N'2016-09-22 23:15:32.000', N'0', N'127.0.0.1', N'9783595c-8bc2-c2bf-b624-08d3e2fb4bff,eb0d9a25-6a72-c217-f524-08d3e2fb14b8', N'16386')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'839328F3-BE7B-CC3B-80E7-08D3E2FB7275', N'系统用户在菜单eb0d9a25-6a72-c217-f524-08d3e2fb14b8下添加按钮冻结客户', N'admin', N'系统管理员', N'2016-09-22 23:16:37.000', N'0', N'127.0.0.1', N'1c282c3a-d839-c047-e493-08d3e2fb7274,eb0d9a25-6a72-c217-f524-08d3e2fb14b8', N'16386')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'14820146-68FE-C7DD-3037-08D3E2FB7A7F', N'系统用户分配角色菜单a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'admin', N'系统管理员', N'2016-09-22 23:16:50.000', N'0', N'127.0.0.1', N'a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'28689')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'7EC6AFAE-8393-CA22-BAE5-08D3E2FB7DA4', N'系统用户分配角色菜单按钮a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'admin', N'系统管理员', N'2016-09-22 23:16:56.000', N'0', N'127.0.0.1', N'a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'28690')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'C809FCB5-0D4D-CE47-4D24-08D3E2FB801C', N'系统用户退出登录', N'admin', N'系统管理员', N'2016-09-22 23:17:00.000', N'0', N'127.0.0.1', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'07F42F0B-0A94-C035-6CBF-08D3E2FB8288', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-22 23:17:04.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'7F8AAEEF-87DE-C0E8-4722-08D3E2FC6BBB', N'系统用户退出登录', N'admin', N'系统管理员', N'2016-09-22 23:23:35.000', N'0', N'127.0.0.1', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'F330FD3A-9C91-CA31-4296-08D3E2FC6E7B', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-22 23:23:40.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'3DBBD496-3997-C9CA-34FA-08D3E2FCEAFD', N'分配系统用户角色893b8fa1-f002-4206-936b-1b357a478b34', N'admin', N'系统管理员', N'2016-09-22 23:27:09.000', N'0', N'127.0.0.1', N'893b8fa1-f002-4206-936b-1b357a478b34', N'20504')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'6D48BAA2-AB7C-C0A1-EC15-08D3E2FCF50B', N'系统用户退出登录', N'admin', N'系统管理员', N'2016-09-22 23:27:26.000', N'0', N'127.0.0.1', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'C70B764A-38FE-CBBF-21B3-08D3E2FD0516', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-22 23:27:52.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'7F70CCAE-976D-C179-A215-08D3E3B5E618', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-23 21:31:17.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'D580728A-C7C9-CD3B-31C4-08D3E3B9623B', N'系统用户分配角色菜单689a7510-70ef-42cd-9ad1-1611b29061d2', N'admin', N'系统管理员', N'2016-09-23 21:56:14.000', N'0', N'127.0.0.1', N'689a7510-70ef-42cd-9ad1-1611b29061d2', N'28689')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'0ADCE50E-EBC2-C033-3259-08D3E3B96B4B', N'系统用户分配角色菜单按钮689a7510-70ef-42cd-9ad1-1611b29061d2', N'admin', N'系统管理员', N'2016-09-23 21:56:29.000', N'0', N'127.0.0.1', N'689a7510-70ef-42cd-9ad1-1611b29061d2', N'28690')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'ECEE7271-B5BF-C9F4-D4F0-08D3E3B96E4E', N'系统用户分配角色菜单d89d5e7e-931a-cae2-0101-08d3de1dacb6', N'admin', N'系统管理员', N'2016-09-23 21:56:34.000', N'0', N'127.0.0.1', N'd89d5e7e-931a-cae2-0101-08d3de1dacb6', N'28689')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'7D5A679F-414C-C626-9291-08D3E3B97D39', N'系统用户分配角色菜单按钮d89d5e7e-931a-cae2-0101-08d3de1dacb6', N'admin', N'系统管理员', N'2016-09-23 21:56:59.000', N'0', N'127.0.0.1', N'd89d5e7e-931a-cae2-0101-08d3de1dacb6', N'28690')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'53F18AEB-88B4-CA32-DF25-08D3E3C74904', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-23 23:35:45.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'F9060E83-9C87-CBB7-BD5B-08D3E3CB71E7', N'系统用户在菜单eb0d9a25-6a72-c217-f524-08d3e2fb14b8下添加按钮导入客户', N'admin', N'系统管理员', N'2016-09-24 00:05:31.000', N'0', N'127.0.0.1', N'8b429131-cf53-cffe-9a2b-08d3e3cb71e5,eb0d9a25-6a72-c217-f524-08d3e2fb14b8', N'16386')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'4E6406DA-B372-C1B4-B57D-08D3E3CB7757', N'系统用户分配角色菜单按钮a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'admin', N'系统管理员', N'2016-09-24 00:05:40.000', N'0', N'127.0.0.1', N'a0eb4d90-3276-cc7a-19e9-08d3dd61893e', N'28690')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'B203710D-010D-C6D3-5B55-08D3E3CB7995', N'系统用户退出登录', N'admin', N'系统管理员', N'2016-09-24 00:05:44.000', N'0', N'127.0.0.1', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'F06C7BA4-1DB5-CC43-8A5A-08D3E3CB7CB0', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-24 00:05:49.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'E2021E80-1F6E-C1B9-E50C-08D3E40E1729', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-24 08:02:35.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'6134F8DC-239C-C87E-B65D-08D3E42A05E8', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-24 11:22:32.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'DCB82116-2FBD-C125-BBDE-08D3E44C30D0', N'系统用户创建商品分类123', N'admin', N'系统管理员', N'2016-09-24 15:27:07.000', N'0', N'127.0.0.1', N'', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'5D64866F-86D1-C747-7E16-08D3E44C3B77', N'系统用户创建商品分类123', N'admin', N'系统管理员', N'2016-09-24 15:27:25.000', N'0', N'127.0.0.1', N'', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'E9CE9EC0-80E5-C087-2EE4-08D3E44D80F0', N'系统用户创建商品分类11', N'admin', N'系统管理员', N'2016-09-24 15:36:31.000', N'0', N'127.0.0.1', N'', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'0654F25A-78C8-C52E-2B38-08D3E44D87C8', N'系统用户登录', N'admin', N'系统管理员', N'2016-09-24 15:36:43.000', N'0', N'', N'893b8fa1-f002-4206-936b-1b357a478b34', N'12')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'E9AA1432-0772-C6D2-B278-08D3E44D9D89', N'系统用户创建商品分类123', N'admin', N'系统管理员', N'2016-09-24 15:37:19.000', N'0', N'127.0.0.1', N'', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'79EC51B6-F9E4-C1A6-78CC-08D3E44DB2F4', N'系统用户创建商品分类88', N'admin', N'系统管理员', N'2016-09-24 15:37:55.000', N'0', N'127.0.0.1', N'', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'5C1417C1-884B-CC17-BF4E-08D3E44DCDA7', N'系统用户创建商品分类33', N'admin', N'系统管理员', N'2016-09-24 15:38:40.000', N'0', N'127.0.0.1', N'', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'1A11B86C-79C9-C030-6CE4-08D3E44DE52A', N'系统用户创建商品分类44', N'admin', N'系统管理员', N'2016-09-24 15:39:19.000', N'0', N'127.0.0.1', N'', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'9A5676A2-A789-C02B-8CB1-08D3E45C21D8', N'系统用户创建商品分类fff', N'admin', N'系统管理员', N'2016-09-24 17:21:14.000', N'0', N'127.0.0.1', N'e57c8acd-0638-c75a-8b2b-08d3e45c21cc', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'7DEDEC2D-193D-C672-7FE8-08D3E45C2EA0', N'系统用户创建商品分类mm', N'admin', N'系统管理员', N'2016-09-24 17:21:35.000', N'0', N'127.0.0.1', N'61b2b16d-8878-cad8-0aa7-08d3e45c2ea0', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'0AA6DAB2-656A-CA9A-77A4-08D3E45C46B3', N'系统用户创建商品分类fsx', N'admin', N'系统管理员', N'2016-09-24 17:22:16.000', N'0', N'127.0.0.1', N'60ea3f72-9f36-c7f8-297b-08d3e45c46b3', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'7C9BB511-6AEC-C9A9-698B-08D3E45C981C', N'系统用户创建商品分类sfsafasdfa', N'admin', N'系统管理员', N'2016-09-24 17:24:32.000', N'0', N'127.0.0.1', N'c2325120-1558-c7b3-1b60-08d3e45c981c', N'16384')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'F7DEAE78-980A-CCCA-F9E1-08D3E4669086', N'系统用户更新菜单cdcca5c8-eff6-c039-e31b-08d3df09330b', N'admin', N'系统管理员', N'2016-09-24 18:35:55.000', N'0', N'127.0.0.1', N'cdcca5c8-eff6-c039-e31b-08d3df09330b', N'4097')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'C421EF5A-7194-CC60-77A1-08D3E46BF88D', N'系统用户删除商品分类e13f2d16-bc33-403b-9409-68c44fbb6231', N'admin', N'系统管理员', N'2016-09-24 19:14:37.000', N'0', N'127.0.0.1', N'e13f2d16-bc33-403b-9409-68c44fbb6231', N'8192')
+GO
+GO
+INSERT INTO [dbo].[EHECD_SystemLog] ([ID], [sDomainDetail], [sLoginName], [sUserName], [dInsertTime], [bIsDeleted], [sIPAddress], [sDoMainId], [tDoType]) VALUES (N'062C236F-063E-C60E-459F-08D3E46CCAAE', N'系统用户删除商品分类f68d3e4c-391a-4bf5-bc1c-60024f85c224', N'admin', N'系统管理员', N'2016-09-24 19:20:29.000', N'0', N'127.0.0.1', N'f68d3e4c-391a-4bf5-bc1c-60024f85c224', N'8192')
+GO
+GO
 
 -- ----------------------------
 -- Table structure for EHECD_SystemUser
@@ -1763,7 +2704,7 @@ GO
 INSERT INTO [dbo].[EHECD_SystemUser] ([ID], [sLoginName], [sPassWord], [sUserName], [tUserState], [tUserType], [sUserNickName], [dCreateTime], [dLastLoginTime], [sProvice], [sCity], [sCounty], [sAddress], [tSex], [bIsDeleted], [sMobileNum]) VALUES (N'685D010C-D3BD-C5C6-DB67-08D3DAE88320', N'yangyukun', N'202CB962AC59075B964B07152D234B70', N'杨瑜堃', N'0', N'0', N'后台用户杨瑜堃', N'2016-09-12 16:40:53.000', N'2016-09-18 00:02:32.000', N'四川省', N'成都市', N'金牛区', N'光荣北路', N'1', N'0', N'13540685528')
 GO
 GO
-INSERT INTO [dbo].[EHECD_SystemUser] ([ID], [sLoginName], [sPassWord], [sUserName], [tUserState], [tUserType], [sUserNickName], [dCreateTime], [dLastLoginTime], [sProvice], [sCity], [sCounty], [sAddress], [tSex], [bIsDeleted], [sMobileNum]) VALUES (N'893B8FA1-F002-4206-936B-1B357A478B34', N'admin', N'202cb962ac59075b964b07152d234b70', N'系统管理员', N'0', N'0', N'超级管理员', N'2016-08-28 08:39:33.260', N'2016-09-21 17:05:33.000', N'四川省', N'成都市', N'青羊区', N'光华中心', N'0', N'0', N'13888888888')
+INSERT INTO [dbo].[EHECD_SystemUser] ([ID], [sLoginName], [sPassWord], [sUserName], [tUserState], [tUserType], [sUserNickName], [dCreateTime], [dLastLoginTime], [sProvice], [sCity], [sCounty], [sAddress], [tSex], [bIsDeleted], [sMobileNum]) VALUES (N'893B8FA1-F002-4206-936B-1B357A478B34', N'admin', N'202cb962ac59075b964b07152d234b70', N'系统管理员', N'0', N'0', N'超级管理员', N'2016-08-28 08:39:33.260', N'2016-09-24 15:36:43.000', N'四川省', N'成都市', N'青羊区', N'光华中心', N'0', N'0', N'13888888888')
 GO
 GO
 
@@ -1856,6 +2797,26 @@ GO
 -- Primary Key structure for table EHECD_Categories
 -- ----------------------------
 ALTER TABLE [dbo].[EHECD_Categories] ADD PRIMARY KEY ([ID])
+GO
+
+-- ----------------------------
+-- Indexes structure for table EHECD_Client
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table EHECD_Client
+-- ----------------------------
+ALTER TABLE [dbo].[EHECD_Client] ADD PRIMARY KEY ([ID])
+GO
+
+-- ----------------------------
+-- Indexes structure for table EHECD_ClientAddress
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table EHECD_ClientAddress
+-- ----------------------------
+ALTER TABLE [dbo].[EHECD_ClientAddress] ADD PRIMARY KEY ([ID])
 GO
 
 -- ----------------------------

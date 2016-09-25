@@ -456,6 +456,7 @@
     <Content Include="Content\themes\ui-dark-hive\tree.css" />
     <Content Include="Content\themes\ui-dark-hive\validatebox.css" />
     <Content Include="Content\themes\ui-dark-hive\window.css" />
+    <Content Include="scripts\common\easyui-dialog-template.js" />
     <Content Include="scripts\lib\baidu.ueditor.module.js" />
     <Content Include="scripts\lib\emuns.module.js" />
     <Content Include="scripts\plug-in\address\baiduaddress\scripts\area.data.js" />
@@ -902,6 +903,9 @@
     <Content Include="Areas\Admin\Views\GoodsCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_BaiduAddressChoose.cshtml" />
     <Content Include="Areas\Admin\Views\ClientManager\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GoodsCategory\AddGoodsCategory.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\GoodsCategory\EditGoodsCategory.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="Content\bootstrap-treeview.min.css" />
     <Content Include="scripts\bootstrap-treeview.js" />
@@ -954,6 +958,9 @@
     <Content Include="scripts\locale\easyui-lang-tr.js" />
     <Content Include="scripts\locale\easyui-lang-zh_CN.js" />
     <Content Include="scripts\locale\easyui-lang-zh_TW.js" />
+    <Content Include="scripts\plug-in\menu\jquerytree\css\style.css" />
+    <Content Include="scripts\plug-in\menu\jquerytree\img\glyphicons-halflings.png" />
+    <Content Include="scripts\plug-in\menu\jquerytree\index.html" />
     <Content Include="scripts\plug-in\ueditor\third-party\jquery-1.10.2.min.map" />
     <Content Include="scripts\plug-in\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="scripts\plug-in\ueditor\third-party\video-js\font\vjs.ttf" />

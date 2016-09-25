@@ -5,5 +5,5 @@
         modules.get(enums.Modules.CACHE).setCache(enums.VARIABLE.UEDITOR_URL, r.Data);
     }, function (r) {
         eui.alertErr(r.Msg);
-    },true,true,null,null,"text","body");
+    },false,true,null,null,"text","body");
 });

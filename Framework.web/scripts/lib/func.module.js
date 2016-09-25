@@ -11,7 +11,7 @@
 modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
 
     var browser = vers ? vers.browser : undefined;
-    
+
     /**
      * 
      * 生成UUID
@@ -35,6 +35,10 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
         return uuid;
     }
 
+    /**
+     * 生成动态的唯一变量名称
+     * @returns {string}  
+     */
     function vertid() {
         var s = [];
         var hexDigits = "abcdefghijklmnopqrstuvwxyz";
@@ -414,24 +418,26 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
      * @param {String} dataType Ajax返回数据类型,默认为 "text"
      * @param {Object} maskcontent 遮罩层容器，如果不指定，默认为后台界面选中的tabs
      */
-    function post(url, data, onSuccess, unSucess, modal, async, onError, onComplete, dataType, maskcontent) {
+    function post(url, data, onSuccess, unSucess, modal, async, onError, onComplete, dataType, maskcontent) {        
         var mask = null;
+        var top = null;
         modal = (modal === false ? false : true);
         if (modal) {
             try {
+                top = maskcontent === undefined ? 33 : 0;
                 maskcontent = maskcontent ? maskcontent : $("#tabs").tabs("getSelected");
             } catch (e) {
             }
-            
-            mask = new Maskwin();           
-            mask.show(maskcontent);
+
+            mask = new Maskwin();
+            mask.show(maskcontent, top);
         }
 
         var jsonData = {
             data: data,
             IP: "",
             sLoginName: "",
-            sUserName:""
+            sUserName: ""
         };
 
         var ajaxHandler = $.ajax({
@@ -503,10 +509,10 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
          * 显示遮罩层
          * @param {tab} 遮罩要放入的容器
          */
-        function show(content) {
+        function show(content, top) {            
             var h = $(content).height();
             var w = $(content).width();
-            this.maskmsg = $('<div style="height:' + h + 'px;width:' + w + 'px;position:absolute;z-index:99999;background: rgba(255,255,255,0.5);left:2px;top:33px;">' +
+            this.maskmsg = $('<div style="height:' + h + 'px;width:' + w + 'px;position:absolute;z-index:99999;background: rgba(255,255,255,0.5);left:2px;top:' + top + 'px;">' +
                         '<div style="position:absolute;overflow:hidden;left:40%;top:35%;height:400px;width:200px;">' +
                                     '<div class="cssload-wrap">' +
 			                        '<div class="cssload-circle"></div>' +
@@ -531,7 +537,7 @@ modules.define("func", ["tool", "vers"], function FuncDomain(tool, vers) {
                 return function () {
                     maskmsg.remove();
                 };
-            })(this.maskmsg), 500);
+            })(this.maskmsg), 300);
         };
 
         return {

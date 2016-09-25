@@ -84,8 +84,7 @@
                     cache: true,
                     closable: true,
                     href: data.url,
-                    justified: true,
-                    
+                    justified: true,                    
                     style: { padding: 1 }
                 });
             } else {

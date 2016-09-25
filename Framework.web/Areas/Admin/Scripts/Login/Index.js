@@ -1,5 +1,6 @@
 ﻿$(function () {
     void function () {
+
         var f = modules.get(enums.Modules.FUNC);/*方法模块*/
         var eui = modules.get(enums.Modules.JQUERY_EASYUI);/*easyui模块*/
         var btn_reset = $("#btn_reset");/*重置按钮*/
