@@ -105,19 +105,20 @@
                                     <td class="tdcontent">
                                         <input id="uname" class="easyui-textbox"
                                                data-options="height:25,width:180,required:true,missingMessage:'请输入登录名',iconCls:'icon-man',iconAlign:'left',type:'text',value:'请输入登录名',value:'admin',validType:['chartLengthBetween[3,12,\'账号\']','isHtmlValidate']" />
+                                        &emsp;<input type="checkbox" id="remember_ac_info"><span style="color:white">记住登录信息</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="title">密  码：</td>
                                     <td class="tdcontent">
                                         <input id="upwd" class="easyui-textbox" data-options="height:25,width:180,required:true,missingMessage:'请输入登录密码',iconCls:'icon-lock',iconAlign:'left',type:'password',value:'123',validType:['chartLengthBetween[3,15,\'密码\']','isHtmlValidate']" />
+                                        &emsp;<a style="color:white" href="javascript:;" id="forget_psd">忘记密码？</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="title">验证码：</td>
                                     <td class="tdcontent">
                                         <img id="vcodepic" style="vertical-align: middle;border-radius:4px;width:85px;height:23px" />
-                                       
                                         <input id="vcode" class="easyui-textbox" data-options="height:25,width:90,required:true,missingMessage:'请输入4位验证码',type:'text',value:'请输入验证码',validType:['chartLengthEquire[4,\'验证码\']','isHtmlValidate']" />
                                     </td>
                                 </tr>

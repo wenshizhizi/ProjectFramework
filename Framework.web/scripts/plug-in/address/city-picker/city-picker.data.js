@@ -10,9 +10,8 @@
  * modify by 杨瑜堃 2016-09-11 修改其地址数据保存方式，源代码中是放在全局变量中的，改为获取对象，不污染全局作用域
  */
 
-var loadCityData = function () {
-
-    var ChineseDistricts = {
+if (modules.get(enums.Modules.CACHE).getCache(enums.VARIABLE.BOOTSTRAP_ADDRESS_DATA) === null) {
+    modules.get(enums.Modules.CACHE).setCache(enums.VARIABLE.BOOTSTRAP_ADDRESS_DATA, {
         //86: {
         //    110000: '北京',
         //    120000: '天津',
@@ -4073,6 +4072,10 @@ var loadCityData = function () {
         820001: {
             820001: '花地瑪堂區'
         }
-    };
-    return ChineseDistricts;
-};
+    });
+}
+//var loadCityData = function () {
+
+//    var ChineseDistricts = ;
+//    return ChineseDistricts;
+//};

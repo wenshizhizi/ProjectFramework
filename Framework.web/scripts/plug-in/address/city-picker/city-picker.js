@@ -16,7 +16,7 @@
 (function (factory) {
     factory(jQuery);
 })(function ($) {
-    var ChineseDistricts = loadCityData();
+    var ChineseDistricts = modules.get(enums.Modules.CACHE).getCache(enums.VARIABLE.BOOTSTRAP_ADDRESS_DATA);
     var NAMESPACE = 'citypicker';
     var EVENT_CHANGE = 'change.' + NAMESPACE;
     var PROVINCE = 'province';

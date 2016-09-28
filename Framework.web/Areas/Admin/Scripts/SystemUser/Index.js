@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿
+$(function () {
     modules.get(enums.Modules.CACHE).setMenuDomain("用户管理", new function () {
 
         var eui = modules.get(enums.Modules.JQUERY_EASYUI);
@@ -122,6 +123,7 @@
                     }
                 }],
                 onClose: function () {
+                    modules.get(enums.Modules.CACHE).cleanCache(enums.VARIABLE.BOOTSTRAP_ADDRESS_DATA);
                     $(div).dialog("destroy"); div = null;
                 },
                 onLoad: function () {
@@ -200,6 +202,7 @@
                         }
                     }],
                     onClose: function () {
+                        modules.get(enums.Modules.CACHE).cleanCache(enums.VARIABLE.BOOTSTRAP_ADDRESS_DATA);
                         $(div).dialog("destroy"); div = null;
                     },
                     onLoad: function () {

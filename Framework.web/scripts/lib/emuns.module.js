@@ -23,7 +23,9 @@
             //百度地图+地址选择的插件选择结果
             BAIDU_MAP_ADDRESS_CHOOSER: "_bcRet",
             //百度editor的上传URL
-            UEDITOR_URL: "ueditorUrl"
+            UEDITOR_URL: "_ueditorUrl",
+            //bootstrap地址选择的数据
+            BOOTSTRAP_ADDRESS_DATA:"_bootstrap_address_data"
         }
     };
 
