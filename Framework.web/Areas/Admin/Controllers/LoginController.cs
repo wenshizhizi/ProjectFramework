@@ -61,10 +61,12 @@ namespace Framework.web.Areas.Admin.Controllers
 
         public PartialViewResult ToForgetPWD()
         {
-
             return PartialView("ForgetPWD");
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
         public void Login()
         {
             //获取上传的账户信息
@@ -81,7 +83,7 @@ namespace Framework.web.Areas.Admin.Controllers
                 return;
             }
 
-            ILogin login = DIEntity.GetInstance().GetImpl<ILogin>();
+            ILogin login = LoadInterface<ILogin>();
             user.sAddress = RequestParameters.dynamicData.IP.Value.ToString();
             var dto = login.Login(user);
 
@@ -99,8 +101,8 @@ namespace Framework.web.Areas.Admin.Controllers
                 if (userRoleMenu.LoadSuccess)
                 {
                     session.SessionUser.User = dto;
-                    Session[SessionInfo.USER_SESSION_NAME/*用户的信息*/] = session;
-                    Session[SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/] = userRoleMenu;
+                    SetSessionInfo(SessionInfo.USER_SESSION_NAME/*用户的信息*/, session);
+                    SetSessionInfo(SessionInfo.USER_MENUS/*用户的权限和菜单等信息*/, userRoleMenu);                    
                     result.Succeeded = true;
                     result.Data = "/Admin/Main";
                 }
