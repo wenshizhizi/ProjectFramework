@@ -224,7 +224,7 @@
                         eui.alertInfo("删除角色成功");
                         eui.search(grid, false);
                     }, function (r) {
-                        eui.alertErr(r.Msg);
+                        eui.aler(r.Msg);
                     });
                 }, undefined, "请选择您要删除的系统用户。",
                 function (selectedRow) {

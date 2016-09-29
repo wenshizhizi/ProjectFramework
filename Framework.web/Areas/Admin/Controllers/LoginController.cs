@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Framework.DTO;
 using Framework.Validate;
 using Framework.web.Controllers;
-using Framework.Domain;
+using Framework.AppCache;
 using Framework.BLL;
 using Framework.DI;
 using Framework.Helper;
@@ -21,19 +21,47 @@ namespace Framework.web.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 发送重置密码的短信验证码
+        /// </summary>
         public void SendMessage()
         {
-            var messger = base.LoadInterface<IMessager>();
-            var param = LoadParam<Dictionary<string, string>>()["mobileNumber"];
-            
+            var param = LoadParam<Dictionary<string, string>>()["sloginName"];
 
-            Framework.AppCache.ApplicationCache.Instance.SetValue(param, "9527", 60);
-            messger.SendMessage("13540685528", string.Format(messger.RegisteMessage, 9527));
+            if (ApplicationCache.Instance.GetValue(param) != null)
+            {
+                result.Succeeded = false;
+                result.Msg = "两分钟内已经获取过验证短信，请等待两分后再获取";
+                return;
+            }
+                        
+            var login = base.LoadInterface<ILogin>();
+            var mnumber = login.QueryMobileNumberByLoginName(param);
+            if (mnumber != null)
+            {
+                var messger = base.LoadInterface<IMessager>();
+                var code = RandomHelper.GetRandomIntString();
+                if (messger.SendMessage(mnumber, string.Format(messger.ChangePWDMessage, code)))
+                {
+                    ApplicationCache.Instance.SetValue(param, code, 120);
+                    result.Succeeded = true;
+                }
+                else
+                {
+                    result.Succeeded = false;
+                    result.Msg = "发送短消息至手机失败，请联系管理员";
+                }
+            }
+            else
+            {
+                result.Succeeded = false;
+                result.Msg = "没有获取到该登录名的联系电话，请确认登录名是否正确？";
+            }
         }
 
         public PartialViewResult ToForgetPWD()
         {
-            
+
             return PartialView("ForgetPWD");
         }
 

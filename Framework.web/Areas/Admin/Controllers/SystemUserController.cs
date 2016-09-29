@@ -73,7 +73,22 @@ namespace Framework.web.Areas.Admin.Controllers
                                 .GetImpl<ISystemUserManager>()
                                 .AddSystemUser(user, RequestParameters.dynamicData);
             result.Succeeded = ret > 0;
-            result.Msg = !result.Succeeded ? ret == -1 ? "添加用户失败，已有相同登录名用户" : "添加用户失败，请联系系统管理员" : "";
+
+            if (!result.Succeeded)
+            {
+                if (ret == -1)
+                {
+                    result.Msg = "添加用户失败，已有相同的登录名";
+                }
+                else if (ret == -2)
+                {
+                    result.Msg = "添加用户失败，已有相同的手机号";
+                }
+                else
+                {
+                    result.Msg = "添加用户失败，请联系系统管理员";
+                }
+            }
         }
 
         /// <summary>

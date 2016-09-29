@@ -55,6 +55,7 @@
     <Compile Include="DateHelpr.cs" />
     <Compile Include="HTMLTranscoding.cs" />
     <Compile Include="IMessager.cs" />
+    <Compile Include="RandomHelper.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="ConvertHelper.cs" />
     <Compile Include="GuidHelper.cs" />

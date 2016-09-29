@@ -128,7 +128,7 @@
             var div = $("<div/>");            
             div.dialog({
                 title: "找回密码",
-                width: 400,
+                width: 450,
                 height: 300,
                 cache: false,
                 href: '/Admin/Login/ToForgetPWD',

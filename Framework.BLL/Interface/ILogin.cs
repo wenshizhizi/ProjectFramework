@@ -1,11 +1,13 @@
-﻿using Framework.DI;
+﻿using System;
+using Framework.DI;
 using Framework.DTO;
+using System.Collections.Generic;
 
 namespace Framework.BLL
 {
     public abstract class ILogin : BaseBll
     {
-        
+
         /// <summary>
         /// 系统用户登录
         /// </summary>
@@ -27,6 +29,26 @@ namespace Framework.BLL
         public virtual EHECD_SystemUserDTO ChangeUserInfo(EHECD_SystemUserDTO t)
         {
             return default(EHECD_SystemUserDTO);
+        }
+
+        /// <summary>
+        /// 根据登录名获取手机号
+        /// </summary>
+        /// <param name="param">登录名</param>
+        /// <returns>手机号</returns>
+        public string QueryMobileNumberByLoginName(string param)
+        {
+            string ret = null;
+            var retq = query.SingleQuery<Dictionary<string, object>>("SELECT sMobileNum FROM EHECD_SystemUser WHERE sLoginName = @sLoginName", new { sLoginName = param });
+            if (retq != default(Dictionary<string, object>) && retq.Count > 0)
+            {
+                ret = retq["sMobileNum"].ToString();
+                return ret;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>

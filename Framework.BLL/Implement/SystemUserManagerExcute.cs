@@ -29,13 +29,20 @@ namespace Framework.BLL
                         END
                         ELSE
                         BEGIN
-	                        {0}
+                            IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sMobileNum = @sMobileNum)
+                            BEGIN
+                                SELECT -2 RET;
+                            END
+                            ELSE
+                            BEGIN
+	                            {0}
+                            END
                         END;";
 
             sqlIf = string.Format(sqlIf, Dapper.DBSqlHelper.GetInsertSQL<EHECD_SystemUserDTO>(user));
 
             //2.保存至数据库
-            var ret = excute.Insert(sqlIf, new { sLoginName = user.sLoginName });
+            var ret = excute.Insert(sqlIf, new { sLoginName = user.sLoginName, sMobileNum = user.sMobileNum });
 
             //3.记录系统日志
             InsertSystemLog(
@@ -161,8 +168,19 @@ namespace Framework.BLL
         //编辑用户
         public override int EditSystemUser(EHECD_SystemUserDTO user, dynamic p)
         {
+            var sqlIf = @"IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sMobileNum = @sMobileNum)
+                          BEGIN
+                              SELECT -2 RET;
+                          END
+                          ELSE
+                          BEGIN
+	                          {0}
+                          END;";
+
+            sqlIf = string.Format(sqlIf, Dapper.DBSqlHelper.GetUpdateSQL<EHECD_SystemUserDTO>(user, string.Format("where ID = '{0}'", user.ID)));
+
             //1.保存至数据库
-            var ret = excute.UpdateSingle<EHECD_SystemUserDTO>(user, string.Format("where ID = '{0}'", user.ID));
+            var ret = excute.Update(sqlIf, new { sMobileNum = user.sMobileNum });
 
             //2.记录系统日志
             InsertSystemLog(
