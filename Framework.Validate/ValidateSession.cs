@@ -22,8 +22,8 @@ namespace Framework.Validate
 
         static ValidateSession()
         {
-            VCodeMaxCount = Int32.Parse(WebConfig.LoadElement("VImgCodeMaxCount"));
-            VImgCodeTimeOut = Int32.Parse(WebConfig.LoadElement("VImgCodeTimeOut"));
+            VCodeMaxCount/*最大验证次数*/ = Int32.Parse(WebConfig.LoadElement("VImgCodeMaxCount"));
+            VImgCodeTimeOut/*图片验证码超时时间（秒）*/ = Int32.Parse(WebConfig.LoadElement("VImgCodeTimeOut"));
         }
 
         /// <summary>

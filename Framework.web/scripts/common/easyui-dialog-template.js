@@ -41,6 +41,9 @@ div.dialog({
         }
     }],
     onClose: function () {
+        /**
+        * 如果dialog里有对全局变量的操作并有驻留，这里记得要清除
+        */
         $(div).dialog("destroy"); div = null;
     },
     onLoad: function () {

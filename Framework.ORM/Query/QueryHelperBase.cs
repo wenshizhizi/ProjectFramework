@@ -10,6 +10,9 @@ using System.Diagnostics;
 
 namespace Framework.Dapper
 {
+    /// <summary>
+    /// 查询的基类
+    /// </summary>
     public abstract class QueryHelperBase : QueryHelper
     {
         //连接字符串
@@ -32,10 +35,7 @@ namespace Framework.Dapper
             }
         }
 
-        /// <summary>
-        /// 关闭连接
-        /// </summary>
-        /// <param name="conn"></param>
+        //关闭连接
         private void CloseConnect(SqlConnection conn)
         {
             try
@@ -52,13 +52,16 @@ namespace Framework.Dapper
         }
 
         /// <summary>
-        /// 这部分代码由于实现了对异常的处理，并且开放给外部的接口
-        /// 就是通过调用该部分，因此该方法不允许被重写
+        /// 单条查询
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sqlCommand"></param>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <remarks>
+        ///     这部分代码由于实现了对异常的处理，并且开放给外部的接口
+        ///     就是通过调用该部分，因此该方法不允许被重写
+        /// </remarks>
+        /// <typeparam name="T">查询的对象类型</typeparam>
+        /// <param name="sqlCommand">sql命令</param>
+        /// <param name="parameter">参数</param>
+        /// <returns>查询结果</returns>
         public override sealed T SingleQuery<T>(string sqlCommand, Object parameter)
         {
             SqlConnection conn = null;
@@ -80,13 +83,16 @@ namespace Framework.Dapper
         }
 
         /// <summary>
-        /// 这部分代码由于实现了对异常的处理，并且开放给外部的接口
-        /// 就是通过调用该部分，因此该方法不允许被重写
+        /// 查询多条数据
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sqlCommand"></param>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <remarks>
+        ///     这部分代码由于实现了对异常的处理，并且开放给外部的接口
+        ///     就是通过调用该部分，因此该方法不允许被重写
+        /// </remarks>
+        /// <typeparam name="T">查询的对象类型</typeparam>
+        /// <param name="sqlCommand">sql命令</param>
+        /// <param name="parameter">参数</param>
+        /// <returns>查询结果</returns>
         public override sealed IList<T> QueryList<T>(string sqlCommand, Object parameter)
         {
             SqlConnection conn = null;
@@ -106,14 +112,18 @@ namespace Framework.Dapper
                 CloseConnect(conn);
             }
         }
-
+                
         /// <summary>
-        /// 这部分代码由于实现了对异常的处理，并且开放给外部的接口
-        /// 就是通过调用该部分，因此该方法不允许被重写
+        /// 分页查询
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sqlCommand"></param>
-        /// <param name="parameter"></param>
+        /// <remarks>
+        ///     这部分代码由于实现了对异常的处理，并且开放给外部的接口
+        ///     就是通过调用该部分，因此该方法不允许被重写
+        /// </remarks>
+        /// <typeparam name="T">查询的对象类型</typeparam>
+        /// <param name="sqlCommand">sql命令</param>
+        /// <param name="pageInfo">分页查询条件对象</param>
+        /// <param name="parameter">参数</param>
         /// <returns></returns>
         public override sealed PagingRet<T> PaginationQuery<T>(string sqlCommand, PageInfo pageInfo, Object parameter)
         {

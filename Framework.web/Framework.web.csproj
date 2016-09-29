@@ -456,11 +456,23 @@
     <Content Include="Content\themes\ui-dark-hive\tree.css" />
     <Content Include="Content\themes\ui-dark-hive\validatebox.css" />
     <Content Include="Content\themes\ui-dark-hive\window.css" />
+    <Content Include="scripts\common\easyui-datagrid-template.js" />
     <Content Include="scripts\common\easyui-dialog-template.js" />
     <Content Include="scripts\lib\baidu.ueditor.module.js" />
     <Content Include="scripts\lib\emuns.module.js" />
+    <Content Include="scripts\login-back\login\css\reset.css" />
+    <Content Include="scripts\login-back\login\css\style.css" />
+    <Content Include="scripts\login-back\login\css\supersized.css" />
+    <Content Include="scripts\login-back\login\img\1.jpg" />
+    <Content Include="scripts\login-back\login\img\2.jpg" />
+    <Content Include="scripts\login-back\login\img\3.jpg" />
+    <Content Include="scripts\login-back\login\index.html" />
+    <Content Include="scripts\login-back\login\js\supersized-init.js" />
+    <Content Include="scripts\login-back\login\js\supersized.3.2.7.min.js" />
+    <Content Include="scripts\login-back\login\login.html" />
     <Content Include="scripts\plug-in\address\baiduaddress\scripts\area.data.js" />
     <Content Include="scripts\plug-in\address\baiduaddress\scripts\baidu.map.js" />
+    <Content Include="scripts\plug-in\address\baiduaddress\scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\plug-in\address\baiduaddress\style\baidu-address.css" />
     <Content Include="scripts\plug-in\address\baiduaddress\_baiduaddress.html" />
     <Content Include="scripts\plug-in\address\city-picker\city-picker.css" />
@@ -906,6 +918,7 @@
     <Content Include="Areas\Admin\Views\GoodsCategory\AddGoodsCategory.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\GoodsCategory\EditGoodsCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\ForgetPWD.cshtml" />
     <None Include="scripts\jquery-1.11.3-vsdoc.js" />
     <Content Include="Content\bootstrap-treeview.min.css" />
     <Content Include="scripts\bootstrap-treeview.js" />
@@ -1351,6 +1364,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="scripts\typings\jquery\file1.ts" />
+    <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

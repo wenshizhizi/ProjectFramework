@@ -68,8 +68,7 @@ namespace Framework.web.Controllers
                 {
                     string url = new UrlHelper(filterContext.RequestContext).Action("Index", "Login");
                     //防止ajax调用分部视图出现登陆超时，在局部跳转URL的问题   
-                    filterContext.HttpContext.Response.ContentType = "text/html";
-                    //$.messager.alert('登录超时','抱歉，您已登录超时，系统将于3秒后返回登录页重新登录','info')
+                    filterContext.HttpContext.Response.ContentType = "text/html";                    
                     filterContext.HttpContext.Response.Write("<script> alert('抱歉，您已登录超时，系统将于3秒后返回登录页重新登录');setTimeout(function(){ window.location.href='" + url + "';},3000); </script>");
                     filterContext.HttpContext.Response.End();
                 }
@@ -93,7 +92,7 @@ namespace Framework.web.Controllers
             if (filterContext.Exception != default(Exception))
             {
                 //DomainInfoException表示这个是自定义的信息
-                if (filterContext.Exception.GetType() == typeof(DomainInfoException))
+                if (filterContext.Exception is DomainInfoException)
                 {
                     var ex = filterContext.Exception as DomainInfoException;
                     if (ex != null && ex.IsLog)
@@ -157,7 +156,7 @@ namespace Framework.web.Controllers
             }
             else
             {
-                //其他方式的请求：暂无
+                //其他方式的请求：暂无处理
             }
         }
 

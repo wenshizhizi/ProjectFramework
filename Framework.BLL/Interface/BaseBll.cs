@@ -27,8 +27,8 @@ namespace Framework.BLL
         /// <param name="doid">操作涉及的ID</param>
         /// <param name="doret">操作结果，根据此结果生成对应信息</param>
         protected void InsertSystemLog(string ulname, string uname, string ip, short type, string detail, string doid, bool doret)
-        {
-            var log = doret ?
+        {            
+               var log = doret ?
                 new EHECD_SystemLogDTO
                 {
                     bIsDeleted = false,

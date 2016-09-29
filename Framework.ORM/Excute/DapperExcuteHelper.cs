@@ -69,18 +69,7 @@ namespace Framework.Dapper
         {
             return conn.Execute(sql,param);
         }
-
-        protected override int DoUpdateMultiple<T>(SqlConnection conn, IDbTransaction tran, IList<T> t, string where)
-        {
-            
-//StringBuilder sb = new StringBuilder();
-            //Parallel.ForEach(t, item => {
-            //    sb.Append(DBSqlHelper.GetUpdateSQL<T>(item));
-            //});
-            //return conn.Execute(sb.ToString(), null, tran, null, CommandType.Text);
-            return 0;
-        }
-
+        
         protected override int DoUpdateSingle<T>(SqlConnection conn, T t, string where)
         {
             string sql = DBSqlHelper.GetUpdateSQL<T>(t, where);

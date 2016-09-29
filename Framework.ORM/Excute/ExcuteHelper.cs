@@ -73,17 +73,5 @@ namespace Framework.Dapper
         {
             return 0;
         }
-
-        /// <summary>
-        /// 更新多条数据,发方法暂时没有实现，定义有点问题，一个where无法满足多条的条件，暂缓调用
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="t"></param>
-        /// <param name="where"></param>
-        /// <returns></returns>
-        public virtual int UpdateMultiple<T>(IList<T> t, string where)
-        {
-            return 0;
-        }
     }
 }

@@ -50,9 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChuangLanMessager.cs" />
     <Compile Include="CommonHelper.cs" />
     <Compile Include="DateHelpr.cs" />
     <Compile Include="HTMLTranscoding.cs" />
+    <Compile Include="IMessager.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="ConvertHelper.cs" />
     <Compile Include="GuidHelper.cs" />

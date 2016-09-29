@@ -9,6 +9,7 @@ using Framework.web.Controllers;
 using Framework.Domain;
 using Framework.BLL;
 using Framework.DI;
+using Framework.Helper;
 
 namespace Framework.web.Areas.Admin.Controllers
 {
@@ -20,13 +21,29 @@ namespace Framework.web.Areas.Admin.Controllers
             return View();
         }
 
+        public void SendMessage()
+        {
+            var messger = base.LoadInterface<IMessager>();
+            var param = LoadParam<Dictionary<string, string>>()["mobileNumber"];
+            
+
+            Framework.AppCache.ApplicationCache.Instance.SetValue(param, "9527", 60);
+            messger.SendMessage("13540685528", string.Format(messger.RegisteMessage, 9527));
+        }
+
+        public PartialViewResult ToForgetPWD()
+        {
+            
+            return PartialView("ForgetPWD");
+        }
+
         public void Login()
         {
             //获取上传的账户信息
-            var user = JSONHelper.GetModel<EHECD_SystemUserDTO>(RequestParameters.data.ToString());
+            var user = LoadParam<EHECD_SystemUserDTO>();
 
             //获取session信息
-            SessionInfo session = (SessionInfo)Session[SessionInfo.USER_SESSION_NAME];
+            SessionInfo session = GetSessionInfo(SessionInfo.USER_SESSION_NAME) as SessionInfo;
 
             //校验验证码:这里偷了个懒，用的EHECD_SystemUserDTO的sUserName临时装了一下
             if (user.sUserName.ToLower() != session.ImgCode.VCodeContent.ToLower())
@@ -42,7 +59,7 @@ namespace Framework.web.Areas.Admin.Controllers
 
             if (dto != null)
             {
-                if(dto.tUserState == 1)
+                if (dto.tUserState == 1)
                 {
                     result.Succeeded = false;
                     result.Msg = "登录失败，该用户已被冻结";

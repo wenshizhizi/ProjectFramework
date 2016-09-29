@@ -18,8 +18,7 @@ namespace Framework.DI
         /// 直接用的是代码做映射，如果你要用，
         /// 配置文件在这个项目的Web.config里面
         /// </summary>
-        private UnityConfigurationSection configuration =
-           ConfigurationManager.GetSection(UnityConfigurationSection.SectionName) as UnityConfigurationSection;
+        private UnityConfigurationSection configuration = ConfigurationManager.GetSection(UnityConfigurationSection.SectionName) as UnityConfigurationSection;
 
         //注入容器
         private UnityContainer container = new UnityContainer();

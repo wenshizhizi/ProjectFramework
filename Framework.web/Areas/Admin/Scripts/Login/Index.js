@@ -125,7 +125,50 @@
 
         //忘记密码
         $("#forget_psd").on("click", function () {
+            var div = $("<div/>");            
+            div.dialog({
+                title: "找回密码",
+                width: 400,
+                height: 300,
+                cache: false,
+                href: '/Admin/Login/ToForgetPWD',
+                modal: true,
+                collapsible: false,
+                minimizable: false,
+                maximizable: false,
+                resizable: false,                     
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-save',
+                    handler: function () {
+                        //if ($("#forget_pwd_form").form("validate")) {
 
+                        //    //序列化提交数据
+                        //    var json = $("#form的id，请自行替换").serializeObject();
+
+                        //    f.post("提交地址", json,
+                        //        function (ret) {
+                        //            eui.alertInfo("成功的提示");
+                        //            $(div).dialog("close");
+                        //            eui.search(grid, false);
+                        //        }, function (ret) {
+                        //            eui.alertErr(ret.Msg);
+                        //        });
+                        //}
+                    }
+                }, {
+                    text: '关闭',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        $(div).dialog("close");
+                    }
+                }],
+                onClose: function () {
+                    $(div).dialog("destroy"); div = null;
+                },
+                onLoad: function () {
+                }
+            });
         });
 
         //登录

@@ -1,0 +1,59 @@
+﻿
+<link href="~/Areas/Admin/Content/gridtable.css" rel="stylesheet" />
+
+<script>
+    $("#get_m_msg_code").on("click", function () {
+
+        var f = modules.get(enums.Modules.FUNC);
+        var eui = modules.get(enums.Modules.JQUERY_EASYUI);
+
+        var mobileNumber = $("[name='sMobileNumber']").val();
+        if (!f.isMobilePhone(mobileNumber) || mobileNumber === "") {
+            eui.alertErr("请输入正确的电话号码");
+            return;
+        }
+
+        f.post("/Admin/Login/SendMessage",
+            {
+                mobileNumber: mobileNumber
+            }, function (r) {
+                eui.alertInfo(r.Data);
+            }, function (r) {
+                eui.alertErr(r.Msg);
+            });
+    });
+</script>
+
+<div class="easyui-panel" data-options="closable:false,collapsible:false,minimizable:false,maximizable:false,border:false,fit:true" style="padding:2px">
+    <form style="width:100%;height:99%;" id="forget_pwd_form">
+        <table class="styletable" style="height:100%">
+            <tbody>
+                <tr>
+                    <td style="width:auto">注册手机号</td>
+                    <td>
+                        <input class="easyui-textbox" data-options="width:180,type:'text',missingMessage:'请输入注册手机号',required:true,validType:['isPhoneNum','isHtmlValidate']" name="sMobileNumber" />
+                        <a class="easyui-linkbutton" id="get_m_msg_code" data-options="plain:true">获取验证码</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:auto">短信验证码</tdstyle="width:auto">
+                    <td>
+                        <input class="easyui-textbox" data-options="width:180,type:'text',missingMessage:'请输入验证码',required:true,validType:['isPhoneNum','isHtmlValidate']" name="m_msg_code" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:auto">新密码</td>
+                    <td>
+                        <input class="easyui-textbox" data-options="width:180,type:'text',missingMessage:'请输入新密码',required:true,validType:['isPhoneNum','isHtmlValidate']" name="npsw" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:auto">确认新密码</td>
+                    <td>
+                        <input class="easyui-textbox" data-options="width:180,type:'text',missingMessage:'请确认新密码',required:true,validType:['isPhoneNum','isHtmlValidate']" name="cnpsw" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

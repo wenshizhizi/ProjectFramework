@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Framework.Dapper
 {
+    /// <summary>
+    /// 分页条件
+    /// </summary>
     public class PageInfo
     {
         /// <summary>
@@ -29,7 +32,9 @@ namespace Framework.Dapper
         public OrderType orderType { get; set; } = OrderType.ASC;
     }
 
-
+    /// <summary>
+    /// 排序的枚举
+    /// </summary>
     public enum OrderType
     {
         /// <summary>
