@@ -289,15 +289,16 @@ namespace Framework.BLL
             //1.查询用户数据
             t = query.SingleQuery<EHECD_SystemUserDTO>("SELECT ID,sLoginName,sUserName,tUserState,tUserType,sUserNickName,dLastLoginTime,sProvice,sCity,sCounty,sAddress,tSex FROM EHECD_SystemUser WHERE sLoginName = @name and sPassWord = @pwd AND bIsDeleted = 0;", new { name = t.sLoginName, pwd = Security.GetMD5Hash(t.sPassWord) });
 
-            //2.记录系统日志
-            InsertSystemLog(
-                t.sLoginName,
-                t.sUserName == null ? "用户" : t.sUserName,
-                IP,
-                (Int16)(SYSTEM_LOG_TYPE.LOGON | SYSTEM_LOG_TYPE.SYSTEMUSER),
-                "系统用户登录",
-                t.ID.ToString() == null ? "" : t.ID.ToString(),
-                t != default(EHECD_SystemUserDTO) && t.tUserState == 0);
+            if (t != null)
+                //2.记录系统日志
+                InsertSystemLog(
+                    t.sLoginName,
+                    t.sUserName == null ? "用户" : t.sUserName,
+                    IP,
+                    (Int16)(SYSTEM_LOG_TYPE.LOGON | SYSTEM_LOG_TYPE.SYSTEMUSER),
+                    "系统用户登录",
+                    t.ID.ToString() == null ? "" : t.ID.ToString(),
+                    t != default(EHECD_SystemUserDTO) && t.tUserState == 0);
 
             if (t != default(EHECD_SystemUserDTO))
             {

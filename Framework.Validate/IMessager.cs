@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Framework.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Framework.Helper
+namespace Framework.Validate
 {
     public interface IMessager
     {
@@ -15,6 +16,11 @@ namespace Framework.Helper
         /// <param name="MsgContent">短信内容</param>
         /// <returns></returns>
         bool SendMessage(string mobileNumber,string MsgContent);
+
+        IRandomHelper RandomTool
+        {
+            get;            
+        }
 
         /// <summary>
         /// 获取注册时的短信验证消息格式化字符串

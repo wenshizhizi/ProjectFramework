@@ -85,7 +85,15 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
                 var flag = value == $(param[0]).val();
                 return flag;
             },
-            message: '两次输入不一致.'
+            message: '两次输入不一致'
+        },
+        newPsdequals:{
+            validator: function (value, param) {
+                debugger
+                var flag = value == $(param[0]).val();                
+                return flag;
+            },
+            message: '请确认要重置的新密码输入一致'
         },
         //是否是html
         isHtmlValidate: {
@@ -126,6 +134,7 @@ modules.define("eui", ["func", "tool"], function (func, tool) {
             },
             message: '请输入长度为{0}的{1}'
         },
+        //验证字符是否等于指定字符
         notEquireCharter: {
             validator: function (value, param) {
                 return $.trim(value) !== param[0];

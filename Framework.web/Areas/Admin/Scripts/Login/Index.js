@@ -125,7 +125,7 @@
 
         //忘记密码
         $("#forget_psd").on("click", function () {
-            var div = $("<div/>");            
+            var div = $("<div/>");
             div.dialog({
                 title: "找回密码",
                 width: 450,
@@ -136,25 +136,34 @@
                 collapsible: false,
                 minimizable: false,
                 maximizable: false,
-                resizable: false,                     
+                resizable: false,
                 buttons: [{
                     text: '确定',
                     iconCls: 'icon-save',
                     handler: function () {
-                        //if ($("#forget_pwd_form").form("validate")) {
-
-                        //    //序列化提交数据
-                        //    var json = $("#form的id，请自行替换").serializeObject();
-
-                        //    f.post("提交地址", json,
-                        //        function (ret) {
-                        //            eui.alertInfo("成功的提示");
-                        //            $(div).dialog("close");
-                        //            eui.search(grid, false);
-                        //        }, function (ret) {
-                        //            eui.alertErr(ret.Msg);
-                        //        });
-                        //}
+                        var sCode = modules.get(enums.Modules.CACHE).getCache("_getmcode");
+                        if (sCode === true) {
+                            if ($("#forget_pwd_form").form("validate")) {
+                                //序列化提交数据
+                                var json = $("#forget_pwd_form").serializeObject();
+                                json.sLoginName = $("#sLoginName").textbox("getText");
+                                f.post("/Admin/Login/ChangePWD", json,
+                                    function (ret) {
+                                        modules.get(enums.Modules.CACHE).cleanCache("_getmcode");
+                                        eui.alertInfo("已重置密码");
+                                        $(div).dialog("close");
+                                    }, function (ret) {
+                                        modules.get(enums.Modules.CACHE).cleanCache("_getmcode");
+                                        eui.alertErr(ret.Msg);                                        
+                                    });
+                            }
+                        } else {
+                            if (sCode === null) {
+                                eui.alertErr("请获取短信验证码");
+                            } else {
+                                eui.alertErr("短信验证码已过期，请重新获取");
+                            }                            
+                        }
                     }
                 }, {
                     text: '关闭',

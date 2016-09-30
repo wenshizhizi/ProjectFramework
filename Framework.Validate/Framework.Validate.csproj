@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChuangLanMessager.cs" />
+    <Compile Include="IMessager.cs" />
     <Compile Include="LoginCheckHttpModule.cs" />
     <Compile Include="SessionInfo.cs" />
     <Compile Include="ValidateCodeImgGenerator.cs" />
@@ -57,6 +59,10 @@
     <ProjectReference Include="..\Framework.Entity\Framework.DTO.csproj">
       <Project>{17fd7ad8-a20d-4f3b-b441-a9f2d2732a93}</Project>
       <Name>Framework.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Helper\Framework.Helper.csproj">
+      <Project>{4BB5F221-3226-4BA9-9EB0-27377C2CB196}</Project>
+      <Name>Framework.Helper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.web.config\Framework.web.config.csproj">
       <Project>{7f29fbc4-3e7d-46b4-99b3-a02fd3eef2b3}</Project>

@@ -22,6 +22,36 @@ namespace Framework.web.config
         }
 
         /// <summary>
+        /// 重新载入配置文件
+        /// </summary>
+        public static void ReLoadJsonConfig()
+        {
+            using (TextReader tr = new StreamReader(Path.Combine(HttpRuntime.BinDirectory, "frame.config.json")))
+            {
+                string configStr = tr.ReadToEnd();
+                configJson = JSONHelper.GetModel<JObject>(configStr);
+            }
+        }
+
+        /// <summary>
+        /// 载入json配置
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns>实际返回的是jobject</returns>
+        /// <exception cref="null">出现异常返回的就是null</exception>
+        public static dynamic LoadDynamicJson(string key)
+        {
+            try
+            {                
+                return (JObject)configJson.GetValue(key);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// 获取配置
         /// </summary>
         /// <param name="key">key</param>

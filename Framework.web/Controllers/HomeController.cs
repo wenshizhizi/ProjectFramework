@@ -14,5 +14,14 @@ namespace Framework.web.Controllers
         {
             return Redirect("/Admin/Main");
         }
+
+        /// <summary>
+        /// 重新读取配置文件
+        /// </summary>
+        [HttpGet]
+        public void RSJC()
+        {
+            Framework.web.config.WebConfig.ReLoadJsonConfig();
+        }
     }
 }

@@ -58,7 +58,23 @@ namespace Framework.BLL
         /// <returns>修改后的用户信息</returns>
         public virtual EHECD_SystemUserDTO ChangePassword(EHECD_SystemUserDTO t)
         {
-            return default(EHECD_SystemUserDTO);
+            var ret = query.SingleQuery<EHECD_SystemUserDTO>("select * from EHECD_SystemUser where sLoginName = @sLoginName;", new { sLoginName = t.sLoginName });
+            if(ret != default(EHECD_SystemUserDTO))
+            {
+               var exr = excute.Update("update EHECD_SystemUser set sPassWord = @PWD where ID = @ID;", new { PWD = Framework.Helper.Security.GetMD5Hash(t.sPassWord),ID = ret.ID });
+                if(exr > 0)
+                {
+                    return ret;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
