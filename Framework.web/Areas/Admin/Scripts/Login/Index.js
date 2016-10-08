@@ -6,6 +6,8 @@
     var btn_lgon/*登录按钮*/ = $("#btn_lgon");
     var code/*验证码框*/ = $("#vcodepic");
     var loginPanel/*登录窗口*/ = $("#lg_panel");
+    var a = "9527";
+    var b = "9528";
 
     /**
      * 初始化登录框位置
@@ -98,12 +100,6 @@
                 $("#upwd").textbox("clear");
         });
 
-        //密码输入框失去焦点如果没有输入则设置默认值
-        $("#upwd").textbox("textbox").on("blur", function () {
-            if ($("#upwd").textbox("getText").length === 0)
-                $("#upwd").textbox("setText", "123");
-        });
-
         //验证码输入框获取焦点去掉默认的值
         $("#vcode").textbox("textbox").on("focus", function () {
             if ($("#vcode").textbox("getText").indexOf("请输入验证码") >= 0)
@@ -154,7 +150,7 @@
                                         $(div).dialog("close");
                                     }, function (ret) {
                                         modules.get(enums.Modules.CACHE).cleanCache("_getmcode");
-                                        eui.alertErr(ret.Msg);                                        
+                                        eui.alertErr(ret.Msg);
                                     });
                             }
                         } else {
@@ -162,7 +158,7 @@
                                 eui.alertErr("请获取短信验证码");
                             } else {
                                 eui.alertErr("短信验证码已过期，请重新获取");
-                            }                            
+                            }
                         }
                     }
                 }, {
@@ -182,12 +178,43 @@
 
         //登录
         btn_lgon.on("click", loginSystem);
+
+        //记录登录信息
+        $("#remember_ac_info").on("change", function () {
+            var checked = $("#remember_ac_info").prop("checked");
+            if (!checked) {
+                $.removeCookie(a, { path: '/' });
+                $.removeCookie(b, { path: '/' });
+            } else {
+                var ua = $("#uname").textbox("getText");
+                var up = $("#upwd").textbox("getText");
+
+                if (ua === "" || ua==="请输入登录名"|| up === "") {
+                    eui.alertInfo("请输入您要保存的账号密码");
+                    $("#remember_ac_info").prop("checked",false);
+                    return;
+                }
+
+                $.cookie(a, ua, { path: '/', expires: 10 });
+                $.cookie(b, up, { path: '/', expires: 10 });
+            }
+        });
     }
 
     //初始化
     try {
         initLoginPanel/*初始化登录框位置*/();
         initVCode/*初始化验证码*/();
+        
+        //验证是否记录登录信息
+        if ($.cookie(a) !== undefined && $.cookie(b) != undefined) {
+            $("#uname").textbox("setText", $.cookie(a));
+            $("#upwd").textbox("setText", $.cookie(b));
+            $("#remember_ac_info").prop("checked", true);
+        } else {
+            $("#remember_ac_info").prop("checked", false);
+        }
+
         bindElementEvent/*绑定事件*/();
     } catch (e) {
         eui.alertErr(e.message);

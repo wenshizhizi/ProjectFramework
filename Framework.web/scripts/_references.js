@@ -17,4 +17,5 @@
 
 /// <reference path="lib/object.module.js" />
 /// <reference path="lib/emuns.module.js" />
+/// <reference path="lib/cookies.js" />
 
