@@ -340,7 +340,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         id = item.ID,
                         iconCls = "icon-folder",
                         text = item.sMenuName,
-                        attributes = new { type = "menu", url = "", order = item.iOrder },
+                        attributes = new { type = "menu", url = string.IsNullOrEmpty(item.sUrl) || string.IsNullOrWhiteSpace(item.sUrl) ? "" : item.sUrl, order = item.iOrder },
                         state = "open",
                         children = child
                     });

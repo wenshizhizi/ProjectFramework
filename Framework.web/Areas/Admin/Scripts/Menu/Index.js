@@ -24,6 +24,7 @@
             $('#tree').treeview({
                 data: r.Data,
                 showTags: true,
+                width:250,
                 collapseIcon: "glyphicon glyphicon-folder-open",
                 expandIcon: "glyphicon glyphicon-folder-close",
                 emptyIcon: "glyphicon glyphicon-tasks",
