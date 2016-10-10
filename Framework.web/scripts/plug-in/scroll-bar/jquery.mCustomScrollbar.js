@@ -1127,7 +1127,7 @@ and dependencies (minified).
 						if(o.alwaysShowScrollbar!==2){mCSB_dragger[0].css("display","none");}
 						content.removeClass(classes[10]);
 					}else{
-						scrollbar[0].css("display","none");
+						//scrollbar[0].css("display","none");
 						content.addClass(classes[10]);
 					}
 					content.addClass(classes[8]);

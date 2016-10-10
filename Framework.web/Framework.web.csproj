@@ -978,6 +978,7 @@
     <Content Include="scripts\plug-in\scroll-bar\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="scripts\plug-in\scroll-bar\jquery.mCustomScrollbar.css" />
     <Content Include="scripts\plug-in\scroll-bar\jquery.mCustomScrollbar.js" />
+    <Content Include="scripts\plug-in\scroll-bar\jquery.mousewheel.min.js" />
     <Content Include="scripts\plug-in\ueditor\third-party\jquery-1.10.2.min.map" />
     <Content Include="scripts\plug-in\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="scripts\plug-in\ueditor\third-party\video-js\font\vjs.ttf" />

@@ -20,8 +20,8 @@
     <link href="~/scripts/plug-in/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet" />
 
     <script src="~/scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/scripts/plug-in/scroll-bar/jquery.mousewheel.min.js"></script>
     <script src="~/scripts/plug-in/scroll-bar/jquery.mCustomScrollbar.js"></script>
-    @*<script src="~/scripts/plug-in/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>*@
     <script src="~/scripts/jquery.easyui-1.4.5.min.js"></script>
 
     <script src="~/scripts/lib/modules.manager.js"></script>
@@ -40,14 +40,7 @@
     <title>项目首页标题</title>
 
     <script>
-        (function ($) {
-            $(window).on("load", function () {
-                $("#menu_left").mCustomScrollbar({
-                    autoHideScrollbar: false
-                    //theme: "rounded"
-                });
-            });
-        })(jQuery);
+        
     </script>
 </head>
 <body>
@@ -90,7 +83,7 @@
             <link href="~/Content/bootstrap-treeview.min.css" rel="stylesheet" />
             <script src="~/scripts/bootstrap-treeview.min.js"></script>
             <script src="~/Areas/Admin/Scripts/Menu/Index.js"></script>
-            <div id="tree" style="margin-left:5px;margin-top:5px;width:260px;z-index:999"></div>
+            <div id="tree" style="margin-left:5px;margin-top:5px;width:255px;"></div>
         </div>
 
         <!--中间面板-->
