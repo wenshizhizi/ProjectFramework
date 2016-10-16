@@ -3,14 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Framework.Dapper;
 using Framework.DTO;
 using Framework.Helper;
+using Framework.Dapper;
 
 namespace Framework.BLL
 {
     public partial class SystemUserManager : ISystemUserManager
     {
+
+        #region sql
+
+        private static readonly string HAS_LOGINNAME = @"IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sLoginName = @sLoginName AND bIsDeleted = 0)
+                        BEGIN
+	                        SELECT -1 RET;
+                        END
+                        ELSE
+                        BEGIN
+                            SELECT 0 RET;
+                        END";
+
+        private static readonly string HAS_PHONENUMBER = @"IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sMobileNum = @sMobileNum AND bIsDeleted = 0)
+                            BEGIN
+                                SELECT -2 RET;
+                            END
+                            ELSE
+                            BEGIN
+	                            SELECT 0 RET;
+                            END";
+
+        private static readonly string HAS_UPDATE_PHONENUMBER = @"IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sMobileNum = @sMobileNum AND sLoginName = @sLoginName)--表示这个手机号是当前这个人自己的
+                          BEGIN
+                              SELECT 0 RET;
+                          END
+                          ELSE
+                          BEGIN
+	                          IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sMobileNum = @sMobileNum AND bIsDeleted = 0)
+                              BEGIN
+                                  SELECT -2 RET;
+                              END
+                              ELSE
+                              BEGIN
+	                              SELECT 0 RET;
+                              END
+                          END;";
+
+        #endregion
+
         //添加用户
         public override int AddSystemUser(EHECD_SystemUserDTO user, dynamic p)
         {
@@ -19,30 +58,31 @@ namespace Framework.BLL
             user.dCreateTime = DateTime.Now;
             user.dLastLoginTime = DateTime.Now;
             user.tUserState = 0;
-            user.tUserType = 0;
             user.ID = Helper.GuidHelper.GetSecuentialGuid();
             user.sPassWord = Helper.Security.GetMD5Hash(user.sPassWord);
 
-            var sqlIf = @"IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sLoginName = @sLoginName)
-                        BEGIN
-	                        SELECT -1 RET;
-                        END
-                        ELSE
-                        BEGIN
-                            IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sMobileNum = @sMobileNum)
-                            BEGIN
-                                SELECT -2 RET;
-                            END
-                            ELSE
-                            BEGIN
-	                            {0}
-                            END
-                        END;";
+            var ret = 999;
 
-            sqlIf = string.Format(sqlIf, Dapper.DBSqlHelper.GetInsertSQL<EHECD_SystemUserDTO>(user));
+            ret = query.
+                    SingleQuery<Dictionary<String, object>>(HAS_LOGINNAME, new { user.sLoginName })
+                    ["RET"].
+                    ToInt32();
 
-            //2.保存至数据库
-            var ret = excute.Insert(sqlIf, new { sLoginName = user.sLoginName, sMobileNum = user.sMobileNum });
+            if (ret /*如为-1则表示有重复的登录名*/ > -1)
+            {
+                ret = query.
+                        SingleQuery<Dictionary<String, object>>(HAS_PHONENUMBER, new { user.sMobileNum })
+                        ["RET"].
+                        ToInt32();
+
+                if (ret /*如为-2则表示有重复的手机号*/ > -2)
+                {
+                    var sql = Dapper.DBSqlHelper.GetInsertSQL<EHECD_SystemUserDTO>(user);
+
+                    //2.持久化用户数据
+                    ret = excute.Insert(sql, new { sLoginName = user.sLoginName, sMobileNum = user.sMobileNum });
+                }
+            }
 
             //3.记录系统日志
             InsertSystemLog(
@@ -168,19 +208,16 @@ namespace Framework.BLL
         //编辑用户
         public override int EditSystemUser(EHECD_SystemUserDTO user, dynamic p)
         {
-            var sqlIf = @"IF EXISTS(SELECT 1 FROM EHECD_SystemUser WHERE sMobileNum = @sMobileNum)
-                          BEGIN
-                              SELECT -2 RET;
-                          END
-                          ELSE
-                          BEGIN
-	                          {0}
-                          END;";
+            var ret = query.
+                    SingleQuery<Dictionary<String, object>>(HAS_UPDATE_PHONENUMBER, new { user.sLoginName, user.sMobileNum })
+                    ["RET"].
+                    ToInt32();
 
-            sqlIf = string.Format(sqlIf, Dapper.DBSqlHelper.GetUpdateSQL<EHECD_SystemUserDTO>(user, string.Format("where ID = '{0}'", user.ID)));
+            if (ret > -2)
+            {
+                ret = excute.Update(Dapper.DBSqlHelper.GetUpdateSQL<EHECD_SystemUserDTO>(user, string.Format("where ID = '{0}'", user.ID)), null);
+            }
 
-            //1.保存至数据库
-            var ret = excute.Update(sqlIf, new { sMobileNum = user.sMobileNum });
 
             //2.记录系统日志
             InsertSystemLog(

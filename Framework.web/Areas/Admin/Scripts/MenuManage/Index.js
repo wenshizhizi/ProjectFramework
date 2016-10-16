@@ -15,10 +15,10 @@
                 lines: false,
                 animate: true,
                 onContextMenu: function (e, node) {
-                    //不要执行与事件关联的默认动作
-                    e.preventDefault();
-                    //创建菜单
-                    createMenu(e, node);
+                    ////不要执行与事件关联的默认动作
+                    //e.preventDefault();
+                    ////创建菜单
+                    //createMenu(e, node);
                 },
                 onDblClick: function (node) {
                     if (node.state === "closed") {
@@ -154,7 +154,7 @@
             });
         }
         //#endregion
-            
+
         //#region 操作菜单
         /**
          * 删除菜单
@@ -524,7 +524,7 @@
                            }, function (r) {
                                eui.alertErr(r.Msg);
                            });
-                       }, "您确定要执行此操作？<span style='color:red;'>"+
+                       }, "您确定要执行此操作？<span style='color:red;'>" +
                                                     "该操作将物理删除所有已经逻辑删除的数据，请慎用！删除操作将针对以下数据做清理：<br/><br/>" +
                                                     "&emsp;&emsp;&emsp;&emsp;【菜单数据】<br/>" +
                                                     "&emsp;&emsp;&emsp;&emsp;【菜单按钮数据】<br/>" +

@@ -17,14 +17,44 @@
     <link href="~/Content/themes/color.css" rel="stylesheet" />
     <link href="~/Content/themes/mobile.css" rel="stylesheet" />
     <link href="~/Content/backload.css" rel="stylesheet" />
+
+    <!--滚轮插件cs-->
     <link href="~/scripts/plug-in/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet" />
+    <!--滚轮插件cs-->
 
-    <script src="~/scripts/jquery-1.11.3.min.js"></script>
-    <script src="~/scripts/plug-in/scroll-bar/jquery.mousewheel.min.js"></script>
+    <!--图片上传插件css-->
+    <link href="~/scripts/plug-in/ueditor/webuploader/uploader.css" rel="stylesheet" />
+    <!--图片上传插件css-->
+
+    <script src="~/scripts/jquery-1.11.3.min.js,
+                ~/scripts/plug-in/scroll-bar/jquery.mousewheel.min.js,
+                ~/scripts/plug-in/scroll-bar/jquery.mCustomScrollbar.js,
+                ~/scripts/jquery.easyui-1.4.5.min.js,
+                ~/scripts/plug-in/ueditor/webuploader/webuploader.min.js,
+                ~/scripts/plug-in/ueditor/webuploader/imgupload.js,
+                ~/scripts/lib/modules.manager.js,
+                ~/scripts/lib/emuns.module.js,
+                ~/scripts/lib/md5.module.js,
+                ~/scripts/lib/base64.module.js,
+                ~/scripts/lib/version.module.js,
+                ~/scripts/lib/object.module.js,
+                ~/scripts/lib/tool.module.js,
+                ~/scripts/lib/array.module.js,
+                ~/scripts/lib/func.module.js,
+                ~/scripts/lib/easyui.module.js,
+                ~/scripts/lib/global.variable.module.js,
+                ~/Areas/Admin/Scripts/Main/index.js"></script>
+
+    @*<script src="~/scripts/plug-in/scroll-bar/jquery.mousewheel.min.js"></script>
     <script src="~/scripts/plug-in/scroll-bar/jquery.mCustomScrollbar.js"></script>
-    <script src="~/scripts/jquery.easyui-1.4.5.min.js"></script>
+    <script src="~/scripts/jquery.easyui-1.4.5.min.js"></script>*@
 
-    <script src="~/scripts/lib/modules.manager.js"></script>
+    <!--图片上传插件js-->
+    @*<script src="~/scripts/plug-in/ueditor/webuploader/webuploader.min.js"></script>
+    <script src="~/scripts/plug-in/ueditor/webuploader/imgupload.js"></script>*@
+    <!--图片上传插件js-->
+
+    @*<script src="~/scripts/lib/modules.manager.js"></script>
     <script src="~/scripts/lib/emuns.module.js"></script>
     <script src="~/scripts/lib/md5.module.js"></script>
     <script src="~/scripts/lib/base64.module.js"></script>
@@ -35,20 +65,16 @@
     <script src="~/scripts/lib/func.module.js"></script>
     <script src="~/scripts/lib/easyui.module.js"></script>
     <script src="~/scripts/lib/global.variable.module.js"></script>
-    <script src="~/Areas/Admin/Scripts/Main/index.js"></script>
+    <script src="~/Areas/Admin/Scripts/Main/index.js"></script>*@
 
     <title>项目首页标题</title>
-
-    <script>
-        
-    </script>
 </head>
 <body>
     <div id="layout" class="easyui-layout" data-options="fit:true">
         <!--上布局-->
         <div data-options="region:'north',title:'',split:false" style="height:40px;">
             <div style="height:100%;width:100%;position:relative;" class="tabs-header">
-                <span style="font-size:22px;line-height:30px;margin-left:30px">XXXX后台管理系统</span>
+                <span style="font-size:22px;line-height:30px;margin-left:30px">友客分享微信旅游商城后台</span>
                 <div style="width:auto;height:20px;right:15px;position:absolute;bottom:10px">
                     切换主题：
                     <select class="easyui-combobox" data-options="editable:false,onSelect: function(rec){$('#them').attr('href',rec.value);}" style="width:100px;">
@@ -74,7 +100,7 @@
         <!--下布局-->
         <div data-options="region:'south',title:'',split:false" style="height:30px;">
             <div style="height:100%;width:100%;line-height:25px;text-align:center" class="tabs-header">
-                XXXX后台管理系统  技术支持-成都亿合科技
+                友客分享微信旅游商城后台  技术支持-成都亿合科技
             </div>
         </div>
 

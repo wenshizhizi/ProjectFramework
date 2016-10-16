@@ -1,4 +1,5 @@
-﻿using Framework.BLL;
+﻿using Framework;
+using Framework.BLL;
 using Framework.web.Controllers;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace Framework.web.Areas.Admin.Controllers
                                 .GetImpl<ISystemUserManager>()
                                 .EditSystemUser(user, RequestParameters.dynamicData);
             result.Succeeded = ret > 0;
-            result.Msg = !result.Succeeded ? ret == -1 ? "编辑用户失败，已有相同登录名用户" : "编辑用户失败，请联系系统管理员" : "";
+            result.Msg = !result.Succeeded ? ret == -2 ? "编辑用户失败，已有相同联系手机号码" : "编辑用户失败，请联系系统管理员" : "";
         }
 
         /// <summary>
@@ -166,9 +167,9 @@ namespace Framework.web.Areas.Admin.Controllers
                                    ID = o.ID.ToString(),
                                    sRoleName = o.sRoleName,
                                    check = alreadyHasRoles.Where(m => o.ID == m.ID).Select(m =>
-                                    {
-                                        return "checked";
-                                    }).FirstOrDefault()
+                                   {
+                                       return "checked";
+                                   }).FirstOrDefault()
                                }).Select(m => JSONHelper.GetModel<object>(JSONHelper.GetJsonString<object>(m))).ToList();
 
                     ViewBag.RoleData = ret;
