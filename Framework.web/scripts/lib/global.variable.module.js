@@ -26,7 +26,7 @@ modules.define("cache", ["func"], function CacheDomain(func) {
      * 清除所有的全局变量
      */
     function cleanGlobal() {
-        for (v in global) {
+        for (var v in global) {
             delete global[v];
         }
     }
@@ -65,12 +65,32 @@ modules.define("cache", ["func"], function CacheDomain(func) {
 
     /**
      * 设置菜单操作域
-     * @param {type} title 菜单名称，请注意要和菜单的标题对应
-     * @param {type} domain 操作域：你的菜单的操作方法
+     * @param {type} domainInfo 菜单操作域domainInfo     
      */
-    function setMenuDomain(title, domain) {
-        var vid = func.vertid();
-        global.menus[vid] = { "title": title, "domain": domain };
+    function setMenuDomain(domain) {        
+        global.menus[domain.id] = domain;
+    }
+
+    /**
+     * 清理菜单操作域
+     * @param {type} title 菜单标题
+     */
+    function cleanMenuDomain(title) {        
+        for (var x in global.menus) {
+            if (global.menus[x].title === title) {
+                delete global[x];
+                break;
+            }
+        }
+    }
+
+    /**
+     * 清除指定id菜单域对象
+     * @param {type} id
+     */
+    function cleanMenuDomainById(id) {
+        if (global.menus[id])
+            delete global.menus[id];
     }
 
     /**
@@ -80,26 +100,13 @@ modules.define("cache", ["func"], function CacheDomain(func) {
      */
     function getMenuDomain(title) {
         var domain = null;
-        for (var i in global.menus) {
-            if (global.menus[i].title === title) {
-                domain = global.menus[i].domain;
+        for (var x in global.menus) {
+            if (global.menus[x].title === title) {
+                domain = global.menus[x].domain;
                 break;
             }
         }
         return domain;
-    }
-
-    /**
-     * 清理菜单操作域
-     * @param {type} title 菜单名称
-     */
-    function cleanMenuDomain(title) {
-        for (var i in global.menus) {
-            if (global.menus[i].title === title) {
-                delete global.menus[i];
-                break;
-            }
-        }
     }
 
     return {
@@ -111,6 +118,7 @@ modules.define("cache", ["func"], function CacheDomain(func) {
         global: global,
         setMenuDomain: setMenuDomain,
         cleanMenuDomain: cleanMenuDomain,
-        getMenuDomain: getMenuDomain
+        getMenuDomain: getMenuDomain,
+        cleanMenuDomainById: cleanMenuDomainById
     };
 });

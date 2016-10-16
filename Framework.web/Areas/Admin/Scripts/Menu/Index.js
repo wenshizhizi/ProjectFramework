@@ -4,19 +4,53 @@
         var f = modules.get(enums.Modules.FUNC);
         var global = modules.get(enums.Modules.CACHE);
         var mainTab = $("#tabs");
-        
+
+        function chooseTab(data) {
+
+            var extab/*获取指定的面板*/ = mainTab.tabs("getTab", data.text);
+
+            if (!f.definededAndNotNull(extab)) {
+
+                var count/*已打开的面板数量*/ = mainTab.tabs("tabs").length;
+
+                //只开8个，超出就关闭第一个
+                if (count >= 8) {
+                    mainTab.tabs("close", 0);
+                }
+
+                mainTab.tabs("add", {
+                    title: data.text,
+                    cache: true,
+                    closable: true,
+                    href: data.url,
+                    justified: true,
+                    style: { padding: 1 }
+                });
+
+            } else {
+                mainTab.tabs("select",
+                    mainTab.tabs("getTabIndex", extab));
+            }
+        }
+
         f.post(/*载入菜单数据*/"/Admin/Menu/LoadMenu", null, function (r) {
 
             mainTab.tabs({
                 onClose: function (title, index) {
-                    global.cleanMenuDomain(title);
+                    debugger
+                    var domain = global.getMenuDomain(title);
+
+                    if (domain.destory) domain.destory();
+
+                    global.cleanMenuDomainById(domain.id);
+
                 }, onBeforeClose: function () {
-                    /* 如果套用了iframe就回收内存 */                    
+                    /* 如果套用了iframe就回收内存 */
                     var frame = $('iframe', this);
                     if (frame.length > 0) {
                         frame[0].contentWindow.document.write('');
                         frame[0].contentWindow.close();
-                        frame.remove();                        
+                        frame.remove();
                     }
                 }
             });
@@ -24,15 +58,13 @@
             $('#tree').treeview({
                 data: r.Data,
                 showTags: true,
-                width:250,
+                width: 250,
                 collapseIcon: "glyphicon glyphicon-folder-open",
                 expandIcon: "glyphicon glyphicon-folder-close",
                 emptyIcon: "glyphicon glyphicon-tasks",
                 selectedBackColor: "#000000",
                 onhoverColor: "#ff9966",
                 color: "#000000",
-                //selectedColor: "#000000",       
-                //selectedIcon: "glyphicon glyphicon-log-out",
                 onNodeSelected: function (event, data) {
                     if (data.url !== "root"/*不是根节点就执行普通菜单操作*/) {
                         chooseTab(data);
@@ -71,27 +103,5 @@
                 window.location.href = "/Admin/Login";
             }, 3000);
         }, true, true, null, null, "text", "body");
-
-        function chooseTab(data) {
-            var extab/*获取指定面板*/ = mainTab.tabs("getTab", data.text);
-            if (!f.definededAndNotNull(extab)) {
-                var count/*已打开的面板数量*/ = mainTab.tabs("tabs").length;
-                if (count >= 8) {
-                    //只开8个，超出就关闭第一个
-                    mainTab.tabs("close", 0);
-                }
-                mainTab.tabs("add", {
-                    title: data.text,
-                    cache: true,
-                    closable: true,
-                    href: data.url,
-                    justified: true,                    
-                    style: { padding: 1 }
-                });
-            } else {
-                mainTab.tabs("select",
-                    mainTab.tabs("getTabIndex", extab));
-            }
-        }
     }();
 });

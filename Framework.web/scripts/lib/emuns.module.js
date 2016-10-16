@@ -3,6 +3,12 @@
     var Enums = {
         //模块名枚举
         Modules: {
+            //浏览器版本
+            VERSION:"vers",
+            //对象操作
+            OBJECT:"object",
+            //工具模块
+            TOOL:"tool",
             //公用发放模块
             FUNC: "func",
             //缓存模块

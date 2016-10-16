@@ -459,6 +459,7 @@
     <Content Include="scripts\common\easyui-datagrid-template.js" />
     <Content Include="scripts\common\easyui-dialog-template.js" />
     <Content Include="scripts\lib\baidu.ueditor.module.js" />
+    <Content Include="scripts\lib\base.js" />
     <Content Include="scripts\lib\cookies.js" />
     <Content Include="scripts\lib\emuns.module.js" />
     <Content Include="scripts\login-back\login\css\reset.css" />
