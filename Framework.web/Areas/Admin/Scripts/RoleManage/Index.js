@@ -11,24 +11,9 @@ function RoleDomain() {
         grid /*用户角色列表*/ = $("#role_grid");
 
     /**
-     * 初始化事件
-     */
-    function initEvent() {
-        
-        $("#role_grid_tool")
-            .on("click", "a[data-id='search_role_button']", function () { _easyui.search(grid, true); })
-            .on("click", "a[data-id='add_role_button']", addRole)
-            .on("click", "a[data-id='edit_role_button']", editRole)
-            .on("click", "a[data-id='del_role_button']", delRole)
-            .on("click", "a[data-id='distribution_menu_authority']", distributionMenuRole)
-            .on("click", "a[data-id='distribution_button_authority']", distributionButtonRole);
-    }
-
-    /**
      * 分配角色按钮
      */
-    function distributionButtonRole() {
-        debugger
+    function distributionButtonRole() {        
         _easyui.checkSelectedRow(grid, function (selectedRow) {
             try {
                 var div = $("<div/>");
@@ -141,34 +126,7 @@ function RoleDomain() {
             }
         }, "请选中你要分配的角色");
     }
-
-    /**
-     * 载入角色列表
-     * @param {Number} pageNumber 页码
-     * @param {Number} pageSize 每页显示条数
-     */
-    function loadRole(pageNumber, pageSize) {
-        try {
-            if ($("#role_form").form("validate")) {
-                var param/*查询参数*/ = $("#role_form").serializeObject();
-                param.pageNumber/*当前页码*/ = pageNumber;
-                param.pageSize/*每页显示条数*/ = pageSize;
-                _func.post("/Admin/RoleManage/LoadRoles", param, function (r) {
-                    grid.datagrid("loadData", r.Data.Result);
-                    grid.datagrid("getPager").pagination({
-                        pageNumber: pageNumber,
-                        pageSize: pageSize,
-                        total: r.Data.MaxCount
-                    });
-                }, function (r) {
-                    _easyui.alertErr(r.Msg);
-                });
-            }
-        } catch (e) {
-            _easyui.alertErr(e.message);
-        }
-    }
-
+        
     /**
      * 添加角色
      */
@@ -213,10 +171,10 @@ function RoleDomain() {
                 $(div).dialog("destroy"); div = null;
             },
             onLoad: function () {
-                //var form = $("#nodata");
-                //if (form.length > 0) {
-                //    div.parent().find("a>span")[0].remove();
-                //}
+                var form = $("#nodata");
+                if (form.length > 0) {
+                    div.parent().find("a>span")[0].remove();
+                }
             }
         });
     }
@@ -325,6 +283,49 @@ function RoleDomain() {
         }, loadRole).pagination("select");
     }
 
+    /**
+     * 载入角色列表
+     * @param {Number} pageNumber 页码
+     * @param {Number} pageSize 每页显示条数
+     */
+    function loadRole(pageNumber, pageSize) {
+        try {
+            if ($("#role_form").form("validate")) {
+                var param/*查询参数*/ = $("#role_form").serializeObject();
+                param.pageNumber/*当前页码*/ = pageNumber;
+                param.pageSize/*每页显示条数*/ = pageSize;
+                _func.post("/Admin/RoleManage/LoadRoles", param, function (r) {
+                    grid.datagrid("loadData", r.Data.Result);
+                    grid.datagrid("getPager").pagination({
+                        pageNumber: pageNumber,
+                        pageSize: pageSize,
+                        total: r.Data.MaxCount
+                    });
+                }, function (r) {
+                    _easyui.alertErr(r.Msg);
+                });
+            }
+        } catch (e) {
+            _easyui.alertErr(e.message);
+        }
+    }
+
+    /**
+     * 初始化事件
+     */
+    function initEvent() {
+        $("#role_grid_tool")
+            .on("click", "a[data-id='search_role_button']", function () { _easyui.search(grid, true); })
+            .on("click", "a[data-id='add_role_button']", addRole)
+            .on("click", "a[data-id='edit_role_button']", editRole)
+            .on("click", "a[data-id='del_role_button']", delRole)
+            .on("click", "a[data-id='distribution_menu_authority']", distributionMenuRole)
+            .on("click", "a[data-id='distribution_button_authority']", distributionButtonRole);
+    }
+        
+    /**
+     * 文档初始好后执行
+     */
     try {
         initData();
         initEvent();

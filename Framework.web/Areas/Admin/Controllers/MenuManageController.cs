@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Framework.Helper;
+using Framework;
 
 namespace Framework.web.Areas.Admin.Controllers
 {
@@ -252,9 +253,9 @@ namespace Framework.web.Areas.Admin.Controllers
         /// </summary>
         public void EditMenu()
         {
-            EHECD_FunctionMenuDTO menu = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.dataStr);
+            EHECD_FunctionMenuDTO menu = LoadParam<EHECD_FunctionMenuDTO>();
             CreateSyslogInfo();
-            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().EditMenu(menu, RequestParameters.dynamicData);
+            var editmenu = LoadInterface<IMenuManager>().EditMenu(menu, RequestParameters.dynamicData);
             if (editmenu != null)
             {
                 result.Data = new
@@ -278,9 +279,9 @@ namespace Framework.web.Areas.Admin.Controllers
         /// </summary>
         public void DeleteMenu()
         {
-            EHECD_FunctionMenuDTO menu = JSONHelper.GetModel<EHECD_FunctionMenuDTO>(RequestParameters.dataStr);
+            EHECD_FunctionMenuDTO menu = LoadParam<EHECD_FunctionMenuDTO>();
             CreateSyslogInfo();
-            var editmenu = DI.DIEntity.GetInstance().GetImpl<IMenuManager>().DeleteMenu(menu, RequestParameters.dynamicData);
+            var editmenu = LoadInterface<IMenuManager>().DeleteMenu(menu, RequestParameters.dynamicData);
             if (editmenu > 0)
             {
                 DeleteSessionMenu(menu.ID.ToString());
@@ -340,7 +341,7 @@ namespace Framework.web.Areas.Admin.Controllers
                         id = item.ID,
                         iconCls = "icon-folder",
                         text = item.sMenuName,
-                        attributes = new { type = "menu", url = string.IsNullOrEmpty(item.sUrl) || string.IsNullOrWhiteSpace(item.sUrl) ? "" : item.sUrl, order = item.iOrder },
+                        attributes = new { type = "menu", url = item.sUrl == null || item.sUrl == "" ? "" : item.sUrl, order = item.iOrder },
                         state = "open",
                         children = child
                     });
@@ -352,7 +353,7 @@ namespace Framework.web.Areas.Admin.Controllers
             {
                 text = "根目录",
                 iconCls = "icon-folder",
-                attributes = new { type = "root", url = "", order = 0 },
+                attributes = new { type = "root", url = "root", order = 0 },
                 state = "open",
                 children = userMs.OrderBy(m => ((dynamic)((dynamic)m).attributes).order).ToList()
             };

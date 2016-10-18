@@ -16,4 +16,16 @@ function BaseDomain() {
     this.obj = modules.get(MODULE.OBJECT);
     this.version = modules.get(MODULE.VERSION).browser;
     this.jqueryEasyui = modules.get(MODULE.JQUERY_EASYUI);
+
+    this.setGlobalCache = function (key, value) {
+        this.cache.setCache(key, value);
+    }
+
+    this.getGlobalCache = function (key) {        
+        return this.cache.getCache(key);
+    }
+
+    this.getGlobalCacheNoResident = function (key) {
+        return this.cache.getCacheNoResident(key);
+    }
 }
